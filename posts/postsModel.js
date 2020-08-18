@@ -27,9 +27,12 @@ module.exports = {
 	ON posts.authorsid = authors.authorsid;
 */
 function getPosts() {
-	return knex.raw("SELECT authors.firstname || ' ' || authors.lastname AS author, " +
-	'posts.postsid as id, posts.authorsid as authorId, posts.likes as likes, posts.reads as reads ' +
-'FROM posts INNER JOIN authors ON posts.authorsid = authors.authorsid;');
+	return db('posts')
+	.select(
+	knex.raw("authors.firstname || ' ' || authors.lastname AS author, " +
+	'posts.postsid AS id, posts.authorsid AS authorId, posts.likes AS likes, posts.reads AS reads')
+	)
+	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
 		/*
 	return db('posts')
 		.select(
