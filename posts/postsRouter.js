@@ -43,19 +43,21 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
+				console.log(posts);
 				let postsid = posts.postsid;
 				Tags.getTagsByPost(postsid).then(tags => {
 					if (!tags) {
 						tags = [];
-					} else {
-						res.status(200).json({
-							author: posts.firstname + " " + posts.lastname,
-							authorId: posts.authorsid,
-							id: posts.id,
-							likes: posts.likes,
-							reads: posts.reads
-						})
 					}
+					console.log(tags);
+					res.status(200).json({
+						author: posts.firstname + " " + posts.lastname,
+						authorId: authors.authorsid,
+						id: posts.id,
+						likes: posts.likes,
+						reads: posts.reads,
+						tags: tags
+					})
 				})
 			}
 		})
