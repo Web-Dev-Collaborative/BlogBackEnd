@@ -68,7 +68,8 @@ router.get('/', restricted, (req, res) => {
 									authorId: post.authorId,
 									id: post.id,
 									likes: post.likes,
-									reads: post.reads
+									reads: post.reads,
+									tags: []
 								}	)
 						}
 					})
