@@ -61,9 +61,21 @@ router.get('/', restricted, (req, res) => {
 					Tags.getTagsByPost()
 					.then(tags => {
 						if(tags) {
+							for(let x = 0; x < modifiedPosts.length;x++){
+								for (let y = 0; y < tags.length; y++){
+									if (modifiedPosts[x].postsid == tags[y].postsid){
+										modifiedPosts[x].tags.push(tags[y].tagname);
+									}
+
+								}
+							}
+							/*
 							tags.forEach((tag)=>{
-								modifiedPosts.tags = tag.tagname;
+								if (tag.postsid == ){
+									modifiedPosts.tags = tag.tagname;
+								}
 							});
+							*/
 						}
 
 						// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
