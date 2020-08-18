@@ -45,10 +45,12 @@ router.get('/', restricted, (req, res) => {
 			else{
 				console.log(posts);
 				let postsid = posts.postsid;
+				/*
 				Tags.getTagsByPost(postsid).then(tags => {
 					if (!tags) {
 						tags = [];
 					}
+					*/
 					console.log(tags);
 					res.status(200).json({
 						author: posts.firstname + " " + posts.lastname,
@@ -58,7 +60,9 @@ router.get('/', restricted, (req, res) => {
 						reads: posts.reads,
 						tags: tags
 					})
+					/*
 				})
+				*/
 			}
 		})
 		.catch(err => res.send(err));
