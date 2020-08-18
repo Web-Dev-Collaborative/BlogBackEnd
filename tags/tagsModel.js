@@ -45,13 +45,14 @@ function getTagsByAuthor(authorsid) {
 	ON poststags.postsid = poststags.postsid
 	WHERE posts.postsid = 2;
 */
-function getTagsByPost(){
+function getTagsByPost(postsid){
 	return db('tags')
 		.select(
-			'posts.postsid AS postsid', 'tags.tagname AS tagname'
+			'tags.tagname AS tagname'
 		)
 		.innerJoin('poststags', 'poststags.tagsid', 'tags.tagsid')
-		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid');
+		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid')
+		.where('posts.postsid', postsid);
 }
 // get tags by post
 /*
