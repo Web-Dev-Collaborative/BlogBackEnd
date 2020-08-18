@@ -34,8 +34,8 @@ module.exports = {
 function getPosts() {
 	return db('posts')
 		.select(
-			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads',
-			'authors.authorsid', 'authors.firstname', 'authors.lastname',
+			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads', 
+			'authors.authorsid'.as('authorId'), Concat(authors.firstname, ' ', authors.lastname).as('author'), 
 			'tags.tagsid', 'tags.tagname',
 			'poststags.poststagsid', 'poststags.postsid', 'poststags.tagsid'
 		)
