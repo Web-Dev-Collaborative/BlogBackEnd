@@ -44,7 +44,7 @@ router.get('/', restricted, (req, res) => {
 			}
 			else{
 				let modifiedPosts = [];
-				posts.forEach((post) => 	{	
+				posts.map((post) => 	{	
 					Tags.getTagsByPost(post.postsid)
 					.then(tags =>{
 						if(!tags) {
@@ -52,16 +52,14 @@ router.get('/', restricted, (req, res) => {
 							// add singlePostTags to each post
 							tags = [];
 						}
-						modifiedPosts.push(
-							{
-								author: post.firstname + " " + post.lastname,
-								authorId: post.authorId,
-								id: post.id,
-								likes: post.likes,
-								reads: post.reads,
-								tags: tags
-							}	)
-
+						modifiedPosts.push({
+							author: post.firstname + " " + post.lastname,
+							authorId: post.authorId,
+							id: post.id,
+							likes: post.likes,
+							reads: post.reads,
+							tags: tags
+						})
 					})
 					.catch(err => res.send(err))
 				});
