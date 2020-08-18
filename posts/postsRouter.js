@@ -50,14 +50,9 @@ router.get('/', restricted, (req, res) => {
 					Tags.getTagsByPost(postsid)
 					.then(tags => {
 						if(!tags){tags = [];}
-						else{singlePostTags = tags.map((tag)=>{singlePostTags.push(tag.tagname);});};
+						else{singlePostTags = tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});};
 						modifiedPosts.push({
-							author: post.firstname + " " + post.lastname,
-							authorId: post.authorId,
-							id: post.id,
-							likes: post.likes,
-							reads: post.reads,
-							tags: singlePostTags
+							tags: tags
 						});
 						singlePostTags = [];
 					})
