@@ -25,8 +25,7 @@ module.exports = {
 	// totalReadCount = all reads from posts written by that author
 
 
-// still need:
-	// query parameters:  
+// still need query parameters
 
 	
 // get all authors

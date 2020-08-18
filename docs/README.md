@@ -15,7 +15,7 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
         - [example](https://hatchways.io/api/assessment/blog/posts?tag=tech)
     - Our API can only filter one tag at a time.  The field “tag” is singular, not plural.
 - [ ] You need the following routes in your API:
-    - [ ]  GET /api/ping, response status code 200, json response {"success": true}
+    - [X]  GET /api/ping, response status code 200, json response {"success": true}
     - [ ] GET /api/posts, response status code 200, response as follows:
         - query parameters:  tags, sortBy, direction
         - The API response will be a list of all the blog posts that have at least one tag specified in the tags parameter.
