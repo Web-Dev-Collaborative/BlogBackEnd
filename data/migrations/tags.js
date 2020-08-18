@@ -4,7 +4,7 @@ exports.up = function(knex) {
       tags.increments('tagsid');
   
       tags
-        .string('tagsName', 256)
+        .string('tagName', 256)
         .notNullable()
         .unique();
     });
