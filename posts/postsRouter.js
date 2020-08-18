@@ -49,8 +49,8 @@ router.get('/', restricted, (req, res) => {
 						tags = [];
 					} else {
 						res.status(200).json({
-							author: posts.author,
-							authorId: posts.authorId,
+							author: posts.firstname + " " + posts.lastname,
+							authorId: posts.authorsid,
 							id: posts.id,
 							likes: posts.likes,
 							reads: posts.reads
