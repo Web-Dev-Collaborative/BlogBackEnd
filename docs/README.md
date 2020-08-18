@@ -68,6 +68,7 @@ posts (try to be efficient when doing this)
 - [ ] Cypress testing
 - [ ] Postman testing & documentation (Postman collection link)
 - [ ] deploy
+- [ ] write instructions to deploy
 - [ ] submit
 
 We have provided an API with the correct solution. This should only be used to verify
@@ -139,9 +140,15 @@ There are four parts to the assessment.
 
 ### `npm start`
 
-When deploying, you will need to migrate and seed the database:
+### Instructions to Deploy
 
-```knex migrate:up authors.js;knex migrate:up tags.js;knex migrate:up posts.js;knex migrate:up poststags.js;knex migrate:up users.js;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```
+- Use Heroku to deploy app.
+- provision PostgreSQL database on Heroku.
+- enter database url as ```DATABASE_URL``` in a local .env file and in config vars on Heroku.
+- enter 'production' without the quotes as ```DB_ENV``` in a local .env file and in config vars on Heroku.
+- The secret will be emailed for you to use as ```JWT_SECRET``` in a local .env file and in config vars on Heroku.
+- Migrate and seed the database using the following commands:
+    ```knex migrate:up authors.js;knex migrate:up tags.js;knex migrate:up posts.js;knex migrate:up poststags.js;knex migrate:up users.js;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```
 
 ## Documentation
 
