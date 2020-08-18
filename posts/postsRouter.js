@@ -45,51 +45,49 @@ router.get('/', restricted, (req, res) => {
 			else{
 				let modifiedPosts = [];
 				posts.forEach((post) => {
-							modifiedPosts.push({
-								author: post.firstname + " " + post.lastname,
-								authorId: post.authorId,
-								id: post.id,
-								likes: post.likes,
-								reads: post.reads,
-								tags: []
-							});
-						// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
-						// add singlePostTags to each post
-						// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
+					Tags.getTagsByPost(post.id)
+					.then(tags => {
+						if(!tags){tags = [];}
+						modifiedPosts.push({
+							author: post.firstname + " " + post.lastname,
+							authorId: post.authorId,
+							id: post.id,
+							likes: post.likes,
+							reads: post.reads,
+							tags: tags
+						});
 					})
 					.catch(err => res.send(err));
-					Tags.getTagsByPost()
-					.then(tags => {
-						if(tags) {
+				});
+			}
+			res.status(200).json({posts: modifiedPosts});
+		})
+		.catch(err => res.send(err))
+});
+			// singlePostTags = [];
+			// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
+			// add singlePostTags to each post
+			// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
+							/*
+							let tagName;
 							for(let x = 0; x < modifiedPosts.length;x++){
 								for (let y = 0; y < tags.length; y++){
 									if (modifiedPosts[x].id == tags[y].postsid){
-										modifiedPosts[x].tags.push(tags[y].tagname);
+										tagName = tags[y].tagname;
+										modifiedPosts[x]['tags'].push(tagName);
 									}
-
 								}
 							}
-							/*
 							tags.forEach((tag)=>{
 								if (tag.postsid == ){
 									modifiedPosts.tags = tag.tagname;
 								}
 							});
 							*/
-						}
 
 						// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
 						// add singlePostTags to each post
 						// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
-					})
-					.catch(err => res.send(err))
-					// singlePostTags = [];
-			
-				}
-				res.status(200).json({posts: modifiedPosts});
-		})
-		.catch(err => res.send(err));
-});
 
 /*
 				// let singlePostTags = [];
