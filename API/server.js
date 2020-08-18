@@ -11,6 +11,7 @@ const registerRouter = require("../auth/register-router.js");
 const authorsRouter = require('../authors/authorsRouter.js');
 const postsRouter = require('../posts/postsRouter.js');
 const tagsRouter = require('../tags/tagsRouter.js');
+const pingRouter = require('../ping/pingRouter.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
 	// queries:  
@@ -40,11 +41,7 @@ server.use('/api/posts', postsRouter);
 server.use('/api/tags', tagsRouter);
 
 // ping endpoint
-server.get('/api/ping', (req, res) => {
-  res.send({
-    "success": true
-  });
-})
+server.use('/api/ping', pingRouter);
 
 // unsecured/unlogged-in response
 server.get('/', (req, res) => {
