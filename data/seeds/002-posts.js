@@ -552,58 +552,58 @@ exports.seed = function (knex) {
                     reads: 75503
                 },
                 {
-                    postsid: ,
+                    postsid: 2,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 469,
+                    reads: 90406
                 },
                 {
-                    postsid: ,
+                    postsid: 6,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 387,
+                    reads: 50062
                 },
                 {
-                    postsid: ,
+                    postsid: 24,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 940,
+                    reads: 89299
                 },
                 {
-                    postsid: ,
+                    postsid: 26,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 748,
+                    reads: 28239
                 },
                 {
-                    postsid: ,
+                    postsid: 30,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 232,
+                    reads: 50940
                 },
                 {
-                    postsid: ,
+                    postsid: 32,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 992,
+                    reads: 32530
                 },
                 {
-                    postsid: ,
+                    postsid: 50,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 898,
+                    reads: 4923
                 },
                 {
-                    postsid: ,
+                    postsid: 63,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 682,
+                    reads: 54374
                 },
                 {
-                    postsid: ,
+                    postsid: 91,
                     authorsid: 12,
-                    likes: ,
-                    reads: 
+                    likes: 455,
+                    reads: 90395
                 }
                 
 			]);
