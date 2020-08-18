@@ -55,7 +55,7 @@ router.get('/', restricted, (req, res) => {
 						}
 				)
 				);
-				res.status(200).json(modifiedPosts);
+				res.status(200).json({posts: modifiedPosts});
 			}
 		})
 		.catch(err => res.send(err));
