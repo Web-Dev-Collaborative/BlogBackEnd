@@ -20,7 +20,7 @@ module.exports = {
 // get all posts
 /*
 	SELECT posts.postsid, posts.authorsid, posts.likes, posts.reads,
-		CONCAT(authors.firstname, ' ', authors.lastname) as author, authors.authorsid as authorId, 
+		authors.authorsid, authors.firstname, authors.lastname,
 		tags.tagsid, tags.tagname,
 		poststags.poststagsid, poststags.postsid, poststags.tagsid
 	FROM posts
@@ -34,8 +34,8 @@ module.exports = {
 function getPosts() {
 	return db('posts')
 		.select(
-			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads', 
-			authors.authorsid.as('authorId'), Concat(authors.firstname, ' ', authors.lastname).as('author'), 
+			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads',
+			'authors.authorsid', 'authors.firstname', 'authors.lastname',
 			'tags.tagsid', 'tags.tagname',
 			'poststags.poststagsid', 'poststags.postsid', 'poststags.tagsid'
 		)
