@@ -61,8 +61,7 @@ router.get('/', restricted, (req, res) => {
 					if(tags) {
 						tags.map((tag)=>{singlePostTags.push(tag);});
 						// loop through modifiedPosts and add singlePostTags
-
-						modifiedPosts.map((post) => {modifiedPosts.push(singlePostTags)});
+						modifiedPosts.map((post) => {post.push(singlePostTags)});
 						singlePostTags = [];
 					}
 				})
