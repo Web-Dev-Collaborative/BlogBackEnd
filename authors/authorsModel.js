@@ -23,7 +23,20 @@ module.exports = {
 			// WHERE authorsid = authorsid
 	// totalLikeCount = all likes from posts written by that author
 	// totalReadCount = all reads from posts written by that author
+/*
+SELECT posts.postsid, posts.authorsid, posts.likes, posts.reads,
+			authors.authorsid, authors.firstname, authors.lastname,
+			tags.tagsid, tags.tagname,
+			poststags.poststagsid, poststags.postsid, poststags.tagsid
+FROM posts
+INNER JOIN poststags
+ON posts.postsid = poststags.postsid
+INNER JOIN authors 
+ON posts.authorsid = authors.authorsid
+INNER JOIN tags
+ON poststags.tagsid = tags.tagsid
 
+*/
 
 
 // still need:
