@@ -36,7 +36,7 @@ function getPosts() {
 	
 		*/
 	return db('posts')
-		.select(
+		.select('authors.firstname' || ' ' || 'authors.lastname'.as('author'),
 			'authors.authorsid AS authorId',
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
 		)
