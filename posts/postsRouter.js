@@ -48,7 +48,7 @@ router.get('/', restricted, (req, res) => {
 				} else {
 					let modifiedTags = [];
 					for(let x = 0; x < tags.length; x++){
-						modifiedTags.push(tags[x].tagname);
+						modifiedTags.push(tags.tagname);
 					};
 					res.status(200).json({
 						author: posts.author,
@@ -56,7 +56,7 @@ router.get('/', restricted, (req, res) => {
 						id: posts.id,
 						likes: posts.likes,
 						reads: posts.reads,
-						tags: modifiedTags
+						tags: tags.tagname
 					})
 				}
 			})
