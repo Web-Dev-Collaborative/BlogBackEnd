@@ -139,6 +139,14 @@ There are four parts to the assessment.
 
 ### `npm start`
 
+When deploying, you will need to migrate and seed the database:
+
+```knex migrate:latest;knex seed:run;```
+
+OR alternatively:
+
+```knex migrate:latest;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```
+
 ## Documentation
 
 - This app has been documented via Postman.
