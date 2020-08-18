@@ -52,7 +52,8 @@ router.get('/', restricted, (req, res) => {
 					}
 					console.log(tags);
 				*/
-					let fullAuthor = posts.firstname && " " && posts.lastname;
+				posts.forEach((post)=>{
+					let fullAuthor = post.firstname + " " + post.lastname;
 					res.status(200).json({
 						/*
 						author: posts.firstname + " " + posts.lastname,
@@ -64,12 +65,16 @@ router.get('/', restricted, (req, res) => {
 
 						*/
 						author: fullAuthor,
-						authorId: posts.authorId,
-						id: posts.id,
-						likes: posts.likes,
-						reads: posts.reads,
-						tags: tags
+						authorId: post.authorId,
+						id: post.id,
+						likes: post.likes,
+						reads: post.reads
 					})
+
+				}
+
+				)
+
 					/*
 				})
 				*/
