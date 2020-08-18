@@ -34,9 +34,9 @@ module.exports = {
 function getPosts() {
 	return db('posts')
 		.select(
-			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads',
-			'authors.authorsid', 'authors.firstname', 'authors.lastname',
-			'poststags.poststagsid', 'poststags.postsid', 'poststags.tagsid'
+			'posts.postsid'.as('id'), 'posts.likes'.as('likes'), 'posts.reads'.as('reads'),
+			'authors.authorsid'.as('authorId'), 'authors.firstname'.as('firstname'), 'authors.lastname'.as('lastname'),
+			'poststags.tagsid'.as('tagsid')
 		)
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
