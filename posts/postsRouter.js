@@ -44,7 +44,7 @@ router.get('/', restricted, (req, res) => {
 			}
 			else{
 				let modifiedPosts = [];
-				let singlePostTags = [];
+				// let singlePostTags = [];
 				posts.forEach((post) => {
 					let postsid = post.id;
 					Tags.getTagsByPost(postsid)
@@ -57,8 +57,7 @@ router.get('/', restricted, (req, res) => {
 								authorId: post.authorId,
 								id: post.id,
 								likes: post.likes,
-								reads: post.reads,
-								tags: [...tags]
+								reads: post.reads
 							});
 						}
 					})
