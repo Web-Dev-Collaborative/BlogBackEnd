@@ -58,27 +58,20 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 the Hatchways API (make a separate API request for every tag specified)
 - [ ] Combine all the results from the API requests above and remove all the repeated
 posts (try to be efficient when doing this)
-- [ ] You will get a better score on our assessment if you can make concurrent
-requests to the API (making the requests in parallel)
-- [ ] An important part of development is testing. In this step, we want to see tests written
-for your routes. Do not use the solutions API route to perform testing in this step. Think
-about the different ways to test the app, and the best way to get good coverage.
-- [ ] Making API calls to other servers can be expensive. How can you reduce the number of
-calls you make to a server? You can cache the results of an API call on your server. Try
-to implement a server side cache to our API. Two tips are 1) keep it simple, and 2) feel
-free to use existing libraries/frameworks.
+- [ ] You will get a better score on our assessment if you can make concurrent requests to the API (making the requests in parallel)
+- [ ] An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
+- [ ] Making API calls to other servers can be expensive. How can you reduce the number of calls you make to a server? You can cache the results of an API call on your server. Try to implement a server side cache to our API. Two tips are 1) keep it simple, and 2) feel free to use existing libraries/frameworks.
 - [ ] add appropriate comments
 - [ ] make sure there are no console red/yellow errors
 - [ ] make sure app organized, no repeated code, all code formatted
-- [ ] fill out readme template
+- [X] fill out readme template
 - [ ] Cypress testing
-- [ ] Postman testing & documentation
+- [ ] Postman testing & documentation (Postman collection link)
 - [ ] deploy
 - [ ] submit
 
 We have provided an API with the correct solution. This should only be used to verify
 your results. Do not call this API in your application. [Here it is in action](https://hatchways.io/api/assessment/solution/posts?tags=history,tech&sortBy=likes&direction=desc).
-
 
 ## Tech Stack
 
@@ -87,7 +80,8 @@ your results. Do not call this API in your application. [Here it is in action](h
 - [Express](https://github.com/expressjs/express):  a fast, unopinionated, minimalist web framework for Node.
 - [bcrypt](https://github.com/pyca/bcrypt/):  modern(-ish) password hashing for your software and your servers.
 - [cypress](https://www.cypress.io):  Fast, easy and reliable testing for anything that runs in a browser.
-- Postman (for testing and documentation)
+- [Postman](https://www.postman.com/):   Postman helps you be more efficient while working with APIs.  Using Postman, you can construct complex HTTP requests quickly, organize them in collections and share them with your co-workers.
+- [PostgreSQL](https://github.com/postgres/postgres):  Open Source Relational Database
 
 ### Breakdown
 
@@ -151,7 +145,7 @@ There are four parts to the assessment.
 - Postman Docs were last published on 08/18/2020
 - Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
 
-[BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema]()   |   [Documentation]()   |   [Endpoints](endpoints.md)
+[Postman Collection]()   |   [BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)
 
 ## Testing
 
