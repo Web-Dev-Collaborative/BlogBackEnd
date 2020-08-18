@@ -10,10 +10,10 @@
 
 ## Users
 
-| Request Method | Endpoint                           | Description                          |
-| :------------- | :--------------------------------- | :----------------------------------- |
-| `POST`         | `/customers/`                      | creates a user                       |
-| `PUT`          | `/customers/:customersid`          | updates a user                       |
-| `DELETE`       | `/customers/:customersid`          | deletes a user                       |
-| `GET`          | `/customers`                       | returns list of users                |
-| `GET`          | `/customers/:customersid`          | returns a user                       |
+| Request Method | Endpoint                   | Description                          |
+| :------------- | :------------------------- | :----------------------------------- |
+| `POST`         | `/users/`                  | creates a user                       |
+| `PUT`          | `/users/:usersid`          | updates a user                       |
+| `DELETE`       | `/users/:usersid`          | deletes a user                       |
+| `GET`          | `/users`                   | returns list of users                |
+| `GET`          | `/users/:usersid`          | returns a user                       |

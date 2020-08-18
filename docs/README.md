@@ -10,6 +10,63 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] add dependencies
 - [X] get to app starting point before hitting start
 - [X] research/review old apps/samples
+- [ ] Build an API that requires you to fetch data from [this API](https://hatchways.io/api/assessment/blog/posts).
+    - query parameters:  tag; string (the tag associated with the blog post)
+        - [example](https://hatchways.io/api/assessment/blog/posts?tag=tech)
+    - Our API can only filter one tag at a time.  The field “tag” is singular, not plural.
+- [ ] You need the following routes in your API:
+    - [ ]  GET /api/ping, response status code 200, json response {"success": true}
+    - [ ] GET /api/posts, response status code 200, response as follows:
+        - query parameters:  tags, sortBy, direction
+        - The API response will be a list of all the blog posts that have at least one tag specified in the tags parameter.
+        - The sortBy parameter specifies which field should be used to sort the returned results. This is an optional parameter, with a default value of `id`.
+        - The direction parameter specifies if the results should be returned in ascending order (if the value is "asc") or descending order (if the value is "desc"). The default value of the direction parameter is `asc`.
+        - Response Body (JSON):
+            ```pseudocode
+            {
+                "posts":
+                    [
+                        {
+                            "id": 1,
+                            "author": "Rylee Paul",
+                            "authorId": 9,
+                            "likes": 960,
+                            "popularity": 0.13,
+                            "reads": 50361,
+                            "tags": [ "tech", "health" ]
+                        },
+                    ...
+                    ]
+            }
+            ```
+        - Error Responses:
+            - If `tags` parameter is not present (response status code: 400):
+                - Response body (JSON):
+                ```pseudocode
+                    {
+                        "error": "Tags parameter is required"
+                    }
+                ```
+            - If a `sortBy` or `direction` are invalid values, specify an error like below (response status code: 400):
+                - Response body (JSON):
+                ```pseudocode
+                    {
+                        "error": "sortBy parameter is invalid"
+                    }
+                ```
+- [ ] For every tag specified in the tags parameter, fetch the posts with that tag using
+the Hatchways API (make a separate API request for every tag specified)
+- [ ] Combine all the results from the API requests above and remove all the repeated
+posts (try to be efficient when doing this)
+- [ ] You will get a better score on our assessment if you can make concurrent
+requests to the API (making the requests in parallel)
+- [ ] An important part of development is testing. In this step, we want to see tests written
+for your routes. Do not use the solutions API route to perform testing in this step. Think
+about the different ways to test the app, and the best way to get good coverage.
+- [ ] Making API calls to other servers can be expensive. How can you reduce the number of
+calls you make to a server? You can cache the results of an API call on your server. Try
+to implement a server side cache to our API. Two tips are 1) keep it simple, and 2) feel
+free to use existing libraries/frameworks.
 - [ ] add appropriate comments
 - [ ] make sure there are no console red/yellow errors
 - [ ] make sure app organized, no repeated code, all code formatted
@@ -18,6 +75,10 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [ ] Postman testing & documentation
 - [ ] deploy
 - [ ] submit
+
+We have provided an API with the correct solution. This should only be used to verify
+your results. Do not call this API in your application. [Here it is in action](https://hatchways.io/api/assessment/solution/posts?tags=history,tech&sortBy=likes&direction=desc).
+
 
 ## Tech Stack
 
@@ -70,11 +131,13 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 
 ## About the Assessment
 
-The goal of this assessment is to test your frontend development skills. The objective is to replicate a frontend application as close to as possible. You are allowed to use any frontend framework (React.js, Angular, Vue.js, etc.) or just plain old Javascript, HTML, and CSS. Your assessment will be graded based on this rubric.
+In this assessment, you will write a simple backend JSON API.  If you notice something
+is not working (like the API, or any of the links in this document), please contact
+hello@hatchways.io.  You may use any type of backend API framework. Please document in a Readme how to start the application.  Your assessment will be graded based on [this rubric](https://drive.google.com/file/d/1f0jiSVTTGtAn8XbHwHcTqPEU-BT4-q6x/view).
 
 Your submission takes into consideration how long it takes you to complete it. You are welcome to submit it at any point, however completing it in less than 12 hours increases your chances of being considered for our next interview cycle.
 
-There are five parts to the assessment.  To complete the later parts of the assessment, it will be very beneficial to use a modern frontend framework.
+There are four parts to the assessment.
 
 ## Available Scripts
 
