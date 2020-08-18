@@ -16,11 +16,7 @@ const restricted = require('../auth/restriction.js');
 router.get('/', restricted, (req, res) => {
 	Authors.getAuthors()
 		.then(authors => {
-			res.status(200).json(
-				{
-					"success": true
-				}
-			);
+			res.status(200).json(authors);
 		})
 		.catch(err => res.send(err));
 });

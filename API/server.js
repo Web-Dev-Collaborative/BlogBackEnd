@@ -41,9 +41,9 @@ server.use('/api/tags', tagsRouter);
 
 // ping endpoint
 server.get('/api/ping', (req, res) => {
-  res.send({
-            "success": true
-          });
+  res.send().json({
+                    "success": true
+                  });
 })
 
 // unsecured/unlogged-in response
