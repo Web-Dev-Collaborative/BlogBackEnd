@@ -43,7 +43,7 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				posts.forEach(function responseBody(post) {
+				posts.forEach((post) => {
 					res.status(200).json({
 						author: post.firstname + " " + post.lastname,
 						authorId: post.authorId,
@@ -52,11 +52,7 @@ router.get('/', restricted, (req, res) => {
 						reads: post.reads
 					})
 
-				})
-
-					/*
-				})
-				*/
+				});
 			}
 		})
 		.catch(err => res.send(err));
