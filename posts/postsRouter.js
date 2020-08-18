@@ -49,7 +49,7 @@ router.get('/', restricted, (req, res) => {
 					Tags.getTagsByPost(post.postsid)
 					.then(tags =>{
 						if(tags) {
-							tags.forEach((tag)=>{singlePostTags.push(tag);});					
+							tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});					
 							modifiedPosts.push(
 								{
 									author: post.firstname + " " + post.lastname,
@@ -60,6 +60,7 @@ router.get('/', restricted, (req, res) => {
 									tags: singlePostTags
 								}
 							);
+							singlePostTags = [];
 						}
 					})
 					.catch(err => res.send(err))
