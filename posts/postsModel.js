@@ -21,26 +21,26 @@ module.exports = {
 /*
 	SELECT posts.postsid, posts.authorsid, posts.likes, posts.reads,
 		authors.authorsid, authors.firstname, authors.lastname,
-		tags.tagsid, tags.tagname,
-		poststags.poststagsid, poststags.postsid, poststags.tagsid
+		tags.tagsid, tags.tagname
 	FROM posts
-	INNER JOIN poststags
-	ON posts.postsid = poststags.postsid
 	INNER JOIN authors 
-	ON posts.authorsid = authors.authorsid
-	INNER JOIN tags
-	ON poststags.tagsid = tags.tagsid;
+	ON posts.authorsid = authors.authorsid;
 */
 function getPosts() {
+	return knex.raw('SELECT posts.postsid AS id, posts.authorsid AS authorId, posts.likes AS likes, posts.reads AS reads, ' + 
+		'authors.authorsid, authors.firstname + " " + authors.lastname AS author' + 
+		' FROM posts INNER JOIN authors ON posts.authorsid = authors.authorsid');
+		/*
 	return db('posts')
 		.select(
 			
-			knex.raw('authors.firstname + " " + authors.lastname AS author'), 'authors.authorsid AS authorId', 
+			'authors.firstname AS firstname' + ' ' + 'authors.lastname AS lastname', 'authors.authorsid AS authorId',
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
 			
 		)
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
+		*/
 }
 
 // get posts by author
