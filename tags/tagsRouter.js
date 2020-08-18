@@ -1,78 +1,75 @@
 const router = require('express').Router();
 
-const Payments = require('./paymentsModel.js');
+const Tags = require('./tagsModel.js');
 const restricted = require('../auth/restriction.js');
-const restrictedA = require('../auth/restrictionA.js');
-const restrictedC = require('../auth/restrictionC.js');
-const restrictedM = require('../auth/restrictionM.js');
 
-// GET:  gets all payments records
-router.get('/', restrictedM, (req, res) => {
-	Payments.find()
-		.then(payments => {
-			res.status(200).json(payments);
+// GET:  gets all tags records
+router.get('/', restricted, (req, res) => {
+	Tags.find()
+		.then(tags => {
+			res.status(200).json(tags);
 		})
 		.catch(err => res.send(err));
 });
 
-// GET:  gets one payment record
-router.get('/:pid', restricted, (req, res) => {
-	const pid = req.params.pid;
-	if (!pid) {
-		res.status(404).json({ message: `The payment with the specified pid ${pid} does not exist.` });
+// GET:  gets one tag record
+router.get('/:tagsid', restricted, (req, res) => {
+	const tagsid = req.params.tagsid;
+	if (!tagsid) {
+		res.status(404).json({ message: `The tag with the specified tagsid ${tagsid} does not exist.` });
 	} else {
-		Payments.findById(pid)
-			.then(payment => {
-				res.status(200).json(payment);
+		Tags.findById(tagsid)
+			.then(tag => {
+				res.status(200).json(tag);
 			})
 			.catch(err => {
-				res.status(500).json({ message: `The payment information could not be retrieved.`, error: err });
+				res.status(500).json({ message: `The tag information could not be retrieved.`, error: err });
 			});
 	}
 });
 
-// POST:  record payment
+// POST:  record tag
 router.post('/', restricted, (req, res) => {
-	const newPayment = req.body;
+	const newTag = req.body;
 
-	Payments.add(newPayment)
-		.then(payment => {
-			res.status(201).json(payment);
+	Tags.add(newTag)
+		.then(tag => {
+			res.status(201).json(tag);
 		})
 		.catch(err => {
-			res.status(500).json({ message: `Failed to create new payment.`, error: err });
+			res.status(500).json({ message: `Failed to create new tag.`, error: err });
 		});
 });
 
-// PUT:  update payment record
-router.put('/:pid', restrictedM, (req, res) => {
-	const pid = req.params.pid;
-	const updatedPayment = req.body;
+// PUT:  update tag record
+router.put('/:tagsid', restricted, (req, res) => {
+	const tagsid = req.params.tagsid;
+	const updatedTag = req.body;
 
-	Payments.update(pid, updatedPayment)
-		.then(payment => {
-			if (payment) {
-				res.json(payment);
+	Tags.update(tagsid, updatedTag)
+		.then(tag => {
+			if (tag) {
+				res.json(tag);
 			} else {
-				res.status(404).json({ message: `Could not find payment with given id ${pid}.` });
+				res.status(404).json({ message: `Could not find tag with given id ${tagsid}.` });
 			}
 		})
 		.catch(err => {
-			res.status(500).json({ message: `Failed to update payment.`, error: err });
+			res.status(500).json({ message: `Failed to update tag.`, error: err });
 		});
 });
-// DELETE:  delete payment record
-router.delete('/:pid', restrictedM, (req, res) => {
-	const pid = req.params.pid;
-	if (!pid) {
-		res.status(404).json({ message: `The payment with the specified ID ${pid} does not exist.` });
+// DELETE:  delete tag record
+router.delete('/:tagsid', restricted, (req, res) => {
+	const tagsid = req.params.tagsid;
+	if (!tagsid) {
+		res.status(404).json({ message: `The tag with the specified ID ${tagsid} does not exist.` });
 	}
-	Payments.remove(pid)
-		.then(payment => {
-			res.json(payment);
+	Tags.remove(tagsid)
+		.then(tag => {
+			res.json(tag);
 		})
 		.catch(err => {
-			res.status(500).json({ message: `The payment could not be removed.`, error: err });
+			res.status(500).json({ message: `The tag could not be removed.`, error: err });
 		});
 });
 

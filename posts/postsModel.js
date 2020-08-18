@@ -9,7 +9,6 @@ module.exports = {
 	getPostsByAuthor,
 	getTotalLikesCount,
 	getTotalReadsCount,
-	getTagsByPost,
 	update,
 	remove
 };
