@@ -17,9 +17,6 @@ const tagsRouter = require('../tags/tagsRouter.js');
 // posts endpoint fields:  author, authorId, id, likes, reads, tags
   // queries:  
 
-// export getTagsByAuthor, getTagsByPost from tags model
-// export getPosts, getPostsByAuthor, getTotalReadsCount, getTotalLikesCount from posts model
-// still need /api/ping and query parameters
 
 const server = express();
 
@@ -41,6 +38,13 @@ server.use('/api/posts', postsRouter);
 
 // tags router
 server.use('/api/tags', tagsRouter);
+
+// ping endpoint
+server.get('/api/ping', (req, res) => {
+  res.send({
+            "success": true
+          });
+})
 
 // unsecured/unlogged-in response
 server.get('/', (req, res) => {
