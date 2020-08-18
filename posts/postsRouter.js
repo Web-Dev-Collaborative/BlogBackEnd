@@ -45,7 +45,7 @@ router.get('/', restricted, (req, res) => {
 			else{
 				let modifiedPosts = [];
 				posts.map((post) => 
-					modifiedPosts.push[
+					modifiedPosts.push(
 						{
 							author: post.firstname + " " + post.lastname,
 							authorId: post.authorId,
@@ -53,7 +53,7 @@ router.get('/', restricted, (req, res) => {
 							likes: post.likes,
 							reads: post.reads
 						}
-					]
+				)
 				);
 				res.status(200).json(modifiedPosts);
 			}
