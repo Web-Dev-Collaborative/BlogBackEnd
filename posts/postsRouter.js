@@ -44,18 +44,27 @@ router.get('/', restricted, (req, res) => {
 			}
 			else{
 				let modifiedPosts = [];
+				let singlePostTags = [];
 				posts.map((post) => 
-					modifiedPosts.push(
-						{
-							author: post.firstname + " " + post.lastname,
-							authorId: post.authorId,
-							id: post.id,
-							likes: post.likes,
-							reads: post.reads
+					Tags.getTagsByPost(post.postsid)
+					.then(tags =>{
+						if(tags) {
+							tags.forEach((tag)=>{singlePostTags.push(tag);});					
+							modifiedPosts.push(
+								{
+									author: post.firstname + " " + post.lastname,
+									authorId: post.authorId,
+									id: post.id,
+									likes: post.likes,
+									reads: post.reads,
+									tags: singlePostTags
+								}
+							);
 						}
-				)
+					})
+					.catch(err => res.send(err))
 				);
-				res.status(200).json(modifiedPosts);
+				res.status(200).json({posts: modifiedPosts});
 			}
 		})
 		.catch(err => res.send(err));
