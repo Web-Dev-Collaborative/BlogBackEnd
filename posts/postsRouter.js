@@ -55,18 +55,14 @@ router.get('/', restricted, (req, res) => {
 					res.status(200).json({
 						/*
 						author: posts.firstname + " " + posts.lastname,
-						authorId: authors.authorsid,
+						authorId: posts.authorsid,
 						id: posts.id,
 						likes: posts.likes,
 						reads: posts.reads,
 						tags: tags
 
 						*/
-						author: authors.firstname + " " + authors.lastname,
-						authorId: authors.authorsid,
-						id: posts.postsid,
-						likes: posts.likes,
-						reads: posts.reads,
+						author: authors.firstname + " " + authors.lastname
 					})
 					/*
 				})
