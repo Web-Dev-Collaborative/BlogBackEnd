@@ -34,19 +34,14 @@ function getPosts() {
 	)
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
 	
+		*/
 	return db('posts')
-		.select("authors.firstname || ' ' || authors.lastname AS author",
+		.select(
 			'authors.authorsid AS authorId',
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
 	
-		*/
-	let sqlStatement = 'SELECT ' + 
-	'posts.postsid as id, posts.authorsid as authorId, posts.likes as likes, posts.reads as reads ' +
-	'FROM posts INNER JOIN authors ON posts.authorsid = authors.authorsid;'
-
-	return knex.raw(sqlStatement);
 }
 
 
