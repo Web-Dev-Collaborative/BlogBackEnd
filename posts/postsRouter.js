@@ -51,7 +51,7 @@ router.get('/', restricted, (req, res) => {
 						tags = [];
 					}
 					console.log(tags);
-					*/
+				*/
 					res.status(200).json({
 						/*
 						author: posts.firstname + " " + posts.lastname,
@@ -62,7 +62,7 @@ router.get('/', restricted, (req, res) => {
 						tags: tags
 
 						*/
-						posts
+						author: posts.firstname + " " + posts.lastname
 					})
 					/*
 				})
