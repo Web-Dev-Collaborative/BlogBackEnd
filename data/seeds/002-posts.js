@@ -480,40 +480,40 @@ exports.seed = function (knex) {
                     reads: 82099
                 },
                 {
-                    postsid: ,
+                    postsid: 35,
                     authorsid: 10,
-                    likes: ,
-                    reads: 
+                    likes: 868,
+                    reads: 66926
                 },
                 {
-                    postsid: ,
+                    postsid: 47,
                     authorsid: 10,
-                    likes: ,
-                    reads: 
+                    likes: 852,
+                    reads: 72023
                 },
                 {
-                    postsid: ,
+                    postsid: 70,
                     authorsid: 10,
-                    likes: ,
-                    reads: 
+                    likes: 632,
+                    reads: 15459
                 },
                 {
-                    postsid: ,
+                    postsid: 75,
                     authorsid: 10,
-                    likes: ,
-                    reads: 
+                    likes: 733,
+                    reads: 94910
                 },
                 {
-                    postsid: ,
+                    postsid: 79,
                     authorsid: 10,
-                    likes: ,
-                    reads: 
+                    likes: 617,
+                    reads: 52494
                 },
                 {
-                    postsid: ,
+                    postsid: 88,
                     authorsid: 10,
-                    likes: ,
-                    reads: 
+                    likes: 371,
+                    reads: 21916
                 },
                 {
                     postsid: ,
@@ -548,6 +548,60 @@ exports.seed = function (knex) {
                 {
                     postsid: ,
                     authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 12,
                     likes: ,
                     reads: 
                 }
