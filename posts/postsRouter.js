@@ -45,6 +45,38 @@ router.get('/', restricted, (req, res) => {
 			else{
 				let modifiedPosts = [];
 				// let singlePostTags = [];
+				posts.forEach((post) => {
+					Tags.getTagsByPost(post.postsid)
+					.then(tags => {
+						if(tags) {
+							// singlePostTags = tags
+							modifiedPosts.push({
+								author: post.firstname + " " + post.lastname,
+								authorId: post.authorId,
+								id: post.id,
+								likes: post.likes,
+								reads: post.reads,
+								tags: tags
+							});
+						}
+						else{
+							modifiedPosts.push({
+								author: post.firstname + " " + post.lastname,
+								authorId: post.authorId,
+								id: post.id,
+								likes: post.likes,
+								reads: post.reads,
+								tags: []
+							});
+						}
+						// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
+						// add singlePostTags to each post
+						// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
+					})
+					.catch(err => res.send(err))
+					// singlePostTags = [];
+				});
+				/*
 				for(let x = 0; x < posts.length;x++) {
 					let postsid = posts[x].postsid;
 					Tags.getTagsByPost(postsid)
@@ -67,10 +99,11 @@ router.get('/', restricted, (req, res) => {
 					})
 					.catch(err => res.send(err))
 					// singlePostTags = [];
+					*/
 				};
 				res.status(200).json({posts: modifiedPosts});
 			}
-		})
+		)
 		.catch(err => res.send(err));
 });
 
