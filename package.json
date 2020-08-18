@@ -1,19 +1,20 @@
 {
-  "name": "HatchwaysBETest",
+  "name": "hatchwaysbetest",
   "version": "1.0.0",
   "description": "This is Erica Ingram's submission for the back-end assessment from Hatchways.  The app is deployed at [this link]().",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon",  
+    "server": "nodemon",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env DB_ENV=testing jest --watch",
+    "cypress": "cypress open"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/evoingram/HatchwaysBETest.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Erica L. Ingram",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/evoingram/HatchwaysBETest/issues"
