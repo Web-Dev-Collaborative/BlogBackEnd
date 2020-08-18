@@ -60,20 +60,19 @@ router.get('/', restricted, (req, res) => {
 									reads: post.reads,
 									tags: tags
 								}	)
+					
+						} else{
+							modifiedPosts.push(
+								{
+									author: post.firstname + " " + post.lastname,
+									authorId: post.authorId,
+									id: post.id,
+									likes: post.likes,
+									reads: post.reads
+								}	)
+						}
+					})
 					.catch(err => res.send(err))
-				}
-				else{
-					modifiedPosts.push(
-						{
-							author: post.firstname + " " + post.lastname,
-							authorId: post.authorId,
-							id: post.id,
-							likes: post.likes,
-							reads: post.reads
-						}	)
-				}
-			}
-					);
 				});
 				res.status(200).json({posts: modifiedPosts});
 			}
