@@ -1,13 +1,64 @@
 const router = require('express').Router();
 
 const Posts = require('./postsModel.js');
+const Authors = require('../authors/authorsModel.js');
+const Tags = require('../tags/tagsModel.js');
 const restricted = require('../auth/restriction.js');
+
+
+// still need query parameters
+
+/*
+
+If `tags` parameter is not present:
+	Response body (JSON):
+	{
+		"error": "Tags parameter is required"
+	}
+Response status code: 400
+
+If a `sortBy` or `direction` are invalid values, specify an error like below:
+	Response body (JSON):
+	{
+		"error": "sortBy parameter is invalid"
+	}
+Response status code: 400
+*/
+
+
+// getAuthors from authors model
+// getTagsByAuthor, getTagsByPost from tags model
+// getPosts, getPostsByAuthor, getTotalReadsCount, getTotalLikesCount from posts model
+
 
 // GET:  gets all posts records
 router.get('/', restricted, (req, res) => {
-	Posts.find()
+	Posts.getPosts()
 		.then(posts => {
-			res.status(200).json(posts);
+			if (!posts) {
+				res.status(404).json({
+					message: `Posts do not exist.`,
+					error: err
+				});
+			}
+			Tags.getTagsByPost(posts.postsid).then(tags => {
+				if (!tags) {
+					tags = [];
+				} else {
+					let modifiedTags = [];
+					for(let x = 0; x < tags.length; x++){
+						modifiedTags.push(tags[x]);
+					};
+					res.status(200).json({
+						author: posts.author,
+						authorId: posts.authorId,
+						id: posts.id,
+						likes: posts.likes,
+						reads: posts.reads,
+						tags: modifiedTags
+					})
+				}
+			})
 		})
 		.catch(err => res.send(err));
 });
@@ -16,14 +67,14 @@ router.get('/', restricted, (req, res) => {
 router.get('/:postsid', restricted, (req, res) => {
 	const postsid = req.params.postsid;
 	if (!postsid) {
-		res.status(404).json({ message: `The single_post with the specified postsid ${postsid} does not exist.` });
+		res.status(404).json({ message: `The post with the specified postsid ${postsid} does not exist.` });
 	} else {
 		Posts.findById(postsid)
 			.then(single_post => {
 				res.status(200).json(single_post);
 			})
 			.catch(err => {
-				res.status(500).json({ message: `The single_post information could not be retrieved.`, error: err });
+				res.status(500).json({ message: `The post information could not be retrieved.`, error: err });
 			});
 	}
 });
@@ -37,7 +88,7 @@ router.post('/', restricted, (req, res) => {
 			res.status(201).json(single_post);
 		})
 		.catch(err => {
-			res.status(500).json({ message: `Failed to create new single_post.`, error: err });
+			res.status(500).json({ message: `Failed to create new post.`, error: err });
 		});
 });
 
@@ -51,25 +102,25 @@ router.put('/:postsid', restricted, (req, res) => {
 			if (single_post) {
 				res.json(single_post);
 			} else {
-				res.status(404).json({ message: `Could not find single_post with given id ${postsid}.` });
+				res.status(404).json({ message: `Could not find post with given id ${postsid}.` });
 			}
 		})
 		.catch(err => {
-			res.status(500).json({ message: `Failed to update single_post.`, error: err });
+			res.status(500).json({ message: `Failed to update post.`, error: err });
 		});
 });
 // DELETE:  delete single_post record
 router.delete('/:postsid', restricted, (req, res) => {
 	const postsid = req.params.postsid;
 	if (!postsid) {
-		res.status(404).json({ message: `The single_post with the specified ID ${postsid} does not exist.` });
+		res.status(404).json({ message: `The post with the specified ID ${postsid} does not exist.` });
 	}
 	Posts.remove(postsid)
 		.then(single_post => {
 			res.json(single_post);
 		})
 		.catch(err => {
-			res.status(500).json({ message: `The single_post could not be removed.`, error: err });
+			res.status(500).json({ message: `The post could not be removed.`, error: err });
 		});
 });
 

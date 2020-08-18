@@ -29,7 +29,7 @@ module.exports = {
 	INNER JOIN authors 
 	ON posts.authorsid = authors.authorsid
 	INNER JOIN tags
-	ON poststags.tagsid = tags.tagsid
+	ON poststags.tagsid = tags.tagsid;
 */
 function getPosts() {
 	return db('posts')

@@ -6,11 +6,6 @@ const restricted = require('../auth/restriction.js');
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
 	// queries:  
 
-// getAuthors from authors model
-// getTagsByAuthor, getTagsByPost from tags model
-// getPosts, getPostsByAuthor, getTotalReadsCount, getTotalLikesCount from posts model
-
-// still need /api/ping and query parameters
 
 // GET:  gets all authors records
 router.get('/', restricted, (req, res) => {
