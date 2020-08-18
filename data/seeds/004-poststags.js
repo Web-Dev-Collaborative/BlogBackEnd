@@ -439,6 +439,121 @@ exports.seed = function (knex) {
 					poststagsid: 87,
 					postsid: 85,
 					tagsid: 8
+				},
+				{
+					poststagsid: 88,
+					postsid: 7,
+					tagsid: 3
+				},
+				{
+					poststagsid: 89,
+					postsid: 7,
+					tagsid: 6
+				},
+				{
+					poststagsid: 90,
+					postsid: 11,
+					tagsid: 2
+				},
+				{
+					poststagsid: 91,
+					postsid: 11,
+					tagsid: 6
+				},
+				{
+					poststagsid: 92,
+					postsid: 23,
+					tagsid: 5
+				},
+				{
+					poststagsid: 93,
+					postsid: 23,
+					tagsid: 1
+				},
+				{
+					poststagsid: 94,
+					postsid: 27,
+					tagsid: 3
+				},
+				{
+					poststagsid: 95,
+					postsid: 28,
+					tagsid: 2
+				},
+				{
+					poststagsid: 96,
+					postsid: 31,
+					tagsid: 7
+				},
+				{
+					poststagsid: 97,
+					postsid: 45,
+					tagsid: 4
+				},
+				{
+					poststagsid: 98,
+					postsid: 45,
+					tagsid: 6
+				},
+				{
+					poststagsid: 99,
+					postsid: 48,
+					tagsid: 5
+				},
+				{
+					poststagsid: 100,
+					postsid: 48,
+					tagsid: 3
+				},
+				{
+					poststagsid: 101,
+					postsid: 53,
+					tagsid: 3
+				},
+				{
+					poststagsid: 102,
+					postsid: 53,
+					tagsid: 5
+				},
+				{
+					poststagsid: 103,
+					postsid: 61,
+					tagsid: 7
+				},
+				{
+					poststagsid: 104,
+					postsid: 61,
+					tagsid: 3
+				},
+				{
+					poststagsid: 105,
+					postsid: 68,
+					tagsid: 7
+				},
+				{
+					poststagsid: 106,
+					postsid: 86,
+					tagsid: 4
+				},
+				{
+					poststagsid: 107,
+					postsid: 86,
+					tagsid: 7
+				},
+				{
+					poststagsid: 108,
+					postsid: 100,
+					tagsid: 6
+				},
+				{
+					poststagsid: 109,
+					postsid: 100,
+					tagsid: 2
+				},
+				{
+					poststagsid: 110,
+					postsid: 100,
+					tagsid: 4
 				}
                 
 			]);
