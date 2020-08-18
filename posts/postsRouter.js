@@ -55,7 +55,7 @@ router.get('/', restricted, (req, res) => {
 								id: post.id,
 								likes: post.likes,
 								reads: post.reads,
-								tags: tags.toString()
+								tags: JSON.stringify(tags)
 							});
 						}
 					})
