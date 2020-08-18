@@ -8,76 +8,76 @@ exports.seed = function (knex) {
 					{
 						bio:
 							'I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat',
-						firstName: 'Lainey',
+						firstname: 'Lainey',
 						authorsid: 1,
-						lastName: 'Ritter'
+						lastname: 'Ritter'
 					},
 					{
 						bio:
 							"I'm love politics. Always looking for feedback on my posts. My interests are below:\n\n-politics\n-science\n-history",
-						firstName: 'Tia',
+						firstname: 'Tia',
 						authorsid: 2,
-						lastName: 'Roberson'
+						lastname: 'Roberson'
 					},
 					{
 						bio: '-Read my posts\n-Let me know what you think!',
-						firstName: 'Jaden',
+						firstname: 'Jaden',
 						authorsid: 3,
-						lastName: 'Bryant'
+						lastname: 'Bryant'
 					},
 					{
 						bio: '-Software Developer from New York\n-Tech is my thing!',
-						firstName: 'Jon',
+						firstname: 'Jon',
 						authorsid: 4,
-						lastName: 'Abbott'
+						lastname: 'Abbott'
 					},
 					{
 						bio: 'I have been writing since I was 12. Now I work for the New York Times',
-						firstName: 'Trevon',
+						firstname: 'Trevon',
 						authorsid: 5,
-						lastName: 'Rodriguez'
+						lastname: 'Rodriguez'
 					},
 					{
 						bio: '-Coder by day\n-Writer by night\n',
-						firstName: 'Bryson',
+						firstname: 'Bryson',
 						authorsid: 6,
-						lastName: 'Bowers'
+						lastname: 'Bowers'
 					},
 					{
 						bio: 'You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer',
-						firstName: 'Ahmad',
+						firstname: 'Ahmad',
 						authorsid: 7,
-						lastName: 'Dunn'
+						lastname: 'Dunn'
 					},
 					{
 						bio: '',
-						firstName: 'Elisha',
+						firstname: 'Elisha',
 						authorsid: 8,
-						lastName: 'Friedman'
+						lastname: 'Friedman'
 					},
 					{
 						bio: 'I love writing about tech. Check out my posts and let me know what you think!',
-						firstName: 'Rylee',
+						firstname: 'Rylee',
 						authorsid: 9,
-						lastName: 'Paul'
+						lastname: 'Paul'
 					},
 					{
 						bio: 'Favorite topics:\n-science\n-culture\n-design',
-						firstName: 'Kinley',
+						firstname: 'Kinley',
 						authorsid: 10,
-						lastName: 'Crosby'
+						lastname: 'Crosby'
 					},
 					{
 						bio: 'Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin',
-						firstName: 'Adalyn',
+						firstname: 'Adalyn',
 						authorsid: 11,
-						lastName: 'Blevins'
+						lastname: 'Blevins'
 					},
 					{
 						bio: 'You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer',
-						firstName: 'Zackery',
+						firstname: 'Zackery',
 						authorsid: 12,
-						lastName: 'Turner'
+						lastname: 'Turner'
 					}
 			]);
 		});
