@@ -62,7 +62,7 @@ router.get('/', restricted, (req, res) => {
 						if(tags) {
 							tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
 							// add singlePostTags to each post
-							post.push({tags: singlePostTags});
+							post.tags = singlePostTags;
 							singlePostTags = [];
 						}
 					})
