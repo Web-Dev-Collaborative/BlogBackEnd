@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
-const restricted = require('../auth/restriction.js');
-
 const Posts = require('./postsModel.js');
 const Authors = require('../authors/authorsModel.js');
 const Tags = require('../tags/tagsModel.js');
 
+
+const restricted = require('../auth/restriction.js');
 
 // still need query parameters
 
@@ -46,17 +46,13 @@ router.get('/', restricted, (req, res) => {
 				if (!tags) {
 					tags = [];
 				} else {
-					let modifiedTags = [];
-					for(let x = 0; x < tags.length; x++){
-						modifiedTags.push(tags[x]);
-					};
 					res.status(200).json({
 						author: posts.author,
 						authorId: posts.authorId,
 						id: posts.id,
 						likes: posts.likes,
 						reads: posts.reads,
-						tags: modifiedTags
+						tags: tags.tagname
 					})
 				}
 			})
