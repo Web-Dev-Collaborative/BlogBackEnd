@@ -126,13 +126,19 @@ your results. Do not call this API in your application. [Here it is in action](h
 
 ## About the Assessment
 
-In this assessment, you will write a simple backend JSON API.  If you notice something
-is not working (like the API, or any of the links in this document), please contact
-hello@hatchways.io.  You may use any type of backend API framework. Please document in a Readme how to start the application.  Your assessment will be graded based on [this rubric](https://drive.google.com/file/d/1f0jiSVTTGtAn8XbHwHcTqPEU-BT4-q6x/view).
+In this assessment, you will write a simple backend JSON API.  If you notice something is not working (like the API, or any of the links in this document), please contact hello@hatchways.io.  You may use any type of backend API framework. Please document in a Readme how to start the application.  Your assessment will be graded based on [this rubric](https://drive.google.com/file/d/1f0jiSVTTGtAn8XbHwHcTqPEU-BT4-q6x/view).
 
 Your submission takes into consideration how long it takes you to complete it. You are welcome to submit it at any point, however completing it in less than 12 hours increases your chances of being considered for our next interview cycle.
 
-There are four parts to the assessment.
+## Instructions to Start
+
+There is no need to run this locally, as this app has been [deployed](https://hatchways-betest.herokuapp.com/api).  If you would like to run the Cypress tests on it, simply run ```yarn cypress open```.
+
+The Postman collection contains examples of all get, post, and put endpoint body submissions AND responses as well as tests, so if you open that in Postman, you should be able to view all the endpoints in the way you want.  They are sorted into folders.  
+
+You will need to log in to hit endpoints, and a login is provided in the Postman collection.  You may also register your own username and a JWT will be provided to you via the live app.  Take the token you receive from either logging in or registering and put it in the Postman collection as the value to the variable ```token```, which should already be in the collection.  This will make it easy for you to navigate the different endpoints.
+
+To add your token to Postman, once you have the collection loaded in Postman, go to the gear icon in the top right next to the environment selection, select the environment you are going to use, and then paste your token in ```initial value``` and ```current value``` with the variable name ```token```.  Each endpoint in the collection is already configured to use this variable as a token, so after you've done that, you should be able to hit endpoints to your heart's content.
 
 ## Instructions to Deploy
 
@@ -142,12 +148,18 @@ There are four parts to the assessment.
 - enter ```production``` as ```DB_ENV``` in a local .env file and in config vars on Heroku.
 - The secret will be emailed for you to use as ```JWT_SECRET``` in a local .env file and in config vars on Heroku.
 - Migrate and seed the database using the following commands:
+
+
     ```knex migrate:up authors.js;knex migrate:up tags.js;knex migrate:up posts.js;knex migrate:up poststags.js;knex migrate:up users.js;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```
+
+- This might or might not be a useful command; it's just here to save you some typing:
+
+```knex migrate:down users.js;knex migrate:down tags.js;knex migrate:down poststags.js;knex migrate:down posts.js;knex migrate:down authors.js;```
 
 ## Documentation
 
 - This app has been documented via Postman.
-- Postman Docs were last published on 08/18/2020
+- Postman Docs were last published on 08/18/2020.
 - Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
 
 [Postman Collection]()   |   [BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)

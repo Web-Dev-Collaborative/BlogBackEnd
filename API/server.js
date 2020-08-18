@@ -8,6 +8,12 @@ const usersRouter = require("../users/user-router");
 const loginRouter = require("../auth/login-router.js");
 const registerRouter = require("../auth/register-router.js");
 
+
+// authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
+	// queries:  
+// posts endpoint fields:  author, authorId, id, likes, reads, tags
+  // queries:  
+
 const server = express();
 
 server.use(helmet());
@@ -15,10 +21,16 @@ server.use(logger);
 server.use(express.json());
 server.use(cors());
 
+// standard auth routers
 server.use("/api/login", loginRouter);
 server.use("/api/register", registerRouter);
 server.use("/api/users", usersRouter);
 
+
+
+
+
+// unsecured/unlogged-in response
 server.get('/', (req, res) => {
   res.send('<h1>🎣</h1>');
 })

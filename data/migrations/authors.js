@@ -4,11 +4,11 @@ exports.up = function(knex) {
       authors.increments('authorsid');
   
       authors
-        .string('firstName', 256)
+        .string('firstname', 256)
         .notNullable();
   
       authors 
-        .string('lastName', 256)
+        .string('lastname', 256)
         .notNullable();
   
       authors 
