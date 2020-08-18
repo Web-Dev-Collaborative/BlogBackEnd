@@ -60,11 +60,11 @@ router.get('/', restricted, (req, res) => {
 					.catch(err => res.send(err));
 				});
 			}
+			res.status(200).json({posts: modifiedPosts});
 		})
 		.catch(err => res.send(err))
-		// singlePostTags = [];
-	res.status(200).json({posts: modifiedPosts});
 });
+			// singlePostTags = [];
 			// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
 			// add singlePostTags to each post
 			// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
