@@ -1,10 +1,10 @@
 exports.seed = function (knex) {
-	// Deletes ALL existing entries
-	return knex('customers')
+    
+	return knex('posts')
 		.del()
 		.then(function () {
-			// Inserts seed entries
-			return knex('customers').insert([
+            
+			return knex('posts').insert([
                 {
                     postsid: 15,
                     authorsid: 1,
