@@ -48,7 +48,7 @@ function getTagsByAuthor(authorsid) {
 function getTagsByPost(postsid){
 	return db('tags')
 		.select(
-			'tags.tagname'
+			'tags.tagname'.as('tags')
 		)
 		.innerJoin('poststags', 'poststags.tagsid', 'tags.tagsid')
 		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid')
