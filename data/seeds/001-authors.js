@@ -4,7 +4,7 @@ exports.seed = function (knex) {
 		.del()
 		.then(function () {
 			return knex('authors').insert([
-				{
+				
 					{
 						bio:
 							'I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat',
@@ -79,7 +79,6 @@ exports.seed = function (knex) {
 						authorsid: 12,
 						lastName: 'Turner'
 					}
-				}
 			]);
 		});
 };

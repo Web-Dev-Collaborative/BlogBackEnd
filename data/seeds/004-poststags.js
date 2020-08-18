@@ -929,7 +929,7 @@ exports.seed = function (knex) {
 					poststagsid: 185,
 					postsid: 63,
 					tagsid: 2
-				}
+				},
 				{
 					poststagsid: 186,
 					postsid: 91,
