@@ -45,14 +45,31 @@ function getTagsByAuthor(authorsid) {
 	ON poststags.postsid = poststags.postsid
 	WHERE posts.postsid = 2;
 */
-function getTagsByPost(postsid){
+function getTagsByPost(){
 	return db('tags')
 		.select(
-			'tags.tagname AS tagname'
+			'posts.postsid AS postsid', 'tags.tagname AS tagname'
 		)
 		.innerJoin('poststags', 'poststags.tagsid', 'tags.tagsid')
-		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid')
-		.where('posts.postsid', postsid);
+		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid');
+}
+// get tags by post
+/*
+	SELECT posts.postsid, tags.tagname
+	FROM tags
+	INNER JOIN poststags
+	ON tags.tagsid = poststags.tagsid
+	INNER JOIN posts
+	ON poststags.postsid = poststags.postsid
+	GROUP BY posts.postsid;
+*/
+function getTagsGroupedByPost(postsid){
+	return db('tags')
+		.select(
+			'posts.postsid AS postsid', 'tags.tagname AS tagname'
+		)
+		.innerJoin('poststags', 'poststags.tagsid', 'tags.tagsid')
+		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid');
 }
 
 
