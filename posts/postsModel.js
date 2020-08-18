@@ -28,8 +28,8 @@ module.exports = {
 */
 function getPosts() {
 	return knex.raw('SELECT authors.authorsid, authors.firstname || " " || authors.lastname AS author, posts.authorsid AS authorId, ' + 
-		'posts.postsid AS id, posts.likes AS likes, posts.reads AS reads, ' + 		
-		' FROM posts INNER JOIN authors ON posts.authorsid = authors.authorsid');
+		'posts.postsid AS id, posts.likes AS likes, posts.reads AS reads ' + 		
+		'FROM posts INNER JOIN authors ON posts.authorsid = authors.authorsid');
 		/*
 	return db('posts')
 		.select(
