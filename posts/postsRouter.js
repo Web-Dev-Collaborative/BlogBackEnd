@@ -42,7 +42,8 @@ router.get('/', restricted, (req, res) => {
 					error: err
 				});
 			}
-			Tags.getTagsByPost(posts.postsid).then(tags => {
+			let postsid = posts.postsid;
+			Tags.getTagsByPost(postsid).then(tags => {
 				if (!tags) {
 					tags = [];
 				} else {
@@ -51,8 +52,7 @@ router.get('/', restricted, (req, res) => {
 						authorId: posts.authorId,
 						id: posts.id,
 						likes: posts.likes,
-						reads: posts.reads,
-						tags: tags.tagname
+						reads: posts.reads
 					})
 				}
 			})
