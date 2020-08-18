@@ -8,6 +8,7 @@ module.exports = {
 	update,
 	getTagsByAuthor,
 	getTagsByPost,
+	getTags,
 	remove
 };
 
@@ -64,7 +65,7 @@ function getTagsByPost(postsid){
 	ON poststags.postsid = poststags.postsid
 	GROUP BY posts.postsid;
 */
-function getTagsGroupedByPost(postsid){
+function getTags(){
 	return db('tags')
 		.select(
 			'posts.postsid AS postsid', 'tags.tagname AS tagname'
