@@ -27,22 +27,21 @@ module.exports = {
 	ON posts.authorsid = authors.authorsid;
 */
 function getPosts() {
+	/*
 	return db('posts')
 	.select(
-	knex.raw("posts.postsid AS id, posts.authorsid AS authorId, posts.likes AS likes, posts.reads AS reads")
+	knex.raw("authors.firstname || ' ' || authors.lastname AS author, posts.postsid AS id, posts.authorsid AS authorId, posts.likes AS likes, posts.reads AS reads")
 	)
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
-		/*
+	
+		*/
 	return db('posts')
-		.select(
-			
-			'authors.firstname AS firstname' + ' ' + 'authors.lastname AS lastname', 'authors.authorsid AS authorId',
+		.select("authors.firstname || ' ' || authors.lastname AS author",
+			'authors.authorsid AS authorId',
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
 			
 		)
-		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
-		*/
 }
 
 // get posts by author
