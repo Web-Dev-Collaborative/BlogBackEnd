@@ -6,13 +6,14 @@ module.exports = {
 	findBy,
 	findById,
 	getAuthors,
+	getPostsByAuthor,
 	update,
 	remove
 };
 
-// authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
-	// bio, firstName, authorsid as id, lastName fields from authors table
-		// SELECT bio, firstName, authorsid as id, lastName from authors
+// authors endpoint fields:  bio, firstname, authorsid (id), lastname, posts, tags, totalLikeCount, totalReadCount
+	// bio, firstname, authorsid as id, lastname fields from authors table
+		// SELECT bio, firstname, authorsid as id, lastname from authors
 	// posts = all posts written by that author
 		// posts endpoint fields:  author, authorId, postsid (id), likes, reads, tags
 		// SELECT postsid, authorsid, likes, reads from posts WHERE authorsid = authorsid
@@ -23,31 +24,31 @@ module.exports = {
 			// WHERE authorsid = authorsid
 	// totalLikeCount = all likes from posts written by that author
 	// totalReadCount = all reads from posts written by that author
-/*
-SELECT posts.postsid, posts.authorsid, posts.likes, posts.reads,
-			authors.authorsid, authors.firstname, authors.lastname,
-			tags.tagsid, tags.tagname,
-			poststags.poststagsid, poststags.postsid, poststags.tagsid
-FROM posts
-INNER JOIN poststags
-ON posts.postsid = poststags.postsid
-INNER JOIN authors 
-ON posts.authorsid = authors.authorsid
-INNER JOIN tags
-ON poststags.tagsid = tags.tagsid
-
-*/
 
 
 // still need:
-	// change authorsid to id
-	// totalLikeCount = all likes from posts written by that author
-	// totalReadCount = all reads from posts written by that author
 	// query parameters:  
+
+	
+// get all authors
+/*
+	SELECT 
+		authors.authorsid, authors.firstname, authors.lastname,
+		posts.postsid, posts.authorsid, posts.likes, posts.reads,
+		tags.tagsid, tags.tagName,
+		poststags.poststagsid, poststags.postsid, poststags.tagsid
+	FROM authors
+	INNER JOIN posts
+	ON authors.authorsid = posts.authorsid
+	INNER JOIN poststags
+	ON posts.postsid = poststags.postsid
+	INNER JOIN tags
+	ON poststags.tagsid = tags.tagsid;
+*/
 function getAuthors() {
 	return db('authors')
 		.select(
-			'authors.bio', 'authors.firstName', 'authors.authorsid', 'authors.lastName', 
+			'authors.bio', 'authors.firstname', 'authors.authorsid'.as('id'), 'authors.lastname', 
 			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads', 
 			'tags.tagsid', 'tags.tagName',
 			'poststags.poststagsid', 'poststags.postsid', 'poststags.tagsid'
@@ -56,6 +57,7 @@ function getAuthors() {
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid');
 }
+
 
 function find() {
 	return db('authors').select('*');

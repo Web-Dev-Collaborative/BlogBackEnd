@@ -1,81 +1,85 @@
 const router = require('express').Router();
 
-const Payments = require('./paymentsModel.js');
+const Authors = require('./authorsModel.js');
 const restricted = require('../auth/restriction.js');
-const restrictedA = require('../auth/restrictionA.js');
-const restrictedC = require('../auth/restrictionC.js');
-const restrictedM = require('../auth/restrictionM.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
 	// queries:  
 
-// GET:  gets all payments records
-router.get('/', restrictedM, (req, res) => {
-	Payments.find()
-		.then(payments => {
-			res.status(200).json(payments);
+// getAuthors from authors model
+// getTagsByAuthor, getTagsByPost from tags model
+// getPosts, getPostsByAuthor, getTotalReadsCount, getTotalLikesCount from posts model
+
+// still need /api/ping and query parameters
+
+// GET:  gets all authors records
+router.get('/', restricted, (req, res) => {
+	Authors.getAuthors()
+		.then(authors => {
+			res.status(200).json(authors);
 		})
 		.catch(err => res.send(err));
 });
 
-// GET:  gets one payment record
-router.get('/:pid', restricted, (req, res) => {
-	const pid = req.params.pid;
-	if (!pid) {
-		res.status(404).json({ message: `The payment with the specified pid ${pid} does not exist.` });
+// GET:  gets one author record
+router.get('/:authorsid', restricted, (req, res) => {
+	const authorsid = req.params.authorsid;
+	if (!authorsid) {
+		res.status(404).json({ message: `The author with the specified authorsid ${authorsid} does not exist.` });
 	} else {
-		Payments.findById(pid)
-			.then(payment => {
-				res.status(200).json(payment);
+		Authors.findById(authorsid)
+			.then(author => {
+				res.status(200).json(author);
 			})
 			.catch(err => {
-				res.status(500).json({ message: `The payment information could not be retrieved.`, error: err });
+				res.status(500).json({ message: `The author information could not be retrieved.`, error: err });
 			});
 	}
 });
 
-// POST:  record payment
+// POST:  record author
 router.post('/', restricted, (req, res) => {
 	const newPayment = req.body;
 
-	Payments.add(newPayment)
-		.then(payment => {
-			res.status(201).json(payment);
+	Authors.add(newPayment)
+		.then(author => {
+			res.status(201).json(author);
 		})
 		.catch(err => {
-			res.status(500).json({ message: `Failed to create new payment.`, error: err });
+			res.status(500).json({ message: `Failed to create new author.`, error: err });
 		});
 });
 
-// PUT:  update payment record
-router.put('/:pid', restrictedM, (req, res) => {
-	const pid = req.params.pid;
+// PUT:  update author record
+router.put('/:authorsid', restricted, (req, res) => {
+	const authorsid = req.params.authorsid;
 	const updatedPayment = req.body;
 
-	Payments.update(pid, updatedPayment)
-		.then(payment => {
-			if (payment) {
-				res.json(payment);
+	Authors.update(authorsid, updatedPayment)
+		.then(author => {
+			if (author) {
+				res.json(author);
 			} else {
-				res.status(404).json({ message: `Could not find payment with given id ${pid}.` });
+				res.status(404).json({ message: `Could not find author with given id ${authorsid}.` });
 			}
 		})
 		.catch(err => {
-			res.status(500).json({ message: `Failed to update payment.`, error: err });
+			res.status(500).json({ message: `Failed to update author.`, error: err });
 		});
 });
-// DELETE:  delete payment record
-router.delete('/:pid', restrictedM, (req, res) => {
-	const pid = req.params.pid;
-	if (!pid) {
-		res.status(404).json({ message: `The payment with the specified ID ${pid} does not exist.` });
+
+// DELETE:  delete author record
+router.delete('/:authorsid', restricted, (req, res) => {
+	const authorsid = req.params.authorsid;
+	if (!authorsid) {
+		res.status(404).json({ message: `The author with the specified ID ${authorsid} does not exist.` });
 	}
-	Payments.remove(pid)
-		.then(payment => {
-			res.json(payment);
+	Authors.remove(authorsid)
+		.then(author => {
+			res.json(author);
 		})
 		.catch(err => {
-			res.status(500).json({ message: `The payment could not be removed.`, error: err });
+			res.status(500).json({ message: `The author could not be removed.`, error: err });
 		});
 });
 

@@ -8,11 +8,15 @@ const usersRouter = require("../users/user-router");
 const loginRouter = require("../auth/login-router.js");
 const registerRouter = require("../auth/register-router.js");
 
+const authorsRouter = require('../authors/authorsRouter.js');
+const postsRouter = require('../posts/postsRouter.js');
+const tagsRouter = require('../tags/tagsRouter.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
 	// queries:  
 // posts endpoint fields:  author, authorId, id, likes, reads, tags
   // queries:  
+
 
 const server = express();
 
@@ -26,9 +30,21 @@ server.use("/api/login", loginRouter);
 server.use("/api/register", registerRouter);
 server.use("/api/users", usersRouter);
 
+// authors router
+server.use('/api/authors', authorsRouter);
 
+// posts router
+server.use('/api/posts', postsRouter);
 
+// tags router
+server.use('/api/tags', tagsRouter);
 
+// ping endpoint
+server.get('/api/ping', (req, res) => {
+  res.send().json({
+                    "success": true
+                  });
+})
 
 // unsecured/unlogged-in response
 server.get('/', (req, res) => {
