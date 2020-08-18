@@ -52,7 +52,7 @@ router.get('/', restricted, (req, res) => {
 						id: posts.id,
 						likes: posts.likes,
 						reads: posts.reads,
-						tags: [...tags.tagname]
+						tags: tags.tagname
 					})
 				}
 			})
