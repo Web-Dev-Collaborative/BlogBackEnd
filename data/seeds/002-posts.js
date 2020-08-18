@@ -376,6 +376,174 @@ exports.seed = function (knex) {
                     authorsid: 7,
                     likes: 573,
                     reads: 89894
+                },
+                {
+                    postsid: 4,
+                    authorsid: 8,
+                    likes: 728,
+                    reads: 19645
+                },
+                {
+                    postsid: 10,
+                    authorsid: 8,
+                    likes: 853,
+                    reads: 35913
+                },
+                {
+                    postsid: 13,
+                    authorsid: 8,
+                    likes: 230,
+                    reads: 64058
+                },
+                {
+                    postsid: 19,
+                    authorsid: 8,
+                    likes: 779,
+                    reads: 3041
+                },
+                {
+                    postsid: 25,
+                    authorsid: 8,
+                    likes: 365,
+                    reads: 32949
+                },
+                {
+                    postsid: 52,
+                    authorsid: 8,
+                    likes: 602,
+                    reads: 76359
+                },
+                {
+                    postsid: 56,
+                    authorsid: 8,
+                    likes: 319,
+                    reads: 96864
+                },
+                {
+                    postsid: ,
+                    authorsid: 9,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 9,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 9,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 9,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 9,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 9,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 10,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 10,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 10,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 10,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 10,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 10,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
+                },
+                {
+                    postsid: ,
+                    authorsid: 11,
+                    likes: ,
+                    reads: 
                 }
                 
 			]);
