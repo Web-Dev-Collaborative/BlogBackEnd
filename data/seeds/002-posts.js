@@ -516,40 +516,40 @@ exports.seed = function (knex) {
                     reads: 21916
                 },
                 {
-                    postsid: ,
+                    postsid: 12,
                     authorsid: 11,
-                    likes: ,
-                    reads: 
+                    likes: 590,
+                    reads: 80351
                 },
                 {
-                    postsid: ,
+                    postsid: 16,
                     authorsid: 11,
-                    likes: ,
-                    reads: 
+                    likes: 749,
+                    reads: 71754
                 },
                 {
-                    postsid: ,
+                    postsid: 34,
                     authorsid: 11,
-                    likes: ,
-                    reads: 
+                    likes: 670,
+                    reads: 65450
                 },
                 {
-                    postsid: ,
+                    postsid: 37,
                     authorsid: 11,
-                    likes: ,
-                    reads: 
+                    likes: 107,
+                    reads: 35946
                 },
                 {
-                    postsid: ,
+                    postsid: 69,
                     authorsid: 11,
-                    likes: ,
-                    reads: 
+                    likes: 425,
+                    reads: 5149
                 },
                 {
-                    postsid: ,
+                    postsid: 89,
                     authorsid: 11,
-                    likes: ,
-                    reads: 
+                    likes: 251,
+                    reads: 75503
                 },
                 {
                     postsid: ,
