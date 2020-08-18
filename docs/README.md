@@ -150,11 +150,11 @@ To add your token to Postman, once you have the collection loaded in Postman, go
 - Migrate and seed the database using the following commands:
 
 
-    ```knex migrate:up authors.js;knex migrate:up tags.js;knex migrate:up posts.js;knex migrate:up poststags.js;knex migrate:up users.js;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```
+    ```knex migrate:up users.js;knex migrate:up authors.js;knex migrate:up tags.js;knex migrate:up posts.js;knex migrate:up poststags.js;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```
 
 - This might or might not be a useful command; it's just here to save you some typing:
 
-```knex migrate:down users.js;knex migrate:down tags.js;knex migrate:down poststags.js;knex migrate:down posts.js;knex migrate:down authors.js;```
+```knex migrate:down users.js;knex migrate:down poststags.js;knex migrate:down posts.js;knex migrate:down tags.js;knex migrate:down authors.js;```
 
 ## Documentation
 
