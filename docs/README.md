@@ -134,18 +134,12 @@ Your submission takes into consideration how long it takes you to complete it. Y
 
 There are four parts to the assessment.
 
-## Available Scripts
-
-### `npm server`
-
-### `npm start`
-
-### Instructions to Deploy
+## Instructions to Deploy
 
 - Use Heroku to deploy app.
 - provision PostgreSQL database on Heroku.
 - enter database url as ```DATABASE_URL``` in a local .env file and in config vars on Heroku.
-- enter 'production' without the quotes as ```DB_ENV``` in a local .env file and in config vars on Heroku.
+- enter ```production``` as ```DB_ENV``` in a local .env file and in config vars on Heroku.
 - The secret will be emailed for you to use as ```JWT_SECRET``` in a local .env file and in config vars on Heroku.
 - Migrate and seed the database using the following commands:
     ```knex migrate:up authors.js;knex migrate:up tags.js;knex migrate:up posts.js;knex migrate:up poststags.js;knex migrate:up users.js;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```

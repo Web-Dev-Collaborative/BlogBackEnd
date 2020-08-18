@@ -13,12 +13,14 @@ exports.up = function(knex) {
       posts 
         .integer('likes')
         .unsigned()
-        .notNullable();
+        .notNullable()
+        .defaultTo(0);
   
       posts 
         .integer('reads')
         .unsigned()
-        .notNullable();
+        .notNullable()
+        .defaultTo(0);
     });
   };
   
