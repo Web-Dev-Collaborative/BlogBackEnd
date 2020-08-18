@@ -49,7 +49,7 @@ router.get('/', restricted, (req, res) => {
 					let postsid = posts[x].postsid;
 					Tags.getTagsByPost(postsid)
 					.then(tags => {
-						if(tags) {tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
+						if(tags) {singlePostTags = tags}
 						// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
 						// add singlePostTags to each post
 						// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
@@ -62,7 +62,8 @@ router.get('/', restricted, (req, res) => {
 						likes: posts[x].likes,
 						reads: posts[x].reads,
 						tags: singlePostTags
-					})
+					});
+					singlePostTags = [];
 				};
 				res.status(200).json({posts: modifiedPosts});
 			}
