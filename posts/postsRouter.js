@@ -76,6 +76,7 @@ router.get('/', restricted, (req, res) => {
 					.catch(err => res.send(err))
 					// singlePostTags = [];
 				});
+				/*
 				for(let x = 0; x < posts.length;x++) {
 					let postsid = posts[x].postsid;
 					Tags.getTagsByPost(postsid)
@@ -98,10 +99,11 @@ router.get('/', restricted, (req, res) => {
 					})
 					.catch(err => res.send(err))
 					// singlePostTags = [];
+					*/
 				};
 				res.status(200).json({posts: modifiedPosts});
 			}
-		})
+		)
 		.catch(err => res.send(err));
 });
 
