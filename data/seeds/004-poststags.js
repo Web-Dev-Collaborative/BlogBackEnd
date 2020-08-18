@@ -394,6 +394,51 @@ exports.seed = function (knex) {
 					poststagsid: 78,
 					postsid: 93,
 					tagsid: 4
+				},
+				{
+					poststagsid: 79,
+					postsid: 5,
+					tagsid: 3
+				},
+				{
+					poststagsid: 80,
+					postsid: 5,
+					tagsid: 7
+				},
+				{
+					poststagsid: 81,
+					postsid: 42,
+					tagsid: 2
+				},
+				{
+					poststagsid: 82,
+					postsid: 49,
+					tagsid: 7
+				},
+				{
+					poststagsid: 83,
+					postsid: 54,
+					tagsid: 8
+				},
+				{
+					poststagsid: 84,
+					postsid: 54,
+					tagsid: 1
+				},
+				{
+					poststagsid: 85,
+					postsid: 81,
+					tagsid: 2
+				},
+				{
+					poststagsid: 86,
+					postsid: 81,
+					tagsid: 4
+				},
+				{
+					poststagsid: 87,
+					postsid: 85,
+					tagsid: 8
 				}
                 
 			]);
