@@ -36,7 +36,7 @@ function getPosts() {
 		.select(
 			
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
-			'authors.authorsid AS authorId', 'authors.firstname, " ", authors.lastname AS author'
+			'authors.authorsid AS authorId', 'authors.firstname + " " + authors.lastname AS author'
 		)
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
