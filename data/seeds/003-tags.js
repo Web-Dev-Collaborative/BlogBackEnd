@@ -7,35 +7,35 @@ exports.seed = function (knex) {
 			return knex('tags').insert([
 				{
 					tagsid: 1,
-					tagName: "culture"
+					tagname: "culture"
 				},
 				{
 					tagsid: 2,
-					tagName: "design"
+					tagname: "design"
 				},
 				{
 					tagsid: 3,
-					tagName: "health"
+					tagname: "health"
 				},
 				{
 					tagsid: 4,
-					tagName: "history"
+					tagname: "history"
 				},
 				{
 					tagsid: 5,
-					tagName: "politics"
+					tagname: "politics"
 				},
 				{
 					tagsid: 6,
-					tagName: "science"
+					tagname: "science"
 				},
 				{
 					tagsid: 7,
-					tagName: "startups"
+					tagname: "startups"
 				},
 				{
 					tagsid: 8,
-					tagName: "tech"
+					tagname: "tech"
 				},
                 
 			]);
