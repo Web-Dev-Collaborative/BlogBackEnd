@@ -33,7 +33,7 @@ Response status code: 400
 
 
 // GET:  gets all posts records
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
 	Posts.getPosts()
 		.then(posts => {
 			if (!posts) {
@@ -46,13 +46,17 @@ router.get('/', (req, res) => {
 				if (!tags) {
 					tags = [];
 				} else {
+					let modifiedTags = [];
+					for(let x = 0; x < tags.length; x++){
+						modifiedTags.push(tags[x].tagname);
+					};
 					res.status(200).json({
 						author: posts.author,
 						authorId: posts.authorId,
 						id: posts.id,
 						likes: posts.likes,
 						reads: posts.reads,
-						tags: [...tags]
+						tags: modifiedTags
 					})
 				}
 			})
