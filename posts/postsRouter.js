@@ -62,7 +62,11 @@ router.get('/', restricted, (req, res) => {
 						tags: tags
 
 						*/
-						author: posts.firstname + " " + posts.lastname
+						author: authors.firstname + " " + authors.lastname,
+						authorId: authors.authorsid,
+						id: posts.postsid,
+						likes: posts.likes,
+						reads: posts.reads,
 					})
 					/*
 				})

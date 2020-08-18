@@ -55,8 +55,8 @@ function getPosts() {
 function getPostsByAuthor(authorsid) {
 	return db('authors')
 		.select(
-			Concat(authors.firstname, ' ', authors.lastname).as('author'), 'authors.authorsid'.as('authorId'),
-			'posts.postsid'.as('id'), 'posts.likes', 'posts.reads'
+			'authors.firstname', 'authors.lastname', 'authors.authorsid',
+			'posts.postsid', 'posts.likes', 'posts.reads'
 		)
 		.innerJoin('posts', 'authors.authorsid', 'posts.authorsid')
 		.where('authors.authorsid', authorsid);
