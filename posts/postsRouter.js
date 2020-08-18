@@ -43,37 +43,16 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				/*
-				console.log(posts);
-				let postsid = posts.postsid;
-				Tags.getTagsByPost(postsid).then(tags => {
-					if (!tags) {
-						tags = [];
-					}
-					console.log(tags);
-				*/
-				posts.forEach((post)=>{
-					let fullAuthor = post.firstname + " " + post.lastname;
+				posts.forEach(function responseBody(post) {
 					res.status(200).json({
-						/*
-						author: posts.firstname + " " + posts.lastname,
-						authorId: posts.authorsid,
-						id: posts.id,
-						likes: posts.likes,
-						reads: posts.reads,
-						tags: tags
-
-						*/
-						author: fullAuthor,
+						author: post.firstname + " " + post.lastname,
 						authorId: post.authorId,
 						id: post.id,
 						likes: post.likes,
 						reads: post.reads
 					})
 
-				}
-
-				)
+				})
 
 					/*
 				})
