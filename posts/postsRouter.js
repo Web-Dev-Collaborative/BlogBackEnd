@@ -45,11 +45,10 @@ router.get('/', restricted, (req, res) => {
 			else{
 				let modifiedPosts = [];
 				for(let x = 0; x < posts.length;x++) {
-					Tags.getTagsByPost(posts[x].postsid)
+					let postsid = posts[x].postsid;
+					Tags.getTagsByPost(postsid)
 					.then(tags =>{
 						if(!tags) {
-							// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
-							// add singlePostTags to each post
 							tags = [];
 						}
 						modifiedPosts.push({
