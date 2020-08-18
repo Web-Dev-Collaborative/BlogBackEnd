@@ -29,8 +29,7 @@ module.exports = {
 function getPosts() {
 	return db('posts')
 	.select(
-	knex.raw("authors.firstname || ' ' || authors.lastname AS author, " +
-	'posts.postsid AS id, posts.authorsid AS authorId, posts.likes AS likes, posts.reads AS reads')
+	knex.raw("posts.postsid AS id, posts.authorsid AS authorId, posts.likes AS likes, posts.reads AS reads")
 	)
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
 		/*
