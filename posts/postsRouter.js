@@ -52,7 +52,7 @@ router.get('/', restricted, (req, res) => {
 					}
 					console.log(tags);
 				*/
-					let fullAuthor = posts.firstname + " " + posts.lastname;
+					// let fullAuthor = posts.firstname + " " + posts.lastname;
 					res.status(200).json({
 						/*
 						author: posts.firstname + " " + posts.lastname,
