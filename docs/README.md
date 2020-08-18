@@ -88,7 +88,7 @@ There are five parts to the assessment.  To complete the later parts of the asse
 - Postman Docs were last published on 08/18/2020
 - Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
 
-[BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema]()   |   [Documentation]()   |   [ENDPOINTS]()
+[BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema]()   |   [Documentation]()   |   [Endpoints](endpoints.md)
 
 ## Testing
 
