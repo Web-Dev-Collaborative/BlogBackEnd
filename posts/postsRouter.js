@@ -43,16 +43,19 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				posts.forEach((post) => {
-					res.status(200).json({
-						author: post.firstname + " " + post.lastname,
-						authorId: post.authorId,
-						id: post.id,
-						likes: post.likes,
-						reads: post.reads
-					})
-
-				});
+				let modifiedPosts = [];
+				posts.map((post) => 
+					modifiedPosts.push[
+						{
+							author: post.firstname + " " + post.lastname,
+							authorId: post.authorId,
+							id: post.id,
+							likes: post.likes,
+							reads: post.reads
+						}
+					]
+				);
+				res.status(200).json(modifiedPosts);
 			}
 		})
 		.catch(err => res.send(err));
