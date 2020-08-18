@@ -51,7 +51,7 @@ function getTagsByPost(postsid){
 			'tags.tagname AS tagname'
 		)
 		.innerJoin('poststags', 'poststags.tagsid', 'tags.tagsid')
-		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid')
+		.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 		.where('posts.postsid', postsid);
 }
 // get tags by post
