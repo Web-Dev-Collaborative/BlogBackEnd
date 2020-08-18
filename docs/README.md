@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This is Erica Ingram's submission for the back-end assessment from Hatchways.  The app is deployed at [this link]().
+This is Erica Ingram's submission for the back-end assessment from Hatchways.  The app is deployed at [this link](https://hatchways-betest.herokuapp.com/api).
 
 ## Features Done
 
@@ -85,10 +85,10 @@ There are five parts to the assessment.  To complete the later parts of the asse
 ## Documentation
 
 - This app has been documented via Postman.
-- Postman Docs were last published on 04/08/2020
+- Postman Docs were last published on 08/18/2020
 - Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
 
-[BASE URL]()   |   [Schema]()   |   [Documentation]()   |   [ENDPOINTS]()
+[BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema]()   |   [Documentation]()   |   [ENDPOINTS]()
 
 ## Testing
 
