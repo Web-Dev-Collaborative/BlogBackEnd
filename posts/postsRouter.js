@@ -50,16 +50,23 @@ router.get('/', restricted, (req, res) => {
 					Tags.getTagsByPost(postsid)
 					.then(tags => {
 						if(!tags){tags = [];}
-						else{singlePostTags = tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});};
+						/*
+						// else{singlePostTags = tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});};
 						modifiedPosts.push({
-							tags: tags
+							author: post.firstname + " " + post.lastname,
+							authorId: post.authorId,
+							id: post.id,
+							likes: post.likes,
+							reads: post.reads,
+							tags: singlePostTags
 						});
 						singlePostTags = [];
+						*/
+						res.status(200).json({posts: tags});
 					})
 					.catch(err => res.send(err));
 				});
 			}
-			res.status(200).json({posts: modifiedPosts});
 		})
 		.catch(err => res.send(err))
 });
