@@ -1,7 +1,7 @@
 {
   "name": "hatchwaysbetest",
   "version": "1.0.0",
-  "description": "This is Erica Ingram's submission for the back-end assessment from Hatchways.  The app is deployed at [this link]().",
+  "description": "This is Erica Ingram's submission for the back-end assessment from Hatchways.  The app is deployed at [this link](https://hatchways-betest.herokuapp.com/api).",
   "main": "index.js",
   "scripts": {
     "server": "nodemon",
