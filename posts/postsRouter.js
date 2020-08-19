@@ -50,7 +50,7 @@ router.get('/', restricted, (req, res) => {
 					.then(tags => {
 						if(!tags){tags = [];}
 						else{
-							if(tags.length > 0){tags.forEach((tag)=>{tagsPerPost.push(tag.tagname);});}
+							if(tags.length > 0){tags.forEach(async (tag)=>{await tagsPerPost.push(tag.tagname);});}
 							modifiedPosts.push({
 								author: post.firstname + " " + post.lastname,
 								authorId: post.authorId,
