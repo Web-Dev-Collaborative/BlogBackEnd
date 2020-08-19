@@ -47,9 +47,8 @@ let tagsField = ['health', 'tech'];
 let tagIncluded, currentTags;
 
 let filteredResults = posts.posts.filter(post => {
-    currentTags = post.tags;
-    // tagsField.forEach((tag)=>{return isTagIncluded(currentTags, tag);});
-
+    if(post.tags.includes(",")){currentTags = post.tags.split(",");}
+    else{currentTags = post.tags;};
     for(let x = 0; x < tagsField.length; x++){
         tagIncluded = tagsField[x];
         return isTagIncluded(currentTags, tagIncluded);
