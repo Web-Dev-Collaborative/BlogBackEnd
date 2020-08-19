@@ -84,10 +84,10 @@ router.get('/', restricted, (req, res) => {
 					}
 					else if(isValidTag === false){
 						// if IS NOT valid tag, return error response
-						res.status(400).json({"error": "Tags parameter is invalid.", 
+						res.status(400).json({"error": "Tags parameter is an invalid array.", 
 											  "are tags query params valid": isValidTag,
 											  "is tags qp array": isArray,
-											  "attempted tags query params": newTagsField
+											  "attempted tags query params": tagsField
 											});
 					};
 				}
@@ -99,10 +99,10 @@ router.get('/', restricted, (req, res) => {
 					}
 					else if(isValidTag === false){
 						// if IS NOT valid tag, return error response
-						res.status(400).json({"error": "Tags parameter is invalid.", 
+						res.status(400).json({"error": "Tags parameter is an invalid string.", 
 											  "are tags query params valid": isValidTag,
 											  "is tags qp array": isArray,
-											  "attempted tags query params": newTagsField
+											  "attempted tags query params": tagsField
 											});
 					};
 				}
