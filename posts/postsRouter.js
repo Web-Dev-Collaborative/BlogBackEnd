@@ -45,8 +45,8 @@ router.get('/', restricted, (req, res) => {
 			else{
 				let modifiedPosts = [];
 				let tagsPerPost = [];
-				posts.forEach((post) => {
-					Tags.getTagsByPost(post.id)
+				posts.forEach(async (post) => {
+					await Tags.getTagsByPost(post.id)
 					.then(tags => {
 						if(!tags){tags = [];}
 						else{
