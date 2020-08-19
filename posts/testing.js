@@ -43,11 +43,7 @@ let posts = {
 }
 
 let tagsField = ['health', 'tech'];
-
-let tagIncluded, currentTags, tagsToCheck;
-
 let filteredResults = posts.posts.filter(post => {
     for(let x = 0; x < tagsField.length; x++){return isTagIncluded(post.tags, tagsField[x]);}
-
 });
 console.log(filteredResults);
