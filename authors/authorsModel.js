@@ -143,14 +143,15 @@ function getAllTotalLikesCount() {
 		.select(
 			db.raw('SUM(posts.likes) AS totalLikeCount'), 'authors.authorsid'
 		)
-		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
+		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
+		.groupBy('authors.authorsid');
 }
 /*
-	SELECT SUM(posts.likes) as totalLikesCount
+	SELECT SUM(posts.likes) as totalLikesCount, authors.authorsid
 	FROM posts
 	INNER JOIN authors
 	ON posts.authorsid = authors.authorsid
-	WHERE authors.authorsid = 2;
+	GROUP BY authors.authorsid;
 */
 // get total likes count
 function getAllTotalReadsCount() {
@@ -158,7 +159,8 @@ function getAllTotalReadsCount() {
 		.select(
 			db.raw('SUM(posts.likes) AS totalLikeCount'), 'authors.authorsid'
 		)
-		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
+		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
+		.groupBy('authors.authorsid');
 }
 
 /*
