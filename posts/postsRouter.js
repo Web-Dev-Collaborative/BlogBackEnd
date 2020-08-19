@@ -70,7 +70,7 @@ router.get('/', restricted, (req, res) => {
 								}
 							}
 						);
-						res.status(200).json({posts: filteredResults});
+						res.status(200).json({tags: tagsField, posts: filteredResults});
 					}
 					else{
 						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
