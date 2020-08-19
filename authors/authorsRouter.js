@@ -16,15 +16,27 @@ router.get('/', restricted, (req, res) => {
 		.catch(err => res.send(err));
 });
 
-// GET:  gets one author record
+// GET:  gets one author record, including posts and total likes & reads counts
 router.get('/:authorsid', restricted, (req, res) => {
 	const authorsid = req.params.authorsid;
 	if (!authorsid) {
 		res.status(404).json({ message: `The author with the specified authorsid ${authorsid} does not exist.` });
 	} else {
-		Authors.findById(authorsid)
+		Authors.getPostsByAuthor(authorsid)
 			.then(author => {
-				res.status(200).json(author);
+				Authors.getTotalLikesCount(authorsid)
+					.then(likes =>
+						Authors.getTotalReadsCount(authorsid)
+							.then(reads =>
+								res.status(200).json({author, likes, reads})
+							)
+						.catch(err => {
+							res.status(500).json({ message: `Author total reads could not be retrieved.`, error: err });
+						})
+					)
+					.catch(err => {
+						res.status(500).json({ message: `Author total likes could not be retrieved.`, error: err });
+					});
 			})
 			.catch(err => {
 				res.status(500).json({ message: `The author information could not be retrieved.`, error: err });
