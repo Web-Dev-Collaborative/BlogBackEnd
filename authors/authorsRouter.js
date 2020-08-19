@@ -42,7 +42,7 @@ router.get('/', restricted, (req, res) => {
 							});
 						} else {
 							// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-							res.status(200).json(posts);
+							res.status(200).json({authors: authors, posts: posts});
 						}
 					})
 					.catch(err => res.send(err));
