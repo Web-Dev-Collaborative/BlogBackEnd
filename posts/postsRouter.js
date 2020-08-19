@@ -57,9 +57,9 @@ router.get('/', restricted, (req, res) => {
 							for(let x = 0; x < tagsField.length; x++){
 								for (let y = 0; y < post.tags.length; y++) {
 									if (post.tags.includes(tagsField[x])) {
-										return false;
-									} else {
 										return true;
+									} else {
+										return false;
 									}
 									
 								}
