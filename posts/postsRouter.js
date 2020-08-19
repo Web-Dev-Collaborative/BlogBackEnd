@@ -49,7 +49,7 @@ router.get('/', restricted, (req, res) => {
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
 	Posts.getPosts()
-		.then(posts => {
+		.then(async posts => {
 			if (!posts) {
 				res.status(404).json({
 					message: `Posts do not exist.`,
@@ -57,22 +57,12 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				let isValidTag = validateTag(tagsField);
+				let isValidTag = await validateTag(tagsField);
 				let filteredResults;
-				let isArray = isTagsFieldArray(tagsField);
-				if(tagsField !== 'culture' && tagsField !== 'design' && tagsField !== 'health' && 
-				tagsField !== 'history' && tagsField !== 'politics' && tagsField !== 'science' && 
-				tagsField !== 'startups' && tagsField !== 'tech'){
-					// if IS NOT valid tag, return error response
-					res.status(400).json({"error": "Tags parameter is invalid.", 
-										  "are tags query params valid": isValidTag,
-										  "is tags qp array": isArray,
-										  "attempted tags query params": newTagsField
-										});
-				}
-				else{
+				let isArray = await isTagsFieldArray(tagsField);
+				if(isValidTag === true){
 					// if IS valid tag, run filterResults on response and return it
-					if(Array.isArray(tagsField) === true){
+					if(isArray === true){
 						/*
 						filteredResults = posts.posts.filter(post => {
 							for (let x = 0; x < tagsField.length; x++) {
@@ -92,11 +82,19 @@ router.get('/', restricted, (req, res) => {
 											  "attempted tags query params": tagsField
 											});
 					}
-					if(Array.isArray(tagsField) === false){
+					if(isArray === false){
 						// if IS NOT an array
 						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
 						res.status(200).json({posts: filteredResults});
 					};
+				}
+				if(isValidTag === false){
+					// if IS NOT valid tag, return error response
+					res.status(400).json({"error": "Tags parameter is invalid.", 
+										  "are tags query params valid": isValidTag,
+										  "is tags qp array": isArray,
+										  "attempted tags query params": newTagsField
+										});
 				}
 			}
 		})
