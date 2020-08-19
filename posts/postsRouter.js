@@ -74,7 +74,12 @@ router.get('/', restricted, (req, res) => {
 							}
 						});
 						*/
-						res.status(200).json({posts: "is array"});
+						// res.status(200).json({posts: "is array"});
+						res.status(200).json({"error": "This is an array.", 
+											  "are tags query params valid": isValidTag,
+											  "is tags qp array": isArray,
+											  "attempted tags query params": tagsField
+											});
 					}
 					else{
 						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
