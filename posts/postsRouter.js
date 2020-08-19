@@ -7,7 +7,7 @@ const Tags = require('../tags/tagsModel.js');
 
 const restricted = require('../auth/restriction.js');
 
-const { isTagsFieldArray,validateTag } = require('./postsHelpers.js');
+const { isTagsFieldArray, validateTag, isTagIncluded } = require('./postsHelpers.js');
 /*
 If a `sortBy` or `direction` are invalid values, specify an error like below:
 	Response body (JSON):
@@ -55,7 +55,7 @@ router.get('/', restricted, (req, res) => {
 					if(isValidTag === true){
 						filteredResults = posts.filter(post => {
 							for(let x = 0; x < tagsField.length; x++){
-								post.tags.includes(tagsField[x]) === true;
+								return isTagIncluded(post.tags, tagsField[x]);
 							}
 						});
 						res.status(200).json({posts: filteredResults});

@@ -39,15 +39,18 @@ let posts = {
     ]
 }
 
+function isTagIncluded(tags, tag){
+    if (tags.includes(tag) === true) {
+        return true;
+    } else if (tags.includes(tag) === false){
+        return false;
+    }
+}
 let tagsField = ['health', 'tech'];
 
+let tagIncluded;
+
 let filteredResults = posts.posts.filter(post => {
-    for(let x = 0; x < tagsField.length; x++){
-        if (post.tags.includes(tagsField[x]) === true) {
-            return true;
-        } else if (post.tags.includes(tagsField[x]) === false){
-            return false;
-        }
-    }
+    for(let x = 0; x < tagsField.length; x++){return isTagIncluded(post.tags, tagsField[x]);}
 });
 console.log(filteredResults);
