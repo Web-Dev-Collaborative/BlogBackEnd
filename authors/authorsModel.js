@@ -11,6 +11,9 @@ module.exports = {
 	getTotalLikesCount,
 	getTotalReadsCount,
 	getTagsByAuthor,
+	getTagsByAllAuthors,
+	getAllTotalReadsCount,
+	getAllTotalLikesCount,
 	update,
 	remove
 };
@@ -47,14 +50,8 @@ module.exports = {
 function getAuthors() {
 	return db('authors')
 		.select(
-			'authors.bio', 'authors.firstname', 'authors.authorsid'.as('id'), 'authors.lastname', 
-			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads', 
-			'tags.tagsid', 'tags.tagName',
-			'poststags.poststagsid', 'poststags.postsid', 'poststags.tagsid'
-		)
-		.innerJoin('posts', 'authors.authorsid', 'posts.authorsid')
-		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
-		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid');
+			'authors.bio AS bio', 'authors.firstname AS firstName', 'authors.authorsid AS id', 'authors.lastname AS lastName'
+		);
 }
 
 /*
@@ -135,6 +132,37 @@ function getTotalReadsCount(authorsid){
 }
 
 /*
+	SELECT SUM(posts.likes) as totalLikesCount, authors.authorsid
+	FROM posts
+	INNER JOIN authors
+	ON posts.authorsid = authors.authorsid
+	GROUP BY authors.authorsid;
+*/
+// get total likes count
+function getAllTotalLikesCount() {
+	return db('posts')
+		.select(
+			db.raw('SUM(posts.likes) AS totalLikeCount'), 'authors.authorsid'
+		)
+		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
+}
+/*
+	SELECT SUM(posts.likes) as totalLikesCount
+	FROM posts
+	INNER JOIN authors
+	ON posts.authorsid = authors.authorsid
+	WHERE authors.authorsid = 2;
+*/
+// get total likes count
+function getAllTotalReadsCount() {
+	return db('posts')
+		.select(
+			db.raw('SUM(posts.likes) AS totalLikeCount'), 'authors.authorsid'
+		)
+		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
+}
+
+/*
 	SELECT DISTINCT ARRAY_AGG(tags.tagname) AS tags
 	FROM Tags
 	INNER JOIN PostsTags 
@@ -155,6 +183,29 @@ function getTagsByAuthor(authorsid){
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.where('authors.authorsid', authorsid)
 
+}
+
+
+/*
+	SELECT DISTINCT ARRAY_AGG(tags.tagname) AS tags, authors.authorsid
+	FROM Tags
+	INNER JOIN PostsTags 
+	ON tags.tagsid = poststags.tagsid
+	INNER JOIN Posts
+	ON poststags.postsid = posts.postsid
+	INNER JOIN Authors
+	ON posts.authorsid = authors.authorsid
+  	GROUP BY authors.authorsid;
+*/
+// get tags by all authors
+function getTagsByAllAuthors(){
+	return db('tags')
+		.distinct()
+		.select(db.raw('ARRAY_AGG(tags.tagname) AS tags'), 'authors.authorsid')
+		.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
+		.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
+		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
+		.groupBy('authors.authorsid');
 }
 
 function find() {

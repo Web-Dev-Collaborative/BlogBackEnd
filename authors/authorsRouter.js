@@ -1,18 +1,81 @@
 const router = require('express').Router();
 
-const Authors = require('./authorsModel.js');
+const Posts = require('../posts/postsModel.js');
+const Authors = require('../authors/authorsModel.js');
+const Tags = require('../tags/tagsModel.js');
+
 const restricted = require('../auth/restriction.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
 
-// GET:  gets all authors records
+/*
+all authors object
+{
+	bio
+	firstName
+	id
+	lastName
+	posts: identical to all posts endpoint only with one author
+	tags: identical to one author endpoint
+	totalLikeCount
+	totalReadCount
+}
+
+*/
+
+// GET:  gets all authors records, including posts and total likes & reads counts
 router.get('/', restricted, (req, res) => {
-	Authors.getAuthors()
+	Author.getAuthors()
 		.then(authors => {
-			res.status(200).json(authors);
+			if (!authors) {
+				res.status(404).json({
+					message: `Authors do not exist.`,
+					error: err
+				});
+			} else {
+				Posts.getPostsByAuthor()
+					.then(posts => {
+						if (!posts) {
+							res.status(404).json({
+								message: `Posts do not exist.`,
+								error: err
+							});
+						} else {
+							Author.getTagsByAllAuthors()
+								if (!tagsPerAuthor) {
+									res.status(404).json({
+										message: `Posts do not exist.`,
+										error: err
+									});
+								} else {
+									Author.getAllTotalLikesCount()
+										if (!likesPerAuthor) {
+											res.status(404).json({
+												message: `Total likes count does not exist.`,
+												error: err
+											});
+										} else {
+
+											Author.getAllTotalReadsCount()
+											if (!readsPerAuthor) {
+												res.status(404).json({
+													message: `Total reads count does not exist.`,
+													error: err
+												});
+											} else {
+												// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
+												res.status(200).json();
+											}
+										}
+								}
+						}
+					})
+					.catch(err => res.send(err));
+			}
 		})
 		.catch(err => res.send(err));
 });
+// 
 
 // GET:  gets one author record, including posts and total likes & reads counts
 router.get('/:authorsid', restricted, (req, res) => {
