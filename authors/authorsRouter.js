@@ -31,15 +31,14 @@ router.get('/:authorsid', restricted, (req, res) => {
 								Authors.getTotalReadsCount(authorsid)
 									.then(reads =>
 										res.status(200).json({
-															  author,
 															  bio: author[0].bio,
 															  firstName: author[0].firstName,
 															  id: author[0].id,
 															  lastName: author[0].lastName,
-															  oneAuthorsPosts, 
-															  oneAuthorsTags, 
-															  totalLikeCount: likes.totalLikeCount, 
-															  totalReadCount: reads.totalReadCount
+															  posts: oneAuthorsPosts, 
+															  tags: oneAuthorsTags[0].tags, 
+															  totalLikeCount: likes, 
+															  totalReadCount: reads
 															})
 									)
 								.catch(err => {
