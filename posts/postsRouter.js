@@ -53,7 +53,6 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						/*
 						filteredResults = posts.posts.filter(post => {
 							for (let x = 0; x < tagsField.length; x++) {
 								if (post.tags.includes(tagsField[x])) {
@@ -64,13 +63,14 @@ router.get('/', restricted, (req, res) => {
 								l;
 							}
 						});
-						*/
-						// res.status(200).json({posts: "is array"});
+						res.status(200).json({posts: filteredResults});
+						/*
 						res.status(200).json({posts: "This is an array.", 
 											  "is tags qp valid": isValidTag,
 											  "is tags qp array": isArray,
 											  "attempted tags query params": tagsField
 											});
+						*/
 					}
 					else if(isValidTag === false){
 						// if IS NOT valid tag, return error response
