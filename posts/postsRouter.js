@@ -46,8 +46,6 @@ router.get('/', restricted, (req, res) => {
 		// if tagsField values are one of available tags
 			// available tags:  culture, design, health, history, politics, science, startups, tech
 		// if tagsField is array or not
-	const isArray = isTagsFieldArray(tagsField);
-	const isValidTag = validateTag(tagsField);
 	// sort by id, reads, likes  (any??)
 	const sortField = req.query.sortBy;
 	// direction asc or desc only, default = asc
@@ -61,10 +59,10 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				if(isValidTag === true){
+				if(validateTag(tagsField) === true){
 					let filteredResults;
 					// if IS valid tag, run filterResults on response and return it
-					if(isArray === true){
+					if(isTagsFieldArray(tagsField) === true){
 						/*
 						filteredResults = posts.posts.filter(post => {
 							for (let x = 0; x < tagsField.length; x++) {
