@@ -47,13 +47,10 @@ let tagsField = ['culture', 'tech'];
 let filteredResults = posts.posts.filter(post => {
         for(let x = 0; x < tagsField.length; x++){
             //return isTagIncluded(post.tags, tagsField[x]);
-            return isTagIncluded(post.tags, tagsField[x]);
+            // return isTagIncluded(post.tags, tagsField[x]);
+            return JSON.stringify(post.tags).includes(tagsField[x]);
 }});
 
-const names = ['Ram', 'Shyam', 'Laxman', [
-    'Jay', 'Jessica', [
-       'Vikram'
-    ]
- ]];
- console.log(isTagIncluded(names, 'Vikram'));
-// console.log(filteredResults);
+const names = ['Ram', 'Shyam', 'Laxman', ['Jay', 'Jessica', ['Vikram']]];
+console.log(isTagIncluded(names, 'Vikram'));
+console.log(filteredResults);
