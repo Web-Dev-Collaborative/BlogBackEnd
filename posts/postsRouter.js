@@ -55,13 +55,11 @@ router.get('/', restricted, (req, res) => {
 					if(isValidTag === true){
 						filteredResults = posts.filter(post => {
 							for (let x = 0; x < tagsField.length; x++) {
-								if (post.tags.includes(tagsField[x])) {
-									return true;
-								} else {
+								if (!post.tags.includes(tagsField[x])) {
 									return false;
-								}
-								l;
+								} 
 							}
+							return true;
 						});
 						res.status(200).json({posts: filteredResults});
 						/*
@@ -81,9 +79,10 @@ router.get('/', restricted, (req, res) => {
 											});
 					};
 				}
+				// if IS NOT an array
 				if(isArray === false){
 					if(isValidTag === true){
-						// if IS NOT an array
+						// if IS valid tag, return filtered results
 						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
 						res.status(200).json({posts: filteredResults});
 					}
