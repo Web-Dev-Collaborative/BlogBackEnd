@@ -33,7 +33,7 @@ router.get('/', restricted, (req, res) => {
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
 	Posts.getPosts()
-		.then(posts => {
+		.then(async posts => {
 			if (!posts) {
 				res.status(404).json({
 					message: `Posts do not exist.`,
@@ -45,7 +45,7 @@ router.get('/', restricted, (req, res) => {
 					// if tagsField values are one of available tags
 						// available tags:  culture, design, health, history, politics, science, startups, tech
 					// if tagsField is array or not
-				let filteredResults, newTagsField;
+				let filteredResults, newTagsField, currentTags;
 				if(tagsField.includes(",")){newTagsField = tagsField.split(",");}
 				else{newTagsField = tagsField};
 				let isArray = isTagsFieldArray(newTagsField);
@@ -53,9 +53,10 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						filteredResults = posts.filter(post => {
+						filteredResults = await posts.filter(post => {
+							currentTags = post.tags;
 							for(let x = 0; x < tagsField.length; x++){
-								return isTagIncluded(post.tags, tagsField[x]);
+								return isTagIncluded(currentTags, tagsField[x]);
 							}
 						});
 						res.status(200).json({posts: filteredResults});
