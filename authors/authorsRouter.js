@@ -30,7 +30,16 @@ router.get('/:authorsid', restricted, (req, res) => {
 							.then(likes =>
 								Authors.getTotalReadsCount(authorsid)
 									.then(reads =>
-										res.status(200).json({author, posts: oneAuthorsPosts, tags: oneAuthorsTags, likes, reads})
+										res.status(200).json({
+															  bio: author.bio,
+															  firstName: author.firstName,
+															  id: author.id, 
+															  lastName: author.lastName,
+															  posts: oneAuthorsPosts, 
+															  tags: oneAuthorsTags, 
+															  totalLikeCount: likes.totalLikeCount, 
+															  totalReadCount: reads.totalReadCount
+															})
 									)
 								.catch(err => {
 									res.status(500).json({ message: `Author total reads could not be retrieved.`, error: err });

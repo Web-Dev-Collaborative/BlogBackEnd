@@ -110,7 +110,7 @@ function getPostsByAuthor(authorsid) {
 function getTotalLikesCount(authorsid) {
 	return db('posts')
 		.select(
-			db.raw('SUM(posts.likes) as totalLikeCount')
+			db.raw('SUM(posts.likes) AS totalLikeCount')
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.where('authors.authorsid', authorsid);
@@ -128,14 +128,14 @@ function getTotalLikesCount(authorsid) {
 function getTotalReadsCount(authorsid){
 	return db('posts')
 		.select(
-			db.raw('SUM(posts.reads) as totalReadCount')
+			db.raw('SUM(posts.reads) AS totalReadCount')
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.where('authors.authorsid', authorsid);
 }
 
 /*
-	SELECT ARRAY_AGG(tags.tagname) AS tags
+	SELECT DISTINCT ARRAY_AGG(tags.tagname) AS tags
 	FROM Tags
 	INNER JOIN PostsTags 
 	ON tags.tagsid = poststags.tagsid
@@ -148,6 +148,7 @@ function getTotalReadsCount(authorsid){
 // get tags by author
 function getTagsByAuthor(authorsid){
 	return db('tags')
+		.distinct()
 		.select(db.raw('ARRAY_AGG(tags.tagname) AS tags'))
 		.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 		.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
