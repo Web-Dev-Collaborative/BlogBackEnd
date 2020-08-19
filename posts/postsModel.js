@@ -9,6 +9,7 @@ module.exports = {
 	getPostsByAuthor,
 	getTotalLikesCount,
 	getTotalReadsCount,
+	getPostsByTag,
 	update,
 	remove
 };
@@ -29,14 +30,6 @@ INNER JOIN tags ON poststags.tagsid = tags.tagsid
 GROUP BY posts.postsid, posts.authorsid, authors.firstname, authors.lastname, posts.likes, posts.reads;
 */
 function getPosts() {
-	/*
-	return db('posts')
-	.select(
-	knex.raw("authors.firstname || ' ' || authors.lastname AS author, posts.postsid AS id, posts.authorsid AS authorId, posts.likes AS likes, posts.reads AS reads")
-	)
-	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
-	
-		*/
 	return db('posts')
 		.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
 			'posts.authorsid AS authorId',
@@ -49,19 +42,6 @@ function getPosts() {
 		.groupBy('posts.postsid', 'posts.authorsid', 
 		'authors.firstname', 'authors.lastname',
 		'posts.likes', 'posts.reads');
-		/*
-		.select('authors.firstname AS firstname', 'authors.lastname AS lastname',
-			'posts.authorsid AS authorId',
-			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
-			knex.raw('ARRAY_AGG(tags.tagname) AS tags')
-		)
-		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
-		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
-		.groupBy('posts.postsid', 'posts.authorsid', 
-		'authors.firstname', 'authors.lastname',
-		'posts.likes', 'posts.reads');
-	*/
 }
 
 
@@ -83,6 +63,26 @@ function getPostsByAuthor(authorsid) {
 		)
 		.innerJoin('posts', 'authors.authorsid', 'posts.authorsid')
 		.where('authors.authorsid', authorsid);
+}
+
+function getPostsByTag(tagname){ 
+	let resultsToFilter = 
+		db('posts')
+			.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
+				'posts.authorsid AS authorId',
+				'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
+				db.raw('ARRAY_AGG(tags.tagname) AS tags')
+			)
+			.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
+			.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
+			.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
+			.groupBy('posts.postsid', 'posts.authorsid', 
+			'authors.firstname', 'authors.lastname',
+			'posts.likes', 'posts.reads');
+		return resultsToFilter.filter(post => {
+			return post.tags.indexOf(tagname) >= 0;
+		});
+
 }
 
  // get total likes count

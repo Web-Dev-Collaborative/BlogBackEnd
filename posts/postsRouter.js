@@ -7,6 +7,8 @@ const Tags = require('../tags/tagsModel.js');
 
 const restricted = require('../auth/restriction.js');
 
+const { validateTag, filterResults } = require('./postsHelpers.js');
+
 // still need query parameters
 
 /*
@@ -34,6 +36,24 @@ Response status code: 400
 
 // GET:  gets all posts records
 router.get('/', restricted, (req, res) => {
+	// TODO:  if req.query.tags doesn't exist, return error response
+	// TODO:  if req.query.tags exists:
+		// if tagsField is string, filter by tagsField
+		// if tagsField is array, filter like below sample
+
+		// TODO:  break validation out into separate function
+
+	const tagsField = req.query.tags;
+
+	// validate tagsField
+		// if tagsField values are one of available tags
+			// available tags:  culture, design, health, history, politics, science, startups, tech
+		// if tagsField is array or not
+	const isValidTag = validateTag(tagsField);
+	// sort by id, reads, likes  (any??)
+	const sortField = req.query.sortBy;
+	// direction asc or desc only, default = asc
+	const directionField = req.query.direction;
 	Posts.getPosts()
 		.then(posts => {
 			if (!posts) {
@@ -43,94 +63,47 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				res.status(200).json({posts: posts});
+				if(isValidTag){
+					// if IS valid tag, run filterResults on response and return it
+					let resultsFilteredByTag = filterResults(tagName, resultsToFilter);
+					res.status(200).json({posts: resultsFilteredByTag});
+				}
+				else{
+					// if IS NOT valid tag, return error response
+					res.status(400).json({"error": "Tags parameter is required"});
+				}
+				/*
+
+					return resultsToFilter.filter(post => {
+						return post.tags.indexOf(tagname) >= 0;
+					});
+				// apply the sorting
+				const response = hobbits.sort(
+					(a, b) => (a[sortField] < b[sortField] ? -1 : 1)
+				);
+			
+			votes.sort(function (vote1, vote2) {
+
+				// Sort by votes
+				// If the first item has a higher number, move it down
+				// If the first item has a lower number, move it up
+				if (vote1.votes > vote2.votes) return -1;
+				if (vote1.votes < vote2.votes) return 1;
+
+				// If the votes number is the same between both items, sort alphabetically
+				// If the first item comes first in the alphabet, move it up
+				// Otherwise move it down
+				if (vote1.title > vote2.title) return 1;
+				if (vote1.title < vote2.title) return -1;
+
+			});
+
+				*/
 			}
 		})
 		.catch(err => res.send(err));
 	});
-			// singlePostTags = [];
-			// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
-			// add singlePostTags to each post
-			// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
-							/*
-							let tagName;
-							for(let x = 0; x < modifiedPosts.length;x++){
-								for (let y = 0; y < tags.length; y++){
-									if (modifiedPosts[x].id == tags[y].postsid){
-										tagName = tags[y].tagname;
-										modifiedPosts[x]['tags'].push(tagName);
-									}
-								}
-							}
-							tags.forEach((tag)=>{
-								if (tag.postsid == ){
-									modifiedPosts.tags = tag.tagname;
-								}
-							});
-							*/
-
-						// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
-						// add singlePostTags to each post
-						// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
-
-/*
-				// let singlePostTags = [];
-				posts.forEach((post) => {
-					Tags.getTagsByPost(post.postsid)
-					.then(tags => {
-						if(tags) {
-							tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
-							modifiedPosts.push({
-								author: post.firstname + " " + post.lastname,
-								authorId: post.authorId,
-								id: post.id,
-								likes: post.likes,
-								reads: post.reads,
-								tags: tags
-							});
-						}
-						else{
-							modifiedPosts.push({
-								author: post.firstname + " " + post.lastname,
-								authorId: post.authorId,
-								id: post.id,
-								likes: post.likes,
-								reads: post.reads,
-								tags: []
-							});
-						}
-
-						// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
-						// add singlePostTags to each post
-						// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
-					})
-					.catch(err => res.send(err))
-					// singlePostTags = [];
-				});
-				for(let x = 0; x < posts.length;x++) {
-					let postsid = posts[x].postsid;
-					Tags.getTagsByPost(postsid)
-					.then(tags => {
-						if(tags) {
-							// singlePostTags = tags
-							modifiedPosts.push({
-								author: posts[x].firstname + " " + posts[x].lastname,
-								authorId: posts[x].authorId,
-								id: posts[x].id,
-								likes: posts[x].likes,
-								reads: posts[x].reads,
-								tags: tags
-							});
-						
-						}
-						// tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});
-						// add singlePostTags to each post
-						// else{tags.forEach((tag)=>{singlePostTags.push(tag.tagname);});}
-					})
-					.catch(err => res.send(err))
-					// singlePostTags = [];
-				};
-				*/
+	
 
 // GET:  gets one single_post record
 router.get('/:postsid', restricted, (req, res) => {
