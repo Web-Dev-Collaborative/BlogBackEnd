@@ -37,8 +37,7 @@ function getPosts() {
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
 	
 		*/
-	return db('posts')
-		.raw('SELECT authors.firstname AS firstname, authors.lastname AS lastname, ' +
+	return knex.raw('SELECT authors.firstname AS firstname, authors.lastname AS lastname, ' +
 		'posts.postsid as id, posts.authorsid as authorId, posts.likes as likes, posts.reads as reads, ' +
 		'ARRAY_AGG(tags.tagname) AS tags ' + 
 		'FROM posts ' + 
