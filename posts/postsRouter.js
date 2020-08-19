@@ -55,8 +55,8 @@ router.get('/', restricted, (req, res) => {
 					if(isValidTag === true){
 						filteredResults = posts.filter(post => {
 							for (let y = 0; y < post.tags.length; y++) {
-								for(let x = 0; x < tagsField.length; x++){
-									if (post.tags.includes(tagsField[x])) {
+								for(let x = 0; x < newTagsField.length; x++){
+									if (post.tags.includes(newTagsField[x])) {
 										return true;
 									} else {
 										return false;
@@ -79,7 +79,7 @@ router.get('/', restricted, (req, res) => {
 						res.status(400).json({"error": "Tags parameter is an invalid array.", 
 											  "is tags qp valid": isValidTag,
 											  "is tags qp array": isArray,
-											  "attempted tags query params": tagsField
+											  "attempted tags query params": newTagsField
 											});
 					};
 				}
