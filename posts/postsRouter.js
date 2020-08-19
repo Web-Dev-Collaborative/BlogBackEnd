@@ -62,12 +62,12 @@ router.get('/', restricted, (req, res) => {
 					const isArray = isTagsFieldArray(tagsField);
 					let filteredResults;
 					if(isArray === true){
-						filteredResults = posts.filter(post => {tagsField.forEach((tag)=>post.tags.indexOf(tag) >= 0)});
-						res.status(200).json({posts: filteredResults});
+						// filteredResults = posts.filter(post => {tagsField.forEach((tag)=>post.tags.indexOf(tag) >= 0)});
+						res.status(200).json({posts: "is array"});
 					}
 					if(isArray === false){
-						filteredResults = posts.filter(post => {post.tags.indexOf(tagsField) >= 0});
-						res.status(200).json({posts: posts.filter(post => {post.tags.indexOf(tagsField) >= 0})});
+						// filteredResults = posts.filter(post => {post.tags.indexOf(tagsField) >= 0});
+						res.status(200).json({posts: "is not array"});
 					};
 				}
 				else{
