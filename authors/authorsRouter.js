@@ -121,35 +121,6 @@ router.get('/', restricted, (req, res) => {
 															for (let u = 0; u < newAuthors.length; u++){
 																newAuthors[u].tags = newAuthors[u].tags.filter((item, index)=>{return newAuthors[u].tags.indexOf(item) >= index;});
 															}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 															res.status(200).json(newAuthors);
 														}
 													})
@@ -225,9 +196,9 @@ router.get('/:authorsid', restricted, (req, res) => {
 
 // POST:  record author
 router.post('/', restricted, (req, res) => {
-	const newPayment = req.body;
+	const newAuthor = req.body;
 
-	Authors.add(newPayment)
+	Authors.add(newAuthor)
 		.then(author => {
 			res.status(201).json(author);
 		})
@@ -239,9 +210,9 @@ router.post('/', restricted, (req, res) => {
 // PUT:  update author record
 router.put('/:authorsid', restricted, (req, res) => {
 	const authorsid = req.params.authorsid;
-	const updatedPayment = req.body;
+	const updatedAuthor = req.body;
 
-	Authors.update(authorsid, updatedPayment)
+	Authors.update(authorsid, updatedAuthor)
 		.then(author => {
 			if (author) {
 				res.json(author);
