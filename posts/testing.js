@@ -1,4 +1,4 @@
-let posts1 = [
+let posts = [
     {
         "author": "Jaden Bryant",
         "authorId": 3,
@@ -35,7 +35,7 @@ let posts1 = [
         ]
     },];
 let tagsField = ['health', 'tech'];
-let filteredResults = posts1.filter(post => 
+let filteredResults = posts.filter(post => 
     {
         for (let x = 0; x < tagsField.length;x++){
             if(post.tags.includes(tagsField[x])){return true}
