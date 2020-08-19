@@ -37,8 +37,8 @@ router.get('/:authorsid', restricted, (req, res) => {
 															  lastName: author[0].lastName,
 															  posts: oneAuthorsPosts, 
 															  tags: oneAuthorsTags[0].tags, 
-															  totalLikeCount: likes, 
-															  totalReadCount: reads
+															  totalLikeCount: likes[0].totallikecount, 
+															  totalReadCount: reads[0].totalreadcount
 															})
 									)
 								.catch(err => {
