@@ -36,11 +36,9 @@ Response status code: 400
 
 // GET:  gets all posts records
 router.get('/', restricted, (req, res) => {
-	let tagsField;
-	if(req.query.tags){tagsField = req.query.tags;}
 	// if req.query.tags is empty, return error response
-	else{res.status(400).json({"error": "Tags parameter is required"});}
-
+	if(!req.query.tags){res.status(400).json({"error": "Tags parameter is required"});}
+	const tagsField = req.query.tags;
 	// validate tagsField
 		// if tagsField values are one of available tags
 			// available tags:  culture, design, health, history, politics, science, startups, tech
@@ -59,7 +57,7 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				if(isValidTag){
+				if(isValidTag === true){
 					// if IS valid tag, run filterResults on response and return it
 					let resultsFilteredByTag = filterResults(tagName, resultsToFilter);
 					res.status(200).json({posts: resultsFilteredByTag});
