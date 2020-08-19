@@ -67,7 +67,6 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
   - [ ] get all tags (show posts & authors)
   - [ ] get one tag (show posts & authors)
   - [ ] update, delete, add tag
-  - [ ] add tag(s) to author(s)
   - [ ] add tag(s) to post(s)
 - [X] Combine all the results from the API requests above and remove all the repeated posts (try to be efficient when doing this)
 - [X] You will get a better score on our assessment if you can make concurrent requests to the API (making the requests in parallel)
