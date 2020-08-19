@@ -54,12 +54,20 @@ router.get('/', restricted, (req, res) => {
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
 						filteredResults = posts.filter(post => {
-							if(post.tags.includes(",")){currentTags = post.tags.split(",");}
-							else{currentTags = post.tags;};
-							for(let x = 0; x < newTagsField.length; x++){
-								tagIncluded = newTagsField[x];
-								return isTagIncluded(currentTags, tagIncluded);
+							if(post.tags.includes(",")){
+								currentTags = post.tags.split(",");
+								for(let x = 0; x < newTagsField.length; x++){
+									tagIncluded = newTagsField[x];
+									return isTagIncluded(currentTags, tagIncluded);
+								}
 							}
+							else{
+								currentTags = post.tags;
+								for(let x = 0; x < newTagsField.length; x++){
+									tagIncluded = newTagsField[x];
+									return isTagIncluded(currentTags, tagIncluded);
+								}
+							};
 						});
 						res.status(200).json({posts: filteredResults});
 						/*

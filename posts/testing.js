@@ -47,11 +47,21 @@ let tagsField = ['health', 'tech'];
 let tagIncluded, currentTags;
 
 let filteredResults = posts.posts.filter(post => {
-    if(post.tags.includes(",")){currentTags = post.tags.split(",");}
-    else{currentTags = post.tags;};
-    for(let x = 0; x < tagsField.length; x++){
-        tagIncluded = tagsField[x];
-        return isTagIncluded(currentTags, tagIncluded);
+    if(post.tags.includes(",")){
+        currentTags = post.tags.split(",");
+        for(let y = 0; y < currentTags.length; y++){
+            for(let x = 0; x < newTagsField.length; x++){
+                tagIncluded = newTagsField[x];
+                return isTagIncluded(currentTags, tagIncluded);
+            }
+        }
     }
+    else{
+        currentTags = post.tags;
+        for(let x = 0; x < tagsField.length; x++){
+            tagIncluded = tagsField[x];
+            return isTagIncluded(currentTags, tagIncluded);
+        }
+    };
 });
 console.log(filteredResults);
