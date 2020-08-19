@@ -1331,55 +1331,55 @@ let oneAuthorsTags = {
     ],
     "totalReadCount": [
         {
-            "totallikecount": "3002",
+            "totalreadcount": "436543",
             "authorsid": 4
         },
         {
-            "totallikecount": "4073",
+            "totalreadcount": "323728",
             "authorsid": 10
         },
         {
-            "totallikecount": "5326",
+            "totalreadcount": "509129",
             "authorsid": 9
         },
         {
-            "totallikecount": "6559",
+            "totalreadcount": "833951",
             "authorsid": 7
         },
         {
-            "totallikecount": "2546",
+            "totalreadcount": "302404",
             "authorsid": 6
         },
         {
-            "totallikecount": "5803",
+            "totalreadcount": "491168",
             "authorsid": 12
         },
         {
-            "totallikecount": "1608",
+            "totalreadcount": "190950",
             "authorsid": 3
         },
         {
-            "totallikecount": "4770",
+            "totalreadcount": "625934",
             "authorsid": 1
         },
         {
-            "totallikecount": "5828",
+            "totalreadcount": "425357",
             "authorsid": 5
         },
         {
-            "totallikecount": "3620",
+            "totalreadcount": "402337",
             "authorsid": 2
         },
         {
-            "totallikecount": "2792",
+            "totalreadcount": "334153",
             "authorsid": 11
         },
         {
-            "totallikecount": "3876",
+            "totalreadcount": "328829",
             "authorsid": 8
         }
     ]
-};
+}
 
 // let filteredTags = oneAuthorsTags[0].tags.filter((item, index)=>{return oneAuthorsTags[0].tags.indexOf(item) >= index;});
 let id;
