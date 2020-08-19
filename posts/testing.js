@@ -48,9 +48,12 @@ function isTagIncluded(tags, tag){
 }
 let tagsField = ['health', 'tech'];
 
-let tagIncluded;
+let tagIncluded, currentTags;
 
 let filteredResults = posts.posts.filter(post => {
-    for(let x = 0; x < tagsField.length; x++){return isTagIncluded(post.tags, tagsField[x]);}
+    currentTags = post.tags;
+    for(let x = 0; x < tagsField.length; x++){
+        return isTagIncluded(currentTags, tagsField[x]);
+    }
 });
 console.log(filteredResults);
