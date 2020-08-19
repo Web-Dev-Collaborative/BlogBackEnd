@@ -65,7 +65,7 @@ router.get('/', restricted, (req, res) => {
 									}
 								}
 							}
-							else if (post.tags.includes(",") == false){
+							else {
 								currentTags = post.tags;
 								for(let x = 0; x < newTagsField.length; x++){
 									tagIncluded = newTagsField[x];
