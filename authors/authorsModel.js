@@ -40,8 +40,7 @@ module.exports = {
 */
 // get bio info for all authors
 function getAllAuthors() {
-	return db('authors')
-		.select('authors.bio AS bio', 'authors.firstname AS firstName', 'authors.authorsid AS id', 'authors.lastname AS lastName');
+	return db('authors').select('authors.bio AS bio', 'authors.firstname AS firstName', 'authors.authorsid AS id', 'authors.lastname AS lastName');
 }
 
 /*
