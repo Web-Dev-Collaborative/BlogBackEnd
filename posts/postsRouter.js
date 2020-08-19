@@ -63,11 +63,12 @@ router.get('/', restricted, (req, res) => {
 					let filteredResults;
 					if(isArray === true){
 						filteredResults = posts.filter(post => 
-								
 							{
 								for (let x = 0; x < tagsField.length;x++){
-									
-									return post.tags.indexOf(tagsField[x]) >= 0
+									if(!(tagsField[x] in post.tags)){
+										return false;
+									}
+									else{return true}
 								}
 							}
 						)
