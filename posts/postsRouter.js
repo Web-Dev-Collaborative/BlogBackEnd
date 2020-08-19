@@ -7,7 +7,7 @@ const Tags = require('../tags/tagsModel.js');
 
 const restricted = require('../auth/restriction.js');
 
-// const { isTagsFieldArray,validateTag } = require('./postsHelpers.js');
+// const { isTagsFieldArray,validateTag,} = require('./postsHelpers.js');
 
 // still need query parameters
 
@@ -96,10 +96,12 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				if(validateTag(tagsField) === true){
-					let filteredResults;
+				let isValidTag = validateTag(tagsField);
+				let filteredResults;
+				let isArray = isTagsFieldArray(tagsField);
+				if(isValidTag === true){
 					// if IS valid tag, run filterResults on response and return it
-					if(isTagsFieldArray(tagsField) === true){
+					if(isArray === true){
 						/*
 						filteredResults = posts.posts.filter(post => {
 							for (let x = 0; x < tagsField.length; x++) {
