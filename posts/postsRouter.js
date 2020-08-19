@@ -7,7 +7,7 @@ const Tags = require('../tags/tagsModel.js');
 
 const restricted = require('../auth/restriction.js');
 
-const { isTagsFieldArray,validateTag} = require('./postsHelpers.js');
+const { isTagsFieldArray,validateTag } = require('./postsHelpers.js');
 
 // still need query parameters
 
@@ -49,7 +49,7 @@ router.get('/', restricted, (req, res) => {
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
 	Posts.getPosts()
-		.then(posts => {
+		.then(async posts => {
 			if (!posts) {
 				res.status(404).json({
 					message: `Posts do not exist.`,
@@ -57,9 +57,9 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				let isValidTag = validateTag(tagsField);
+				let isValidTag = await validateTag(tagsField);
 				let filteredResults;
-				let isArray = isTagsFieldArray(tagsField);
+				let isArray = await isTagsFieldArray(tagsField);
 				if(isValidTag === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isArray === true){
