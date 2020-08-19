@@ -38,7 +38,7 @@ function getPosts() {
 	
 		*/
 	return db('posts')
-		.select(db.raw("authors.firstname AS firstname || ' ' || authors.lastname AS lastname as author"),
+		.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
 			'posts.authorsid AS authorId',
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
 			db.raw('ARRAY_AGG(tags.tagname) AS tags')
