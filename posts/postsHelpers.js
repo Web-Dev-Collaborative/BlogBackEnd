@@ -9,6 +9,8 @@ function validateTag(tagsField){
 	// validate tagsField
 		// available tags:  culture, design, health, history, politics, science, startups, tech
 	// if tagsField is array or not
+    // if tagsField is string, filter by tagsField
+    // if tagsField is array, filter like below sample
 	if(Array.isArray(tagsField)){
 		tagsField.forEach((tag)=>{
 			if(tag != 'culture' || 
