@@ -51,12 +51,7 @@ router.get('/', restricted, (req, res) => {
 						if(!tags){tags = [];}
 						else{
 							modifiedPosts.push({
-								author: post.firstname + " " + post.lastname,
-								authorId: post.authorId,
-								id: post.id,
-								likes: post.likes,
-								reads: post.reads,
-								tags: JSON.stringify(tags)
+								tags: tags
 							});
 						}
 					})
