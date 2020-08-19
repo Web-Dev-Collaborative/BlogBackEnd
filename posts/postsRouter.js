@@ -43,6 +43,7 @@ router.get('/', restricted, (req, res) => {
 		// if tagsField values are one of available tags
 			// available tags:  culture, design, health, history, politics, science, startups, tech
 		// if tagsField is array or not
+	const isArray = isTagsFieldArray(tagsField);
 	const isValidTag = validateTag(tagsField);
 	// sort by id, reads, likes  (any??)
 	const sortField = req.query.sortBy;
@@ -58,9 +59,8 @@ router.get('/', restricted, (req, res) => {
 			}
 			else{
 				if(isValidTag === true){
-					// if IS valid tag, run filterResults on response and return it
-					const isArray = isTagsFieldArray(tagsField);
 					let filteredResults;
+					// if IS valid tag, run filterResults on response and return it
 					if(isArray === true){
 						/*
 						filteredResults = posts.posts.filter(post => {
@@ -75,13 +75,14 @@ router.get('/', restricted, (req, res) => {
 						});
 						*/
 						// res.status(200).json({posts: "is array"});
-						res.status(200).json({"error": "This is an array.", 
+						res.status(200).json({posts: "This is an array.", 
 											  "are tags query params valid": isValidTag,
 											  "is tags qp array": isArray,
 											  "attempted tags query params": tagsField
 											});
 					}
 					else{
+						// if IS NOT an array
 						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
 						res.status(200).json({posts: filteredResults});
 					};
