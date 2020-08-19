@@ -59,7 +59,7 @@ router.get('/', restricted, (req, res) => {
 			else{
 				if(isValidTag === true){
 					// if IS valid tag, run filterResults on response and return it
-					let resultsFilteredByTag = filterResults(tagsField, posts);
+					const resultsFilteredByTag = filterResults(tagsField, posts);
 					res.status(200).json({posts: resultsFilteredByTag});
 				}
 				else{
