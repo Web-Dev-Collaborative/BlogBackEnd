@@ -66,8 +66,8 @@ router.get('/', restricted, (req, res) => {
 						res.status(200).json({posts: "is array"});
 					}
 					if(isArray === false){
-						// filteredResults = posts.filter(post => {post.tags.indexOf(tagsField) >= 0});
-						res.status(200).json({posts: "is not array"});
+						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
+						res.status(200).json({posts: filteredResults});
 					};
 				}
 				else{
@@ -80,9 +80,7 @@ router.get('/', restricted, (req, res) => {
 				}
 				/*
 
-					return resultsToFilter.filter(post => {
-						return post.tags.indexOf(tagname) >= 0;
-					});
+					return resultsToFilter.filter(post => {return post.tags.indexOf(tagname) >= 0;});
 				// apply the sorting
 				const response = hobbits.sort(
 					(a, b) => (a[sortField] < b[sortField] ? -1 : 1)
