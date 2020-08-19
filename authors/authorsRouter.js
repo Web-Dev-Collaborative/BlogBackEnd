@@ -20,6 +20,7 @@ router.get('/:authorsid', restricted, (req, res) => {
 	if (!authorsid) {
 		res.status(404).json({ message: `The author with the specified authorsid ${authorsid} does not exist.` });
 	} else {
+		let filteredTags;
 		Authors.getAuthor(authorsid)
 			.then(author => {
 			Authors.getPostsByAuthor(authorsid)
@@ -29,18 +30,19 @@ router.get('/:authorsid', restricted, (req, res) => {
 						Authors.getTotalLikesCount(authorsid)
 							.then(likes =>
 								Authors.getTotalReadsCount(authorsid)
-									.then(reads =>
+									.then(reads =>{
+										filteredTags = oneAuthorsTags[0].tags.filter((item, index)=>{return oneAuthorsTags[0].tags.indexOf(item) >= index;});
 										res.status(200).json({
 															  bio: author[0].bio,
 															  firstName: author[0].firstName,
 															  id: author[0].id,
 															  lastName: author[0].lastName,
 															  posts: oneAuthorsPosts, 
-															  tags: oneAuthorsTags[0].tags, 
+															  tags: filteredTags, 
 															  totalLikeCount: likes[0].totallikecount, 
 															  totalReadCount: reads[0].totalreadcount
 															})
-									)
+										})
 								.catch(err => {
 									res.status(500).json({ message: `Author total reads could not be retrieved.`, error: err });
 								})
