@@ -66,9 +66,14 @@ router.get('/', restricted, (req, res) => {
 															});
 														} else {
 															// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-
-
-															let id;
+															let oneAuthorsTags = {
+																"authors": authors,
+																"posts": posts,
+																"tags": tagsPerAuthor,
+																"totalLikeCount": likesPerAuthor,
+																"totalReadCount": readsPerAuthor
+															};
+															let authorsid;
 															let newAuthors = oneAuthorsTags.authors;
 															for(let v = 0; v < oneAuthorsTags.authors.length; v++){
 																authorsid = oneAuthorsTags.authors[v].id;

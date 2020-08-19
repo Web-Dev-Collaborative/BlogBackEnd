@@ -1382,7 +1382,7 @@ let oneAuthorsTags = {
 }
 
 // let filteredTags = oneAuthorsTags[0].tags.filter((item, index)=>{return oneAuthorsTags[0].tags.indexOf(item) >= index;});
-let id;
+let authorsid;
 let newAuthors = oneAuthorsTags.authors;
 for(let v = 0; v < oneAuthorsTags.authors.length; v++){
     authorsid = oneAuthorsTags.authors[v].id;
