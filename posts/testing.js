@@ -6,7 +6,7 @@ function isTagsFieldArray(tagsField){
 
 function validateTag(tagsField){
     const isArray = isTagsFieldArray(tagsField);
-    console.log(isArray);
+    console.log("is tagsField an array?  " + isArray);
 	// validate tagsField
 		// available tags:  culture, design, health, history, politics, science, startups, tech
 	// if tagsField is array or not
@@ -45,6 +45,8 @@ console.log(tagsTest + ' = ' + validateTag(tagsTest));
 tagsTest = ['tech', 'health'];
 console.log(tagsTest + ' = ' + validateTag(tagsTest));
 tagsTest = ['tech', 'healthie'];
+console.log(tagsTest + ' = ' + validateTag(tagsTest));
+tagsTest = ['tech', 'health', 'science'];
 console.log(tagsTest + ' = ' + validateTag(tagsTest));
 /*
 console.log(tagsTest + ' = ' + validateTag(tagsTest));

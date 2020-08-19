@@ -26,16 +26,18 @@ function validateTag(tagsField){
         }
         // else return false
         return true;
-	}
-    // if tagsField is not array
-    if(tagsField === 'culture' || tagsField === 'design' || tagsField === 'health' || 
-        tagsField === 'history' || tagsField === 'politics' || tagsField === 'science' || 
-        tagsField === 'startups' || tagsField === 'tech'){
-        // if tag is valid, return false
-        return true;
     }
-    // else return false
-    return false;
+    else{
+        // if tagsField is not array
+        if(tagsField === 'culture' || tagsField === 'design' || tagsField === 'health' || 
+            tagsField === 'history' || tagsField === 'politics' || tagsField === 'science' || 
+            tagsField === 'startups' || tagsField === 'tech'){
+            // if tag is valid, return false
+            return true;
+        }
+        // else return false
+        return false;
+    }
 }
 
 // filter results by tagsField
