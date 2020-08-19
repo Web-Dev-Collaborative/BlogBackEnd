@@ -33,7 +33,7 @@ router.get('/', restricted, (req, res) => {
 					error: err
 				});
 			} else {
-				Author.getPostsByAuthor()
+				Author.getPostsByAllAuthors()
 					.then(posts => {
 						if (!posts) {
 							res.status(404).json({
@@ -63,7 +63,7 @@ router.get('/', restricted, (req, res) => {
 												});
 											} else {
 												// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-												res.status(200).json({authors});
+												res.status(200).json(authors);
 											}
 										}
 								}
