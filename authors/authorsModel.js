@@ -59,29 +59,17 @@ function getAuthors() {
 
 /*
 	SELECT 
-		authors.authorsid, authors.firstname, authors.lastname,
-		posts.postsid, posts.authorsid, posts.likes, posts.reads,
-		tags.tagsid, tags.tagName,
-		poststags.poststagsid, poststags.postsid, poststags.tagsid
+		authors.authorsid as id, authors.firstname as firstName, 
+		authors.lastname as lastName, authors.bio
 	FROM authors
-	INNER JOIN posts
-	ON authors.authorsid = posts.authorsid
-	INNER JOIN poststags
-	ON posts.postsid = poststags.postsid
-	INNER JOIN tags
-	ON poststags.tagsid = tags.tagsid
 	WHERE authors.authorsid = 2;
 */
 // get author
 function getAuthor(authorsid) {
 	return db('authors')
 		.select(
-			'authors.bio', 'authors.firstname', 'authors.authorsid'.as('id'), 'authors.lastname', 
-			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads', 
-			'poststags.poststagsid', 'poststags.postsid'
+			'authors.bio', 'authors.firstname', 'authors.authorsid AS id', 'authors.lastname'
 		)
-		.innerJoin('posts', 'authors.authorsid', 'posts.authorsid')
-		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.where('authors.authorsid', authorsid);
 }
 
