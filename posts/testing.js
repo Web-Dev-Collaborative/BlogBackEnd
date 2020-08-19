@@ -1,3 +1,6 @@
+
+const { isTagsFieldArray, validateTag, isTagIncluded } = require('./postsHelpers.js');
+
 let posts = {
     "posts": [
         {
@@ -39,8 +42,6 @@ let posts = {
     ]
 }
 
-function isTagIncluded(tags, tag){return tags.includes(tag);}
-
 let tagsField = ['health', 'tech'];
 
 let tagIncluded, currentTags;
@@ -48,7 +49,8 @@ let tagIncluded, currentTags;
 let filteredResults = posts.posts.filter(post => {
     currentTags = post.tags;
     for(let x = 0; x < tagsField.length; x++){
-        return isTagIncluded(currentTags, tagsField[x]);
+        tagIncluded = tagsField[x];
+        return isTagIncluded(currentTags, tagIncluded);
     }
 });
 console.log(filteredResults);
