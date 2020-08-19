@@ -11,7 +11,7 @@ function validateTag(tagsField){
 	// if tagsField is array or not
     // if tagsField is string, filter by tagsField
     // if tagsField is array, filter like below sample
-	if(Array.isArray(tagsField)){
+	if(Array.isArray(tagsField) === true){
 		tagsField.forEach((tag)=>{
 			if(tag != 'culture' || 
 			   tag != 'design' || 
