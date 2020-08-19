@@ -40,7 +40,8 @@ function getPosts() {
 	return db('posts')
 		.select('authors.firstname AS firstname', 'authors.lastname AS lastname',
 			'posts.authorsid AS authorId',
-			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads'
+			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
+			knex.raw('ARRAY_AGG(tags.tagname) AS tags')
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
