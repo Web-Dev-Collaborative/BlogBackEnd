@@ -7,7 +7,12 @@ const Tags = require('../tags/tagsModel.js');
 
 const restricted = require('../auth/restriction.js');
 
-const { validateTag, filterResults, isTagsFieldArray } = require('./postsHelpers.js');
+const { 
+    isTagsFieldArray,
+    isTagValid,
+    validateTag,
+	filterResults 
+} = require('./postsHelpers.js');
 
 // still need query parameters
 
