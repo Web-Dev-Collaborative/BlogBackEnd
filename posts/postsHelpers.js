@@ -17,18 +17,13 @@ function validateTag(tagsField){
             // else return true
 	if(isArray === true){
         for(let x = 0; x < tagsField.length;x++){
-            if(tagsField[x] !== 'culture' || 
-               tagsField[x] !== 'design' || 
-			   tagsField[x] !== 'health' || 
-			   tagsField[x] !== 'history' || 
-			   tagsField[x] !== 'politics' || 
-			   tagsField[x] !== 'science' || 
-			   tagsField[x] !== 'startups' || 
-			   tagsField[x] !== 'tech'){
+            if(tagsField[x] !== 'culture' && tagsField[x] !== 'design' && tagsField[x] !== 'health' && 
+			   tagsField[x] !== 'history' && tagsField[x] !== 'politics' && tagsField[x] !== 'science' && 
+			   tagsField[x] !== 'startups' && tagsField[x] !== 'tech'){
                    // if invalid tag, return false
                    return false;
-			   }
-            }
+			}
+        }
         // else return false
         return true;
 	}
