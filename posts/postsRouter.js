@@ -33,7 +33,7 @@ router.get('/', restricted, (req, res) => {
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
 	Posts.getPosts()
-		.then(posts => {
+		.then(async posts => {
 			if (!posts) {
 				res.status(404).json({
 					message: `Posts do not exist.`,
@@ -53,7 +53,7 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						filteredResults = posts.posts.filter(post => {
+						filteredResults = await posts.posts.filter(post => {
 							for (let y = 0; y < post.tags.length; y++) {
 								for(let x = 0; x < newTagsField.length; x++){
 									if (post.tags.includes(newTagsField[x])) {
