@@ -55,8 +55,8 @@ router.get('/', restricted, (req, res) => {
 					// if sort criteria not valid
 						// available sorts:  author, authorId, id, likes, reads
 				if(sortField !== '' && sortField !== undefined && sortField !== null){ 
-					if(sortField !== 'author' || sortField !== 'authorId' || 
-					   sortField !== 'likes' || sortField !== 'reads'){
+					if(sortField !== 'author' && sortField !== 'authorId' && 
+					   sortField !== 'likes' && sortField !== 'reads'){
 						res.status(400).json({"error": "sortBy parameter is invalid."});
 					}
 					else if(sortField === 'author' || sortField === 'authorId' || 
@@ -64,7 +64,7 @@ router.get('/', restricted, (req, res) => {
 						// if directionField IS NOT empty
 						if(directionField !== '' && directionField !== undefined && directionField !== null){
 							// if directionField !== 'asc' || directionField !== 'desc' then return error response
-							if(directionField !== 'asc' || directionField !== 'desc'){
+							if(directionField !== 'asc' && directionField !== 'desc'){
 								res.status(400).json({"error": "direction parameter is invalid."});
 							}
 							// else if directionField = 'asc', sort ascending by sortField
