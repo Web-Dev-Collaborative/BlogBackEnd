@@ -104,7 +104,6 @@ function getPostsByAuthor(authorsid) {
 	INNER JOIN authors ON posts.authorsid = authors.authorsid
 	INNER JOIN poststags ON posts.postsid = poststags.postsid
 	INNER JOIN tags ON poststags.tagsid = tags.tagsid
-	WHERE authors.authorsid = 2
 	GROUP BY posts.postsid, posts.authorsid, authors.firstname, authors.lastname, posts.likes, posts.reads;
 */
 // get posts by author
