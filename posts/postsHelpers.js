@@ -6,7 +6,7 @@ module.exports = {
     isTagIncluded
 };
 
-function isTagIncluded(tags, tag){return tags.includes(tag);}
+function isTagIncluded(postTags, tagToCheck){return postTags.includes(tagToCheck);}
 
 function isTagsFieldArray(tagsField) {
 	const isArray = Array.isArray(tagsField);
