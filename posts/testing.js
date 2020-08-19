@@ -44,13 +44,19 @@ let posts = {
 }
 
 let tagsField = ['culture', 'tech'];
+
 let filteredResults = posts.posts.filter(post => {
+    //return tagsField.some(tag => post.tags.includes(tag))
+    return tagsField.every(tag => post.tags.includes(tag))
+    // movies.filter(x => x.genres.some(g => filters.includes(g)))
+    /*
     for(let x = 0; x < post.tags.length;x++){
         if(!tagsField.includes(post.tags[x])){
             return false
         }
         return true;
     }
+    */
     // tagsField.includes(post.tags)
             //return isTagIncluded(post.tags, tagsField[x]);
             // return isTagIncluded(post.tags, tagsField[x]);
