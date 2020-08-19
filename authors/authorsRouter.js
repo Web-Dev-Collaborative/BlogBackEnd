@@ -66,7 +66,7 @@ router.get('/', restricted, (req, res) => {
 														});
 													} else {
 														// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-														res.status(200).json({authors: authors, posts: posts, tags: tagsPerAuthor});
+														res.status(200).json({authors: authors, posts: posts, tags: tagsPerAuthor, totalLikeCount: likesPerAuthor, totalReadCount: readsPerAuthor});
 													}
 												})
 												.catch(err => res.send(err));
