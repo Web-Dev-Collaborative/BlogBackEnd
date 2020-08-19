@@ -62,10 +62,10 @@ router.get('/', restricted, (req, res) => {
 					const isArray = isTagsFieldArray(tagName);
 					let filteredResults;
 					if(isArray === true){
-						filteredResults = resultsToFilter.filter(post => {tagName.forEach((tag)=>post.tags.indexOf(tag) >= 0)});
+						filteredResults = posts.filter(post => {tagsField.forEach((tag)=>post.tags.indexOf(tag) >= 0)});
 					}
 					else {
-						filteredResults = resultsToFilter.filter(post => {post.tags.indexOf(tagName) >= 0;});
+						filteredResults = posts.filter(post => {post.tags.indexOf(tagsField) >= 0;});
 					};
 					res.status(200).json({posts: filteredResults});
 				}
