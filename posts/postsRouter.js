@@ -49,6 +49,7 @@ router.get('/', restricted, (req, res) => {
 		// if tagsField values are one of available tags
 			// available tags:  culture, design, health, history, politics, science, startups, tech
 		// if tagsField is array or not
+	if (tagsField == ''){res.status(400).json({"error": "Tags parameter is required"});}
 	const isValidTag = validateTag(tagsField);
 	// sort by id, reads, likes  (any??)
 	const sortField = req.query.sortBy;
