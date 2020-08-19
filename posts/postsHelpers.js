@@ -2,12 +2,28 @@ module.exports = {
     validateTag,
     filterResults,
     isTagsFieldArray
-  };
-  
-function isTagsFieldArray(tagsField){return Array.isArray(tagsField);};
+};
+
+
+function isTagsFieldArray(tagsField){
+    const isArray = Array.isArray(tagsField);
+    return isArray;
+};
+
+function isTagValid(tagsField){
+    if(tagsField !== 'culture' && tagsField !== 'design' && tagsField !== 'health' && 
+            tagsField !== 'history' && tagsField !== 'politics' && tagsField !== 'science' && 
+            tagsField !== 'startups' && tagsField !== 'tech'){
+                // if invalid tag, return false
+                return false;
+         }
+     // else return false
+     return true;
+}
 
 function validateTag(tagsField){
     const isArray = isTagsFieldArray(tagsField);
+    console.log("is |" + tagsTest + "| an array?  " + isArray);
 	// validate tagsField
 		// available tags:  culture, design, health, history, politics, science, startups, tech
 	// if tagsField is array or not
@@ -17,25 +33,14 @@ function validateTag(tagsField){
             // else return true
 	if(isArray === true){
         for(let x = 0; x < tagsField.length;x++){
-            if(tagsField[x] !== 'culture' && tagsField[x] !== 'design' && tagsField[x] !== 'health' && 
-			   tagsField[x] !== 'history' && tagsField[x] !== 'politics' && tagsField[x] !== 'science' && 
-			   tagsField[x] !== 'startups' && tagsField[x] !== 'tech'){
-                   // if invalid tag, return false
-                   return false;
-			}
+            if (isTagValid(tagsField[x]) === false){return isTagValid(tagsField[x])};
         }
-        // else return false
-        return true;
-	}
-    // if tagsField is not array
-    if(tagsField === 'culture' || tagsField === 'design' || tagsField === 'health' || 
-        tagsField === 'history' || tagsField === 'politics' || tagsField === 'science' || 
-        tagsField === 'startups' || tagsField === 'tech'){
-        // if tag is valid, return false
         return true;
     }
-    // else return false
-    return false;
+    else{
+        // if tagsField is not array
+        return isTagValid(tagsField);
+    }
 }
 
 // filter results by tagsField
