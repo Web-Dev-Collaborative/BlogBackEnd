@@ -4,7 +4,6 @@ const Posts = require('./postsModel.js');
 const Authors = require('../authors/authorsModel.js');
 const Tags = require('../tags/tagsModel.js');
 
-
 const restricted = require('../auth/restriction.js');
 
 const { isTagsFieldArray, validateTag, isTagIncluded } = require('./postsHelpers.js');
@@ -20,7 +19,6 @@ Response status code: 400
 // getAuthors from authors model
 // getTagsByAuthor, getTagsByPost from tags model
 // getPosts, getPostsByAuthor, getTotalReadsCount, getTotalLikesCount from posts model
-
 
 
 // GET:  gets all posts records
@@ -53,34 +51,12 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						filteredResults = posts.filter(post => {
-							return newTagsField.every(tag => post.tags.includes(tag))
-								// C.filter(post=>B.filter(tag=>A.includes(k.name)));
-								// return JSON.stringify(post.tags).includes(newTagsField[x]);
-								// return
-							/*
-								for (var prop in obj)
-									if (!(prop in item) || obj[prop] !== item[prop])
-										return false;
-								return true;
-							*/
-						});
+						filteredResults = posts.filter(post => {return newTagsField.every(tag => post.tags.includes(tag))});
 						res.status(200).json({posts: filteredResults});
-						/*
-						res.status(200).json({posts: "This is an array.", 
-											  "is tags qp valid": isValidTag,
-											  "is tags qp array": isArray,
-											  "attempted tags query params": tagsField
-											});
-						*/
 					}
 					else if(isValidTag === false){
 						// if IS NOT valid tag, return error response
-						res.status(400).json({"error": "Tags parameter is an invalid array.", 
-											  "is tags qp valid": isValidTag,
-											  "is tags qp array": isArray,
-											  "attempted tags query params": newTagsField
-											});
+						res.status(400).json({"error": "Tags parameter is invalid."});
 					};
 				}
 				// if IS NOT an array
@@ -92,11 +68,7 @@ router.get('/', restricted, (req, res) => {
 					}
 					else if(isValidTag === false){
 						// if IS NOT valid tag, return error response
-						res.status(400).json({"error": "Tags parameter is an invalid string.", 
-											  "is tags qp valid": isValidTag,
-											  "is tags qp array": isArray,
-											  "attempted tags query params": newTagsField
-											});
+						res.status(400).json({"error": "Tags parameter is invalid."});
 					};
 				}
 			}
