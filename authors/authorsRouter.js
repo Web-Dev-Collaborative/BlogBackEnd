@@ -25,7 +25,7 @@ all authors object
 
 // GET:  gets all authors records, including posts and total likes & reads counts
 router.get('/', restricted, (req, res) => {
-	Author.getAuthors()
+	Authors.getAuthors()
 		.then(authors => {
 			if (!authors) {
 				res.status(404).json({
@@ -33,8 +33,43 @@ router.get('/', restricted, (req, res) => {
 					error: err
 				});
 			} else {
-				// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-				res.status(200).json({authors: authors});
+				Authors.getPostsByAllAuthors()
+					.then(posts => {
+						if (!posts) {
+							res.status(404).json({
+								message: `Posts do not exist.`,
+								error: err
+							});
+						} else {
+							Authors.getTagsByAllAuthors()
+								if (!tagsPerAuthor) {
+									res.status(404).json({
+										message: `Tags do not exist.`,
+										error: err
+									});
+								} else {
+									Authors.getAllTotalLikesCount()
+										if (!likesPerAuthor) {
+											res.status(404).json({
+												message: `Total likes count does not exist.`,
+												error: err
+											});
+										} else {
+											Authors.getAllTotalReadsCount()
+											if (!readsPerAuthor) {
+												res.status(404).json({
+													message: `Total reads count does not exist.`,
+													error: err
+												});
+											} else {
+												// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
+												res.status(200).json(authors);
+											}
+										}
+								}
+						}
+					})
+					.catch(err => res.send(err));
 			}
 		})
 		.catch(err => res.send(err));

@@ -5,7 +5,7 @@ module.exports = {
 	find,
 	findBy,
 	findById,
-	getAuthors,
+	getAllAuthors,
 	getAuthor,
 	getPostsByAuthor,
 	getPostsByAllAuthors,
@@ -39,11 +39,9 @@ module.exports = {
 	FROM authors
 */
 // get bio info for all authors
-function getAuthors() {
+function getAllAuthors() {
 	return db('authors')
-		.select(
-			'authors.bio AS bio', 'authors.firstname AS firstName', 'authors.authorsid AS id', 'authors.lastname AS lastName'
-		);
+		.select('authors.bio AS bio', 'authors.firstname AS firstName', 'authors.authorsid AS id', 'authors.lastname AS lastName');
 }
 
 /*
