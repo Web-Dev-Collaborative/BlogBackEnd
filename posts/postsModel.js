@@ -43,7 +43,10 @@ function getPosts() {
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
-		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid');
+		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
+		.groupBy('posts.postsid', 'posts.authorsid', 
+		'authors.firstname', 'authors.lastname',
+		'posts.likes', 'posts.reads');
 	
 }
 
