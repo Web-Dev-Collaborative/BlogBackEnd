@@ -54,7 +54,7 @@ router.get('/', restricted, (req, res) => {
 				// validate sortField
 					// if sort criteria not valid
 						// available sorts:  author, authorId, id, likes, reads
-				if(sortField !== ''){ 
+				if(req.query.sortBy.length > 0){ 
 					if(sortField !== 'author' || sortField !== 'authorId' || 
 					   sortField !== 'likes' || sortField !== 'reads'){
 						res.status(400).json({"error": "sortBy parameter is invalid."});
@@ -62,9 +62,13 @@ router.get('/', restricted, (req, res) => {
 					else if(sortField === 'author' || sortField === 'authorId' || 
 							sortField === 'likes' || sortField === 'reads') {
 						// if directionField IS NOT empty
-						if(directionField !== ''){
-							// if directionField = 'asc', sort ascending by sortField
-							if (directionField === 'asc'){
+						if(directionField.length > 0){
+							// if directionField !== 'asc' || directionField !== 'desc' then return error response
+							if(directionField !== 'asc' || directionField !== 'desc'){
+								res.status(400).json({"error": "direction parameter is invalid."});
+							}
+							// else if directionField = 'asc', sort ascending by sortField
+							else if (directionField === 'asc'){
 								// sort ascending by sortField
 								posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
 							}
@@ -72,10 +76,6 @@ router.get('/', restricted, (req, res) => {
 							else if (directionField === 'desc'){
 								// sort descending by sortField
 								posts.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
-							}
-							// else if directionField !== 'asc' || directionField !== 'desc' then return error response
-							else if(directionField !== 'asc' || directionField !== 'desc'){
-								res.status(400).json({"error": "direction parameter is invalid."});
 							}
 						}
 			}
