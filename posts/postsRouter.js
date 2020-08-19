@@ -8,18 +8,7 @@ const Tags = require('../tags/tagsModel.js');
 const restricted = require('../auth/restriction.js');
 
 const { isTagsFieldArray,validateTag } = require('./postsHelpers.js');
-
-// still need query parameters
-
 /*
-
-If `tags` parameter is not present:
-	Response body (JSON):
-	{
-		"error": "Tags parameter is required"
-	}
-Response status code: 400
-
 If a `sortBy` or `direction` are invalid values, specify an error like below:
 	Response body (JSON):
 	{
@@ -27,7 +16,6 @@ If a `sortBy` or `direction` are invalid values, specify an error like below:
 	}
 Response status code: 400
 */
-
 
 // getAuthors from authors model
 // getTagsByAuthor, getTagsByPost from tags model
