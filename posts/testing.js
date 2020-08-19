@@ -36,16 +36,17 @@ let posts = {
             "tags": [
                 "history",
                 "tech",
+                "culture"
                 
             ]
         }
     ]
 }
 
-let tagsField = ['health', 'tech'];
+let tagsField = ['culture', 'tech'];
 let filteredResults = posts.posts.filter(post => {
-    post.tags.forEach((tag) =>{
-        for(let x = 0; x < tagsField.length; x++){return isTagIncluded(tag, tagsField[x]);}
-    })
+    for(let x = 0; x < tagsField.length; x++){
+        return isTagIncluded(post.tags, tagsField[x]);
+    }
 });
 console.log(filteredResults);

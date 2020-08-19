@@ -1,12 +1,15 @@
 module.exports = {
+	 
+    isTagIncluded,
 	isTagsFieldArray,
 	isTagValid,
 	validateTag,
-    filterResults, 
-    isTagIncluded
+    filterResults
 };
 
-function isTagIncluded(postTag, tagToCheck){return postTag.includes(tagToCheck);}
+function isTagIncluded(postTag, tagToCheck){
+	return postTag.indexOf(tagToCheck) >= 0;
+}
 
 function isTagsFieldArray(tagsField) {
 	const isArray = Array.isArray(tagsField);
