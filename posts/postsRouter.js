@@ -28,10 +28,6 @@ router.get('/', restricted, (req, res) => {
 	// if req.query.tags is empty, return error response
 	if(!req.query.tags){res.status(400).json({"error": "Tags parameter is required"});}
 	const tagsField = req.query.tags;
-	// validate tagsField
-		// if tagsField values are one of available tags
-			// available tags:  culture, design, health, history, politics, science, startups, tech
-		// if tagsField is array or not
 	// sort by id, reads, likes  (any??)
 	const sortField = req.query.sortBy;
 	// direction asc or desc only, default = asc
@@ -45,6 +41,10 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
+				// validate tagsField
+					// if tagsField values are one of available tags
+						// available tags:  culture, design, health, history, politics, science, startups, tech
+					// if tagsField is array or not
 				let filteredResults, newTagsField;
 				if(tagsField.includes(",")){newTagsField = tagsField.split(",");}
 				else{newTagsField = tagsField};
@@ -53,7 +53,7 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						filteredResults = posts.posts.filter(post => {
+						filteredResults = posts.filter(post => {
 							for (let x = 0; x < tagsField.length; x++) {
 								if (post.tags.includes(tagsField[x])) {
 									return true;
