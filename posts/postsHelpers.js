@@ -14,37 +14,31 @@ function validateTag(tagsField){
         // if tagsField IS NOT array and contains invalid tags, return false
             // else return true
 	if(isArray === true){
-		return tagsField.forEach((tag)=>{
-			if(tag != 'culture' || 
-			   tag != 'design' || 
-			   tag != 'health' || 
-			   tag != 'history' || 
-			   tag != 'politics' || 
-			   tag != 'science' || 
-			   tag != 'startups' || 
-			   tag != 'tech'){
+		tagsField.forEach((tag)=>{
+			if(tag !== 'culture' || 
+			   tag !== 'design' || 
+			   tag !== 'health' || 
+			   tag !== 'history' || 
+			   tag !== 'politics' || 
+			   tag !== 'science' || 
+			   tag !== 'startups' || 
+			   tag !== 'tech'){
                    // if not one of valid tags, return false
                    return false;
-                   
 			   }
-            // else return true
-            return true;
 		});
-	}
-		// if tagsField is not array
-		if(tagsField !== 'culture' || 
-		   tagsField !== 'design' || 
-		   tagsField !== 'health' || 
-		   tagsField !== 'history' || 
-		   tagsField !== 'politics' || 
-		   tagsField !== 'science' || 
-		   tagsField !== 'startups' || 
-		   tagsField !== 'tech'){
-            // if the tag is invalid, return false
-            return false;
-		}
         // else return true
         return true;
+	}
+		// if tagsField is not array
+		if(tagsField === 'culture' || tagsField === 'design' || tagsField === 'health' || 
+		   tagsField === 'history' || tagsField === 'politics' || tagsField === 'science' || 
+		   tagsField === 'startups' || tagsField === 'tech'){
+            // if tag is invalid, return false
+            return true;
+		}
+        // else return true
+        return false;
 }
 
 // filter results by tagsField
