@@ -59,7 +59,7 @@ router.get('/', restricted, (req, res) => {
 								for(let y = 0; y < currentTags.length; y++){
 									for(let x = 0; x < newTagsField.length; x++){
 										tagIncluded = newTagsField[x];
-										return isTagIncluded(currentTags, tagIncluded);
+										return isTagIncluded(currentTags[y], tagIncluded);
 									}
 								}
 							}
