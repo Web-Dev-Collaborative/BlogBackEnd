@@ -53,27 +53,8 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						filteredResults = posts.filter(post => {
-							if (post.tags.includes(",") == true || Array.isArray(post.tags)){
-								if(Array.isArray(post.tags)){currentTags = post.tags}
-								else{currentTags = post.tags.split(",");}
-								for(let y = 0; y < currentTags.length; y++){
-									tagToCheck = currentTags[y];
-									for(let x = 0; x < newTagsField.length; x++){
-										tagIncluded = newTagsField[x];
-										shouldTagBeIncluded = isTagIncluded(tagToCheck, tagIncluded);
-										return shouldTagBeIncluded;
-									}
-								}
-							}
-							else {
-								currentTags = post.tags;
-								for(let x = 0; x < newTagsField.length; x++){
-									tagIncluded = newTagsField[x];
-									shouldTagBeIncluded = isTagIncluded(tagToCheck, tagIncluded);
-									return shouldTagBeIncluded;
-								}
-							};
+						filteredResults = posts.posts.filter(post => {
+							for(let x = 0; x < tagsField.length; x++){return isTagIncluded(post.tags, tagsField[x]);}
 						});
 						res.status(200).json({posts: filteredResults});
 						/*
