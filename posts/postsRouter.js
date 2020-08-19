@@ -36,20 +36,15 @@ Response status code: 400
 
 // GET:  gets all posts records
 router.get('/', restricted, (req, res) => {
-	// TODO:  if req.query.tags doesn't exist, return error response
-	// TODO:  if req.query.tags exists:
-		// if tagsField is string, filter by tagsField
-		// if tagsField is array, filter like below sample
-
-		// TODO:  break validation out into separate function
-
-	const tagsField = req.query.tags;
+	let tagsField;
+	if(req.query.tags){tagsField = req.query.tags;}
+	// if req.query.tags is empty, return error response
+	else{res.status(400).json({"error": "Tags parameter is required"});}
 
 	// validate tagsField
 		// if tagsField values are one of available tags
 			// available tags:  culture, design, health, history, politics, science, startups, tech
 		// if tagsField is array or not
-	if (tagsField == ''){res.status(400).json({"error": "Tags parameter is required"});}
 	const isValidTag = validateTag(tagsField);
 	// sort by id, reads, likes  (any??)
 	const sortField = req.query.sortBy;
