@@ -1,6 +1,18 @@
 
 const { isTagsFieldArray,validateTag } = require('./postsHelpers.js');
 
+console.log('----------');
+let newTagsField = 'tech,health';
+if(newTagsField.includes(",")){newTagsField = newTagsField.split(",");}
+console.log('tagsField = ' + newTagsField);
+console.log('is |' + newTagsField + '| valid?  ' + validateTag(newTagsField) + ' is |' + newTagsField + '| an array?  ' + isTagsFieldArray(newTagsField));
+console.log('--------');
+console.log('----------');
+newTagsField = 'tech';
+if(newTagsField.includes(",")){newTagsField = newTagsField.split(",");}
+console.log('tagsField = ' + newTagsField);
+console.log('is |' + newTagsField + '| valid?  ' + validateTag(newTagsField) + ' is |' + newTagsField + '| an array?  ' + isTagsFieldArray(newTagsField));
+console.log('--------');
 console.log('--------');
 let tagsTest;
 tagsTest = 'tech';
