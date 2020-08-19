@@ -66,12 +66,91 @@ router.get('/', restricted, (req, res) => {
 															});
 														} else {
 															// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-															res.status(200).json({authors: authors, 
-																				posts: posts, 
-																				tags: tagsPerAuthor, 
-																				totalLikeCount: likesPerAuthor, 
-																				totalReadCount: readsPerAuthor
-																				});
+															let oneAuthorsTags = {
+																"authors": authors,
+																"posts": posts,
+																"tags": tagsPerAuthor,
+																"totalLikeCount": likesPerAuthor,
+																"totalReadCount": readsPerAuthor
+															};
+															let authorsid;
+															let newAuthors = oneAuthorsTags.authors;
+															for(let v = 0; v < oneAuthorsTags.authors.length; v++){
+																authorsid = oneAuthorsTags.authors[v].id;
+																newAuthors[v].posts = [];
+																// loop through posts
+																for(let w = 0; w < oneAuthorsTags.posts.length; w++){
+																	let postAuthorsId = oneAuthorsTags.posts[w].authorId;
+																	if(authorsid === postAuthorsId){
+																		// do something to posts matching author
+																		let currentPost = oneAuthorsTags.posts[w];
+																		newAuthors[v].posts.push(currentPost);
+																	}
+																	// loop through tags
+																	for(let x = 0; x < oneAuthorsTags.tags.length; x++){
+															
+																		let tagsAuthorsId = oneAuthorsTags.tags[x].authorsid;
+																		if(authorsid === tagsAuthorsId){
+																			// do something to tags matching author
+																			let currentTags = oneAuthorsTags.tags[x].tags;
+																			newAuthors[v].tags = currentTags;
+																		}
+																		// loop through totalLikeCount
+																		for(let y = 0; y < oneAuthorsTags.totalLikeCount.length; y++){
+																			let tlcAuthorsId = oneAuthorsTags.totalLikeCount[y].authorsid;
+																			if(authorsid === tlcAuthorsId){
+																				// do something to totalLikeCount matching author
+																				let tlcValue = oneAuthorsTags.totalLikeCount[y].totallikecount;
+																				newAuthors[v].totalLikeCount = tlcValue;
+																			}
+																			// loop through totalReadCount
+																			for(let z = 0; z < oneAuthorsTags.totalReadCount.length; z++){
+																				let trcAuthorsId = oneAuthorsTags.totalReadCount[z].authorsid;
+																				if(authorsid === trcAuthorsId){
+																					let trcValue = oneAuthorsTags.totalReadCount[z].totalreadcount;
+																					// do something to totalReadCount matching author
+																					newAuthors[v].totalReadCount = trcValue;
+																				}
+																			
+																			}
+																		}
+																	}
+																}
+															}
+															// remove duplicate tags
+															for (let u = 0; u < newAuthors.length; u++){
+																newAuthors[u].tags = newAuthors[u].tags.filter((item, index)=>{return newAuthors[u].tags.indexOf(item) >= index;});
+															}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+															res.status(200).json(newAuthors);
 														}
 													})
 													.catch(err => res.send(err));
