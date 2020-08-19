@@ -45,7 +45,7 @@ router.get('/', restricted, (req, res) => {
 					// if tagsField values are one of available tags
 						// available tags:  culture, design, health, history, politics, science, startups, tech
 					// if tagsField is array or not
-				let filteredResults, newTagsField, currentTags;
+				let filteredResults, newTagsField, currentTags, tagToCheck;
 				if(tagsField.includes(",")){newTagsField = tagsField.split(",");}
 				else{newTagsField = tagsField};
 				let isArray = isTagsFieldArray(newTagsField);
@@ -57,9 +57,10 @@ router.get('/', restricted, (req, res) => {
 							if (post.tags.includes(",") == true){
 								currentTags = post.tags.split(",");
 								for(let y = 0; y < currentTags.length; y++){
+									tagToCheck = currentTags[y];
 									for(let x = 0; x < newTagsField.length; x++){
 										tagIncluded = newTagsField[x];
-										return isTagIncluded(currentTags[y], tagIncluded);
+										return isTagIncluded(tagToCheck, tagIncluded);
 									}
 								}
 							}
