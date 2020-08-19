@@ -43,27 +43,7 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				let modifiedPosts = [];
-				let tagsPerPost = [];
-				posts.forEach(async (post) => {
-					await Tags.getTagsByPost(post.id)
-					.then(tags => {
-						if(!tags){tags = [];}
-						else{
-							if(tags.length > 0){tags.forEach(async (tag)=>{await tagsPerPost.push(tag.tagname);});}
-							modifiedPosts.push({
-								author: post.firstname + " " + post.lastname,
-								authorId: post.authorId,
-								id: post.id,
-								likes: post.likes,
-								reads: post.reads,
-								tags: tagsPerPost
-							});
-						}
-					})
-					.catch(err => res.send(err));
-				});
-				res.status(200).json({posts: modifiedPosts});
+				res.status(200).json({posts: posts});
 			}
 		})
 		.catch(err => res.send(err));
