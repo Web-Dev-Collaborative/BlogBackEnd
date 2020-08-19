@@ -45,10 +45,11 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				let filteredResults;
-				if(tagsField.includes(",")){tagsField = tagsField.split(",");}
-				let isArray = isTagsFieldArray(tagsField);
-				let isValidTag = validateTag(tagsField);
+				let filteredResults, newTagsField;
+				if(tagsField.includes(",")){newTagsField = tagsField.split(",");}
+				else{newTagsField = tagsField};
+				let isArray = isTagsFieldArray(newTagsField);
+				let isValidTag = validateTag(newTagsField);
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
