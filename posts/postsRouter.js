@@ -49,7 +49,7 @@ router.get('/', restricted, (req, res) => {
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
 	Posts.getPosts()
-		.then(async posts => {
+		.then(posts => {
 			if (!posts) {
 				res.status(404).json({
 					message: `Posts do not exist.`,
@@ -57,9 +57,9 @@ router.get('/', restricted, (req, res) => {
 				});
 			}
 			else{
-				let isValidTag = await validateTag(tagsField);
+				let isValidTag = validateTag(tagsField);
 				let filteredResults;
-				let isArray = await isTagsFieldArray(tagsField);
+				let isArray = isTagsFieldArray(tagsField);
 				if(isValidTag === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isArray === true){
@@ -82,13 +82,13 @@ router.get('/', restricted, (req, res) => {
 											  "attempted tags query params": tagsField
 											});
 					}
-					else{
+					if(isArray === false){
 						// if IS NOT an array
 						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
 						res.status(200).json({posts: filteredResults});
 					};
 				}
-				else{
+				if(isValidTag === false){
 					// if IS NOT valid tag, return error response
 					res.status(400).json({"error": "Tags parameter is invalid.", 
 										  "are tags query params valid": isValidTag,
@@ -96,31 +96,6 @@ router.get('/', restricted, (req, res) => {
 										  "attempted tags query params": newTagsField
 										});
 				}
-				/*
-
-					return resultsToFilter.filter(post => {return post.tags.indexOf(tagname) >= 0;});
-				// apply the sorting
-				const response = hobbits.sort(
-					(a, b) => (a[sortField] < b[sortField] ? -1 : 1)
-				);
-			
-			votes.sort(function (vote1, vote2) {
-
-				// Sort by votes
-				// If the first item has a higher number, move it down
-				// If the first item has a lower number, move it up
-				if (vote1.votes > vote2.votes) return -1;
-				if (vote1.votes < vote2.votes) return 1;
-
-				// If the votes number is the same between both items, sort alphabetically
-				// If the first item comes first in the alphabet, move it up
-				// Otherwise move it down
-				if (vote1.title > vote2.title) return 1;
-				if (vote1.title < vote2.title) return -1;
-
-			});
-
-				*/
 			}
 		})
 		.catch(err => res.send(err));
