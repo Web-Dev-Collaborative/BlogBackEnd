@@ -16,19 +16,19 @@ function validateTag(tagsField){
         // if tagsField IS NOT array and contains invalid tags, return false
             // else return true
 	if(isArray === true){
-		tagsField.forEach((tag)=>{
-			if(tag === 'culture' || 
-			   tag === 'design' || 
-			   tag === 'health' || 
-			   tag === 'history' || 
-			   tag === 'politics' || 
-			   tag === 'science' || 
-			   tag === 'startups' || 
-			   tag === 'tech'){
-                   // if one of valid tags, return true
-                   return true;
+        for(let x = 0; x < tagsField.length;x++){
+            if(tagsField[x] !== 'culture' || 
+               tagsField[x] !== 'design' || 
+			   tagsField[x] !== 'health' || 
+			   tagsField[x] !== 'history' || 
+			   tagsField[x] !== 'politics' || 
+			   tagsField[x] !== 'science' || 
+			   tagsField[x] !== 'startups' || 
+			   tagsField[x] !== 'tech'){
+                   // if invalid tag, return false
+                   return false;
 			   }
-		});
+            }
         // else return false
         return true;
 	}
