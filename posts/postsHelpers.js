@@ -2,8 +2,11 @@ module.exports = {
 	isTagsFieldArray,
 	isTagValid,
 	validateTag,
-	filterResults
+    filterResults, 
+    isTagIncluded
 };
+
+function isTagIncluded(tags, tag){return tags.includes(tag);}
 
 function isTagsFieldArray(tagsField) {
 	const isArray = Array.isArray(tagsField);

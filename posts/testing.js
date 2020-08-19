@@ -39,13 +39,8 @@ let posts = {
     ]
 }
 
-function isTagIncluded(tags, tag){
-    if (tags.includes(tag) === true) {
-        return true;
-    } else if (tags.includes(tag) === false){
-        return false;
-    }
-}
+function isTagIncluded(tags, tag){return tags.includes(tag);}
+
 let tagsField = ['health', 'tech'];
 
 let tagIncluded, currentTags;
