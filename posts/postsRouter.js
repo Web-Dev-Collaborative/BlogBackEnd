@@ -55,11 +55,11 @@ router.get('/', restricted, (req, res) => {
 					if(isValidTag === true){
 						filteredResults = posts.filter(post => {
 							for(let x = 0; x < tagsField.length; x++){
-									if (post.tags.includes(tagsField[x])) {
-										return true;
-									} else {
-										return false;
-									}
+								if (post.tags.includes(tagsField[x]) === true) {
+									return true;
+								} else if (post.tags.includes(tagsField[x]) === false){
+									return false;
+								}
 							}
 						});
 						res.status(200).json({posts: filteredResults});

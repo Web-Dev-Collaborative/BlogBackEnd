@@ -43,11 +43,11 @@ let tagsField = ['health', 'tech'];
 
 let filteredResults = posts.posts.filter(post => {
     for(let x = 0; x < tagsField.length; x++){
-            if (post.tags.includes(tagsField[x])) {
-                return true;
-            } else {
-                return false;
-            }
+        if (post.tags.includes(tagsField[x])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 });
 console.log(filteredResults);
