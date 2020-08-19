@@ -19,12 +19,14 @@ module.exports = {
 
 // get all posts
 /*
-	SELECT posts.postsid, posts.authorsid, posts.likes, posts.reads,
-		authors.authorsid, authors.firstname, authors.lastname,
-		tags.tagsid, tags.tagname
-	FROM posts
-	INNER JOIN authors 
-	ON posts.authorsid = authors.authorsid;
+SELECT authors.firstname, authors.lastname, 
+       posts.postsid as id, posts.authorsid as authorId, posts.likes as likes, posts.reads as reads,
+       ARRAY_AGG(tags.tagname) AS tags
+FROM posts 
+INNER JOIN authors ON posts.authorsid = authors.authorsid
+INNER JOIN poststags ON posts.postsid = poststags.postsid
+INNER JOIN tags ON poststags.tagsid = tags.tagsid
+GROUP BY posts.postsid, posts.authorsid, authors.firstname, authors.lastname, posts.likes, posts.reads;
 */
 function getPosts() {
 	/*
@@ -38,8 +40,7 @@ function getPosts() {
 	return db('posts')
 		.select('authors.firstname AS firstname', 'authors.lastname AS lastname',
 			'posts.authorsid AS authorId',
-			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
-			knex.raw('ARRAY_AGG(tags.tagname) AS tags')
+			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads'
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
