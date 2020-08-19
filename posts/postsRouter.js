@@ -62,6 +62,7 @@ router.get('/', restricted, (req, res) => {
 					const isArray = isTagsFieldArray(tagsField);
 					let filteredResults;
 					if(isArray === true){
+						/*
 						filteredResults = posts.posts.filter(post => {
 							for (let x = 0; x < tagsField.length; x++) {
 								if (post.tags.includes(tagsField[x])) {
@@ -72,6 +73,7 @@ router.get('/', restricted, (req, res) => {
 								l;
 							}
 						});
+						*/
 						res.status(200).json({tags: tagsField});
 					}
 					else{
