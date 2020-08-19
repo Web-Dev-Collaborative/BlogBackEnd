@@ -63,16 +63,18 @@ router.get('/', restricted, (req, res) => {
 					let filteredResults;
 					if(isArray === true){
 						filteredResults = posts.filter(post => {tagsField.forEach((tag)=>post.tags.indexOf(tag) >= 0)});
+						res.status(200).json({posts: filteredResults});
 					}
-					else {
-						filteredResults = posts.filter(post => {post.tags.indexOf(tagsField) >= 0;});
+					if(isArray === false){
+						filteredResults = posts.filter(post => {post.tags.indexOf(tagsField) >= 0});
+						res.status(200).json({posts: posts.filter(post => {post.tags.indexOf(tagsField) >= 0})});
 					};
-					res.status(200).json({posts: filteredResults});
 				}
 				else{
 					// if IS NOT valid tag, return error response
 					res.status(400).json({"error": "Tags parameter is invalid.", 
 										  "are tags query params valid": isValidTag,
+										  "is tags qp array": isArray,
 										  "attempted tags query params": tagsField
 										});
 				}
