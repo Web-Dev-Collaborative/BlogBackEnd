@@ -78,6 +78,11 @@ router.get('/', restricted, (req, res) => {
 								posts = posts.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
 							}
 						}
+						// default sort ascending by sortField
+						else {
+							// sort ascending by sortField
+							posts = posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+						}
 			}
 				}
 				
