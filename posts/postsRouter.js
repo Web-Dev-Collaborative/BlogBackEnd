@@ -53,7 +53,7 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						filteredResults = posts.filter(post => {
+						filteredResults = posts.posts.filter(post => {
 							for (let y = 0; y < post.tags.length; y++) {
 								for(let x = 0; x < newTagsField.length; x++){
 									if (post.tags.includes(newTagsField[x])) {
@@ -87,7 +87,7 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === false){
 					if(isValidTag === true){
 						// if IS valid tag, return filtered results
-						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
+						filteredResults = posts.filter(post => {return post.tags.indexOf(newTagsField) >= 0});
 						res.status(200).json({posts: filteredResults});
 					}
 					else if(isValidTag === false){
@@ -95,7 +95,7 @@ router.get('/', restricted, (req, res) => {
 						res.status(400).json({"error": "Tags parameter is an invalid string.", 
 											  "is tags qp valid": isValidTag,
 											  "is tags qp array": isArray,
-											  "attempted tags query params": tagsField
+											  "attempted tags query params": newTagsField
 											});
 					};
 				}
