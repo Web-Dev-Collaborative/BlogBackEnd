@@ -42,6 +42,7 @@ router.get('/', restricted, (req, res) => {
 							});
 						} else {
 							Authors.getTagsByAllAuthors()
+							.then(tagsPerAuthor =>{
 								if (!tagsPerAuthor) {
 									res.status(404).json({
 										message: `Tags do not exist.`,
@@ -51,6 +52,8 @@ router.get('/', restricted, (req, res) => {
 									// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
 									res.status(200).json({authors: authors, posts: posts, tags: tagsPerAuthor});
 								}
+							})
+							.catch(err => res.send(err));
 						}
 					})
 					.catch(err => res.send(err));
