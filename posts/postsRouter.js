@@ -49,7 +49,14 @@ router.get('/', restricted, (req, res) => {
 			// available tags:  culture, design, health, history, politics, science, startups, tech
 		// if tagsField is array or not
 	const isArray = isTagsFieldArray(tagsField);
-	const isValidTag = validateTag(tagsField);
+	let newTagsField;
+	if(tagsField.includes(',')){
+		newTagsField = tagsField.split(",");
+	}
+	else{
+		newTagsField = tagsField
+	}
+	const isValidTag = validateTag(newTagsField);
 	// sort by id, reads, likes  (any??)
 	const sortField = req.query.sortBy;
 	// direction asc or desc only, default = asc
@@ -97,7 +104,7 @@ router.get('/', restricted, (req, res) => {
 					res.status(400).json({"error": "Tags parameter is invalid.", 
 										  "are tags query params valid": isValidTag,
 										  "is tags qp array": isArray,
-										  "attempted tags query params": tagsField
+										  "attempted tags query params": newTagsField
 										});
 				}
 				/*

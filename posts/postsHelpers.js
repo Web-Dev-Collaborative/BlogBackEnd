@@ -18,12 +18,15 @@ function isTagValid(tagsField){
                 // if invalid tag, return false
                 return false;
          }
+    else{
      // else return false
-     return true;
+        return true;
+    }
 }
 
 function validateTag(tagsField){
     const isArray = isTagsFieldArray(tagsField);
+    console.log("is |" + tagsTest + "| an array?  " + isArray);
 	// validate tagsField
 		// available tags:  culture, design, health, history, politics, science, startups, tech
 	// if tagsField is array or not
@@ -33,7 +36,7 @@ function validateTag(tagsField){
             // else return true
 	if(isArray === true){
         for(let x = 0; x < tagsField.length;x++){
-            if (isTagValid(tagsField[x]) === false){return isTagValid(tagsField[x])};
+            if (isTagValid(tagsField[x]) === false){return false};
         }
         return true;
     }
