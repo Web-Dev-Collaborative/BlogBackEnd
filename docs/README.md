@@ -57,13 +57,12 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] For every tag specified in the tags parameter, fetch the posts with that tag using the Hatchways API (make a separate API request for every tag specified)
 - posts endpoints:
   - [X] add tags to get single post
-  - [ ] get posts by author endpoint or query parameter
+  - [X] get posts by author endpoint
   - [X] update, delete, add post
 - authors endpoints:
-  - [ ] get all authors (show posts & tags)
-  - [ ] get one author (show posts & tags)
-  - [ ] update, delete, add author
-  - [ ] add author to post(s)
+  - [X] get all authors (show posts & tags)
+  - [X] get one author (show posts & tags)
+  - [X] update, delete, add author
 - tags endpoints:
   - [ ] get all tags (show posts & authors)
   - [ ] get one tag (show posts & authors)

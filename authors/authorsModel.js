@@ -97,7 +97,7 @@ function getPostsByAuthor(authorsid) {
 // get posts by author
 function getPostsByAllAuthors() {
 	return db('posts')
-		.select('posts.authorsid AS authorId',
+		.select(db.raw("authors.firstname || ' ' || authors.lastname as author"), 'posts.authorsid AS authorId',
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
 			db.raw('ARRAY_AGG(tags.tagname) AS tags')
 		)
