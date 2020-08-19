@@ -50,8 +50,7 @@ router.get('/', (req, res) => {
 						if(!tags){tags = [];}
 						else{
 							modifiedPosts.push({
-								post,
-								tags: JSON.stringify(tags)
+								post
 							});
 						}
 					})
