@@ -9,9 +9,7 @@ const restricted = require('../auth/restriction.js');
 
 const { 
     isTagsFieldArray,
-    isTagValid,
     validateTag,
-	filterResults 
 } = require('./postsHelpers.js');
 
 // still need query parameters
