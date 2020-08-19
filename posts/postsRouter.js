@@ -65,15 +65,13 @@ router.get('/', restricted, (req, res) => {
 						filteredResults = posts.filter(post => 
 							{
 								for (let x = 0; x < tagsField.length;x++){
-									if(tagsField[x] in post.tags){
-										return true;
-									}
+									if(post.tags.includes(tagsField[x])){return true}
 									else{return false}
 								}
 							}
 						)
-					};
-					if(isArray === false){filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});};
+					}
+					else{filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});};
 					res.status(200).json({posts: filteredResults});
 				}
 				else{
