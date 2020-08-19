@@ -46,7 +46,7 @@ module.exports = {
 	INNER JOIN tags
 	ON poststags.tagsid = tags.tagsid;
 */
-// get all authors
+// get bio info for all authors
 function getAuthors() {
 	return db('authors')
 		.select(
@@ -61,7 +61,7 @@ function getAuthors() {
 	FROM authors
 	WHERE authors.authorsid = 2;
 */
-// get author
+// get bio info for one author
 function getAuthor(authorsid) {
 	return db('authors')
 		.select(
@@ -103,7 +103,7 @@ function getPostsByAuthor(authorsid) {
 	ON posts.authorsid = authors.authorsid
 	WHERE authors.authorsid = 2;
 */
-// get total likes count
+// get total likes count for one author
 function getTotalLikesCount(authorsid) {
 	return db('posts')
 		.select(
@@ -113,7 +113,6 @@ function getTotalLikesCount(authorsid) {
 		.where('authors.authorsid', authorsid);
 }
 
-
 /*
 	SELECT SUM(posts.reads) as totalLikesCount
 	FROM posts
@@ -121,7 +120,7 @@ function getTotalLikesCount(authorsid) {
 	ON posts.authorsid = authors.authorsid
 	WHERE authors.authorsid = 2;
 */
-// get total reads count
+// get total reads count for one author
 function getTotalReadsCount(authorsid){
 	return db('posts')
 		.select(
@@ -173,7 +172,7 @@ function getAllTotalReadsCount() {
 	ON posts.authorsid = authors.authorsid
 	WHERE authors.authorsid = 2;
 */
-// get tags by author
+// get tags for one author
 function getTagsByAuthor(authorsid){
 	return db('tags')
 		.distinct()

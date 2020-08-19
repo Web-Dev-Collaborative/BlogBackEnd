@@ -64,7 +64,7 @@ router.get('/', restricted, (req, res) => {
 												});
 											} else {
 												// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-												res.status(200).json();
+												res.status(200).json({authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor});
 											}
 										}
 								}
