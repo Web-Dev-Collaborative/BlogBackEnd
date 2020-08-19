@@ -45,6 +45,12 @@ function validateTag(tagsField){
 // filter results by tagsField
 function filterResults(tagName, resultsToFilter){
     const isArray = isTagsFieldArray(tagName);
-	if(isArray === true){return tagName.forEach((tag)=>resultsToFilter.filter(post => {return post.tags.indexOf(tag) >= 0;}))};
-    return resultsToFilter.filter(post => {post.tags.indexOf(tagName) >= 0;});
+    let filteredResults;
+	if(isArray === true){
+        filteredResults = resultsToFilter.filter(post => {tagName.forEach((tag)=>post.tags.indexOf(tag) >= 0)});
+    }
+    else {
+        filteredResults = resultsToFilter.filter(post => {post.tags.indexOf(tagName) >= 0;});
+    };
+    return filteredResults;
 }
