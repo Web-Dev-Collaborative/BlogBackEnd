@@ -5,7 +5,6 @@ module.exports = {
     filterResults
 };
 
-
 function isTagsFieldArray(tagsField){
     const isArray = Array.isArray(tagsField);
     return isArray;
@@ -26,7 +25,7 @@ function isTagValid(tagsField){
 
 function validateTag(tagsField){
     const isArray = isTagsFieldArray(tagsField);
-    console.log("is |" + tagsTest + "| an array?  " + isArray);
+    let isValidTag;
 	// validate tagsField
 		// available tags:  culture, design, health, history, politics, science, startups, tech
 	// if tagsField is array or not
@@ -36,13 +35,15 @@ function validateTag(tagsField){
             // else return true
 	if(isArray === true){
         for(let x = 0; x < tagsField.length;x++){
-            if (isTagValid(tagsField[x]) === false){return false};
+            isValidTag = isTagValid(tagsField[x]);
+            if (isValidTag === false){return false};
         }
         return true;
     }
     else{
-        // if tagsField is not array
-        return isTagValid(tagsField);
+		// if tagsField is not array
+		isValidTag = isTagValid(tagsField);
+        return isValidTag;
     }
 }
 
