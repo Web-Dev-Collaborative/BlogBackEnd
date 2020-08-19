@@ -70,7 +70,8 @@ router.get('/', restricted, (req, res) => {
 								currentTags = post.tags;
 								for(let x = 0; x < newTagsField.length; x++){
 									tagIncluded = newTagsField[x];
-									return isTagIncluded(currentTags, tagIncluded);
+									shouldTagBeIncluded = isTagIncluded(tagToCheck, tagIncluded);
+									return shouldTagBeIncluded;
 								}
 							};
 						});
