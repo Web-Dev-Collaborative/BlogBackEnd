@@ -5,6 +5,7 @@ module.exports = {
 	find,
 	findBy,
 	findById,
+	getSinglePost,
 	getPosts,
 	getPostsByAuthor,
 	getTotalLikesCount,
@@ -42,6 +43,22 @@ function getPosts() {
 		.groupBy('posts.postsid', 'posts.authorsid', 
 		'authors.firstname', 'authors.lastname',
 		'posts.likes', 'posts.reads');
+}
+
+function getSinglePost(postsid) {
+	return db('posts')
+		.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
+			'posts.authorsid AS authorId',
+			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
+			db.raw('ARRAY_AGG(tags.tagname) AS tags')
+		)
+		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
+		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
+		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
+		.groupBy('posts.postsid', 'posts.authorsid', 
+		'authors.firstname', 'authors.lastname',
+		'posts.likes', 'posts.reads')
+		.where('posts.postsid', postsid);
 }
 
 

@@ -115,15 +115,15 @@ router.get('/', restricted, cache(10), (req, res) => {
 		.catch(err => res.send(err));
 });
 
-// GET:  gets one single_post record
+// GET:  gets one single post record
 router.get('/:postsid', restricted, cache(10), (req, res) => {
 	const postsid = req.params.postsid;
 	if (!postsid) {
 		res.status(404).json({ message: `The post with the specified postsid ${postsid} does not exist.` });
 	} else {
-		Posts.findById(postsid)
-			.then(single_post => {
-				res.status(200).json(single_post);
+		Posts.getSinglePost(postsid)
+			.then(singlePost => {
+				res.status(200).json(singlePost);
 			})
 			.catch(err => {
 				res.status(500).json({ message: `The post information could not be retrieved.`, error: err });
@@ -131,28 +131,28 @@ router.get('/:postsid', restricted, cache(10), (req, res) => {
 	}
 });
 
-// POST:  record single_post
+// POST:  add single post
 router.post('/', restricted, (req, res) => {
 	const newPost = req.body;
 
 	Posts.add(newPost)
-		.then(single_post => {
-			res.status(201).json(single_post);
+		.then(singlePost => {
+			res.status(201).json(singlePost);
 		})
 		.catch(err => {
 			res.status(500).json({ message: `Failed to create new post.`, error: err });
 		});
 });
 
-// PUT:  update single_post record
+// PUT:  update single post record
 router.put('/:postsid', restricted, (req, res) => {
 	const postsid = req.params.postsid;
 	const updatedPost = req.body;
 
 	Posts.update(postsid, updatedPost)
-		.then(single_post => {
-			if (single_post) {
-				res.json(single_post);
+		.then(singlePost => {
+			if (singlePost) {
+				res.json(singlePost);
 			} else {
 				res.status(404).json({ message: `Could not find post with given id ${postsid}.` });
 			}
@@ -162,15 +162,15 @@ router.put('/:postsid', restricted, (req, res) => {
 		});
 });
 
-// DELETE:  delete single_post record
+// DELETE:  delete single post record
 router.delete('/:postsid', restricted, (req, res) => {
 	const postsid = req.params.postsid;
 	if (!postsid) {
 		res.status(404).json({ message: `The post with the specified ID ${postsid} does not exist.` });
 	}
 	Posts.remove(postsid)
-		.then(single_post => {
-			res.json(single_post);
+		.then(singlePost => {
+			res.json(singlePost);
 		})
 		.catch(err => {
 			res.status(500).json({ message: `The post could not be removed.`, error: err });

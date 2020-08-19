@@ -10,13 +10,13 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] add dependencies
 - [X] get to app starting point before hitting start
 - [X] research/review old apps/samples
-- [ ] Build an API that requires you to fetch data from [this API](https://hatchways.io/api/assessment/blog/posts).
+- [X] Build an API that requires you to fetch data from [this API](https://hatchways.io/api/assessment/blog/posts).
     - query parameters:  tag; string (the tag associated with the blog post)
         - [example](https://hatchways.io/api/assessment/blog/posts?tag=tech)
     - Our API can only filter one tag at a time.  The field “tag” is singular, not plural.
-- [ ] You need the following routes in your API:
+- [X] You need the following routes in your API:
     - [X]  GET /api/ping, response status code 200, json response {"success": true}
-    - [ ] GET /api/posts, response status code 200, response as follows:
+    - [X] GET /api/posts, response status code 200, response as follows:
         - query parameters:  tags, sortBy, direction
         - The API response will be a list of all the blog posts that have at least one tag specified in the tags parameter.
         - The sortBy parameter specifies which field should be used to sort the returned results. This is an optional parameter, with a default value of `id`.
@@ -54,13 +54,25 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
                         "error": "sortBy parameter is invalid"
                     }
                 ```
-- [ ] For every tag specified in the tags parameter, fetch the posts with that tag using
-the Hatchways API (make a separate API request for every tag specified)
-- [ ] Combine all the results from the API requests above and remove all the repeated
-posts (try to be efficient when doing this)
-- [ ] You will get a better score on our assessment if you can make concurrent requests to the API (making the requests in parallel)
+- [X] For every tag specified in the tags parameter, fetch the posts with that tag using the Hatchways API (make a separate API request for every tag specified)
+- posts endpoints:
+  - [ ] add tags to get single post
+  - [ ] get posts by author endpoint or query parameter
+- authors endpoints:
+  - [ ] get all authors (show posts & tags)
+  - [ ] get one author (show posts & tags)
+  - [ ] update, delete, add author
+  - [ ] add author to post(s)
+- tags endpoints:
+  - [ ] get all tags (show posts & authors)
+  - [ ] get one tag (show posts & authors)
+  - [ ] update, delete, add tag
+  - [ ] add tag(s) to author(s)
+  - [ ] add tag(s) to post(s)
+- [X] Combine all the results from the API requests above and remove all the repeated posts (try to be efficient when doing this)
+- [X] You will get a better score on our assessment if you can make concurrent requests to the API (making the requests in parallel)
 - [ ] An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
-- [ ] Making API calls to other servers can be expensive. How can you reduce the number of calls you make to a server? You can cache the results of an API call on your server. Try to implement a server side cache to our API. Two tips are 1) keep it simple, and 2) feel free to use existing libraries/frameworks.
+- [X] Making API calls to other servers can be expensive. How can you reduce the number of calls you make to a server? You can cache the results of an API call on your server. Try to implement a server side cache to our API. Two tips are 1) keep it simple, and 2) feel free to use existing libraries/frameworks.
 - [ ] add appropriate comments
 - [ ] make sure there are no console red/yellow errors
 - [ ] make sure app organized, no repeated code, all code formatted
