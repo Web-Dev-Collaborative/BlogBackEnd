@@ -64,7 +64,7 @@ router.get('/', restricted, (req, res) => {
 				}
 				else{
 					// if IS NOT valid tag, return error response
-					res.status(400).json({"error": "Tags parameter is required"});
+					res.status(400).json({"error": "Tags parameter is invalid."});
 				}
 				/*
 
