@@ -17,9 +17,7 @@ const { cache } = require('../cache/cacheHelpers.js');
 // GET:  gets all posts records
 router.get('/', restricted, cache(10), (req, res) => {
 	// if req.query.tags is empty, return error response
-	if (!req.query.tags) {
-		res.status(400).json({ error: 'Tags parameter is required' });
-	}
+	if (!req.query.tags) {res.status(400).json({ error: 'Tags parameter is required' });};
 	const tagsField = req.query.tags;
 	// sort by id, reads, likes  (any??)
 	const sortField = req.query.sortBy;
@@ -37,9 +35,9 @@ router.get('/', restricted, cache(10), (req, res) => {
 					// if tagsField values are one of available tags
 						// available tags:  culture, design, health, history, politics, science, startups, tech
 				// if tagsField is array or not
-				let filteredResults, newTagsField, newSortField;
+				let filteredResults, newTagsField;
 				if (tagsField.includes(',')) {newTagsField = tagsField.split(',');} 
-				else {newTagsField = tagsField;}
+				else {newTagsField = tagsField;};
 				let isTFArray = isTagsFieldArray(newTagsField);
 				let isValidTag = validateTag(newTagsField);
 				// validate sortField
@@ -76,15 +74,15 @@ router.get('/', restricted, cache(10), (req, res) => {
 							else if (directionField === 'desc') {
 								// sort descending by sortField
 								posts = posts.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
-							}
+							};
 						}
 						// default sort ascending by sortField
 						else {
 							// sort ascending by sortField
 							posts = posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
-						}
-					}
-				}
+						};
+					};
+				};
 
 				// if multiple tags
 				if (isTFArray === true) {
@@ -97,8 +95,8 @@ router.get('/', restricted, cache(10), (req, res) => {
 					} else if (isValidTag === false) {
 						// if IS NOT valid tag, return error response
 						res.status(400).json({ error: 'Tags parameter is invalid.' });
-					}
-				}
+					};
+				};
 				// if single tag
 				if (isTFArray === false) {
 					if (isValidTag === true) {
@@ -110,9 +108,9 @@ router.get('/', restricted, cache(10), (req, res) => {
 					} else if (isValidTag === false) {
 						// if IS NOT valid tag, return error response
 						res.status(400).json({ error: 'Tags parameter is invalid.' });
-					}
-				}
-			}
+					};
+				};
+			};
 		})
 		.catch(err => res.send(err));
 });
@@ -163,6 +161,7 @@ router.put('/:postsid', restricted, (req, res) => {
 			res.status(500).json({ message: `Failed to update post.`, error: err });
 		});
 });
+
 // DELETE:  delete single_post record
 router.delete('/:postsid', restricted, (req, res) => {
 	const postsid = req.params.postsid;
