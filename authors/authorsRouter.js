@@ -25,7 +25,7 @@ all authors object
 
 // GET:  gets all authors records, including posts and total likes & reads counts
 router.get('/', restricted, (req, res) => {
-	Authors.getAuthors()
+	Authors.getAllAuthors()
 		.then(authors => {
 			if (!authors) {
 				res.status(404).json({
