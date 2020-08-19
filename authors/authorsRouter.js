@@ -42,7 +42,6 @@ router.get('/', restricted, (req, res) => {
 							});
 						} else {
 
-							
 							Authors.getTagsByAllAuthors()
 								if (!tagsPerAuthor) {
 									res.status(404).json({
@@ -51,7 +50,7 @@ router.get('/', restricted, (req, res) => {
 									});
 								} else {
 									// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-									res.status(200).json({authors: authors, posts: posts, tags: tagsPerAuthor});
+									res.status(200).json({authors: authors, posts: posts});
 								}
 						}
 					})
