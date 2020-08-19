@@ -6,9 +6,11 @@ module.exports = {
 	findBy,
 	findById,
 	getAuthors,
+	getAuthor,
 	getPostsByAuthor,
 	getTotalLikesCount,
 	getTotalReadsCount,
+	getTagsByAuthor,
 	update,
 	remove
 };
@@ -53,6 +55,36 @@ function getAuthors() {
 		.innerJoin('posts', 'authors.authorsid', 'posts.authorsid')
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid');
+}
+
+/*
+	SELECT 
+		authors.authorsid, authors.firstname, authors.lastname,
+		posts.postsid, posts.authorsid, posts.likes, posts.reads,
+		tags.tagsid, tags.tagName,
+		poststags.poststagsid, poststags.postsid, poststags.tagsid
+	FROM authors
+	INNER JOIN posts
+	ON authors.authorsid = posts.authorsid
+	INNER JOIN poststags
+	ON posts.postsid = poststags.postsid
+	INNER JOIN tags
+	ON poststags.tagsid = tags.tagsid
+	WHERE authors.authorsid = 2;
+*/
+// get author
+function getAuthor(authorsid) {
+	return db('authors')
+		.select(
+			'authors.bio', 'authors.firstname', 'authors.authorsid'.as('id'), 'authors.lastname', 
+			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads', 
+			'tags.tagsid', 'tags.tagName',
+			'poststags.poststagsid', 'poststags.postsid', 'poststags.tagsid'
+		)
+		.innerJoin('posts', 'authors.authorsid', 'posts.authorsid')
+		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
+		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
+		.where('authors.authorsid', authorsid);
 }
 
 /*
@@ -116,6 +148,27 @@ function getTotalReadsCount(authorsid){
 		.where('authors.authorsid', authorsid);
 }
 
+/*
+	SELECT ARRAY_AGG(tags.tagname) AS tags
+	FROM Tags
+	INNER JOIN PostsTags 
+	ON tags.tagsid = poststags.tagsid
+	INNER JOIN Posts
+	ON poststags.postsid = posts.postsid
+	INNER JOIN Authors
+	ON posts.authorsid = authors.authorsid
+	WHERE authors.authorsid = 2;
+*/
+// get tags by author
+function getTagsByAuthor(authorsid){
+	return db('tags')
+		.select(db.raw('ARRAY_AGG(tags.tagname) AS tags'))
+		.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
+		.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
+		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
+		.where('authors.authorsid', authorsid)
+
+}
 
 function find() {
 	return db('authors').select('*');
