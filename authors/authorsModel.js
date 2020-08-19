@@ -78,12 +78,10 @@ function getAuthor(authorsid) {
 		.select(
 			'authors.bio', 'authors.firstname', 'authors.authorsid'.as('id'), 'authors.lastname', 
 			'posts.postsid', 'posts.authorsid', 'posts.likes', 'posts.reads', 
-			'tags.tagsid', 'tags.tagName',
-			'poststags.poststagsid', 'poststags.postsid', 'poststags.tagsid'
+			'poststags.poststagsid', 'poststags.postsid'
 		)
 		.innerJoin('posts', 'authors.authorsid', 'posts.authorsid')
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
-		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
 		.where('authors.authorsid', authorsid);
 }
 

@@ -38,7 +38,7 @@ router.get('/:authorsid', restricted, (req, res) => {
 							)
 							.catch(err => {
 								res.status(500).json({ message: `Author total likes could not be retrieved.`, error: err });
-							});
+							})
 					})
 					.catch(err => {
 						res.status(500).json({ message: `The author's tags could not be retrieved.`, error: err });
@@ -47,11 +47,11 @@ router.get('/:authorsid', restricted, (req, res) => {
 				})
 				.catch(err => {
 					res.status(500).json({ message: `The author's posts could not be retrieved.`, error: err });
-				});
+				})
 			})
 			.catch(err => {
 				res.status(500).json({ message: `The author information could not be retrieved.`, error: err });
-			});
+			})
 	}
 });
 
