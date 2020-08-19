@@ -58,18 +58,23 @@ router.get('/', restricted, (req, res) => {
 												});
 											} else {
 												Authors.getAllTotalReadsCount()
-												.then(readsPerAuthor =>{
-													if (!readsPerAuthor) {
-														res.status(404).json({
-															message: `Total reads count does not exist.`,
-															error: err
-														});
-													} else {
-														// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
-														res.status(200).json({authors: authors, posts: posts, tags: tagsPerAuthor, totalLikeCount: likesPerAuthor, totalReadCount: readsPerAuthor});
-													}
-												})
-												.catch(err => res.send(err));
+													.then(readsPerAuthor =>{
+														if (!readsPerAuthor) {
+															res.status(404).json({
+																message: `Total reads count does not exist.`,
+																error: err
+															});
+														} else {
+															// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
+															res.status(200).json({authors: authors, 
+																				posts: posts, 
+																				tags: tagsPerAuthor, 
+																				totalLikeCount: likesPerAuthor, 
+																				totalReadCount: readsPerAuthor
+																				});
+														}
+													})
+													.catch(err => res.send(err));
 											}
 										})
 										.catch(err => res.send(err));
