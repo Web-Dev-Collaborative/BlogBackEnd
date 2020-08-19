@@ -12,13 +12,6 @@ const authorsRouter = require('../authors/authorsRouter.js');
 const postsRouter = require('../posts/postsRouter.js');
 const tagsRouter = require('../tags/tagsRouter.js');
 const pingRouter = require('../ping/pingRouter.js');
-
-// authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
-	// queries:  
-// posts endpoint fields:  author, authorId, id, likes, reads, tags
-  // queries:  
-
-
 const server = express();
 
 server.use(helmet());
@@ -45,7 +38,7 @@ server.use('/api/ping', pingRouter);
 
 // unsecured/unlogged-in response
 server.get('/', (req, res) => {
-  res.send('<h1>🎣</h1>');
+  res.send('<h1>🎣  You must log in to view users, posts, authors, and tags.</h1>');
 })
 
 module.exports = server;
