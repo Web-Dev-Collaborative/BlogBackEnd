@@ -44,7 +44,7 @@ function validateTag(tagsField){
 
 // filter results by tagsField
 function filterResults(tagName, resultsToFilter){
-    return resultsToFilter.filter(post => {
-        return post.tags.indexOf(tagName) >= 0;
-    });
+    const isArray = isTagsFieldArray(tagName);
+	if(isArray === true){return tagName.forEach((tag)=>resultsToFilter.filter(post => {return post.tags.indexOf(tag) >= 0;}))};
+    return resultsToFilter.filter(post => {post.tags.indexOf(tagName) >= 0;});
 }
