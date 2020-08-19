@@ -10,8 +10,10 @@ function isTagValid(tagsField){
                 // if invalid tag, return false
                 return false;
          }
+    else{
      // else return false
-     return true;
+        return true;
+    }
 }
 
 function validateTag(tagsField){
@@ -26,7 +28,7 @@ function validateTag(tagsField){
             // else return true
 	if(isArray === true){
         for(let x = 0; x < tagsField.length;x++){
-            if (isTagValid(tagsField[x]) === false){return isTagValid(tagsField[x])};
+            if (isTagValid(tagsField[x]) === false){return false};
         }
         return true;
     }
