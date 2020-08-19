@@ -56,7 +56,8 @@ router.get('/', restricted, (req, res) => {
 						filteredResults = posts.filter(post => {
 							currentTags = post.tags;
 							for(let x = 0; x < tagsField.length; x++){
-								return isTagIncluded(currentTags, tagsField[x]);
+								tagIncluded = tagsField[x];
+								return isTagIncluded(currentTags, tagIncluded);
 							}
 						});
 						res.status(200).json({posts: filteredResults});
