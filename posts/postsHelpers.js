@@ -1,6 +1,7 @@
 module.exports = {
     validateTag,
-    filterResults
+    filterResults,
+    isTagsFieldArray
   };
   
 function isTagsFieldArray(tagsField){return Array.isArray(tagsField);};

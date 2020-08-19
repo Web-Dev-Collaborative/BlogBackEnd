@@ -59,8 +59,15 @@ router.get('/', restricted, (req, res) => {
 			else{
 				if(isValidTag === true){
 					// if IS valid tag, run filterResults on response and return it
-					const resultsFilteredByTag = filterResults(tagsField, posts);
-					res.status(200).json({posts: resultsFilteredByTag});
+					const isArray = isTagsFieldArray(tagName);
+					let filteredResults;
+					if(isArray === true){
+						filteredResults = resultsToFilter.filter(post => {tagName.forEach((tag)=>post.tags.indexOf(tag) >= 0)});
+					}
+					else {
+						filteredResults = resultsToFilter.filter(post => {post.tags.indexOf(tagName) >= 0;});
+					};
+					res.status(200).json({posts: filteredResults});
 				}
 				else{
 					// if IS NOT valid tag, return error response
