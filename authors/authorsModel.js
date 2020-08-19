@@ -68,7 +68,7 @@ function getAuthors() {
 function getAuthor(authorsid) {
 	return db('authors')
 		.select(
-			'authors.bio', 'authors.firstname', 'authors.authorsid AS id', 'authors.lastname'
+			'authors.bio AS bio', 'authors.firstname AS firstName', 'authors.authorsid AS id', 'authors.lastname AS lastName'
 		)
 		.where('authors.authorsid', authorsid);
 }
