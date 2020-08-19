@@ -1,43 +1,11 @@
 module.exports = {
-	 
-    isTagIncluded,
 	isTagsFieldArray,
-	isTagValid,
-	validateTag,
-    filterResults
+	validateTag
 };
-
-// const includesMultiDimension = (arr, str) => JSON.stringify(arr).includes(str);
-
-function isTagIncluded(postTag, tagToCheck){
-	// return postTag.includes(tagToCheck);
-	// return postTag === tagToCheck;
-	// return postTag.indexOf(tagToCheck) >= 0;
-	return JSON.stringify(postTag).includes(tagToCheck);
-}
 
 function isTagsFieldArray(tagsField) {
 	const isArray = Array.isArray(tagsField);
 	return isArray;
-}
-
-function isTagValid(tagsField) {
-	if (
-		tagsField !== 'culture' &&
-		tagsField !== 'design' &&
-		tagsField !== 'health' &&
-		tagsField !== 'history' &&
-		tagsField !== 'politics' &&
-		tagsField !== 'science' &&
-		tagsField !== 'startups' &&
-		tagsField !== 'tech'
-	) {
-		// if invalid tag, return false
-		return false;
-	} else {
-		// else return false
-		return true;
-	}
 }
 
 function validateTag(tagsField) {
@@ -85,20 +53,4 @@ function validateTag(tagsField) {
 			return true;
 		}
 	}
-}
-
-// filter results by tagsField
-function filterResults(tagName, resultsToFilter) {
-	const isArray = isTagsFieldArray(tagName);
-	let filteredResults;
-	if (isArray === true) {
-		filteredResults = resultsToFilter.filter(post => {
-			tagName.forEach(tag => post.tags.indexOf(tag) >= 0);
-		});
-	} else {
-		filteredResults = resultsToFilter.filter(post => {
-			post.tags.indexOf(tagName) >= 0;
-		});
-	}
-	return filteredResults;
 }

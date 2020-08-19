@@ -6,7 +6,10 @@ const Tags = require('../tags/tagsModel.js');
 
 const restricted = require('../auth/restriction.js');
 
-const { isTagsFieldArray, validateTag, isTagIncluded } = require('./postsHelpers.js');
+const { 
+	isTagsFieldArray,
+	validateTag
+} = require('./postsHelpers.js');
 /*
 If a `sortBy` or `direction` are invalid values, specify an error like below:
 	Response body (JSON):
@@ -43,12 +46,42 @@ router.get('/', restricted, (req, res) => {
 					// if tagsField values are one of available tags
 						// available tags:  culture, design, health, history, politics, science, startups, tech
 					// if tagsField is array or not
-				let filteredResults, newTagsField;
+				let filteredResults, newTagsField, newSortField;
 				if(tagsField.includes(",")){newTagsField = tagsField.split(",");}
 				else{newTagsField = tagsField};
-				let isArray = isTagsFieldArray(newTagsField);
+				let isTFArray = isTagsFieldArray(newTagsField);
 				let isValidTag = validateTag(newTagsField);
-				if(isArray === true){
+				// validate sortField
+					// if sort criteria not valid
+						// available sorts:  author, authorId, id, likes, reads
+						if(sortField !== '' && 
+							sortField !== 'author' || 
+							sortField !== 'authorId' || 
+							sortField !== 'likes' ||
+							sortField !== 'reads'){
+								res.status(400).json({"error": "sortBy parameter is invalid."});
+						}
+					else if(sortField !== ''){
+						// if directionField IS NOT empty
+						if(directionField !== ''){
+							// if directionField = 'asc', sort ascending by sortField
+							if (directionField === 'asc'){
+								// sort ascending by sortField
+								posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+							}
+							// else if directionField = 'desc', sort descending by sortField
+							else if (directionField === 'desc'){
+								// sort descending by sortField
+								posts.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
+							}
+							// else if directionField !== 'asc' || directionField !== 'desc' then return error response
+							else if(directionField !== 'asc' || directionField !== 'desc'){
+								res.status(400).json({"error": "direction parameter is invalid."});
+							}
+						}
+					}
+				// if multiple tags
+				if(isTFArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
 						filteredResults = posts.filter(post => {return newTagsField.every(tag => post.tags.includes(tag))});
@@ -59,8 +92,8 @@ router.get('/', restricted, (req, res) => {
 						res.status(400).json({"error": "Tags parameter is invalid."});
 					};
 				}
-				// if IS NOT an array
-				if(isArray === false){
+				// if single tag
+				if(isTFArray === false){
 					if(isValidTag === true){
 						// if IS valid tag, return filtered results
 						filteredResults = posts.filter(post => {return post.tags.indexOf(newTagsField) >= 0});
