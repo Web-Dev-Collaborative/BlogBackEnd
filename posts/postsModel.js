@@ -39,8 +39,11 @@ function getPosts() {
 		.select('authors.firstname AS firstname', 'authors.lastname AS lastname',
 			'posts.authorsid AS authorId',
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
+			'tags.tagname'
 		)
-		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid');
+		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
+		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
+		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid');
 	
 }
 
