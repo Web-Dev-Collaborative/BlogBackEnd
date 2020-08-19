@@ -7,8 +7,13 @@ module.exports = {
     filterResults
 };
 
+// const includesMultiDimension = (arr, str) => JSON.stringify(arr).includes(str);
+
 function isTagIncluded(postTag, tagToCheck){
-	return postTag.indexOf(tagToCheck) >= 0;
+	// return postTag.includes(tagToCheck);
+	// return postTag === tagToCheck;
+	// return postTag.indexOf(tagToCheck) >= 0;
+	return JSON.stringify(postTag).includes(tagToCheck);
 }
 
 function isTagsFieldArray(tagsField) {
