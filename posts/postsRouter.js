@@ -53,7 +53,7 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						filteredResults = posts.filter(post => {
+						filteredResults = posts.posts.filter(post => {
 							if (post.tags.includes(",") == true || Array.isArray(post.tags)){
 								if(Array.isArray(post.tags)){currentTags = post.tags}
 								else{currentTags = post.tags.split(",");}
