@@ -31,10 +31,7 @@ router.get('/:authorsid', restricted, (req, res) => {
 								Authors.getTotalReadsCount(authorsid)
 									.then(reads =>
 										res.status(200).json({
-															  bio: author.bio,
-															  firstName: author.firstName,
-															  id: author.id, 
-															  lastName: author.lastName,
+															  author,
 															  posts: oneAuthorsPosts.posts, 
 															  tags: oneAuthorsTags.tags, 
 															  totalLikeCount: likes.totalLikeCount, 
