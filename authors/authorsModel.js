@@ -170,7 +170,7 @@ function getAllTotalLikesCount() {
 function getAllTotalReadsCount() {
 	return db('posts')
 		.select(
-			db.raw('SUM(posts.likes) AS totalLikeCount'), 'authors.authorsid'
+			db.raw('SUM(posts.reads) AS totalReadCount'), 'authors.authorsid'
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.groupBy('authors.authorsid');
