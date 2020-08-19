@@ -74,7 +74,7 @@ router.get('/', restricted, (req, res) => {
 							}
 						});
 						*/
-						res.status(200).json({tags: tagsField});
+						res.status(200).json({posts: "is array"});
 					}
 					else{
 						filteredResults = posts.filter(post => {return post.tags.indexOf(tagsField) >= 0});
