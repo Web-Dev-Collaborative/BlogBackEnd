@@ -10,22 +10,17 @@ const {
 	isTagsFieldArray,
 	validateTag
 } = require('./postsHelpers.js');
-/*
-If a `sortBy` or `direction` are invalid values, specify an error like below:
-	Response body (JSON):
-	{
-		"error": "sortBy parameter is invalid"
-	}
-Response status code: 400
-*/
+
+const { 
+	cache
+} = require('../cache/cacheHelpers.js');
 
 // getAuthors from authors model
 // getTagsByAuthor, getTagsByPost from tags model
 // getPosts, getPostsByAuthor, getTotalReadsCount, getTotalLikesCount from posts model
 
-
 // GET:  gets all posts records
-router.get('/', restricted, (req, res) => {
+router.get('/', restricted, cache(10), (req, res) => {
 	// if req.query.tags is empty, return error response
 	if(!req.query.tags){res.status(400).json({"error": "Tags parameter is required"});}
 	const tagsField = req.query.tags;
