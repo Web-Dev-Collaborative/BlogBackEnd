@@ -53,16 +53,13 @@ router.get('/', restricted, (req, res) => {
 				if(isArray === true){
 					// if IS valid tag, run filterResults on response and return it
 					if(isValidTag === true){
-						filteredResults = posts.posts.filter(post => {
+						filteredResults = posts.filter(post => {
 							for(let x = 0; x < tagsField.length; x++){
-								for (let y = 0; y < post.tags.length; y++) {
 									if (post.tags.includes(tagsField[x])) {
 										return true;
 									} else {
 										return false;
 									}
-									
-								}
 							}
 						});
 						res.status(200).json({posts: filteredResults});
