@@ -55,8 +55,8 @@ router.get('/', restricted, (req, res) => {
 					if(isValidTag === true){
 						filteredResults = posts.filter(post => {
 							currentTags = post.tags;
-							for(let x = 0; x < tagsField.length; x++){
-								tagIncluded = tagsField[x];
+							for(let x = 0; x < newTagsField.length; x++){
+								tagIncluded = newTagsField[x];
 								return isTagIncluded(currentTags, tagIncluded);
 							}
 						});

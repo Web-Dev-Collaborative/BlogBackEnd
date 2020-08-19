@@ -48,6 +48,8 @@ let tagIncluded, currentTags;
 
 let filteredResults = posts.posts.filter(post => {
     currentTags = post.tags;
+    // tagsField.forEach((tag)=>{return isTagIncluded(currentTags, tag);});
+
     for(let x = 0; x < tagsField.length; x++){
         tagIncluded = tagsField[x];
         return isTagIncluded(currentTags, tagIncluded);
