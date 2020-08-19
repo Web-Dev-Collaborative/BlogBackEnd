@@ -4,8 +4,6 @@ const Authors = require('./authorsModel.js');
 const restricted = require('../auth/restriction.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
-	// queries:  
-
 
 // GET:  gets all authors records
 router.get('/', restricted, (req, res) => {
@@ -22,8 +20,6 @@ router.get('/:authorsid', restricted, (req, res) => {
 	if (!authorsid) {
 		res.status(404).json({ message: `The author with the specified authorsid ${authorsid} does not exist.` });
 	} else {
-
-
 		Authors.getAuthor(authorsid)
 			.then(author => {
 			Authors.getPostsByAuthor(authorsid)
@@ -42,7 +38,7 @@ router.get('/:authorsid', restricted, (req, res) => {
 							)
 							.catch(err => {
 								res.status(500).json({ message: `Author total likes could not be retrieved.`, error: err });
-							});
+							})
 					})
 					.catch(err => {
 						res.status(500).json({ message: `The author's tags could not be retrieved.`, error: err });
@@ -51,11 +47,11 @@ router.get('/:authorsid', restricted, (req, res) => {
 				})
 				.catch(err => {
 					res.status(500).json({ message: `The author's posts could not be retrieved.`, error: err });
-				});
+				})
 			})
 			.catch(err => {
 				res.status(500).json({ message: `The author information could not be retrieved.`, error: err });
-			});
+			})
 	}
 });
 
