@@ -42,8 +42,8 @@ let posts = {
 let tagsField = ['health', 'tech'];
 
 let filteredResults = posts.posts.filter(post => {
-    for (let y = 0; y < post.tags.length; y++) {
-        for(let x = 0; x < tagsField.length; x++){
+    for(let x = 0; x < tagsField.length; x++){
+        for (let y = 0; y < post.tags.length; y++) {
             if (post.tags.includes(tagsField[x])) {
                 return true;
             } else {
