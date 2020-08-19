@@ -61,25 +61,29 @@ router.get('/', restricted, (req, res) => {
 							sortField !== 'reads'){
 								res.status(400).json({"error": "sortBy parameter is invalid."});
 						}
-					else if(sortField !== ''){
-						// if directionField IS NOT empty
-						if(directionField !== ''){
-							// if directionField = 'asc', sort ascending by sortField
-							if (directionField === 'asc'){
-								// sort ascending by sortField
-								posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
-							}
-							// else if directionField = 'desc', sort descending by sortField
-							else if (directionField === 'desc'){
-								// sort descending by sortField
-								posts.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
-							}
-							// else if directionField !== 'asc' || directionField !== 'desc' then return error response
-							else if(directionField !== 'asc' || directionField !== 'desc'){
-								res.status(400).json({"error": "direction parameter is invalid."});
+						else if(sortField !== ''&& 
+								sortField === 'author' || 
+								sortField === 'authorId' || 
+								sortField === 'likes' ||
+								sortField === 'reads'){
+							// if directionField IS NOT empty
+							if(directionField !== ''){
+								// if directionField = 'asc', sort ascending by sortField
+								if (directionField === 'asc'){
+									// sort ascending by sortField
+									posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+								}
+								// else if directionField = 'desc', sort descending by sortField
+								else if (directionField === 'desc'){
+									// sort descending by sortField
+									posts.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
+								}
+								// else if directionField !== 'asc' || directionField !== 'desc' then return error response
+								else if(directionField !== 'asc' || directionField !== 'desc'){
+									res.status(400).json({"error": "direction parameter is invalid."});
+								}
 							}
 						}
-					}
 				// if multiple tags
 				if(isTFArray === true){
 					// if IS valid tag, run filterResults on response and return it
