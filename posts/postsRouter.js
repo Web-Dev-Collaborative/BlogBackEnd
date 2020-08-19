@@ -10,9 +10,12 @@ const { isTagsFieldArray, validateTag } = require('./postsHelpers.js');
 
 const { cache } = require('../cache/cacheHelpers.js');
 
-// getAuthors from authors model
+// getAuthors, getPostsByAuthor from authors model
 // getTagsByAuthor, getTagsByPost from tags model
-// getPosts, getPostsByAuthor, getTotalReadsCount, getTotalLikesCount from posts model
+// getPosts, getTotalReadsCount, getTotalLikesCount from posts model
+
+// posts endpoint fields:  author, authorId, postsid as id, likes, reads, tags
+  // queries:  tags, sortBy, direction
 
 // GET:  gets all posts records
 router.get('/', restricted, cache(10), (req, res) => {
@@ -128,7 +131,7 @@ router.get('/:postsid', restricted, cache(10), (req, res) => {
 			.catch(err => {
 				res.status(500).json({ message: `The post information could not be retrieved.`, error: err });
 			});
-	}
+	};
 });
 
 // POST:  add single post

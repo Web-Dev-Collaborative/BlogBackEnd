@@ -7,29 +7,26 @@ module.exports = {
 	findById,
 	getSinglePost,
 	getPosts,
-	getPostsByAuthor,
-	getTotalLikesCount,
-	getTotalReadsCount,
 	getPostsByTag,
 	update,
 	remove
 };
 
 // posts endpoint fields:  author, authorId, postsid as id, likes, reads, tags
-  // queries:  
+  // queries:  tags, sortBy, direction
 
 
-// get all posts
 /*
-SELECT authors.firstname, authors.lastname, 
-       posts.postsid as id, posts.authorsid as authorId, posts.likes as likes, posts.reads as reads,
-       ARRAY_AGG(tags.tagname) AS tags
-FROM posts 
-INNER JOIN authors ON posts.authorsid = authors.authorsid
-INNER JOIN poststags ON posts.postsid = poststags.postsid
-INNER JOIN tags ON poststags.tagsid = tags.tagsid
-GROUP BY posts.postsid, posts.authorsid, authors.firstname, authors.lastname, posts.likes, posts.reads;
+	SELECT authors.firstname, authors.lastname, 
+		posts.postsid as id, posts.authorsid as authorId, posts.likes as likes, posts.reads as reads,
+		ARRAY_AGG(tags.tagname) AS tags
+	FROM posts 
+	INNER JOIN authors ON posts.authorsid = authors.authorsid
+	INNER JOIN poststags ON posts.postsid = poststags.postsid
+	INNER JOIN tags ON poststags.tagsid = tags.tagsid
+	GROUP BY posts.postsid, posts.authorsid, authors.firstname, authors.lastname, posts.likes, posts.reads;
 */
+// get all posts
 function getPosts() {
 	return db('posts')
 		.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
@@ -45,6 +42,7 @@ function getPosts() {
 		'posts.likes', 'posts.reads');
 }
 
+// get one single post
 function getSinglePost(postsid) {
 	return db('posts')
 		.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
@@ -62,26 +60,7 @@ function getSinglePost(postsid) {
 }
 
 
-// get posts by author
-/*
-	SELECT 
-		CONCAT(authors.firstname, ' ', authors.lastname) as author, authors.authorsid as authorId, 
-		posts.postsid as id, posts.likes, posts.reads
-	FROM authors
-	INNER JOIN posts
-	ON posts.postsid = posts.authorsid
-	WHERE authors.authorsid = 2;
-*/
-function getPostsByAuthor(authorsid) {
-	return db('authors')
-		.select(
-			'authors.firstname', 'authors.lastname', 'authors.authorsid',
-			'posts.postsid', 'posts.likes', 'posts.reads'
-		)
-		.innerJoin('posts', 'authors.authorsid', 'posts.authorsid')
-		.where('authors.authorsid', authorsid);
-}
-
+// get posts by tag
 function getPostsByTag(tagname){ 
 	let resultsToFilter = 
 		db('posts')
@@ -100,41 +79,6 @@ function getPostsByTag(tagname){
 			return post.tags.indexOf(tagname) >= 0;
 		});
 
-}
-
- // get total likes count
-/*
-	SELECT SUM(posts.likes) as totalLikesCount
-	FROM posts
-	INNER JOIN authors
-	ON posts.authorsid = authors.authorsid
-	WHERE authors.authorsid = 2;
-*/
-function getTotalLikesCount(authorsid) {
-	return db('posts')
-		.select(
-			SUM(posts.likes)
-		)
-		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-		.where('authors.authorsid', authorsid);
-}
-
-
- // get total reads count
-/*
-	SELECT SUM(posts.reads) as totalLikesCount
-	FROM posts
-	INNER JOIN authors
-	ON posts.authorsid = authors.authorsid
-	WHERE authors.authorsid = 2;
-*/
-function getTotalReadsCount(authorsid){
-	return db('posts')
-		.select(
-			SUM(posts.reads)
-		)
-		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-		.where('authors.authorsid', authorsid);
 }
 
 
