@@ -59,12 +59,12 @@ router.get('/', restricted, (req, res) => {
 			else{
 				if(isValidTag === true){
 					// if IS valid tag, run filterResults on response and return it
-					let resultsFilteredByTag = filterResults(tagName, resultsToFilter);
+					let resultsFilteredByTag = filterResults(tagsField, resultsToFilter);
 					res.status(200).json({posts: resultsFilteredByTag});
 				}
 				else{
 					// if IS NOT valid tag, return error response
-					res.status(400).json({"error": "Tags parameter is required"});
+					res.status(400).json({"error": "Tags parameter is invalid."});
 				}
 				/*
 
