@@ -38,6 +38,15 @@ function getPosts() {
 	
 		*/
 	return db('posts')
+		.raw('SELECT authors.firstname AS firstname, authors.lastname AS lastname, ' +
+		'posts.postsid as id, posts.authorsid as authorId, posts.likes as likes, posts.reads as reads, ' +
+		'ARRAY_AGG(tags.tagname) AS tags ' + 
+		'FROM posts ' + 
+		'INNER JOIN authors ON posts.authorsid = authors.authorsid ' +
+		'INNER JOIN poststags ON posts.postsid = poststags.postsid ' +
+		'INNER JOIN tags ON poststags.tagsid = tags.tagsid ' +
+		'GROUP BY posts.postsid, posts.authorsid, authors.firstname, authors.lastname, posts.likes, posts.reads;')
+		/*
 		.select('authors.firstname AS firstname', 'authors.lastname AS lastname',
 			'posts.authorsid AS authorId',
 			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
@@ -49,7 +58,7 @@ function getPosts() {
 		.groupBy('posts.postsid', 'posts.authorsid', 
 		'authors.firstname', 'authors.lastname',
 		'posts.likes', 'posts.reads');
-	
+	*/
 }
 
 
