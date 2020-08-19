@@ -65,10 +65,10 @@ router.get('/', restricted, (req, res) => {
 						filteredResults = posts.filter(post => 
 							{
 								for (let x = 0; x < tagsField.length;x++){
-									if(!(tagsField[x] in post.tags)){
-										return false;
+									if(tagsField[x] in post.tags){
+										return true;
 									}
-									else{return true}
+									else{return false}
 								}
 							}
 						)
