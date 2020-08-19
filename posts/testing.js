@@ -1,5 +1,8 @@
 
-function isTagsFieldArray(tagsField){return Array.isArray(tagsField);};
+function isTagsFieldArray(tagsField){
+    const isArray = Array.isArray(tagsField);
+    return isArray;
+};
 
 function validateTag(tagsField){
     const isArray = isTagsFieldArray(tagsField);
