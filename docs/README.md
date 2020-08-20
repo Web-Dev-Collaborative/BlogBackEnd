@@ -6,10 +6,11 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 
 ## Features Done
 
-- [X] new github repo
+- [X] research/review old apps/samples
+- [X] new private github repo
 - [X] add dependencies
 - [X] get to app starting point before hitting start
-- [X] research/review old apps/samples
+- [X] create migrations/seeds data
 - [X] Build an API that requires you to fetch data from [this API](https://hatchways.io/api/assessment/blog/posts).
     - query parameters:  tag; string (the tag associated with the blog post)
         - [example](https://hatchways.io/api/assessment/blog/posts?tag=tech)
@@ -63,23 +64,37 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
   - [X] get all authors (show posts & tags)
   - [X] get one author (show posts & tags)
   - [X] update, delete, add author
-- tags endpoints:
-  - [ ] get all tags (show posts & authors)
-  - [ ] get one tag (show posts & authors)
-  - [ ] update, delete, add tag
-  - [ ] add tag(s) to post(s)
 - [X] Combine all the results from the API requests above and remove all the repeated posts (try to be efficient when doing this)
 - [X] You will get a better score on our assessment if you can make concurrent requests to the API (making the requests in parallel)
-- [ ] An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
 - [X] Making API calls to other servers can be expensive. How can you reduce the number of calls you make to a server? You can cache the results of an API call on your server. Try to implement a server side cache to our API. Two tips are 1) keep it simple, and 2) feel free to use existing libraries/frameworks.
+- tags endpoints:
+  - [ ] get all tags (show posts & authors)
+    - [ ] /tags/authors
+    - [ ] /tags/posts
+    - [ ] /tags
+  - [ ] get one tag (show posts & authors)
+    - [ ] /tags/<tag>/authors
+    - [ ] /tags/<tag>/posts
+    - [ ] /tags/<tag>
+  - [ ] get a post's tags
+  - [ ] add tag to post
+  - [X] update, delete, add tag
+- poststags endpoints:
+    - [ ] query params on put /posts?tags=<tag>,<tag>
+    - [ ] update, delete, add a post's tags
+    - [ ] get a post's tags
+  - [ ] add first & last name query params to authors endpoint, sortBy first/last name, authorsid
+  - [ ] add overall endpoints folder & update its dependencies
+- [ ] Cypress testing
+  - An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
+- [ ] Postman testing & documentation (Postman collection link)
 - [ ] add appropriate comments
 - [ ] make sure there are no console red/yellow errors
 - [ ] make sure app organized, no repeated code, all code formatted
 - [X] fill out readme template
-- [ ] Cypress testing
-- [ ] Postman testing & documentation (Postman collection link)
-- [ ] deploy
-- [ ] write instructions to deploy
+- [X] deploy
+- [X] write instructions to deploy
+- [ ] update endpoints readme with all endpoints & query params
 - [ ] submit
 
 We have provided an API with the correct solution. This should only be used to verify
@@ -163,7 +178,7 @@ To add your token to Postman, once you have the collection loaded in Postman, go
 
     ```knex migrate:up users.js;knex migrate:up authors.js;knex migrate:up tags.js;knex migrate:up posts.js;knex migrate:up poststags.js;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```
 
-- This might or might not be a useful command; it's just here to save you some typing:
+- These might or might not be useful commands; it's just here to save you some typing:
 
 ```knex migrate:down users.js;knex migrate:down poststags.js;knex migrate:down posts.js;knex migrate:down tags.js;knex migrate:down authors.js;```
 
