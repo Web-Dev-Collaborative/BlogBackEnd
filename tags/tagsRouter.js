@@ -15,11 +15,12 @@ router.get('/authors', restricted, (req, res) => {
 	Tags.getAllTags()
 		.then(allTags => {
 
-					res.status(200).json(allTags);
+			res.status(200).json(allTags);
+
 		})
 		.catch(err => res.send(err));
 });
-
+/*
 // GET:  gets posts per all tags
     // /tags/posts
 	// chain getAllTags, getAllPostsByAllTags
@@ -194,5 +195,5 @@ router.delete('/:tagsid', restricted, (req, res) => {
 			res.status(500).json({ message: `The tag could not be removed.`, error: err });
 		});
 });
-
+*/
 module.exports = router;
