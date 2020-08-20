@@ -19,7 +19,13 @@ router.get('/authors', restricted, (req, res) => {
 	Tags.getAllTags()
 		.then(allTags => {
 
-			res.status(200).json(allTags);
+			Tags.getAllAuthorsByAllTags()
+				.then(authorsByAllTags => {
+
+					res.status(200).json(allTags, authorsByAllTags);
+
+				})
+				.catch(err => res.send(err));
 
 		})
 		.catch(err => res.send(err));
