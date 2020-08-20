@@ -5,6 +5,8 @@ const Authors = require('../authors/authorsModel.js');
 const Posts = require('../posts/postsModel.js');
 const restricted = require('../auth/restriction.js');
 
+const { compare, compare1 } = require('../tags/tagsHelpers.js');
+
 const { cache } = require('../cache/cacheHelpers.js');
 /*
 - tags endpoints:	
@@ -26,6 +28,13 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 							.then(allTotalLikesCounts => {
 								Authors.getAllTotalReadsCount()
 									.then(allTotalReadsCounts => {
+																				
+										authorsByAllTags = authorsByAllTags.filter((thing, index, self) => 
+											index === self.findIndex(t => t.id === thing.id));
+											authorsByAllTags.sort(compare);
+
+										allTotalLikesCounts.sort(compare1);
+										allTotalReadsCounts.sort(compare1);
 
 										let newTagsList = allTags;
 										let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, 
@@ -37,40 +46,37 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 											newTagsList[x].authors = [];
 										
 											for(let y = 0; y < authorsByAllTags.length; y++){
+
 												authorsTagNameToMatch = authorsByAllTags[y].tagname;
 												authorToMatch = authorsByAllTags[y].id;
 												authorBio = authorsByAllTags[y].bio;
 												authorName = authorsByAllTags[y].author;
 										
-												for(let w = 0; w < allTotalLikesCounts.length; w++){
-													currentTLCauthorsID = allTotalLikesCounts[w].authorsid;
-													currentTLCValue = allTotalLikesCounts[w].totallikecount;
+													currentTLCauthorsID = allTotalLikesCounts[y].authorsid;
+													currentTLCValue = allTotalLikesCounts[y].totallikecount;
 										
 													if(currentTLCauthorsID === authorToMatch){
 										
-														for(let v = 0; v < allTotalReadsCounts.length; v++){
-										
-															currentTRCauthorsID = allTotalReadsCounts[w].authorsid;
-															currentTRCValue = allTotalReadsCounts[w].totalreadcount;
-										
-															if(currentTRCauthorsID === currentTLCauthorsID){
-										
-																for(let z = 0; z < postsByAllAuthors.length; z++){
-																	
-																	postsAuthorToMatch = postsByAllAuthors[z].authorId;
-										
-																	if(Number(currentTLCauthorsID) === Number(currentTRCauthorsID) && 
-																	Number(postsAuthorToMatch) === Number(currentTRCauthorsID) && 
-																	Number(postsAuthorToMatch) === Number(authorToMatch)  && 
-																	postsByAllAuthors[z].tags.includes(tagNameToMatch) && !currentAuthorsPosts.includes(postsByAllAuthors[z])){
-										
-																		currentAuthorsPosts.push(postsByAllAuthors[z]);
-																	}
+														currentTRCauthorsID = allTotalReadsCounts[y].authorsid;
+														currentTRCValue = allTotalReadsCounts[y].totalreadcount;
+									
+														if(currentTRCauthorsID === currentTLCauthorsID){
+									
+															for(let z = 0; z < postsByAllAuthors.length; z++){
+																
+																postsAuthorToMatch = postsByAllAuthors[z].authorId;
+									
+																if(Number(currentTLCauthorsID) === Number(currentTRCauthorsID) && 
+																Number(postsAuthorToMatch) === Number(currentTRCauthorsID) && 
+																Number(postsAuthorToMatch) === Number(authorToMatch)  && 
+																postsByAllAuthors[z].tags.includes(tagNameToMatch) && !currentAuthorsPosts.includes(postsByAllAuthors[z])){
+									
+																	currentAuthorsPosts.push(postsByAllAuthors[z]);
 																}
 															}
 														}
 													}
-												}
+													
 												if(tagNameToMatch === authorsTagNameToMatch){
 											
 													authorToAdd = {
