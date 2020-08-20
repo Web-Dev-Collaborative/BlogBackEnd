@@ -23,14 +23,14 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 
 				.then(authorsByAllTags => {
 
-					let newTagsList = allTags.tags;
+					let newTagsList = allTags;
 					let tagNameToMatch, authorsTagNameToMatch, authorToAdd;
 					// loop through allTags.tags and get allTags.tags.tagname
 					// loop through allTags.authors and get allTags.authors.tagname
 					// if allTags.tags.tagname = allTags.authors.tagname, add to new array under tagname
 					
-					for(let x = 0; x < allTags.tags.length;x++){
-						tagNameToMatch = allTags.tags[x].tagname;
+					for(let x = 0; x < allTags.length;x++){
+						tagNameToMatch = allTags[x].tagname;
 						newTagsList[x].authors = [];
 						for(let y = 0; y < authorsByAllTags.length;y++){
 							authorsTagNameToMatch = authorsByAllTags[y].tagname;
