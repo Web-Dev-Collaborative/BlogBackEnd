@@ -1,10 +1,8 @@
 const router = require('express').Router();
 
 const Tags = require('./tagsModel.js');
+const Authors = require('../authors/authorsModel.js');
 const restricted = require('../auth/restriction.js');
-
-const { add, findBy, findById, getTagsByAuthor, getTagsByPost, getTags, getAllTags, getAllAuthorsByAllTags,
-	getAllPostsByAllTags, getOneTag, getAllAuthorsByOneTag, getAllPostsByOneTag, update, remove } = require('./tagsHelpers.js');
 
 const { cache } = require('../cache/cacheHelpers.js');
 /*
@@ -18,37 +16,39 @@ const { cache } = require('../cache/cacheHelpers.js');
 router.get('/authors', restricted, cache(10), (req, res) => {
 	Tags.getAllTags()
 		.then(allTags => {
-
 			Tags.getAllAuthorsByAllTags()
-
 				.then(authorsByAllTags => {
 
-					let newTagsList = allTags;
-					let tagNameToMatch, authorsTagNameToMatch, authorToAdd;
-					// loop through allTags.tags and get allTags.tags.tagname
-					// loop through allTags.authors and get allTags.authors.tagname
-					// if allTags.tags.tagname = allTags.authors.tagname, add to new array under tagname
-					
-					for(let x = 0; x < allTags.length;x++){
-						tagNameToMatch = allTags[x].tagname;
-						newTagsList[x].authors = [];
-						for(let y = 0; y < authorsByAllTags.length;y++){
-							authorsTagNameToMatch = authorsByAllTags[y].tagname;
-							if(tagNameToMatch === authorsTagNameToMatch){
-								authorToAdd = {
-									"bio": authorsByAllTags[y].bio,
-									"id": authorsByAllTags[y].id,
-									"author": authorsByAllTags[y].author
-								};
-								newTagsList[x].authors.push(authorToAdd);
-							}
-						}   
-					}
-					res.status(200).json(newTagsList);
+					Authors.getPostsByAllAuthors()
+					.then(postsByAllAuthors => {
 
+						let newTagsList = allTags;
+						let tagNameToMatch, authorsTagNameToMatch, authorToAdd;	
+
+						for(let x = 0; x < allTags.length;x++){
+							tagNameToMatch = allTags[x].tagname;
+							newTagsList[x].authors = [];
+
+							for(let y = 0; y < authorsByAllTags.length;y++){
+								authorsTagNameToMatch = authorsByAllTags[y].tagname;
+
+								if(tagNameToMatch === authorsTagNameToMatch){
+									authorToAdd = {
+										"bio": authorsByAllTags[y].bio,
+										"id": authorsByAllTags[y].id,
+										"author": authorsByAllTags[y].author
+									};
+									newTagsList[x].authors.push(authorToAdd);
+								}
+							}   
+						}
+
+						res.status(200).json({newTagsList, posts: postsByAllAuthors});
+
+					})
+					.catch(err => res.send(err));
 				})
 				.catch(err => res.send(err));
-
 		})
 		.catch(err => res.send(err));
 });
