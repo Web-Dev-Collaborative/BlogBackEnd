@@ -70,7 +70,7 @@ function getAllAuthorsByAllTags(){
 		'authors.bio as bio',
 		'authors.authorsid AS id', 
 		db.raw("authors.firstname || ' ' || authors.lastname AS author"),
-		'tags.tagname AS tagname'
+		db.raw('ARRAY_AGG(tags.tagname) AS tags')
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')

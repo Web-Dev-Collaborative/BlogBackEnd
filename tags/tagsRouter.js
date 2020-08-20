@@ -28,7 +28,8 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 									.then(allTotalReadsCounts => {
 
 										let newTagsList = allTags;
-										let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorToMatch, authorBio, authorName;	
+										let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, 
+											postsAuthorToMatch, authorBio, authorName;	
 										let currentAuthorsPosts = [];
 
 										for(let x = 0; x < newTagsList.length;x++){
@@ -60,6 +61,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 										
 																	if(Number(currentTLCauthorsID) === Number(currentTRCauthorsID) && 
 																	Number(postsAuthorToMatch) === Number(currentTRCauthorsID) && 
+																	Number(postsAuthorToMatch) === Number(authorToMatch)  && 
 																	postsByAllAuthors[z].tags.includes(tagNameToMatch) && !currentAuthorsPosts.includes(postsByAllAuthors[z])){
 										
 																		currentAuthorsPosts.push(postsByAllAuthors[z]);
