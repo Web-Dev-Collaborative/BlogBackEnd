@@ -36,7 +36,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 																
 									for(let z = 0; z < postsByAllAuthors.length;z++){
 										postsAuthorToMatch = postsByAllAuthors[z].author;
-										if(postsByAllAuthors[z].author === authorsByAllTags[y].author){
+										if(postsAuthorToMatch === authorToMatch){
 											if(postsByAllAuthors[z].tags.includes(tagNameToMatch)){
 												currentAuthorsPosts.push(postsByAllAuthors[z])
 											}
