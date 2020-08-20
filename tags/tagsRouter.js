@@ -88,7 +88,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 											}   
 										}
 
-										res.status(200).json(newTagsList);
+										res.status(200).json(allTags, authorsByAllTags, postsByAllAuthors, allTotalLikesCounts, allTotalReadsCounts);
 								})
 								.catch(err => res.send(err));
 							})
