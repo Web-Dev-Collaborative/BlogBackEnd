@@ -5,7 +5,7 @@ const Authors = require('../authors/authorsModel.js');
 const Posts = require('../posts/postsModel.js');
 const restricted = require('../auth/restriction.js');
 
-const { compare1 } = require('../tags/tagsHelpers.js');
+const { compare, compare1 } = require('../tags/tagsHelpers.js');
 
 const { cache } = require('../cache/cacheHelpers.js');
 /*
@@ -46,7 +46,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 											newTagsList[x].authors = [];
 										
 											for(let y = 0; y < authorsByAllTags.length; y++){
-												
+
 												authorsTagNameToMatch = authorsByAllTags[y].tagname;
 												authorToMatch = authorsByAllTags[y].id;
 												authorBio = authorsByAllTags[y].bio;
