@@ -37,11 +37,8 @@ module.exports = {
 	- [ ] /tags/<tag> (show posts & authors)
 		- tagsid, tagname, posts, authors
 		- chain getOneTag, getAllAuthorsByOneTag, getAllPostsByOneTag
-	
   - [ ] get a post's tags (postsModel getPostsByTag(tagname))
   - [ ] add tag to post
-	- 
-
 */
 
 /*
@@ -65,8 +62,7 @@ INNER JOIN Authors
 ON authors.authorsid = posts.authorsid
 GROUP BY tags.tagname, authors.authorsid, authors.firstname, authors.lastname, authors.bio
 */
-// function for getting all authors per all tags
-// 
+// get all authors per all tags
 function getAllAuthorsByAllTags(){
 	return db('tags')
 	.select(
@@ -90,7 +86,7 @@ INNER JOIN Posts
 ON poststags.postsid = posts.postsid
 GROUP BY tags.tagname, posts.postsid, posts.likes, posts.reads
 */
-// function for getting all posts per all tags
+// get all posts per all tags
 function getAllPostsByAllTags(){
 	return db('tags')
 	.select('tags.tagname AS tagname', 
@@ -106,7 +102,7 @@ SELECT tags.tagsid, tags.tagname
 FROM Tags
 WHERE tags.tagname = 'tech'
 */
-// function for getting tagsid & tagname on one tag
+// get tagsid & tagname on one tag
 function getOneTag(tagsid){
 	return db('tags').select('tags.tagsid, tags.tagname').where('tags.tagsid', tagsid);
 }
@@ -124,7 +120,7 @@ ON authors.authorsid = posts.authorsid
 WHERE tags.tagname = 'tech'
 GROUP BY tags.tagname, authors.authorsid, authors.firstname, authors.lastname, authors.bio
 */
-// function for getting all authors on one tag
+// get all authors on one tag
 function getAllAuthorsByOneTag(tagsid){
 	return db('tags')
 	.select(
@@ -137,7 +133,6 @@ function getAllAuthorsByOneTag(tagsid){
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 	.groupBy('tags.tagname', 'authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio')
 	.where('tags.tagsid', tagsid);
-
 }
 
 /*
@@ -150,7 +145,7 @@ ON poststags.postsid = posts.postsid
 WHERE tags.tagname = 'tech'
 GROUP BY tags.tagname, posts.postsid, posts.likes, posts.reads
 */
-// function for getting all posts on one tag
+// get all posts on one tag
 function getAllPostsByOneTag(tagsid){
 	return db('tags')
 	.select('posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads'
@@ -173,7 +168,7 @@ INNER JOIN authors
 ON posts.authorsid = authors.authorsid
 WHERE authors.authorsid = 2;
 */
-// tags by author
+// get tags by author
 function getTagsByAuthor(authorsid) {
 	return db('tags')
 		.select(
@@ -227,7 +222,6 @@ function getTags(){
 		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid')
 		.groupBy('posts.postsid');
 }
-
 
 function findBy(filter) {
 	return db('tags').where(filter);
