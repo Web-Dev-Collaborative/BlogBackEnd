@@ -34,14 +34,14 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 
 																
 									for(let z = 0; z < postsByAllAuthors.length;z++){
-										if(postsByAllAuthors[z].authorid = authorsByAllTags[y].id){
+										if(postsByAllAuthors[z].authorId = authorsByAllTags[y].id){
 											if(postsByAllAuthors[z].tags.includes(tagNameToMatch)){
 												currentAuthorsPosts.push(postsByAllAuthors[z])
 											}
 										}
 									}
 									if(tagNameToMatch === authorsTagNameToMatch){
-										
+
 										authorToAdd = {
 											"bio": authorsByAllTags[y].bio,
 											"id": authorsByAllTags[y].id,
@@ -54,7 +54,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 								}   
 							}
 
-							res.status(200).json({newTagsList});
+							res.status(200).json(newTagsList);
 
 						})
 						.catch(err => res.send(err));
