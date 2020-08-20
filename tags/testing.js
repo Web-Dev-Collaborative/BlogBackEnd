@@ -2,156 +2,529 @@ let allTags = {
     "tags": [
         {
             "tagsid": 1,
-            "tagname": "culture",
-            "authors": []
+            "tagname": "culture"
         },
         {
             "tagsid": 2,
-            "tagname": "design",
-            "authors": []
+            "tagname": "design"
         },
         {
             "tagsid": 3,
-            "tagname": "health",
-            "authors": []
+            "tagname": "health"
         },
         {
             "tagsid": 4,
-            "tagname": "history",
-            "authors": []
+            "tagname": "history"
         },
         {
             "tagsid": 5,
-            "tagname": "politics",
-            "authors": []
+            "tagname": "politics"
         },
         {
             "tagsid": 6,
-            "tagname": "science",
-            "authors": []
+            "tagname": "science"
         },
         {
             "tagsid": 7,
-            "tagname": "startups",
-            "authors": []
+            "tagname": "startups"
         },
         {
             "tagsid": 8,
-            "tagname": "tech",
-            "authors": []
+            "tagname": "tech"
         }
     ],
     "authors": [
         {
-            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
-            "id": 1,
-            "author": "Lainey Ritter",
-            "tags": [
-                "tech",
-                "tech",
-                "tech"
-            ]
-        },
-        {
-            "bio": "I'm love politics. Always looking for feedback on my posts. My interests are below:\n\n-politics\n-science\n-history",
-            "id": 2,
-            "author": "Tia Roberson",
-            "tags": [
-                "culture",
-                "culture"
-            ]
-        },
-        {
-            "bio": "-Read my posts\n-Let me know what you think!",
-            "id": 3,
-            "author": "Jaden Bryant",
-            "tags": [
-                "design"
-            ]
-        },
-        {
-            "bio": "-Software Developer from New York\n-Tech is my thing!",
-            "id": 4,
-            "author": "Jon Abbott",
-            "tags": [
-                "startups"
-            ]
-        },
-        {
-            "bio": "I have been writing since I was 12. Now I work for the New York Times",
-            "id": 5,
-            "author": "Trevon Rodriguez",
-            "tags": [
-                "history",
-                "history",
-                "history",
-                "history",
-                "history"
-            ]
+            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
+            "id": 9,
+            "author": "Rylee Paul",
+            "tagname": "tech"
         },
         {
             "bio": "-Coder by day\n-Writer by night\n",
             "id": 6,
             "author": "Bryson Bowers",
-            "tags": [
-                "culture"
-            ]
-        },
-        {
-            "bio": "You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer",
-            "id": 7,
-            "author": "Ahmad Dunn",
-            "tags": [
-                "politics",
-                "politics",
-                "politics"
-            ]
-        },
-        {
-            "bio": "",
-            "id": 8,
-            "author": "Elisha Friedman",
-            "tags": [
-                "tech",
-                "tech",
-                "tech"
-            ]
-        },
-        {
-            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
-            "id": 9,
-            "author": "Rylee Paul",
-            "tags": [
-                "tech",
-                "tech"
-            ]
+            "tagname": "culture"
         },
         {
             "bio": "Favorite topics:\n-science\n-culture\n-design",
             "id": 10,
             "author": "Kinley Crosby",
-            "tags": [
-                "tech"
-            ]
+            "tagname": "tech"
         },
         {
-            "bio": "Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin",
-            "id": 11,
-            "author": "Adalyn Blevins",
-            "tags": [
-                "health",
-                "health"
-            ]
+            "bio": "",
+            "id": 8,
+            "author": "Elisha Friedman",
+            "tagname": "tech"
+        },
+        {
+            "bio": "I have been writing since I was 12. Now I work for the New York Times",
+            "id": 5,
+            "author": "Trevon Rodriguez",
+            "tagname": "history"
         },
         {
             "bio": "You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer",
             "id": 12,
             "author": "Zackery Turner",
-            "tags": [
-                "culture",
-                "culture",
-                "culture"
-            ]
+            "tagname": "culture"
+        },
+        {
+            "bio": "You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer",
+            "id": 7,
+            "author": "Ahmad Dunn",
+            "tagname": "politics"
+        },
+        {
+            "bio": "I have been writing since I was 12. Now I work for the New York Times",
+            "id": 5,
+            "author": "Trevon Rodriguez",
+            "tagname": "politics"
+        },
+        {
+            "bio": "",
+            "id": 8,
+            "author": "Elisha Friedman",
+            "tagname": "science"
+        },
+        {
+            "bio": "-Software Developer from New York\n-Tech is my thing!",
+            "id": 4,
+            "author": "Jon Abbott",
+            "tagname": "startups"
+        },
+        {
+            "bio": "-Software Developer from New York\n-Tech is my thing!",
+            "id": 4,
+            "author": "Jon Abbott",
+            "tagname": "science"
+        },
+        {
+            "bio": "Favorite topics:\n-science\n-culture\n-design",
+            "id": 10,
+            "author": "Kinley Crosby",
+            "tagname": "startups"
+        },
+        {
+            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
+            "id": 9,
+            "author": "Rylee Paul",
+            "tagname": "politics"
+        },
+        {
+            "bio": "-Software Developer from New York\n-Tech is my thing!",
+            "id": 4,
+            "author": "Jon Abbott",
+            "tagname": "politics"
+        },
+        {
+            "bio": "Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin",
+            "id": 11,
+            "author": "Adalyn Blevins",
+            "tagname": "health"
+        },
+        {
+            "bio": "",
+            "id": 8,
+            "author": "Elisha Friedman",
+            "tagname": "history"
+        },
+        {
+            "bio": "Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin",
+            "id": 11,
+            "author": "Adalyn Blevins",
+            "tagname": "startups"
+        },
+        {
+            "bio": "-Read my posts\n-Let me know what you think!",
+            "id": 3,
+            "author": "Jaden Bryant",
+            "tagname": "design"
+        },
+        {
+            "bio": "You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer",
+            "id": 7,
+            "author": "Ahmad Dunn",
+            "tagname": "health"
+        },
+        {
+            "bio": "-Software Developer from New York\n-Tech is my thing!",
+            "id": 4,
+            "author": "Jon Abbott",
+            "tagname": "health"
+        },
+        {
+            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
+            "id": 1,
+            "author": "Lainey Ritter",
+            "tagname": "tech"
+        },
+        {
+            "bio": "-Software Developer from New York\n-Tech is my thing!",
+            "id": 4,
+            "author": "Jon Abbott",
+            "tagname": "history"
+        },
+        {
+            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
+            "id": 9,
+            "author": "Rylee Paul",
+            "tagname": "culture"
+        },
+        {
+            "bio": "You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer",
+            "id": 12,
+            "author": "Zackery Turner",
+            "tagname": "science"
+        },
+        {
+            "bio": "-Coder by day\n-Writer by night\n",
+            "id": 6,
+            "author": "Bryson Bowers",
+            "tagname": "design"
+        },
+        {
+            "bio": "Favorite topics:\n-science\n-culture\n-design",
+            "id": 10,
+            "author": "Kinley Crosby",
+            "tagname": "culture"
+        },
+        {
+            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
+            "id": 1,
+            "author": "Lainey Ritter",
+            "tagname": "health"
+        },
+        {
+            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
+            "id": 9,
+            "author": "Rylee Paul",
+            "tagname": "science"
+        },
+        {
+            "bio": "You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer",
+            "id": 12,
+            "author": "Zackery Turner",
+            "tagname": "startups"
+        },
+        {
+            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
+            "id": 9,
+            "author": "Rylee Paul",
+            "tagname": "health"
+        },
+        {
+            "bio": "",
+            "id": 8,
+            "author": "Elisha Friedman",
+            "tagname": "health"
+        },
+        {
+            "bio": "I have been writing since I was 12. Now I work for the New York Times",
+            "id": 5,
+            "author": "Trevon Rodriguez",
+            "tagname": "science"
+        },
+        {
+            "bio": "-Coder by day\n-Writer by night\n",
+            "id": 6,
+            "author": "Bryson Bowers",
+            "tagname": "health"
+        },
+        {
+            "bio": "I'm love politics. Always looking for feedback on my posts. My interests are below:\n\n-politics\n-science\n-history",
+            "id": 2,
+            "author": "Tia Roberson",
+            "tagname": "culture"
+        },
+        {
+            "bio": "You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer",
+            "id": 7,
+            "author": "Ahmad Dunn",
+            "tagname": "startups"
+        },
+        {
+            "bio": "You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer",
+            "id": 12,
+            "author": "Zackery Turner",
+            "tagname": "history"
+        },
+        {
+            "bio": "I'm love politics. Always looking for feedback on my posts. My interests are below:\n\n-politics\n-science\n-history",
+            "id": 2,
+            "author": "Tia Roberson",
+            "tagname": "startups"
+        },
+        {
+            "bio": "I'm love politics. Always looking for feedback on my posts. My interests are below:\n\n-politics\n-science\n-history",
+            "id": 2,
+            "author": "Tia Roberson",
+            "tagname": "politics"
+        },
+        {
+            "bio": "Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin",
+            "id": 11,
+            "author": "Adalyn Blevins",
+            "tagname": "design"
+        },
+        {
+            "bio": "Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin",
+            "id": 11,
+            "author": "Adalyn Blevins",
+            "tagname": "tech"
+        },
+        {
+            "bio": "I have been writing since I was 12. Now I work for the New York Times",
+            "id": 5,
+            "author": "Trevon Rodriguez",
+            "tagname": "startups"
+        },
+        {
+            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
+            "id": 9,
+            "author": "Rylee Paul",
+            "tagname": "design"
+        },
+        {
+            "bio": "I have been writing since I was 12. Now I work for the New York Times",
+            "id": 5,
+            "author": "Trevon Rodriguez",
+            "tagname": "tech"
+        },
+        {
+            "bio": "-Software Developer from New York\n-Tech is my thing!",
+            "id": 4,
+            "author": "Jon Abbott",
+            "tagname": "tech"
+        },
+        {
+            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
+            "id": 9,
+            "author": "Rylee Paul",
+            "tagname": "startups"
+        },
+        {
+            "bio": "-Coder by day\n-Writer by night\n",
+            "id": 6,
+            "author": "Bryson Bowers",
+            "tagname": "history"
+        },
+        {
+            "bio": "You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer",
+            "id": 12,
+            "author": "Zackery Turner",
+            "tagname": "tech"
+        },
+        {
+            "bio": "-Coder by day\n-Writer by night\n",
+            "id": 6,
+            "author": "Bryson Bowers",
+            "tagname": "startups"
+        },
+        {
+            "bio": "You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer",
+            "id": 12,
+            "author": "Zackery Turner",
+            "tagname": "politics"
+        },
+        {
+            "bio": "I love writing about tech. Check out my posts and let me know what you think!",
+            "id": 9,
+            "author": "Rylee Paul",
+            "tagname": "history"
+        },
+        {
+            "bio": "You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer",
+            "id": 7,
+            "author": "Ahmad Dunn",
+            "tagname": "design"
+        },
+        {
+            "bio": "Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin",
+            "id": 11,
+            "author": "Adalyn Blevins",
+            "tagname": "politics"
+        },
+        {
+            "bio": "You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer",
+            "id": 12,
+            "author": "Zackery Turner",
+            "tagname": "design"
+        },
+        {
+            "bio": "Favorite topics:\n-science\n-culture\n-design",
+            "id": 10,
+            "author": "Kinley Crosby",
+            "tagname": "history"
+        },
+        {
+            "bio": "You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer",
+            "id": 7,
+            "author": "Ahmad Dunn",
+            "tagname": "science"
+        },
+        {
+            "bio": "I have been writing since I was 12. Now I work for the New York Times",
+            "id": 5,
+            "author": "Trevon Rodriguez",
+            "tagname": "culture"
+        },
+        {
+            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
+            "id": 1,
+            "author": "Lainey Ritter",
+            "tagname": "politics"
+        },
+        {
+            "bio": "",
+            "id": 8,
+            "author": "Elisha Friedman",
+            "tagname": "culture"
+        },
+        {
+            "bio": "I'm love politics. Always looking for feedback on my posts. My interests are below:\n\n-politics\n-science\n-history",
+            "id": 2,
+            "author": "Tia Roberson",
+            "tagname": "design"
+        },
+        {
+            "bio": "-Read my posts\n-Let me know what you think!",
+            "id": 3,
+            "author": "Jaden Bryant",
+            "tagname": "history"
+        },
+        {
+            "bio": "Favorite topics:\n-science\n-culture\n-design",
+            "id": 10,
+            "author": "Kinley Crosby",
+            "tagname": "design"
+        },
+        {
+            "bio": "I have been writing since I was 12. Now I work for the New York Times",
+            "id": 5,
+            "author": "Trevon Rodriguez",
+            "tagname": "health"
+        },
+        {
+            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
+            "id": 1,
+            "author": "Lainey Ritter",
+            "tagname": "startups"
+        },
+        {
+            "bio": "-Software Developer from New York\n-Tech is my thing!",
+            "id": 4,
+            "author": "Jon Abbott",
+            "tagname": "culture"
+        },
+        {
+            "bio": "Favorite topics:\n-science\n-culture\n-design",
+            "id": 10,
+            "author": "Kinley Crosby",
+            "tagname": "science"
+        },
+        {
+            "bio": "I'm love politics. Always looking for feedback on my posts. My interests are below:\n\n-politics\n-science\n-history",
+            "id": 2,
+            "author": "Tia Roberson",
+            "tagname": "tech"
+        },
+        {
+            "bio": "-Coder by day\n-Writer by night\n",
+            "id": 6,
+            "author": "Bryson Bowers",
+            "tagname": "tech"
+        },
+        {
+            "bio": "You can contact me at zack@turner.com!\n\n-CEO\n-Co-founder\n-Writer",
+            "id": 12,
+            "author": "Zackery Turner",
+            "tagname": "health"
+        },
+        {
+            "bio": "Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin",
+            "id": 11,
+            "author": "Adalyn Blevins",
+            "tagname": "history"
+        },
+        {
+            "bio": "-Read my posts\n-Let me know what you think!",
+            "id": 3,
+            "author": "Jaden Bryant",
+            "tagname": "startups"
+        },
+        {
+            "bio": "You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer",
+            "id": 7,
+            "author": "Ahmad Dunn",
+            "tagname": "culture"
+        },
+        {
+            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
+            "id": 1,
+            "author": "Lainey Ritter",
+            "tagname": "design"
+        },
+        {
+            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
+            "id": 1,
+            "author": "Lainey Ritter",
+            "tagname": "culture"
+        },
+        {
+            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
+            "id": 1,
+            "author": "Lainey Ritter",
+            "tagname": "history"
+        },
+        {
+            "bio": "Favorite topics:\n-science\n-culture\n-design",
+            "id": 10,
+            "author": "Kinley Crosby",
+            "tagname": "health"
+        },
+        {
+            "bio": "I really enjoy writing. It is one of my favourite hobbies.\n\nFollow me on:\n-Instagram\n-Snapchat",
+            "id": 1,
+            "author": "Lainey Ritter",
+            "tagname": "science"
+        },
+        {
+            "bio": "",
+            "id": 8,
+            "author": "Elisha Friedman",
+            "tagname": "politics"
+        },
+        {
+            "bio": "Always looking for new connections.\n\nConnect with me on:\n-Facebook\n-Linkedin",
+            "id": 11,
+            "author": "Adalyn Blevins",
+            "tagname": "science"
+        },
+        {
+            "bio": "You can contact me at ahmad@dunn.com!\n\n-Engineer\n-Writer",
+            "id": 7,
+            "author": "Ahmad Dunn",
+            "tagname": "history"
+        },
+        {
+            "bio": "",
+            "id": 8,
+            "author": "Elisha Friedman",
+            "tagname": "design"
+        },
+        {
+            "bio": "-Read my posts\n-Let me know what you think!",
+            "id": 3,
+            "author": "Jaden Bryant",
+            "tagname": "tech"
+        },
+        {
+            "bio": "I'm love politics. Always looking for feedback on my posts. My interests are below:\n\n-politics\n-science\n-history",
+            "id": 2,
+            "author": "Tia Roberson",
+            "tagname": "history"
         }
     ],
     "posts": [
@@ -1308,6 +1681,8 @@ let allTags = {
         }
     ]
 }
+
+
 /* one tag's object:
 {
     "tagsid": 1,
@@ -1326,22 +1701,15 @@ let allTags = {
 let newTagsList = allTags.tags;
 let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorName;
 let authorBio, authorName, postsAuthorToMatch, currentTLCauthorsID, currentTRCauthorsID;
-let currentPost;
+let currentPost, currentAuthorID, currentPostTag, currentTagName;
+let likesAuthorID, authorsAuthorID, totalLikesCount, currentAuthor;
+let likesLength, authorsLength, totalReadsCount, readsLength;
+let newTagsListLength, currentTagID, currentAuthorsTagName;
+let matchingTagAndAuthor, tagsLength, postsLength, postsTagsLength;
+let currentPostTagName, currentPostTags, currentPostAuthor;
+// create new array as newTagsList = tags array
 let currentAuthorsPosts = [];
 // sort authors, likes, reads & use y for all three
-allTags.authors = allTags.authors.filter((thing, index, self) => index === self.findIndex(t => t.id === thing.id));
-function compare(a, b) {
-	const idA = a.id;
-	const idB = b.id;
-
-	let comparison = 0;
-	if (idA > idB) {
-		comparison = 1;
-	} else if (idA < idB) {
-		comparison = -1;
-	}
-	return comparison;
-}
 
 function compare1(a, b) {
 	const idA = a.authorsid;
@@ -1356,10 +1724,201 @@ function compare1(a, b) {
 	return comparison;
 }
 
-allTags.authors.sort(compare);
 allTags.likes.sort(compare1);
 allTags.reads.sort(compare1);
-console.log(allTags.authors);
+// loop through likes and add to authors array
+likesLength = allTags.likes.length;
+authorsLength = allTags.authors.length;
+readsLength = allTags.reads.length;
+newTagsListLength = newTagsList.length;
+for (let x = 0; x < likesLength; x++){
+    likesAuthorID = allTags.likes[x].authorsid;
+    totalLikesCount = allTags.likes[x].totallikecount;
+    for (let y = 0; y < authorsLength; y++){
+        authorsAuthorID = allTags.authors[y].id;
+        if(likesAuthorID === authorsAuthorID){
+            allTags.authors[y].totalLikesCount = totalLikesCount;
+        };
+    };
+};
+for (let u = 0; u < authorsLength;u++){
+    allTags.authors[u].posts = [];
+}
+
+
+
+// loop through reads and add to authors array
+for (let x = 0; x < readsLength; x++){
+    readsAuthorID = allTags.reads[x].authorsid;
+    totalReadsCount = allTags.reads[x].totalreadcount;
+    currentAuthorID = allTags.authors[x].id;
+    currentAuthorName = allTags.authors[x].author;
+    for (let y = 0; y < authorsLength; y++){
+        authorsAuthorID = allTags.authors[y].id;
+        if(readsAuthorID === authorsAuthorID){
+            allTags.authors[y].totalReadsCount = totalReadsCount;
+        };
+    };
+};
+for (let x = 0; x < newTagsListLength; x++){
+    newTagsList[x].authors = [];
+}
+
+postsLength = allTags.posts.length;
+
+// loop through authors
+    // get tagname of each author
+for (let x = 0; x < authorsLength; x++){
+    currentAuthorsTagName = allTags.authors[x].tagname;
+    currentAuthorName = allTags.authors[x].author;
+    // console.log('authors array info = ' + currentAuthorsTagName, currentAuthorName);
+// loop through posts
+    // get tagnames of each post
+    for (let y = 0; y < postsLength; y++){
+        currentPost = allTags.posts[y];
+        postTagsLength = allTags.posts[y].tags.length;
+        currentPostTags = allTags.posts[y].tags;
+        currentPostAuthor = allTags.posts[y].author;
+        // console.log('posts array info = ' + currentPostTags, currentPostAuthor);
+        if(currentAuthorName === currentPostAuthor){
+        // if author of post matches author from authors array
+        // loop through each post's tags
+            // if author's tagname matches one of post's tagnames
+                // add that post to author's posts array
+            for (let z = 0; z < postTagsLength; z++){
+                currentPostTagName = currentPostTags[z];
+                if(currentPostTagName === currentAuthorsTagName){
+                    allTags.authors[x].posts.push(currentPost);
+                }
+            }
+        }
+    }
+}
+// loop through tags
+// loop through authors
+// if authors.tagname == newTagsList.tagname, then add to newTagsList.authors
+
+for (let x = 0; x < newTagsListLength; x++){
+    currentTagName = newTagsList[x].tagname;
+    for (let y = 0; y < authorsLength; y++){
+        currentAuthorsTagName = allTags.authors[y].tagname;
+        if(currentTagName === currentAuthorsTagName){
+            // add allTags.authors[y] to newTagsList.authors[x]
+            currentAuthor = allTags.authors[y];
+            newTagsList[x].authors.push(currentAuthor);
+        }
+    }
+}
+
+console.log(JSON.stringify(newTagsList));
+/*
+
+newTagsListLength = newTagsList.length;
+for (let x = 0; x < newTagsListLength; x++){
+    authorsLength = newTagsList[x].authors.length;
+    for (let y = 0; y < authorsLength; y++){
+        postsLength = newTagsList[x].authors[y].posts.length;
+        // console.log(postsLength);
+        if(newTagsList[x].authors[y].posts.length === 0){
+            // delete newTagsList[x].authors[y];
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if newTagsList[x].authors[y].posts.length == 0 then 
+    // newTagsList[x].authors.splice(y, 1);
+// console.log('------------------------------------');
+// console.log(JSON.stringify(allTags));
+// loop through authors array and add each to newTagsList per tag name
+// also add empty posts array for later
+newTagsListLength = newTagsList.length;
+for(let z = 0; z < newTagsListLength;z++){
+    currentTagID = newTagsList[z].tagsid;
+    currentTagName = newTagsList[z].tagname;
+    newTagsList[z].authors = [];
+    for(let w = 0; w < authorsLength; w++){
+        currentAuthorsTagName = allTags.authors[w].tagname;
+        if(currentAuthorsTagName === currentTagName){
+            matchingTagAndAuthor = {
+                bio: allTags.authors[w].bio,
+                id: allTags.authors[w].id,
+                authorTagName: allTags.authors[w].tagname,
+                author: allTags.authors[w].author,
+                totalLikesCount: allTags.authors[w].totalLikesCount,
+                totalReadsCount: allTags.authors[w].totalReadsCount,
+                posts: []
+            };
+            newTagsList[z].authors.push(matchingTagAndAuthor);
+        };
+    };
+
+};
+tagsLength = newTagsList.length;
+postsLength = allTags.posts.length;
+// loop through tags, authors, posts
+for (let t = 0; t < tagsLength; t++){
+    currentTagID = newTagsList[t].tagsid;
+    currentTagName = newTagsList[t].tagname;
+    for (let u = 0; u < authorsLength;u++){
+        currentAuthorsTagName = allTags.authors[u].tagname;
+        currentAuthorID = allTags.authors[u].id;
+        currentAuthorName = allTags.authors[u].author;
+        for (let v = 0; v < postsLength; v++){
+            postsAuthorName = allTags.posts[v].author;
+            postsTags = allTags.posts[v].tags;
+            // each post should match author and tag
+            // loop through each post's tags
+            // if tag matches and author matches, add post
+            for(let s = 0; s < postsTagsLength; s++){
+                currentPostTag = allTags.posts[v].tags[s];
+                if(postsAuthorName === currentAuthorName && currentTagName === currentPostTag){
+                    newTagsList[t].authors[u].posts.push(allTags.posts[v]);
+                }
+            }
+        };
+    };
+};
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 for (let x = 0; x < allTags.tags.length; x++) {
 	tagNameToMatch = allTags.tags[x].tagname;
@@ -1411,6 +1970,6 @@ for (let x = 0; x < allTags.tags.length; x++) {
 		}
 	}
 }
+*/
 
-// console.log(JSON.stringify(newTagsList));
 // query params to sort asc/desc
