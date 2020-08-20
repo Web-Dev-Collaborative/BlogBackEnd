@@ -85,7 +85,11 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 											}   
 										}
 
-										res.status(200).json({tags: allTags, authors: authorsByAllTags, posts: postsByAllAuthors, likes: allTotalLikesCounts, reads: allTotalReadsCounts});
+										res.status(200).json({tags: allTags, 
+															authors: authorsByAllTags, 
+															posts: postsByAllAuthors, 
+															likes: allTotalLikesCounts, 
+															reads: allTotalReadsCounts});
 								})
 								.catch(err => res.send(err));
 							})
