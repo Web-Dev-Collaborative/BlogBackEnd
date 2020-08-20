@@ -1579,6 +1579,106 @@ let allTags = {
                 "history"
             ]
         }
+    ],
+    "likes": [
+        {
+            "totallikecount": "3002",
+            "authorsid": 4
+        },
+        {
+            "totallikecount": "4073",
+            "authorsid": 10
+        },
+        {
+            "totallikecount": "5326",
+            "authorsid": 9
+        },
+        {
+            "totallikecount": "6559",
+            "authorsid": 7
+        },
+        {
+            "totallikecount": "2546",
+            "authorsid": 6
+        },
+        {
+            "totallikecount": "5803",
+            "authorsid": 12
+        },
+        {
+            "totallikecount": "1608",
+            "authorsid": 3
+        },
+        {
+            "totallikecount": "4770",
+            "authorsid": 1
+        },
+        {
+            "totallikecount": "5828",
+            "authorsid": 5
+        },
+        {
+            "totallikecount": "3620",
+            "authorsid": 2
+        },
+        {
+            "totallikecount": "2792",
+            "authorsid": 11
+        },
+        {
+            "totallikecount": "3876",
+            "authorsid": 8
+        }
+    ],
+    "reads": [
+        {
+            "totalreadcount": "436543",
+            "authorsid": 4
+        },
+        {
+            "totalreadcount": "323728",
+            "authorsid": 10
+        },
+        {
+            "totalreadcount": "509129",
+            "authorsid": 9
+        },
+        {
+            "totalreadcount": "833951",
+            "authorsid": 7
+        },
+        {
+            "totalreadcount": "302404",
+            "authorsid": 6
+        },
+        {
+            "totalreadcount": "491168",
+            "authorsid": 12
+        },
+        {
+            "totalreadcount": "190950",
+            "authorsid": 3
+        },
+        {
+            "totalreadcount": "625934",
+            "authorsid": 1
+        },
+        {
+            "totalreadcount": "425357",
+            "authorsid": 5
+        },
+        {
+            "totalreadcount": "402337",
+            "authorsid": 2
+        },
+        {
+            "totalreadcount": "334153",
+            "authorsid": 11
+        },
+        {
+            "totalreadcount": "328829",
+            "authorsid": 8
+        }
     ]
 }
 /*
@@ -1598,7 +1698,7 @@ one tag's object:
 */
 
 let newTagsList = allTags.tags;
-let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorToMatch;
+let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorToMatch, currentTLCauthorsID, currentTRCauthorsID;
 // loop through allTags.tags and get allTags.tags.tagname
 // loop through allTags.authors and get allTags.authors.tagname
 // if allTags.tags.tagname = allTags.authors.tagname, add to new array under tagname
@@ -1606,32 +1706,56 @@ let currentAuthorsPosts = [];
 for(let x = 0; x < allTags.tags.length; x++){
     tagNameToMatch = allTags.tags[x].tagname;
     newTagsList[x].authors = [];
+
     for(let y = 0; y < allTags.authors.length; y++){
         authorsTagNameToMatch = allTags.authors[y].tagname;
         authorToMatch = allTags.authors[y].id;
 
-        for(let z = 0; z < allTags.posts.length; z++){
-            postsAuthorToMatch = allTags.posts[z].authorId;
-            if(Number(postsAuthorToMatch) === Number(authorToMatch) && allTags.posts[z].tags.includes(tagNameToMatch)){
-                currentAuthorsPosts.push(allTags.posts[z])
+        for(let w = 0; w < allTags.likes.length; w++){
+            currentTLCauthorsID = allTags.likes[w].authorsid;
+            currentTLCValue = allTags.likes[w].totallikecount;
+
+            if(currentTLCauthorsID === authorToMatch){
+
+                for(let v = 0; v < allTags.reads.length; v++){
+
+                    currentTRCauthorsID = allTags.reads[w].authorsid;
+                    currentTRCValue = allTags.reads[w].totalreadcount;
+
+                    if(currentTRCauthorsID === currentTLCauthorsID){
+
+                        for(let z = 0; z < allTags.posts.length; z++){
+                            
+                            postsAuthorToMatch = allTags.posts[z].authorId;
+
+                            if(Number(currentTLCauthorsID) === Number(currentTRCauthorsID) && 
+                            Number(postsAuthorToMatch) === Number(currentTRCauthorsID) && 
+                            allTags.posts[z].tags.includes(tagNameToMatch) && !currentAuthorsPosts.includes(allTags.posts[z])){
+
+                                currentAuthorsPosts.push(allTags.posts[z]);
+                            }
+                        }
+                    }
+                }
             }
         }
-
         if(tagNameToMatch === authorsTagNameToMatch){
-            // add posts per author, filtered by tagname
-                // if allTags.posts[z].authorid = allTags.authors[y].id AND
-                    // tagNameToMatch is included in allTags.posts[z].tags
-                        // add to currentAuthorsPosts
+    
             authorToAdd = {
                 "bio": allTags.authors[y].bio,
                 "id": allTags.authors[y].id,
                 "author": allTags.authors[y].author,
-                "posts": currentAuthorsPosts
+                "posts": currentAuthorsPosts,
+                "totalLikeCount": currentTLCValue,
+                "totalReadCount": currentTRCValue,
             };
+    
             newTagsList[x].authors.push(authorToAdd);
+            authorToAdd = {};
         }
-        currentAuthorsPosts = [];
     }   
+    currentAuthorsPosts = [];
 }
+
 console.log(JSON.stringify(newTagsList));
 // query params to sort asc/desc
