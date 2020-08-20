@@ -75,7 +75,7 @@ function getAllAuthorsByAllTags(){
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-	.groupBy('tags.tagname', 'authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio');
+	.groupBy('authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio');
 };
 
 /*
