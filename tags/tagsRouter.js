@@ -22,7 +22,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 						.then(postsByAllAuthors => {
 
 							let newTagsList = allTags;
-							let tagNameToMatch, authorsTagNameToMatch, authorToAdd;	
+							let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorToMatch;	
 							let currentAuthorsPosts = [];
 
 							for(let x = 0; x < newTagsList.length;x++){
@@ -31,17 +31,17 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 
 								for(let y = 0; y < authorsByAllTags.length;y++){
 									authorsTagNameToMatch = authorsByAllTags[y].tagname;
+									authorToMatch = authorsByAllTags[y].author;
 
 																
 									for(let z = 0; z < postsByAllAuthors.length;z++){
-										if(postsByAllAuthors[z].authorid = authorsByAllTags[y].id){
-											if(postsByAllAuthors[z].tags.includes(tagNameToMatch)){
-												currentAuthorsPosts.push(postsByAllAuthors[z])
-											}
+										postsAuthorToMatch = postsByAllAuthors[z].author;
+										if(postsAuthorToMatch === authorToMatch && postsByAllAuthors[z].tags.includes(tagNameToMatch)){
+											currentAuthorsPosts.push(postsByAllAuthors[z])
 										}
 									}
 									if(tagNameToMatch === authorsTagNameToMatch){
-										
+
 										authorToAdd = {
 											"bio": authorsByAllTags[y].bio,
 											"id": authorsByAllTags[y].id,
@@ -49,12 +49,12 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 											"posts": currentAuthorsPosts
 										};
 										newTagsList[x].authors.push(authorToAdd);
-										currentAuthorsPosts = [];
 									}
+									currentAuthorsPosts = [];
 								}   
 							}
 
-							res.status(200).json({newTagsList});
+							res.status(200).json(newTagsList);
 
 						})
 						.catch(err => res.send(err));

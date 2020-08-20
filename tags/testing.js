@@ -1598,24 +1598,25 @@ one tag's object:
 */
 
 let newTagsList = allTags.tags;
-let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorIDOnPost;
+let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorToMatch;
 // loop through allTags.tags and get allTags.tags.tagname
 // loop through allTags.authors and get allTags.authors.tagname
 // if allTags.tags.tagname = allTags.authors.tagname, add to new array under tagname
 let currentAuthorsPosts = [];
-for(let x = 0; x < allTags.tags.length;x++){
+for(let x = 0; x < allTags.tags.length; x++){
     tagNameToMatch = allTags.tags[x].tagname;
     newTagsList[x].authors = [];
-    for(let y = 0; y < allTags.authors.length;y++){
+    for(let y = 0; y < allTags.authors.length; y++){
         authorsTagNameToMatch = allTags.authors[y].tagname;
+        authorToMatch = allTags.authors[y].id;
 
-        for(let z = 0; z < allTags.posts.length;z++){
-            if(allTags.posts[z].authorid = allTags.authors[y].id){
-                if(allTags.posts[z].tags.includes(tagNameToMatch)){
-                    currentAuthorsPosts.push(allTags.posts[z])
-                }
+        for(let z = 0; z < allTags.posts.length; z++){
+            postsAuthorToMatch = allTags.posts[z].authorId;
+            if(Number(postsAuthorToMatch) === Number(authorToMatch) && allTags.posts[z].tags.includes(tagNameToMatch)){
+                currentAuthorsPosts.push(allTags.posts[z])
             }
         }
+
         if(tagNameToMatch === authorsTagNameToMatch){
             // add posts per author, filtered by tagname
                 // if allTags.posts[z].authorid = allTags.authors[y].id AND
@@ -1628,9 +1629,9 @@ for(let x = 0; x < allTags.tags.length;x++){
                 "posts": currentAuthorsPosts
             };
             newTagsList[x].authors.push(authorToAdd);
-            currentAuthorsPosts = [];
         }
+        currentAuthorsPosts = [];
     }   
 }
-console.log(JSON.parse(newTagsList));
+console.log(JSON.stringify(newTagsList));
 // query params to sort asc/desc
