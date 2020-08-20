@@ -34,7 +34,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 
 																
 									for(let z = 0; z < postsByAllAuthors.length;z++){
-										if(postsByAllAuthors[z].authorid = allTags.authors[y].id){
+										if(postsByAllAuthors[z].authorid = authorsByAllTags[y].id){
 											if(postsByAllAuthors[z].tags.includes(tagNameToMatch)){
 												currentAuthorsPosts.push(postsByAllAuthors[z])
 											}
@@ -46,9 +46,9 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 												// tagNameToMatch is included in allTags.posts[z].tags
 													// add to currentAuthorsPosts
 										authorToAdd = {
-											"bio": allTags.authors[y].bio,
-											"id": allTags.authors[y].id,
-											"author": allTags.authors[y].author,
+											"bio": authorsByAllTags[y].bio,
+											"id": authorsByAllTags[y].id,
+											"author": authorsByAllTags[y].author,
 											"posts": currentAuthorsPosts
 										};
 										newTagsList[x].authors.push(authorToAdd);
