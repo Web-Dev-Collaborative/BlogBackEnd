@@ -13,14 +13,9 @@ const restricted = require('../auth/restriction.js');
 	// chain getAllTags, getAllAuthorsByAllTags
 router.get('/authors', restricted, (req, res) => {
 	Tags.getAllTags()
-		.then(tags => {
-			Tags.getAllAuthorsByAllTags()
-				.then(authorsByAllTags => {
+		.then(allTags => {
 
-					res.status(200).json(tags);
-
-				})
-				.catch(err => res.send(err));
+					res.status(200).json(allTags);
 		})
 		.catch(err => res.send(err));
 });
