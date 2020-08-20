@@ -3,6 +3,10 @@ const router = require('express').Router();
 const Tags = require('./tagsModel.js');
 const restricted = require('../auth/restriction.js');
 
+const { add, findBy, findById, getTagsByAuthor, getTagsByPost, getTags, getAllTags, getAllAuthorsByAllTags,
+	getAllPostsByAllTags, getOneTag, getAllAuthorsByOneTag, getAllPostsByOneTag, update, remove } = require('./tagsHelpers.js');
+
+const { cache } = require('../cache/cacheHelpers.js');
 /*
 - tags endpoints:	
   - [ ] add tag to post
@@ -20,7 +24,7 @@ router.get('/authors', restricted, (req, res) => {
 		})
 		.catch(err => res.send(err));
 });
-/*
+
 // GET:  gets posts per all tags
     // /tags/posts
 	// chain getAllTags, getAllPostsByAllTags
@@ -195,5 +199,5 @@ router.delete('/:tagsid', restricted, (req, res) => {
 			res.status(500).json({ message: `The tag could not be removed.`, error: err });
 		});
 });
-*/
+
 module.exports = router;

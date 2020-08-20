@@ -47,8 +47,8 @@ FROM Tags
 */
 // get tagsid & tagname on all tags
 function getAllTags(){
-	return db('tags').select('tags.tagsid, tags.tagname');
-}
+	return db.raw('SELECT tags.tagsid, tags.tagname FROM Tags');
+};
 
 /*
 SELECT tags.tagname AS tagname, authors.bio AS bio, 
@@ -75,7 +75,7 @@ function getAllAuthorsByAllTags(){
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 	.groupBy('tags.tagname', 'authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio');
-}
+};
 
 /*
 SELECT tags.tagname, posts.postsid AS id, posts.likes AS likes, posts.reads AS reads
@@ -95,7 +95,7 @@ function getAllPostsByAllTags(){
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 	.groupBy('tags.tagname', 'posts.postsid', 'posts.likes', 'posts.reads');
-}
+};
 
 /*
 SELECT tags.tagsid, tags.tagname
@@ -105,7 +105,7 @@ WHERE tags.tagname = 'tech'
 // get tagsid & tagname on one tag
 function getOneTag(tagsid){
 	return db('tags').select('tags.tagsid, tags.tagname').where('tags.tagsid', tagsid);
-}
+};
 
 /*
 SELECT tags.tagname AS tagname, authors.bio AS bio, 
@@ -133,7 +133,7 @@ function getAllAuthorsByOneTag(tagsid){
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 	.groupBy('tags.tagname', 'authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio')
 	.where('tags.tagsid', tagsid);
-}
+};
 
 /*
 SELECT tags.tagname, posts.postsid AS id, posts.likes AS likes, posts.reads AS reads
@@ -155,7 +155,7 @@ function getAllPostsByOneTag(tagsid){
 	.groupBy('tags.tagname', 'posts.postsid', 'posts.likes', 'posts.reads')
 	.where('tags.tagsid', tagsid);
 
-}
+};
 
 /*
 SELECT DISTINCT tags.tagname 
@@ -180,7 +180,7 @@ function getTagsByAuthor(authorsid) {
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.where('authors.authorsid', authorsid)
 		.groupBy('authors.authorsid');
-}
+};
 
 /*
 	SELECT tags.tagname
@@ -221,11 +221,11 @@ function getTags(){
 		.innerJoin('poststags', 'poststags.tagsid', 'tags.tagsid')
 		.innerJoin('posts', 'poststags.postsid', 'poststags.postsid')
 		.groupBy('posts.postsid');
-}
+};
 
 function findBy(filter) {
 	return db('tags').where(filter);
-}
+};
 
 async function add(tag) {
 	const [tagsid] = await db('tags').insert(tag, 'tagsid');
