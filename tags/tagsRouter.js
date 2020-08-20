@@ -30,14 +30,104 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 									.then(allTotalReadsCounts => {
 																			
 
+
+										let newTagsList = allTags.tags;
+										let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorName;
+										let authorBio, authorName, postsAuthorToMatch, currentTLCauthorsID, currentTRCauthorsID;
+										let currentPost, currentAuthorID, currentPostTag, currentTagName;
+										let likesAuthorID, authorsAuthorID, totalLikesCount, currentAuthor;
+										let likesLength, authorsLength, totalReadsCount, readsLength;
+										let newTagsListLength, currentTagID, currentAuthorsTagName;
+										let matchingTagAndAuthor, tagsLength, postsLength, postsTagsLength;
+										let currentPostTagName, currentPostTags, currentPostAuthor;
+										// create new array as newTagsList = tags array
+										let currentAuthorsPosts = [];
+										// sort authors, likes, reads & use y for all three
+										
 										allTotalLikesCounts.sort(compare1);
 										allTotalReadsCounts.sort(compare1);
+										// loop through likes and add to authors array
+										likesLength = allTotalLikesCounts.length;
+										authorsLength = authorsByAllTags.length;
+										readsLength = allTotalReadsCounts.length;
+										newTagsListLength = newTagsList.length;
+										postsLength = postsByAllAuthors.length;
+										for (let x = 0; x < likesLength; x++){
+											likesAuthorID = allTotalLikesCounts[x].authorsid;
+											totalLikesCount = allTotalLikesCounts[x].totallikecount;
+											for (let y = 0; y < authorsLength; y++){
+												authorsAuthorID = authorsByAllTags[y].id;
+												if(likesAuthorID === authorsAuthorID){
+													authorsByAllTags[y].totalLikesCount = totalLikesCount;
+												};
+											};
+										};
+										for (let u = 0; u < authorsLength;u++){
+											authorsByAllTags[u].posts = [];
+										}
+										
+										// loop through reads and add to authors array
+										for (let x = 0; x < readsLength; x++){
+											readsAuthorID = allTotalReadsCounts[x].authorsid;
+											totalReadsCount = allTotalReadsCounts[x].totalreadcount;
+											currentAuthorID = authorsByAllTags[x].id;
+											currentAuthorName = authorsByAllTags[x].author;
+											for (let y = 0; y < authorsLength; y++){
+												authorsAuthorID = authorsByAllTags[y].id;
+												if(readsAuthorID === authorsAuthorID){
+													authorsByAllTags[y].totalReadsCount = totalReadsCount;
+												};
+											};
+										};
+										for (let x = 0; x < newTagsListLength; x++){
+											newTagsList[x].authors = [];
+										}
+										
+										// loop through authors
+											// get tagname of each author
+										for (let x = 0; x < authorsLength; x++){
+											currentAuthorsTagName = authorsByAllTags[x].tagname;
+											currentAuthorName = authorsByAllTags[x].author;
+											// console.log('authors array info = ' + currentAuthorsTagName, currentAuthorName);
+										// loop through posts
+											// get tagnames of each post
+											for (let y = 0; y < postsLength; y++){
+												currentPost = postsByAllAuthors[y];
+												postTagsLength = postsByAllAuthors[y].tags.length;
+												currentPostTags = postsByAllAuthors[y].tags;
+												currentPostAuthor = postsByAllAuthors[y].author;
+												// console.log('posts array info = ' + currentPostTags, currentPostAuthor);
+												if(currentAuthorName === currentPostAuthor){
+												// if author of post matches author from authors array
+												// loop through each post's tags
+													// if author's tagname matches one of post's tagnames
+														// add that post to author's posts array
+													for (let z = 0; z < postTagsLength; z++){
+														currentPostTagName = currentPostTags[z];
+														if(currentPostTagName === currentAuthorsTagName){
+															authorsByAllTags[x].posts.push(currentPost);
+														}
+													}
+												}
+											}
+										}
+										// loop through tags
+										// loop through authors
+										// if authors.tagname == newTagsList.tagname, then add to newTagsList.authors
+										
+										for (let x = 0; x < newTagsListLength; x++){
+											currentTagName = newTagsList[x].tagname;
+											for (let y = 0; y < authorsLength; y++){
+												currentAuthorsTagName = authorsByAllTags[y].tagname;
+												if(currentTagName === currentAuthorsTagName){
+													// add authorsByAllTags[y] to newTagsList.authors[x]
+													currentAuthor = authorsByAllTags[y];
+													newTagsList[x].authors.push(currentAuthor);
+												}
+											}
+										}
 
-										res.status(200).json({tags: allTags, 
-															authors: authorsByAllTags, 
-															posts: postsByAllAuthors, 
-															likes: allTotalLikesCounts, 
-															reads: allTotalReadsCounts});
+										res.status(200).json(newTagsList);
 								})
 								.catch(err => res.send(err));
 							})
