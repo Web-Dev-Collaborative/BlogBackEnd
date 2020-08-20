@@ -33,58 +33,6 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 										allTotalLikesCounts.sort(compare1);
 										allTotalReadsCounts.sort(compare1);
 
-										let newTagsList = allTags;
-										let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, 
-											postsAuthorToMatch, authorBio, authorName;	
-										let currentAuthorsPosts = [];
-
-										for(let x = 0; x < newTagsList.length;x++){
-											tagNameToMatch = newTagsList[x].tagname;
-											newTagsList[x].authors = [];
-										
-											for(let y = 0; y < authorsByAllTags.length; y++){
-
-												authorsTagNameToMatch = authorsByAllTags[y].tagname;
-												authorToMatch = authorsByAllTags[y].id;
-												authorBio = authorsByAllTags[y].bio;
-												authorName = authorsByAllTags[y].author;
-									
-												currentTLCauthorsID = allTotalLikesCounts[y].authorsid;
-												currentTLCValue = allTotalLikesCounts[y].totallikecount;
-								
-												currentTRCauthorsID = allTotalReadsCounts[y].authorsid;
-												currentTRCValue = allTotalReadsCounts[y].totalreadcount;
-									
-									
-												for(let z = 0; z < postsByAllAuthors.length; z++){
-													
-													postsAuthorToMatch = postsByAllAuthors[z].authorId;
-						
-													if(Number(postsAuthorToMatch) === Number(authorToMatch)  && 
-													postsByAllAuthors[z].tags.includes(tagNameToMatch) && !currentAuthorsPosts.includes(postsByAllAuthors[z])){
-						
-														currentAuthorsPosts.push(postsByAllAuthors[z]);
-													}
-												}
-													
-												if(tagNameToMatch === authorsTagNameToMatch){
-											
-													authorToAdd = {
-														"bio": authorBio,
-														"id": authorToMatch,
-														"author": authorName,
-														"posts": currentAuthorsPosts,
-														"totalLikeCount": currentTLCValue,
-														"totalReadCount": currentTRCValue,
-													};
-											
-													newTagsList[x].authors.push(authorToAdd);
-													authorToAdd = {};
-													currentAuthorsPosts = [];
-												}
-											}   
-										}
-
 										res.status(200).json({tags: allTags, 
 															authors: authorsByAllTags, 
 															posts: postsByAllAuthors, 
