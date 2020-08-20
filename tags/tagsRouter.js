@@ -51,31 +51,24 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 												authorToMatch = authorsByAllTags[y].id;
 												authorBio = authorsByAllTags[y].bio;
 												authorName = authorsByAllTags[y].author;
-										
-													currentTLCauthorsID = allTotalLikesCounts[y].authorsid;
-													currentTLCValue = allTotalLikesCounts[y].totallikecount;
-										
-													if(currentTLCauthorsID === authorToMatch){
-										
-														currentTRCauthorsID = allTotalReadsCounts[y].authorsid;
-														currentTRCValue = allTotalReadsCounts[y].totalreadcount;
 									
-														if(currentTRCauthorsID === currentTLCauthorsID){
+												currentTLCauthorsID = allTotalLikesCounts[y].authorsid;
+												currentTLCValue = allTotalLikesCounts[y].totallikecount;
+								
+												currentTRCauthorsID = allTotalReadsCounts[y].authorsid;
+												currentTRCValue = allTotalReadsCounts[y].totalreadcount;
 									
-															for(let z = 0; z < postsByAllAuthors.length; z++){
-																
-																postsAuthorToMatch = postsByAllAuthors[z].authorId;
 									
-																if(Number(currentTLCauthorsID) === Number(currentTRCauthorsID) && 
-																Number(postsAuthorToMatch) === Number(currentTRCauthorsID) && 
-																Number(postsAuthorToMatch) === Number(authorToMatch)  && 
-																postsByAllAuthors[z].tags.includes(tagNameToMatch) && !currentAuthorsPosts.includes(postsByAllAuthors[z])){
-									
-																	currentAuthorsPosts.push(postsByAllAuthors[z]);
-																}
-															}
-														}
+												for(let z = 0; z < postsByAllAuthors.length; z++){
+													
+													postsAuthorToMatch = postsByAllAuthors[z].authorId;
+						
+													if(Number(postsAuthorToMatch) === Number(authorToMatch)  && 
+													postsByAllAuthors[z].tags.includes(tagNameToMatch) && !currentAuthorsPosts.includes(postsByAllAuthors[z])){
+						
+														currentAuthorsPosts.push(postsByAllAuthors[z]);
 													}
+												}
 													
 												if(tagNameToMatch === authorsTagNameToMatch){
 											
@@ -90,9 +83,9 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 											
 													newTagsList[x].authors.push(authorToAdd);
 													authorToAdd = {};
+													currentAuthorsPosts = [];
 												}
 											}   
-											currentAuthorsPosts = [];
 										}
 
 										res.status(200).json(newTagsList);
