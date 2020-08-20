@@ -36,10 +36,8 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 																
 									for(let z = 0; z < postsByAllAuthors.length;z++){
 										postsAuthorToMatch = postsByAllAuthors[z].author;
-										if(postsAuthorToMatch === authorToMatch){
-											if(postsByAllAuthors[z].tags.includes(tagNameToMatch)){
-												currentAuthorsPosts.push(postsByAllAuthors[z])
-											}
+										if(postsAuthorToMatch === authorToMatch && postsByAllAuthors[z].tags.includes(tagNameToMatch)){
+											currentAuthorsPosts.push(postsByAllAuthors[z])
 										}
 									}
 									if(tagNameToMatch === authorsTagNameToMatch){
@@ -51,8 +49,8 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 											"posts": currentAuthorsPosts
 										};
 										newTagsList[x].authors.push(authorToAdd);
-										currentAuthorsPosts = [];
 									}
+									currentAuthorsPosts = [];
 								}   
 							}
 
