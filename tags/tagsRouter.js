@@ -22,9 +22,9 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 				.then(authorsByAllTags => {
 					Authors.getPostsByAllAuthors()
 						.then(postsByAllAuthors => {
-							Posts.getAllTotalLikesCount()
+							Authors.getAllTotalLikesCount()
 							.then(allTotalLikesCounts => {
-								Posts.getAllTotalReadsCount()
+								Authors.getAllTotalReadsCount()
 									.then(allTotalReadsCounts => {
 
 										let newTagsList = allTags;
