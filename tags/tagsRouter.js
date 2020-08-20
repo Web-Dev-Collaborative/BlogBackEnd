@@ -23,7 +23,28 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 
 				.then(authorsByAllTags => {
 
-					res.status(200).json({tags: allTags, authors: authorsByAllTags});
+					let newTagsList = allTags.tags;
+					let tagNameToMatch, authorsTagNameToMatch, authorToAdd;
+					// loop through allTags.tags and get allTags.tags.tagname
+					// loop through allTags.authors and get allTags.authors.tagname
+					// if allTags.tags.tagname = allTags.authors.tagname, add to new array under tagname
+					
+					for(let x = 0; x < allTags.tags.length;x++){
+						tagNameToMatch = allTags.tags[x].tagname;
+						newTagsList[x].authors = [];
+						for(let y = 0; y < authorsByAllTags.length;y++){
+							authorsTagNameToMatch = authorsByAllTags[y].tagname;
+							if(tagNameToMatch === authorsTagNameToMatch){
+								authorToAdd = {
+									"bio": authorsByAllTags[y].bio,
+									"id": authorsByAllTags[y].id,
+									"author": authorsByAllTags[y].author
+								};
+								newTagsList[x].authors.push(authorToAdd);
+							}
+						}   
+					}
+					res.status(200).json(newTagsList);
 
 				})
 				.catch(err => res.send(err));
