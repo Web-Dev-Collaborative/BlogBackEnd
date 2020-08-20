@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Tags = require('./tagsModel.js');
 const Authors = require('../authors/authorsModel.js');
+const Posts = require('../posts/postsModel.js');
 const restricted = require('../auth/restriction.js');
 
 const { cache } = require('../cache/cacheHelpers.js');
@@ -13,6 +14,7 @@ const { cache } = require('../cache/cacheHelpers.js');
 // GET:  gets authors per all tags
 	// /tags/authors
 	// chain getAllTags, getAllAuthorsByAllTags
+	// TODO:  add totalLikesCount, totalReadsCount
 router.get('/authors', restricted, cache(10), (req, res) => {
 	Tags.getAllTags()
 		.then(allTags => {
@@ -20,41 +22,49 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 				.then(authorsByAllTags => {
 					Authors.getPostsByAllAuthors()
 						.then(postsByAllAuthors => {
+							Posts.getAllTotalLikesCount()
+							.then(allTotalLikesCounts => {
+								Posts.getAllTotalReadsCount()
+									.then(allTotalReadsCounts => {
 
-							let newTagsList = allTags;
-							let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorToMatch;	
-							let currentAuthorsPosts = [];
+										let newTagsList = allTags;
+										let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorToMatch;	
+										let currentAuthorsPosts = [];
 
-							for(let x = 0; x < newTagsList.length;x++){
-								tagNameToMatch = newTagsList[x].tagname;
-								newTagsList[x].authors = [];
+										for(let x = 0; x < newTagsList.length;x++){
+											tagNameToMatch = newTagsList[x].tagname;
+											newTagsList[x].authors = [];
 
-								for(let y = 0; y < authorsByAllTags.length;y++){
-									authorsTagNameToMatch = authorsByAllTags[y].tagname;
-									authorToMatch = authorsByAllTags[y].author;
+											for(let y = 0; y < authorsByAllTags.length;y++){
+												authorsTagNameToMatch = authorsByAllTags[y].tagname;
+												authorToMatch = authorsByAllTags[y].author;
 
-																
-									for(let z = 0; z < postsByAllAuthors.length;z++){
-										postsAuthorToMatch = postsByAllAuthors[z].author;
-										if(postsAuthorToMatch === authorToMatch && postsByAllAuthors[z].tags.includes(tagNameToMatch)){
-											currentAuthorsPosts.push(postsByAllAuthors[z])
+																			
+												for(let z = 0; z < postsByAllAuthors.length;z++){
+													postsAuthorToMatch = postsByAllAuthors[z].author;
+													if(postsAuthorToMatch === authorToMatch && postsByAllAuthors[z].tags.includes(tagNameToMatch)){
+														currentAuthorsPosts.push(postsByAllAuthors[z])
+													}
+												}
+												if(tagNameToMatch === authorsTagNameToMatch){
+
+													authorToAdd = {
+														"bio": authorsByAllTags[y].bio,
+														"id": authorsByAllTags[y].id,
+														"author": authorsByAllTags[y].author,
+														"posts": currentAuthorsPosts
+													};
+													newTagsList[x].authors.push(authorToAdd);
+												}
+												currentAuthorsPosts = [];
+											}   
 										}
-									}
-									if(tagNameToMatch === authorsTagNameToMatch){
 
-										authorToAdd = {
-											"bio": authorsByAllTags[y].bio,
-											"id": authorsByAllTags[y].id,
-											"author": authorsByAllTags[y].author,
-											"posts": currentAuthorsPosts
-										};
-										newTagsList[x].authors.push(authorToAdd);
-									}
-									currentAuthorsPosts = [];
-								}   
-							}
-
-							res.status(200).json(newTagsList);
+										res.status(200).json({newTagsList, likes: allTotalLikesCounts, reads: allTotalReadsCounts});
+								})
+								.catch(err => res.send(err));
+							})
+							.catch(err => res.send(err));
 
 						})
 						.catch(err => res.send(err));
