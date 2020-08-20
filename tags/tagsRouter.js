@@ -28,10 +28,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 							.then(allTotalLikesCounts => {
 								Authors.getAllTotalReadsCount()
 									.then(allTotalReadsCounts => {
-																				
-										authorsByAllTags = authorsByAllTags.filter((thing, index, self) => 
-											index === self.findIndex(t => t.id === thing.id));
-											authorsByAllTags.sort(compare);
+																			
 
 										allTotalLikesCounts.sort(compare1);
 										allTotalReadsCounts.sort(compare1);
