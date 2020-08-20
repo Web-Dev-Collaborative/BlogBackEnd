@@ -1,5 +1,5 @@
 let allTags = {
-	tags: [
+	"tags": [
 		{
 			tagsid: 1,
 			tagname: 'culture'
@@ -33,7 +33,7 @@ let allTags = {
 			tagname: 'tech'
 		}
 	],
-	authors: [
+	"authors": [
 		{
 			bio: 'I love writing about tech. Check out my posts and let me know what you think!',
 			id: 9,
@@ -533,7 +533,7 @@ let allTags = {
 			tagname: 'history'
 		}
 	],
-	posts: [
+	"posts": [
 		{
 			author: 'Jaden Bryant',
 			authorId: 3,
@@ -1303,7 +1303,7 @@ let allTags = {
 			tags: ['science', 'design', 'history']
 		}
 	],
-	likes: [
+	"likes": [
 		{
 			totallikecount: '3002',
 			authorsid: 4
@@ -1353,7 +1353,7 @@ let allTags = {
 			authorsid: 8
 		}
 	],
-	reads: [
+	"reads": [
 		{
 			totalreadcount: '436543',
 			authorsid: 4
@@ -1404,8 +1404,7 @@ let allTags = {
 		}
 	]
 };
-/*
-one tag's object:
+/* one tag's object:
 {
     "tagsid": 1,
     "tagname": 'culture',
@@ -1456,11 +1455,14 @@ function compare1(a, b) {
 allTags.authors.sort(compare);
 allTags.likes.sort(compare1);
 allTags.reads.sort(compare1);
-// console.log(allTags.likes);
+console.log(allTags.authors);
 
 for (let x = 0; x < allTags.tags.length; x++) {
 	tagNameToMatch = allTags.tags[x].tagname;
 	newTagsList[x].authors = [];
+
+    // loop through each tag
+    // 
 
 	for (let y = 0; y < allTags.authors.length; y++) {
 		authorsTagNameToMatch = allTags.authors[y].tagname;
@@ -1487,7 +1489,7 @@ for (let x = 0; x < allTags.tags.length; x++) {
 		}
 
         currentAuthorsPosts = currentAuthorsPosts.filter(post => post.authorId === authorToMatch);
-        console.log('current authors posts = ' + JSON.stringify(currentAuthorsPosts));
+        // console.log('current authors posts = ' + JSON.stringify(currentAuthorsPosts));
         
 		if (tagNameToMatch === authorsTagNameToMatch) {
 			authorToAdd = {
@@ -1506,5 +1508,5 @@ for (let x = 0; x < allTags.tags.length; x++) {
 	}
 }
 
-console.log(JSON.stringify(newTagsList));
+// console.log(JSON.stringify(newTagsList));
 // query params to sort asc/desc
