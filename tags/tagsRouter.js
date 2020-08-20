@@ -126,6 +126,22 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 												}
 											}
 										}
+										// loop through newTagsList.authors
+											// add every property but newTagsList.authors.tagname
+										for (let x = 0; x < newTagsListLength; x++){
+											currentTag = newTagsList[x];
+											authorsLength = newTagsList[x].authors.length;
+											for (let y = 0; y < authorsLength; y++){
+												currentTag.authors[y] = {
+													bio: currentTag.authors[y].bio,
+													id: currentTag.authors[y].id,
+													author: currentTag.authors[y].author,
+													posts: currentTag.authors[y].posts,
+													totalLikesCount: currentTag.authors[y].totalLikesCount,
+													totalReadsCount: currentTag.authors[y].totalReadsCount
+												}
+											}
+										}
 
 										res.status(200).json(newTagsList);
 								})
