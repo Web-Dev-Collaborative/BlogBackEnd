@@ -1598,7 +1598,7 @@ one tag's object:
 */
 
 let newTagsList = allTags.tags;
-let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorIDOnPost;
+let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorToMatch;
 // loop through allTags.tags and get allTags.tags.tagname
 // loop through allTags.authors and get allTags.authors.tagname
 // if allTags.tags.tagname = allTags.authors.tagname, add to new array under tagname
@@ -1608,9 +1608,11 @@ for(let x = 0; x < allTags.tags.length;x++){
     newTagsList[x].authors = [];
     for(let y = 0; y < allTags.authors.length;y++){
         authorsTagNameToMatch = allTags.authors[y].tagname;
+        authorToMatch = allTags.authors[y].author;
 
         for(let z = 0; z < allTags.posts.length;z++){
-            if(allTags.posts[z].authorid = allTags.authors[y].id){
+            postsAuthorToMatch = allTags.posts[z].author;
+            if(postsAuthorToMatch === authorToMatch){
                 if(allTags.posts[z].tags.includes(tagNameToMatch)){
                     currentAuthorsPosts.push(allTags.posts[z])
                 }
@@ -1632,5 +1634,5 @@ for(let x = 0; x < allTags.tags.length;x++){
         }
     }   
 }
-console.log(JSON.parse(newTagsList));
+console.log(JSON.stringify(newTagsList));
 // query params to sort asc/desc
