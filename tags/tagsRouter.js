@@ -18,35 +18,46 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 		.then(allTags => {
 			Tags.getAllAuthorsByAllTags()
 				.then(authorsByAllTags => {
-
 					Authors.getPostsByAllAuthors()
-					.then(postsByAllAuthors => {
+						.then(postsByAllAuthors => {
 
-						let newTagsList = allTags;
-						let tagNameToMatch, authorsTagNameToMatch, authorToAdd;	
+							let newTagsList = allTags;
+							let tagNameToMatch, authorsTagNameToMatch, authorToAdd;	
+							let currentAuthorsPosts = [];
 
-						for(let x = 0; x < allTags.length;x++){
-							tagNameToMatch = allTags[x].tagname;
-							newTagsList[x].authors = [];
+							for(let x = 0; x < newTagsList.length;x++){
+								tagNameToMatch = newTagsList[x].tagname;
+								newTagsList[x].authors = [];
 
-							for(let y = 0; y < authorsByAllTags.length;y++){
-								authorsTagNameToMatch = authorsByAllTags[y].tagname;
+								for(let y = 0; y < authorsByAllTags.length;y++){
+									authorsTagNameToMatch = authorsByAllTags[y].tagname;
 
-								if(tagNameToMatch === authorsTagNameToMatch){
-									authorToAdd = {
-										"bio": authorsByAllTags[y].bio,
-										"id": authorsByAllTags[y].id,
-										"author": authorsByAllTags[y].author
-									};
-									newTagsList[x].authors.push(authorToAdd);
-								}
-							}   
-						}
+																
+									for(let z = 0; z < postsByAllAuthors.length;z++){
+										if(postsByAllAuthors[z].authorid = authorsByAllTags[y].id){
+											if(postsByAllAuthors[z].tags.includes(tagNameToMatch)){
+												currentAuthorsPosts.push(postsByAllAuthors[z])
+											}
+										}
+									}
+									if(tagNameToMatch === authorsTagNameToMatch){
+										
+										authorToAdd = {
+											"bio": authorsByAllTags[y].bio,
+											"id": authorsByAllTags[y].id,
+											"author": authorsByAllTags[y].author,
+											"posts": currentAuthorsPosts
+										};
+										newTagsList[x].authors.push(authorToAdd);
+										currentAuthorsPosts = [];
+									}
+								}   
+							}
 
-						res.status(200).json({newTagsList, posts: postsByAllAuthors});
+							res.status(200).json({newTagsList});
 
-					})
-					.catch(err => res.send(err));
+						})
+						.catch(err => res.send(err));
 				})
 				.catch(err => res.send(err));
 		})
