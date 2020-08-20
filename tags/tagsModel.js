@@ -47,7 +47,8 @@ FROM Tags
 */
 // get tagsid & tagname on all tags
 function getAllTags(){
-	return db.raw('SELECT tags.tagsid, tags.tagname FROM Tags');
+	return db('tags')
+		.select('tags.tagsid', 'tags.tagname');
 };
 
 /*
@@ -201,7 +202,7 @@ function getTagsByPost(postsid){
 		.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 		.where('posts.postsid', postsid)
 		.groupBy('posts.postsid');
-}
+};
 
 /*
 	SELECT posts.postsid, tags.tagname
@@ -230,16 +231,16 @@ function findBy(filter) {
 async function add(tag) {
 	const [tagsid] = await db('tags').insert(tag, 'tagsid');
 	return findById(tagsid);
-}
+};
 
 function findById(tagsid) {
 	return db('tags').select('tagsid', '*').where({ tagsid }).first();
-}
+};
 
 function update(tagsid, tag) {
 	return db('tags').where({ tagsid }).update(tag);
-}
+};
 
 function remove(tagsid) {
 	return db('tags').where('tagsid', Number(tagsid)).del();
-}
+};

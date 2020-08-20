@@ -15,11 +15,12 @@ const { cache } = require('../cache/cacheHelpers.js');
 // GET:  gets authors per all tags
 	// /tags/authors
 	// chain getAllTags, getAllAuthorsByAllTags
-router.get('/authors', restricted, (req, res) => {
+router.get('/authors', restricted, cache(10), (req, res) => {
 	Tags.getAllTags()
 		.then(allTags => {
 
 			Tags.getAllAuthorsByAllTags()
+
 				.then(authorsByAllTags => {
 
 					res.status(200).json({tags: allTags, authors: authorsByAllTags});
