@@ -31,7 +31,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 																			
 
 
-										let newTagsList = allTags.tags;
+										let newTagsList = allTags;
 										let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorName;
 										let authorBio, authorName, postsAuthorToMatch, currentTLCauthorsID, currentTRCauthorsID;
 										let currentPost, currentAuthorID, currentPostTag, currentTagName;
