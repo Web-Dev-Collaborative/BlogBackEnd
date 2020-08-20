@@ -70,12 +70,12 @@ function getAllAuthorsByAllTags(){
 		'authors.bio as bio',
 		'authors.authorsid AS id', 
 		db.raw("authors.firstname || ' ' || authors.lastname AS author"),
-		db.raw('ARRAY_AGG(tags.tagname) AS tags')
+		'tags.tagname AS tagname'
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-	.groupBy('authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio');
+	.groupBy('tags.tagname', 'authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio');
 };
 
 /*
