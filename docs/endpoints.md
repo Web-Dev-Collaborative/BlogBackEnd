@@ -74,7 +74,7 @@ available tags:
 
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
-| `POST`         | `/poststags/`              | links a post to a tag                |
+| `POST`         | `/poststags`               | links a post to a tag                |
 | `PUT`          | `/poststags/:poststagsid`  | updates a post-tag link              |
 | `DELETE`       | `/poststags/:poststagsid`  | deletes a post-tag link              |
 | `GET`          | `/poststags`               | returns list of post-tag links       |
@@ -83,4 +83,5 @@ available tags:
 
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
-| `GET`          | `/popular`                 | returns list of most popular posts   |
+| `GET`          | `/mostliked                | returns list of most liked posts     |
+| `GET`          | `/mostread                 | returns list of most read posts      |

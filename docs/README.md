@@ -88,9 +88,11 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] fill out readme template
 - [X] deploy
 - [X] write instructions to deploy
-- [ ] Postman testing & documentation
-- [ ] Cypress testing
-  - An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
+- [X] Postman testing & documentation
+- [ ] add error message exists to register endpoint
+- [ ] most likes endpoint
+- [ ] most reads endpoint
+- [ ] test & document most likes/reads endpoints
 - [ ] add appropriate comments
 - [ ] update endpoints readme with all endpoints & query params
 - [ ] need Postman collection link
@@ -191,4 +193,4 @@ To add your token to Postman, once you have the collection loaded in Postman, go
 
 ## Testing
 
-- All endpoints have been tested and documented via Cypress and Postman.
+- All endpoints have been tested and documented via Postman.

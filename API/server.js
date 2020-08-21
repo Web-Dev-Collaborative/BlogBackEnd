@@ -33,6 +33,9 @@ server.use('/api/posts', postsRouter);
 // tags router
 server.use('/api/tags', tagsRouter);
 
+// poststags router (links tags to posts)
+server.use('/api/poststags', tagsRouter);
+
 // ping endpoint
 server.use('/api/ping', pingRouter);
 
