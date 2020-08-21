@@ -174,9 +174,11 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	}
 																	return true;
 																});
-															};
+															}
+															else {
+																res.status(200).json(newAuthors);
+															}
 														}
-														res.status(200).json(newAuthors);
 													})
 													.catch((err) => res.send(err));
 											}
