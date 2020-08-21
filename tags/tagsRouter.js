@@ -13,10 +13,7 @@ const { cache } = require('../cache/cacheHelpers.js');
   - [ ] add tag to post
 */
 
-// GET:  gets authors per all tags
-	// /tags/authors
-	// chain getAllTags, getAllAuthorsByAllTags
-	// TODO:  add totalLikesCount, totalReadsCount
+// GET:  gets authors per all tags w/ each author's posts for that tag
 router.get('/authors', restricted, cache(10), (req, res) => {
 	Tags.getAllTags()
 		.then(allTags => {
@@ -32,16 +29,12 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 
 
 										let newTagsList = allTags;
-										let tagNameToMatch, authorsTagNameToMatch, authorToAdd, authorToMatch, postsAuthorName;
-										let authorBio, authorName, postsAuthorToMatch, currentTLCauthorsID, currentTRCauthorsID;
-										let currentPost, currentAuthorID, currentPostTag, currentTagName;
+										let currentPost, currentTagName, postTagsLength;
 										let likesAuthorID, authorsAuthorID, totalLikesCount, currentAuthor;
 										let likesLength, authorsLength, totalReadsCount, readsLength;
-										let newTagsListLength, currentTagID, currentAuthorsTagName;
-										let matchingTagAndAuthor, tagsLength, postsLength, postsTagsLength;
+										let newTagsListLength, currentAuthorsTagName, postsLength;
 										let currentPostTagName, currentPostTags, currentPostAuthor;
 										// create new array as newTagsList = tags array
-										let currentAuthorsPosts = [];
 										// sort authors, likes, reads & use y for all three
 										
 										allTotalLikesCounts.sort(compare1);
