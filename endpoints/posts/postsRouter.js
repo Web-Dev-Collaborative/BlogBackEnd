@@ -170,6 +170,7 @@ router.put("/:postsid", restricted, (req, res) => {
 // DELETE:  delete single post record
 router.delete("/:postsid", restricted, (req, res) => {
 	const postsid = req.params.postsid;
+	
 	if (!postsid) {
 		res.status(404).json({ message: `The post with the specified ID ${postsid} does not exist.` });
 	}
