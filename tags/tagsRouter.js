@@ -389,8 +389,8 @@ router.get('/:tagname', restricted, (req, res) => {
 // GET:  get all authors per single tag
 	// /tags/<tag>/authors
 	// chain getOneTag, getAllAuthorsByOneTag
-router.get('/:tagname/authors', restricted, (req, res) => {
-	const singleTagName = req.params.tagname;
+router.get('/:singletagname/authors', restricted, (req, res) => {
+	const singleTagName = req.params.singletagname;
 	if (!singleTagName) {
 		res.status(404).json({
 			message: `The tag name ${singleTagName} does not exist.`,
