@@ -5,6 +5,7 @@ const Users = require('../endpoints/users/userModel.js');
 const Token = require('./authHelpers.js');
 const { validateUser } = require('../endpoints/users/userHelpers.js');
 
+// POST:  register user
 router.post('/', (req, res) => {
 
   let user = req.body;

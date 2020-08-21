@@ -72,7 +72,6 @@ function getSinglePost(postsid) {
 		.where('posts.postsid', postsid);
 }
 
-
 // get posts by tag
 function getPostsByTag(tagname){ 
 	let resultsToFilter = 
@@ -102,23 +101,25 @@ function getPostsByTag(tagname){
 
 }
 
-
+// get all rows from posts table
 function find() {
 	return db('posts')
 		.select('*');
 }
-
+// filter posts table rows by filter provided by user
 function findBy(filter) {
 	return db('posts')
 		.where(filter);
 }
 
+// create new row in posts table
 async function add(post) {
 	const [postsid] = await db('posts')
 		.insert(post, 'postsid');
 	return findById(postsid);
 }
 
+// find a row in posts table by postsid
 function findById(postsid) {
 	return db('posts')
 		.select('postsid', '*')
@@ -126,12 +127,14 @@ function findById(postsid) {
 		.first();
 }
 
+// update a row in posts table by postsid
 function update(postsid, post) {
 	return db('posts')
 		.where({ postsid })
 		.update(post);
 }
 
+// delete a row in posts table by postsid
 function remove(postsid) {
 	return db('posts')
 		.where('postsid', Number(postsid))

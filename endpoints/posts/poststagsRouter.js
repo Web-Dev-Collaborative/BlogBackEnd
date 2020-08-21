@@ -5,7 +5,7 @@ const restricted = require("../../auth/restriction.js");
 
 const { cache } = require("../../cache/cacheHelpers.js");
 
-// GET:  gets all poststags records
+// GET:  gets all poststags records (all tags for each post)
 router.get("/", restricted, cache(10), (req, res) => {
 	Poststags.find()
 		.then((poststags) => {
@@ -14,7 +14,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 		.catch((err) => res.send(err));
 });
 
-// GET:  gets one poststags record
+// GET:  gets one poststags record (get tags for one post)
 router.get("/:poststagsid", restricted, cache(10), (req, res) => {
 	const poststagsid = req.params.poststagsid;
 	
@@ -34,7 +34,7 @@ router.get("/:poststagsid", restricted, cache(10), (req, res) => {
 	};
 });
 
-// POST:  record poststags
+// POST:  record a poststags entry (add tag to post)
 router.post("/", restricted, (req, res) => {
 	const newposttag = req.body;
 
@@ -47,7 +47,7 @@ router.post("/", restricted, (req, res) => {
 		});
 });
 
-// PUT:  update poststags record (add tag to post)
+// PUT:  update poststags record (update tags on a post)
 router.put("/:poststagsid", restricted, (req, res) => {
 	const poststagsid = req.params.poststagsid;
 	const updatedposttag = req.body;
@@ -65,7 +65,7 @@ router.put("/:poststagsid", restricted, (req, res) => {
 		});
 });
 
-// DELETE:  delete poststags record
+// DELETE:  delete poststags record (remove tag from post)
 router.delete("/:poststagsid", restricted, (req, res) => {
 	const poststagsid = req.params.poststagsid;
 
