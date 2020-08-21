@@ -162,7 +162,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	return true;
 																});
 															}
-															else if(lastnameField !== "" && lastnameField !== undefined && lastnameField !== null){
+															if(lastnameField !== "" && lastnameField !== undefined && lastnameField !== null){
 																newAuthors = newAuthors.filter(author => {
 																	if(author.lastname.includes(lastnameField.toLowerCase()) === false){
 																		if(author.lastname.includes(lastnameField.toUpperCase()) === false){
@@ -172,7 +172,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	return true;
 																});
 															}
-															else if(bioField !== "" && bioField !== undefined && bioField !== null){
+															if(bioField !== "" && bioField !== undefined && bioField !== null){
 																newAuthors = newAuthors.filter(author => {
 																	if(author.bio.includes(bioField.toLowerCase()) === false){
 																		if(author.bio.includes(bioField.toUpperCase()) === false){
@@ -182,9 +182,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	return true;
 																});
 															}
-															else {
-																res.status(200).json(newAuthors);
-															}
+															res.status(200).json(newAuthors);
 														}
 													})
 													.catch((err) => res.send(err));
