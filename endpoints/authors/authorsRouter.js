@@ -15,9 +15,9 @@ router.get("/", restricted, cache(10), (req, res) => {
 	else{lastnameField = req.query.lastname};
 	if(!req.query.bio){bioField = ''}
 	else{bioField = req.query.bio};
-	const sortField = req.query.sortBy;
+	let sortField = req.query.sortBy;
 	if(!req.query.sortBy){sortField = ''}
-	const directionField = req.query.direction;
+	let directionField = req.query.direction;
 	if(!req.query.direction){directionField = ''}
 
 	Authors.getAllAuthors()
