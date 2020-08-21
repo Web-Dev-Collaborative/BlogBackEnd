@@ -9,16 +9,16 @@ const { cache } = require("../../cache/cacheHelpers.js");
 router.get("/", restricted, cache(10), (req, res) => {
 	
 	let firstnameField, lastnameField, bioField, sortField, directionField;
-	if(!req.query.firstname){firstnameField = ''}
-	else{firstnameField = req.query.firstname};
-	if(!req.query.lastname){lastnameField = ''}
-	else{lastnameField = req.query.lastname};
-	if(!req.query.bio){bioField = ''}
-	else{bioField = req.query.bio};
-	if(!req.query.sortBy){sortField = ''}
-	else{sortField = req.query.bio};
-	if(!req.query.direction){directionField = ''}
-	else{directionField = req.query.bio};
+	if(req.query.firstname){firstnameField = req.query.firstname}
+	else{firstnameField = ''};
+	if(req.query.lastname){lastnameField = req.query.lastname}
+	else{lastnameField = ''};
+	if(req.query.bio){bioField = req.query.bio}
+	else{bioField = ''};
+	if(req.query.sortBy){sortField = req.query.bio}
+	else{sortField = ''};
+	if(req.query.direction){directionField = req.query.bio}
+	else{directionField = ''};
 
 	Authors.getAllAuthors()
 		.then((authors) => {
