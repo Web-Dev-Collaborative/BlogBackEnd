@@ -1,12 +1,12 @@
 const router = require("express").Router();
 
-const Posts = require("./postsModel.js");
+const Posts = require("./popularModel.js");
 const Authors = require("../authors/authorsModel.js");
 const Tags = require("../tags/tagsModel.js");
 
 const restricted = require("../../auth/restriction.js");
 
-const { isTagsFieldArray, validateTag } = require("./postsHelpers.js");
+const { isTagsFieldArray, validateTag } = require("./popularHelpers.js");
 
 const { cache } = require("../../cache/cacheHelpers.js");
 
@@ -58,7 +58,6 @@ router.get("/mostliked", restricted, cache(10), (req, res) => {
 						sortField !== 'author' &&
 						sortField !== 'authorId' &&
 						sortField !== 'likes' &&
-						sortField !== 'reads' &&
 						sortField !== 'id'
 					) {
 						res.status(400).json({ error: 'sortBy parameter is invalid.' });
@@ -66,7 +65,6 @@ router.get("/mostliked", restricted, cache(10), (req, res) => {
 						sortField === 'author' ||
 						sortField === 'authorId' ||
 						sortField === 'likes' ||
-						sortField === 'reads' ||
 						sortField === 'id'
 					) {
 						// if directionField IS NOT empty
@@ -163,7 +161,6 @@ router.get("/mostread", restricted, cache(10), (req, res) => {
 						sortField !== 'author' &&
 						sortField !== 'authorId' &&
 						sortField !== 'likes' &&
-						sortField !== 'reads' &&
 						sortField !== 'id'
 					) {
 						res.status(400).json({ error: 'sortBy parameter is invalid.' });
@@ -171,7 +168,6 @@ router.get("/mostread", restricted, cache(10), (req, res) => {
 						sortField === 'author' ||
 						sortField === 'authorId' ||
 						sortField === 'likes' ||
-						sortField === 'reads' ||
 						sortField === 'id'
 					) {
 						// if directionField IS NOT empty
