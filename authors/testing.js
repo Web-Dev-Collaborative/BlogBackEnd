@@ -1286,12 +1286,24 @@ let newAuthors = [
 ]
 
 const sortField = 'firstName';
+let firstnameField = 'r'
 
-let sortedNewAuthors;
-if(sortField === 'firstName'){sortedNewAuthors = newAuthors.sort(compareFirst);}
-else if (sortField === 'lastName'){sortedNewAuthors = newAuthors.sort(compareLast);}
-else {sortedNewAuthors = newAuthors.sort(compareID);}
+if(sortField === 'firstName'){newAuthors = newAuthors.sort(compareFirst);}
+else if (sortField === 'lastName'){newAuthors = newAuthors.sort(compareLast);}
+else {newAuthors = newAuthors.sort(compareID);}
+
+
+if(firstnameField !== '' && firstnameField !== undefined && firstnameField !== null){
+    newAuthors = newAuthors.filter(author => {
+        if(author.firstName.includes(firstnameField.toLowerCase()) === false){
+            if(author.firstName.includes(firstnameField.toUpperCase()) === false){
+                return false;
+            }
+        }
+        return true;
+    });
+}
 
 console.log('------------------');
 console.log('newAuthors = ');
-console.log(sortedNewAuthors);
+console.log(newAuthors);

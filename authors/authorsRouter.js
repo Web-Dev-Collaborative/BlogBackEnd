@@ -170,17 +170,32 @@ router.get('/', restricted, (req, res) => {
 															}
 															if(firstnameField !== '' && firstnameField !== undefined && firstnameField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	return author.firstname.includes(firstnameField);
+																	if(author.firstname.includes(firstnameField.toLowerCase()) === false){
+																		if(author.firstname.includes(firstnameField.toUpperCase()) === false){
+																			return false;
+																		}
+																	}
+																	return true;
 																});
 															}
 															if(lastnameField !== '' && lastnameField !== undefined && lastnameField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	return author.lastname.includes(lastnameField);
+																	if(author.lastname.includes(lastnameField.toLowerCase()) === false){
+																		if(author.lastname.includes(lastnameField.toUpperCase()) === false){
+																			return false;
+																		}
+																	}
+																	return true;
 																});
 															}
 															if(bioField !== '' && bioField !== undefined && bioField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	return author.bio.includes(bioField);
+																	if(author.bio.includes(bioField.toLowerCase()) === false){
+																		if(author.bio.includes(bioField.toUpperCase()) === false){
+																			return false;
+																		}
+																	}
+																	return true;
 																});
 															}
 															res.status(200).json(newAuthors);
