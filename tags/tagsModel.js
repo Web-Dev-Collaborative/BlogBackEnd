@@ -129,8 +129,9 @@ GROUP BY tags.tagname, authors.authorsid, authors.firstname, authors.lastname, a
 function getAllAuthorsByOneTag(tagName){
 	return db('tags')
 	.select(
+		'tags.tagname AS tagname',
 		'authors.bio AS bio',
-		'authors.authorsid AS id', 
+		'authors.authorsid', 
 		db.raw("authors.firstname || ' ' || authors.lastname AS author")
 	)
 	.distinct()
@@ -153,10 +154,11 @@ GROUP BY tags.tagname, posts.postsid, posts.likes, posts.reads
 // get all posts on one tag
 function getAllPostsByOneTag(tagName){
 	return db('tags')
-	.select('posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads'
+	.select('authors.authorsid', 'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads', db.raw("authors.firstname || ' ' || authors.lastname AS author")
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
+	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 	.where('tags.tagname', tagName);
 
 };
