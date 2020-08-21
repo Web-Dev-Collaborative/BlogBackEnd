@@ -170,17 +170,17 @@ router.get('/', restricted, (req, res) => {
 															}
 															if(firstnameField !== '' && firstnameField !== undefined && firstnameField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	return author.firstname.includes(firstnameField) >= 0;
+																	return author.firstname.includes(firstnameField);
 																});
 															}
 															if(lastnameField !== '' && lastnameField !== undefined && lastnameField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	return author.lastname.includes(lastnameField) >= 0;
+																	return author.lastname.includes(lastnameField);
 																});
 															}
 															if(bioField !== '' && bioField !== undefined && bioField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	return author.bio.includes(bioField) >= 0;
+																	return author.bio.includes(bioField);
 																});
 															}
 															res.status(200).json(newAuthors);
