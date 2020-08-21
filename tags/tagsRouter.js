@@ -363,7 +363,7 @@ router.get('/posts', restricted, cache(10), (req, res) => {
 });
 
 // GET:  get all posts AND authors per single tag
-router.get('/:singletagname', restricted, (req, res) => {
+router.get('/:singletagname', restricted, cache(10), (req, res) => {
 	const singleTagName = req.params.singletagname;
 	if (!singleTagName) {
 		res.status(404).json({
@@ -478,19 +478,6 @@ router.get('/:tagname/posts', restricted, cache(10), (req, res) => {
 
 				})
 				.catch(err => res.send(err));
-		})
-		.catch(err => res.send(err));
-});
-
-// GET:  get all tags for one post
-	// /tags/posts/<postsid>
-	// getTagsByPost(postsID)
-	// TODO
-router.get('/posts/:postsid', restricted, (req, res) => {
-	const postsID = req.params.postsid;
-	Tags.getTagsByPost(postsID)
-		.then(tags => {
-			res.status(200).json({tags: tags});
 		})
 		.catch(err => res.send(err));
 });
