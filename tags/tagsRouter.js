@@ -378,7 +378,13 @@ router.get('/:singletagname', restricted, (req, res) => {
 						Tags.getAllPostsByOneTag(singleTagName)
 						.then(postsForSingleTag => {
 
-							let newTagsList = {tagsid: singleTag[0].tagsid, tagName: singleTag[0].tagName, authors: authorsForSingleTag, posts: postsByOneTag};
+							let newTagsList = {
+								tagsid: singleTag[0].tagsid, 
+								tagName: singleTag[0].tagName, 
+								authors: authorsForSingleTag, 
+								posts: postsForSingleTag
+							};
+
 							let newTagsListAuthorsLength = newTagsList.authors.length;
 							let postsLength = postsForSingleTag.length;
 							let currentAuthorsID, currentPostAuthor, postToPush;
@@ -412,7 +418,7 @@ router.get('/:singletagname', restricted, (req, res) => {
 });
 
 // GET:  get all authors per single tag
-router.get('/:singletagname/authors', restricted, (req, res) => {
+router.get('/:singletagname/authors', restricted, cache(10), (req, res) => {
 	const singleTagName = req.params.singletagname;
 	if (!singleTagName) {
 		res.status(404).json({
