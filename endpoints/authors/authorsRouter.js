@@ -111,9 +111,6 @@ router.get("/", restricted, cache(10), (req, res) => {
 															for (let u = 0; u < newAuthors.length; u++){
 																newAuthors[u].tags = newAuthors[u].tags.filter((item, index)=>{return newAuthors[u].tags.indexOf(item) >= index;});
 															};
-															if(!req.query.firstname && !req.query.lastname && !req.query.bio){
-																res.status(200).json(newAuthors);
-															}
 
 															// firstname, lastname, id sortBy QPs
 															if (sortField !== "" && sortField !== undefined && sortField !== null) {
@@ -178,8 +175,8 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	return true;
 																});
 															};
-															res.status(200).json(newAuthors);
 														}
+														res.status(200).json(newAuthors);
 													})
 													.catch((err) => res.send(err));
 											}
