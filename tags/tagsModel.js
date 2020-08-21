@@ -106,8 +106,8 @@ FROM Tags
 WHERE tags.tagname = 'tech'
 */
 // get tagsid & tagname on one tag
-function getOneTag(tagsid){
-	return db('tags').select('tags.tagsid, tags.tagname').where('tags.tagsid', tagsid);
+function getOneTag(tagName){
+	return db('tags').select('tags.tagsid, tags.tagname').where('tags.tagname', tagName);
 };
 
 /*
@@ -124,7 +124,7 @@ WHERE tags.tagname = 'tech'
 GROUP BY tags.tagname, authors.authorsid, authors.firstname, authors.lastname, authors.bio
 */
 // get all authors on one tag
-function getAllAuthorsByOneTag(tagsid){
+function getAllAuthorsByOneTag(tagName){
 	return db('tags')
 	.select(
 		'authors.bio as bio',
@@ -135,7 +135,7 @@ function getAllAuthorsByOneTag(tagsid){
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 	.groupBy('tags.tagname', 'authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio')
-	.where('tags.tagsid', tagsid);
+	.where('tags.tagname', tagName);
 };
 
 /*
