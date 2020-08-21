@@ -133,11 +133,11 @@ function getAllAuthorsByOneTag(tagName){
 		'authors.authorsid AS id', 
 		db.raw("authors.firstname || ' ' || authors.lastname AS author")
 	)
+	.distinct()
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-	.where('tags.tagname', tagName)
-	.groupBy('tags.tagname', 'authors.authorsid', 'authors.firstname', 'authors.lastname', 'authors.bio');
+	.where('tags.tagname', tagName);
 };
 
 /*
