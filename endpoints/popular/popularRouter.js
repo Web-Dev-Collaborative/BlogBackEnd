@@ -26,13 +26,9 @@ router.get("/mostliked", restricted, cache(10), (req, res) => {
 					error: err
 				});
 			} else {
-				// validate tagsField
-					// if tagsField values are one of available tags
-						// available tags:  culture, design, health, history, politics, science, startups, tech
-				// if tagsField is array or not
 				let filteredResults, newTagsField;
 				if (tagsField.includes(',')) {newTagsField = tagsField.split(',')}
-				else {newTagsField = tagsField};
+				else {newTagsField = [tagsField]};
 				let isTFArray = isTagsFieldArray(newTagsField);
 				let isValidTag = validateTag(newTagsField);
 
@@ -128,13 +124,9 @@ router.get("/mostread", restricted, cache(10), (req, res) => {
 					error: err
 				});
 			} else {
-				// validate tagsField
-					// if tagsField values are one of available tags
-						// available tags:  culture, design, health, history, politics, science, startups, tech
-				// if tagsField is array or not
 				let filteredResults, newTagsField;
 				if (tagsField.includes(',')) {newTagsField = tagsField.split(',')}
-				else {newTagsField = tagsField};
+				else {newTagsField = [tagsField]};
 				let isTFArray = isTagsFieldArray(newTagsField);
 				let isValidTag = validateTag(newTagsField);
 

@@ -1,20 +1,6 @@
 
 # Endpoints
 
-queries for authors:
-
-- bio (case insensitive)
-- firstname (case insensitive)
-- lastname (case insensitive)
-- sortBy (firstname, lastname, id) (case sensitive)
-- direction (asc/desc) (case sensitive)
-
-queries for posts:
-
-- tags (case insensitive)
-- sortBy (author, authorId, likes, reads, id) (case sensitive)
-- direction (asc/desc) (case sensitive)
-
 available tags:
 
 - culture
@@ -45,6 +31,14 @@ available tags:
 
 ## Authors
 
+available query parameters:
+
+- bio (case insensitive)
+- firstname (case insensitive)
+- lastname (case insensitive)
+- sortBy (firstname, lastname, id) (case sensitive)
+- direction (asc/desc) (case sensitive)
+
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
 | `POST`         | `/authors/`                | creates an author                    |
@@ -53,6 +47,12 @@ available tags:
 | `GET`          | `/authors`                 | returns list of authors              |
 
 ## Posts
+
+available query parameters:
+
+- tags (case insensitive)
+- sortBy (author, authorId, likes, reads, id) (case sensitive)
+- direction (asc/desc) (case sensitive)
 
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
@@ -80,6 +80,8 @@ available tags:
 | `GET`          | `/poststags`               | returns list of post-tag links       |
 
 ## Popularity, Likes, and Reads
+
+- tags, sortBy, and direction query parameters all optional
 
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
