@@ -68,23 +68,21 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] You will get a better score on our assessment if you can make concurrent requests to the API (making the requests in parallel)
 - [X] Making API calls to other servers can be expensive. How can you reduce the number of calls you make to a server? You can cache the results of an API call on your server. Try to implement a server side cache to our API. Two tips are 1) keep it simple, and 2) feel free to use existing libraries/frameworks.
 - tags endpoints:
-  - [ ] get all tags (show posts & authors)
-    - [ ] /tags/authors
-    - [ ] /tags/posts
-    - [ ] /tags
-  - [ ] get one tag (show posts & authors)
-    - [ ] /tags/<tag>/authors
-    - [ ] /tags/<tag>/posts
-    - [ ] /tags/<tag>
-  - [ ] get a post's tags
-  - [ ] add tag to post
+  - [X] get all tags (show posts & authors)
+    - [X] /tags/authors
+    - [X] /tags/posts
+    - [X] /tags
+  - [X] get one tag (show posts & authors)
+    - [X] /tags/<tag>/authors
+    - [X] /tags/<tag>/posts
+    - [X] /tags/<tag>
+  - [X] add tag to post
   - [X] update, delete, add tag
 - poststags endpoints:
-    - [ ] query params on put /posts?tags=<tag>,<tag>
-    - [ ] update, delete, add a post's tags
-    - [ ] get a post's tags
-  - [ ] add first & last name query params to authors endpoint, sortBy first/last name, authorsid
-  - [ ] add overall endpoints folder & update its dependencies
+    - [X] get, update, delete, add a post's tags
+- [ ] add firstname & lastname query params to authors get endpoints
+- [ ] add sortBy query params for firstname, lastname, authorsid to authors get endpoints
+- [ ] add overall endpoints folder & update its dependencies
 - [ ] Cypress testing
   - An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
 - [ ] Postman testing & documentation (Postman collection link)
@@ -158,7 +156,7 @@ Your submission takes into consideration how long it takes you to complete it. Y
 
 ## Instructions to Start
 
-There is no need to run this locally, as this app has been [deployed](https://hatchways-betest.herokuapp.com/api).  If you would like to run the Cypress tests on it, simply run ```yarn cypress open```.
+There is no need to run this locally, as this app has been [deployed](https://hatchways-betest.herokuapp.com/api).  The [Postman Collection]() may be found [here](), so there is no set-up required on your part whatsoever.  If you would like to run the Cypress tests on it, simply run ```yarn cypress open```.
 
 The Postman collection contains examples of all get, post, and put endpoint body submissions AND responses as well as tests, so if you open that in Postman, you should be able to view all the endpoints in the way you want.  They are sorted into folders.  
 
@@ -185,7 +183,7 @@ To add your token to Postman, once you have the collection loaded in Postman, go
 ## Documentation
 
 - This app has been documented via Postman.
-- Postman Docs were last published on 08/18/2020.
+- Postman Docs were last published on 08/20/2020.
 - Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
 
 [Postman Collection]()   |   [BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)
