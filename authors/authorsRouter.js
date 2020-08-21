@@ -131,6 +131,7 @@ router.get('/', restricted, (req, res) => {
 																	sortField !== 'lastName' &&
 																	sortField !== 'id'
 																) {
+																	let sortedNewAuthors = [];
 																	// if directionField IS NOT empty
 																	if (directionField !== '' && directionField !== undefined && directionField !== null) {
 																		// if directionField !== 'asc' || directionField !== 'desc' then return error response
@@ -139,28 +140,28 @@ router.get('/', restricted, (req, res) => {
 																		}
 																		else if (directionField === 'asc') {
 																			// sort ascending by sortField
-																			if(sortField === 'firstName'){newAuthors = newAuthors.sort(compareFirst);}
-																			else if (sortField === 'lastName'){newAuthors = newAuthors.sort(compareLast);}
-																			else {newAuthors = newAuthors.sort(compareID);}
+																			if(sortField === 'firstName'){sortedNewAuthors = newAuthors.sort(compareFirst);}
+																			else if (sortField === 'lastName'){sortedNewAuthors = newAuthors.sort(compareLast);}
+																			else {sortedNewAuthors = newAuthors.sort(compareID);}
 																			
 																		}
 																		// else if directionField = 'desc', sort descending by sortField
 																		else if (directionField === 'desc') {
 																			// sort descending by sortField
-																			newAuthors = newAuthors.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
+																			sortedNewAuthors = newAuthors.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
 																		};
 																	}
 																	// default sort ascending by sortField
 																	else {
 																		// sort ascending by sortField
-																		if(sortField === 'firstName'){newAuthors = newAuthors.sort(compareFirst);}
-																		else if (sortField === 'lastName'){newAuthors = newAuthors.sort(compareLast);}
-																		else {newAuthors = newAuthors.sort(compareID);}
+																		if(sortField === 'firstName'){sortedNewAuthors = newAuthors.sort(compareFirst);}
+																		else if (sortField === 'lastName'){sortedNewAuthors = newAuthors.sort(compareLast);}
+																		else {sortedNewAuthors = newAuthors.sort(compareID);}
 																	};
 
 																}
 															}
-															res.status(200).json(newAuthors);
+															res.status(200).json(sortedNewAuthors);
 														}
 													})
 													.catch(err => res.send(err));
