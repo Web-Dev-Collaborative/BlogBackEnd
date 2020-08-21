@@ -97,7 +97,7 @@ function getAllPostsByAllTags(){
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
-	.groupBy('tags.tagname', 'posts.postsid', 'posts.likes', 'posts.reads');
+	.innerJoin('authors', 'authors.authorsid', 'posts.authorsid');
 };
 
 /*
