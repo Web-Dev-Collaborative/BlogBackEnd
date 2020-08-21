@@ -405,14 +405,14 @@ router.get('/:tagname/authors', restricted, (req, res) => {
 						Authors.getAllPostsByOneTag(tagName)
 							.then(postsByAllAuthors => {
 
-						res.status(200).json({tagsid: tag.tagsid, tagName: tag.tagname, authors: authorsByOneTag, posts: postsByAllAuthors});
+								res.status(200).json({tagsid: tag.tagsid, tagName: tag.tagname, authors: authorsByOneTag, posts: postsByAllAuthors});
 
+							})
+							.catch(err => res.send({error: err, tagName: tagName, function: 'getAllPostsByOneTag'}));
 					})
-					.catch(err => res.send({error: err, tagName: tagName, function: 'getAllAuthorsByOneTag'});
-				})
-				.catch(err => res.send({error: err, tagName: tagName, function: 'getAllAuthorsByOneTag'}));
-		})
-		.catch(err => res.send({error: err, tagName: tagName, function: 'getOneTag'}));
+					.catch(err => res.send({error: err, tagName: tagName, function: 'getAllAuthorsByOneTag'}));
+			})
+			.catch(err => res.send({error: err, tagName: tagName, function: 'getOneTag'}));
 	}
 });
 
