@@ -153,7 +153,9 @@ router.get('/', restricted, (req, res) => {
 																	// default sort ascending by sortField
 																	else {
 																		// sort ascending by sortField
-																		newAuthors = newAuthors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+																		if(sortField === 'firstName'){newAuthors = newAuthors.sort(compareFirst);}
+																		else if (sortField === 'lastName'){newAuthors = newAuthors.sort(compareLast);}
+																		else {newAuthors = newAuthors.sort(compareID);}
 																	};
 
 																}
