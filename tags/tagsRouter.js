@@ -15,7 +15,7 @@ const { cache } = require('../cache/cacheHelpers.js');
 */
 
 // GET:  posts AND authors per all tags
-router.get('/', restricted, (req, res) => {
+router.get('/', restricted, cache(10), (req, res) => {
 	Tags.getAllTags()
 		.then(allTags => {
 			Tags.getAllAuthorsByAllTags()
@@ -317,7 +317,7 @@ router.get('/authors', restricted, cache(10), (req, res) => {
 });
 
 // GET:  gets posts per all tags
-router.get('/posts', restricted, (req, res) => {
+router.get('/posts', restricted, cache(10), (req, res) => {
 	Tags.getAllTags()
 		.then(tags => {
 			Tags.getAllPostsByAllTags()
@@ -399,12 +399,12 @@ router.get('/:tagname/authors', restricted, (req, res) => {
 		Tags.getOneTag(tagName).then(tag => {
 				Tags.getAllAuthorsByOneTag(tagName).then(authorsByOneTag => {
 						
-						res.status(200).json({tag: tag, authors: authorsByOneTag, tagName: tagName});
+						res.status(200).json({tagsid: tag.tagsid, tagName: tag.tagname, authors: authorsByOneTag});
 
-					})
-					.catch(err => res.send({error: err, tagName: tagName, function: 'getAllAuthorsByOneTag'}));
-			})
-			.catch(err => res.send({error: err, tagName: tagName, function: 'getOneTag'}));
+				})
+				.catch(err => res.send({error: err, tagName: tagName, function: 'getAllAuthorsByOneTag'}));
+		})
+		.catch(err => res.send({error: err, tagName: tagName, function: 'getOneTag'}));
 	}
 });
 
