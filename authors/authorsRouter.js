@@ -3,6 +3,12 @@ const router = require('express').Router();
 const Authors = require('../authors/authorsModel.js');
 const restricted = require('../auth/restriction.js');
 
+const { 
+    compareFirst,
+    compareLast,
+	compareID 
+} = require('./authorsHelpers.js');
+
 const { cache } = require('../cache/cacheHelpers.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
@@ -133,7 +139,10 @@ router.get('/', restricted, (req, res) => {
 																		}
 																		else if (directionField === 'asc') {
 																			// sort ascending by sortField
-																			newAuthors = newAuthors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+																			if(sortField === 'firstName'){newAuthors = newAuthors.sort(compareFirst);}
+																			else if (sortField === 'lastName'){newAuthors = newAuthors.sort(compareLast);}
+																			else {newAuthors = newAuthors.sort(compareID);}
+																			
 																		}
 																		// else if directionField = 'desc', sort descending by sortField
 																		else if (directionField === 'desc') {
@@ -144,7 +153,9 @@ router.get('/', restricted, (req, res) => {
 																	// default sort ascending by sortField
 																	else {
 																		// sort ascending by sortField
-																		newAuthors = newAuthors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+																		if(sortField === 'firstName'){newAuthors = newAuthors.sort(compareFirst);}
+																		else if (sortField === 'lastName'){newAuthors = newAuthors.sort(compareLast);}
+																		else {newAuthors = newAuthors.sort(compareID);}
 																	};
 
 																}
