@@ -151,14 +151,13 @@ WHERE tags.tagname = 'tech'
 GROUP BY tags.tagname, posts.postsid, posts.likes, posts.reads
 */
 // get all posts on one tag
-function getAllPostsByOneTag(tagsid){
+function getAllPostsByOneTag(tagName){
 	return db('tags')
 	.select('posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads'
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
-	.groupBy('tags.tagname', 'posts.postsid', 'posts.likes', 'posts.reads')
-	.where('tags.tagsid', tagsid);
+	.where('tags.tagname', tagName);
 
 };
 
