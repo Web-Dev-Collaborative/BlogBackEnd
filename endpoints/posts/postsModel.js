@@ -12,9 +12,6 @@ module.exports = {
 	remove
 };
 
-// posts endpoint fields:  author, authorId, postsid as id, likes, reads, tags
-  // queries:  tags, sortBy, direction
-
 
 /*
 	SELECT authors.firstname, authors.lastname, 
@@ -29,33 +26,49 @@ module.exports = {
 // get all posts
 function getPosts() {
 	return db('posts')
-		.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
+		.select(
+			db.raw("authors.firstname || ' ' || authors.lastname as author"),
 			'posts.authorsid AS authorId',
-			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
+			'posts.postsid AS id', 
+			'posts.likes AS likes', 
+			'posts.reads AS reads',
 			db.raw('ARRAY_AGG(tags.tagname) AS tags')
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
-		.groupBy('posts.postsid', 'posts.authorsid', 
-		'authors.firstname', 'authors.lastname',
-		'posts.likes', 'posts.reads');
+		.groupBy(
+			'posts.postsid', 
+			'posts.authorsid', 
+			'authors.firstname', 
+			'authors.lastname',
+			'posts.likes', 
+			'posts.reads'
+		);
 }
 
 // get one single post
 function getSinglePost(postsid) {
 	return db('posts')
-		.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
+		.select(
+			db.raw("authors.firstname || ' ' || authors.lastname as author"),
 			'posts.authorsid AS authorId',
-			'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
+			'posts.postsid AS id', 
+			'posts.likes AS likes', 
+			'posts.reads AS reads',
 			db.raw('ARRAY_AGG(tags.tagname) AS tags')
 		)
 		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
-		.groupBy('posts.postsid', 'posts.authorsid', 
-		'authors.firstname', 'authors.lastname',
-		'posts.likes', 'posts.reads')
+		.groupBy(
+			'posts.postsid', 
+			'posts.authorsid', 
+			'authors.firstname', 
+			'authors.lastname',
+			'posts.likes', 
+			'posts.reads'
+		)
 		.where('posts.postsid', postsid);
 }
 
@@ -64,17 +77,25 @@ function getSinglePost(postsid) {
 function getPostsByTag(tagname){ 
 	let resultsToFilter = 
 		db('posts')
-			.select(db.raw("authors.firstname || ' ' || authors.lastname as author"),
+			.select(
+				db.raw("authors.firstname || ' ' || authors.lastname as author"),
 				'posts.authorsid AS authorId',
-				'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads',
+				'posts.postsid AS id', 
+				'posts.likes AS likes', 
+				'posts.reads AS reads',
 				db.raw('ARRAY_AGG(tags.tagname) AS tags')
 			)
 			.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
 			.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
 			.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
-			.groupBy('posts.postsid', 'posts.authorsid', 
-			'authors.firstname', 'authors.lastname',
-			'posts.likes', 'posts.reads');
+			.groupBy(
+				'posts.postsid', 
+				'posts.authorsid', 
+				'authors.firstname', 
+				'authors.lastname',
+				'posts.likes', 
+				'posts.reads'
+			);
 		return resultsToFilter.filter(post => {
 			return post.tags.indexOf(tagname) >= 0;
 		});
@@ -83,26 +104,36 @@ function getPostsByTag(tagname){
 
 
 function find() {
-	return db('posts').select('*');
+	return db('posts')
+		.select('*');
 }
 
 function findBy(filter) {
-	return db('posts').where(filter);
+	return db('posts')
+		.where(filter);
 }
 
 async function add(post) {
-	const [postsid] = await db('posts').insert(post, 'postsid');
+	const [postsid] = await db('posts')
+		.insert(post, 'postsid');
 	return findById(postsid);
 }
 
 function findById(postsid) {
-	return db('posts').select('postsid', '*').where({ postsid }).first();
+	return db('posts')
+		.select('postsid', '*')
+		.where({ postsid })
+		.first();
 }
 
 function update(postsid, post) {
-	return db('posts').where({ postsid }).update(post);
+	return db('posts')
+		.where({ postsid })
+		.update(post);
 }
 
 function remove(postsid) {
-	return db('posts').where('postsid', Number(postsid)).del();
+	return db('posts')
+		.where('postsid', Number(postsid))
+		.del();
 }

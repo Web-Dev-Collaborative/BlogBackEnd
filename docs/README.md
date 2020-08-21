@@ -82,13 +82,13 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
     - [X] get, update, delete, add a post's tags
 - [X] add firstname & lastname query params to authors get endpoints
 - [X] add sortBy query params for firstname, lastname, authorsid to authors get endpoints
-- [ ] add overall endpoints folder & update its dependencies
+- [X] add overall endpoints folder & update its dependencies
 - [ ] Cypress testing
   - An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
 - [ ] Postman testing & documentation (Postman collection link)
 - [ ] add appropriate comments
-- [ ] make sure there are no console red/yellow errors
-- [ ] make sure app organized, no repeated code, all code formatted
+- [X] make sure there are no console red/yellow errors
+- [X] make sure app organized, no repeated code, all code formatted
 - [X] fill out readme template
 - [X] deploy
 - [X] write instructions to deploy
