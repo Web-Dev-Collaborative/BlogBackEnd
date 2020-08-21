@@ -83,20 +83,18 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] add firstname & lastname query params to authors get endpoints
 - [X] add sortBy query params for firstname, lastname, authorsid to authors get endpoints
 - [X] add overall endpoints folder & update its dependencies
-- [ ] Cypress testing
-  - An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
-- [ ] Postman testing & documentation (Postman collection link)
-- [ ] add appropriate comments
 - [X] make sure there are no console red/yellow errors
 - [X] make sure app organized, no repeated code, all code formatted
 - [X] fill out readme template
 - [X] deploy
 - [X] write instructions to deploy
+- [ ] Postman testing & documentation
+- [ ] Cypress testing
+  - An important part of development is testing. In this step, we want to see tests written for your routes. Do not use the solutions API route to perform testing in this step. Think about the different ways to test the app, and the best way to get good coverage.
+- [ ] add appropriate comments
 - [ ] update endpoints readme with all endpoints & query params
+- [ ] need Postman collection link
 - [ ] submit
-
-We have provided an API with the correct solution. This should only be used to verify
-your results. Do not call this API in your application. [Here it is in action](https://hatchways.io/api/assessment/solution/posts?tags=history,tech&sortBy=likes&direction=desc).
 
 ## Tech Stack
 
@@ -154,11 +152,14 @@ In this assessment, you will write a simple backend JSON API.  If you notice som
 
 Your submission takes into consideration how long it takes you to complete it. You are welcome to submit it at any point, however completing it in less than 12 hours increases your chances of being considered for our next interview cycle.
 
+We have provided an API with the correct solution. This should only be used to verify
+your results. Do not call this API in your application. [Here it is in action](https://hatchways.io/api/assessment/solution/posts?tags=history,tech&sortBy=likes&direction=desc).
+
 ## Instructions to Start
 
 There is no need to run this locally, as this app has been [deployed](https://hatchways-betest.herokuapp.com/api).  The [Postman Collection]() may be found [here](), so there is no set-up required on your part whatsoever.  If you would like to run the Cypress tests on it, simply run ```yarn cypress open```.
 
-The Postman collection contains examples of all get, post, and put endpoint body submissions AND responses as well as tests, so if you open that in Postman, you should be able to view all the endpoints in the way you want.  They are sorted into folders.  
+The Postman collection contains examples of all get, post, and put endpoint body submissions AND responses as well as tests, so if you open the Postman collection, you should be able to view and use all the endpoints.  They are sorted into folders.
 
 You will need to log in to hit endpoints, and a login is provided in the Postman collection.  You may also register your own username and a JWT will be provided to you via the live app.  Take the token you receive from either logging in or registering and put it in the Postman collection as the value to the variable ```token```, which should already be in the collection.  This will make it easy for you to navigate the different endpoints.
 

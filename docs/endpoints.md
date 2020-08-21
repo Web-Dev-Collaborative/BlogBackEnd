@@ -1,6 +1,13 @@
 
 # Endpoints
 
+- queries
+  - bio (case insensitive)
+  - firstname (case insensitive)
+  - lastname (case insensitive)
+  - sortBy (firstname, lastname, id) (case sensitive)
+  - direction (asc/desc) (case sensitive)
+
 ## Login / Registration
 
 | Request Method | Endpoint         | Description                          |
