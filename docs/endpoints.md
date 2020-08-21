@@ -1,12 +1,30 @@
 
 # Endpoints
 
-- queries
-  - bio (case insensitive)
-  - firstname (case insensitive)
-  - lastname (case insensitive)
-  - sortBy (firstname, lastname, id) (case sensitive)
-  - direction (asc/desc) (case sensitive)
+queries for authors:
+
+- bio (case insensitive)
+- firstname (case insensitive)
+- lastname (case insensitive)
+- sortBy (firstname, lastname, id) (case sensitive)
+- direction (asc/desc) (case sensitive)
+
+queries for posts:
+
+- tags (case insensitive)
+- sortBy (author, authorId, likes, reads, id) (case sensitive)
+- direction (asc/desc) (case sensitive)
+
+available tags:
+
+- culture
+- design
+- health
+- history
+- politics
+- science
+- startups
+- tech
 
 ## Login / Registration
 
