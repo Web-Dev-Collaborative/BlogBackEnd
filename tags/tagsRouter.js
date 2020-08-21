@@ -380,7 +380,7 @@ router.get('/:singletagname', restricted, (req, res) => {
 
 							let newTagsList = {
 								tagsid: singleTag[0].tagsid, 
-								tagName: singleTag[0].tagName, 
+								tagName: singleTag[0].tagname, 
 								authors: authorsForSingleTag, 
 								posts: postsForSingleTag
 							};
