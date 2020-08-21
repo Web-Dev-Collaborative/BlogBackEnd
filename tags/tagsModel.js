@@ -108,7 +108,7 @@ WHERE tags.tagname = 'tech'
 // get tagsid & tagname on one tag
 function getOneTag(singleTagName){
 	return db('tags')
-		.select('tags.tagname', 'tags.tagsid')
+		.select('tags.tagname AS tagname', 'tags.tagsid AS tagsid')
 		.where('tags.tagname', singleTagName);
 };
 
