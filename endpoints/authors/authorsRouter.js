@@ -7,11 +7,17 @@ const { cache } = require("../../cache/cacheHelpers.js");
 
 // GET:  gets all authors records, including posts and total likes & reads counts
 router.get("/", restricted, cache(10), (req, res) => {
+	
 	const firstnameField = req.query.firstname;
+	if(!req.query.firstname){firstnameField = ''}
 	const lastnameField = req.query.lastname;
+	if(!req.query.lastname){lastnameField = ''}
 	const bioField = req.query.bio;
+	if(!req.query.bio){bioField = ''}
 	const sortField = req.query.sortBy;
+	if(!req.query.sortBy){sortField = ''}
 	const directionField = req.query.direction;
+	if(!req.query.direction){directionField = ''}
 
 	Authors.getAllAuthors()
 		.then((authors) => {
@@ -155,7 +161,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	return true;
 																});
 															}
-															if(lastnameField !== "" && lastnameField !== undefined && lastnameField !== null){
+															else if(lastnameField !== "" && lastnameField !== undefined && lastnameField !== null){
 																newAuthors = newAuthors.filter(author => {
 																	if(author.lastname.includes(lastnameField.toLowerCase()) === false){
 																		if(author.lastname.includes(lastnameField.toUpperCase()) === false){
@@ -164,8 +170,8 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	}
 																	return true;
 																});
-															};
-															if(bioField !== "" && bioField !== undefined && bioField !== null){
+															}
+															else if(bioField !== "" && bioField !== undefined && bioField !== null){
 																newAuthors = newAuthors.filter(author => {
 																	if(author.bio.includes(bioField.toLowerCase()) === false){
 																		if(author.bio.includes(bioField.toUpperCase()) === false){
