@@ -12,13 +12,24 @@ const {
 const { cache } = require('../cache/cacheHelpers.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
+  // queries:  bio, firstname, lastname, sortBy (firstname, lastname, id), direction (asc/desc)
 
-// - add first & last name query params to authors endpoint
+// - add bio & first & last name query params to authors endpoint
+
+// if firstnameField not '' or not null or not undefined
+	/*
+	if(firstnameField !== '' && firstnameField !== undefined && firstnameField !== null){
+		newAuthors = newAuthors.filter(author => {
+			return author.firstname.includes(firstnameField) >= 0;
+		});
+	}
+	*/
 
 // GET:  gets all authors records, including posts and total likes & reads counts
 router.get('/', restricted, (req, res) => {
 	const firstnameField = req.query.firstname;
 	const lastnameField = req.query.lastname;
+	const bioField = req.query.bio;
 	const sortField = req.query.sortBy;
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
@@ -156,6 +167,21 @@ router.get('/', restricted, (req, res) => {
 																		newAuthors = newAuthors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
 																	};
 																}
+															}
+															if(firstnameField !== '' && firstnameField !== undefined && firstnameField !== null){
+																newAuthors = newAuthors.filter(author => {
+																	return author.firstname.includes(firstnameField) >= 0;
+																});
+															}
+															if(lastnameField !== '' && lastnameField !== undefined && lastnameField !== null){
+																newAuthors = newAuthors.filter(author => {
+																	return author.lastname.includes(lastnameField) >= 0;
+																});
+															}
+															if(bioField !== '' && bioField !== undefined && bioField !== null){
+																newAuthors = newAuthors.filter(author => {
+																	return author.bio.includes(bioField) >= 0;
+																});
 															}
 															res.status(200).json(newAuthors);
 														}
