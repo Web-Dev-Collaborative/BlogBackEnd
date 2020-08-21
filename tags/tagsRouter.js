@@ -448,7 +448,8 @@ router.get('/:tagname/posts', restricted, (req, res) => {
 			Tags.getAllPostsByOneTag(tagName)
 				.then(postsByOneTag => {
 
-					res.status(200).json({tags: tags, posts: postsByOneTag});
+					res.status(200).json({tagsid: tags[0].tagsid, tagname: tags[0].tagname, posts: postsByOneTag});
+					// res.status(200).json({tags: tags, posts: postsByOneTag});
 
 				})
 				.catch(err => res.send(err));

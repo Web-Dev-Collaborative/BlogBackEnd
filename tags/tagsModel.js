@@ -162,10 +162,10 @@ GROUP BY tags.tagname, posts.postsid, posts.likes, posts.reads
 function getAllPostsByOneTag(tagName){
 	return db('tags')
 	.select(
-		'authors.authorsid', 
 		'posts.postsid AS id', 
 		'posts.likes AS likes', 
 		'posts.reads AS reads', 
+		'authors.authorsid', 
 		db.raw("authors.firstname || ' ' || authors.lastname AS author")
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
