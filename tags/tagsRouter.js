@@ -11,6 +11,7 @@ const { cache } = require('../cache/cacheHelpers.js');
 /*
 - tags endpoints:	
   - [ ] add tag to post
+  - [ ] query params to sort asc/desc
 */
 
 // GET:  gets authors per all tags w/ each author's posts for that tag
