@@ -10,15 +10,15 @@ router.get("/", restricted, cache(10), (req, res) => {
 	
 	let firstnameField, lastnameField, bioField, sortField, directionField;
 	if(req.query.firstname){firstnameField = req.query.firstname}
-	else{firstnameField = ''};
+	else{firstnameField = undefined};
 	if(req.query.lastname){lastnameField = req.query.lastname}
-	else{lastnameField = ''};
+	else{lastnameField = undefined};
 	if(req.query.bio){bioField = req.query.bio}
-	else{bioField = ''};
+	else{bioField = undefined};
 	if(req.query.sortBy){sortField = req.query.bio}
-	else{sortField = ''};
+	else{sortField = undefined};
 	if(req.query.direction){directionField = req.query.bio}
-	else{directionField = ''};
+	else{directionField = undefined};
 
 	Authors.getAllAuthors()
 		.then((authors) => {
@@ -189,8 +189,6 @@ router.get("/", restricted, cache(10), (req, res) => {
 											}
 										})
 										.catch((err) => res.send(err));
-
-
 								}
 							})
 							.catch((err) => res.send(err));
