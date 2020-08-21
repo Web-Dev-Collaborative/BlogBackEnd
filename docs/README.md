@@ -95,7 +95,7 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] add appropriate comments
 - [ ] update endpoints readme with all endpoints & query params
 - [ ] need Postman collection link
-- [ ] submit
+- [ ] submit (email with secret & login info)
 
 ## Tech Stack
 
