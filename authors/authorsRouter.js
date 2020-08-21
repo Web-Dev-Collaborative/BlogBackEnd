@@ -140,7 +140,9 @@ router.get('/', restricted, (req, res) => {
 																		}
 																		else if (directionField === 'asc') {
 																			// sort ascending by sortField
-																			if(sortField === 'firstName'){sortedNewAuthors = newAuthors.sort(compareFirst);}
+																			if(sortField === 'firstName'){
+																				res.status(200).json(newAuthors.sort(compareFirst));
+																			}
 																			else if (sortField === 'lastName'){sortedNewAuthors = newAuthors.sort(compareLast);}
 																			else {sortedNewAuthors = newAuthors.sort(compareID);}
 																			
@@ -154,11 +156,12 @@ router.get('/', restricted, (req, res) => {
 																	// default sort ascending by sortField
 																	else {
 																		// sort ascending by sortField
-																		if(sortField === 'firstName'){sortedNewAuthors = newAuthors.sort(compareFirst);}
+																		if(sortField === 'firstName'){
+																			res.status(200).json(newAuthors.sort(compareFirst));
+																		}
 																		else if (sortField === 'lastName'){sortedNewAuthors = newAuthors.sort(compareLast);}
 																		else {sortedNewAuthors = newAuthors.sort(compareID);}
 																	};
-
 																}
 															}
 															res.status(200).json(sortedNewAuthors);
