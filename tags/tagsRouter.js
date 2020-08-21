@@ -401,13 +401,21 @@ router.get('/:singletagname/authors', restricted, (req, res) => {
 			.then(singleTag => {
 				Tags.getAllAuthorsByOneTag(singleTagName)
 					.then(authorsForSingleTag => {
+						Tags.getAllPostsByOneTag(singleTagName)
+						.then(postsForSingleTag => {
 
-						res.status(200).json({tagsid: singleTag[0].tagsid, tagName: singleTag[0].tagname, authors: authorsForSingleTag});
+							res.status(200).json({tagsid: singleTag[0].tagsid, 
+												  tagName: singleTag[0].tagname, 
+												  authors: authorsForSingleTag, 
+												  posts: postsForSingleTag
+												});
+						})
+						.catch(err => res.send({error: err, tagName: singleTagName, function: 'getAllPostsByOneTag'}));
 
 					})
-					.catch(err => res.send({error: err, tagName: singleTagName, function: 'getAllAuthorsByOneTag', endpoint: `/${singleTagName}/authors`}));
+					.catch(err => res.send({error: err, tagName: singleTagName, function: 'getAllAuthorsByOneTag'}));
 			})
-			.catch(err => res.send({error: err, tagName: singleTagName, function: 'getOneTag', endpoint: `/${singleTagName}/authors`}));
+			.catch(err => res.send({error: err, tagName: singleTagName}));
 	};
 });
 
