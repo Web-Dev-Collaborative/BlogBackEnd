@@ -389,31 +389,22 @@ router.get('/:tagname', restricted, (req, res) => {
 // GET:  get all authors per single tag
 	// /tags/<tag>/authors
 	// chain getOneTag, getAllAuthorsByOneTag
-router.get('/:tagname/authors', restricted, (req, res) => {
-	const tagName = req.params.tagname;
-	if (!tagName) {
+router.get('/:singletagname/authors', restricted, (req, res) => {
+	const singleTagName = req.params.singletagname;
+	if (!singleTagName) {
 		res.status(404).json({
-			message: `The tag name ${tagName} does not exist.`,
+			message: `The tag name ${singleTagName} does not exist.`,
 			error: err
 		});
 	} else {
-		Tags.getOneTag(tagName)
-			.then(tag => {
-				Tags.getAllAuthorsByOneTag(tagName)
-					.then(authorsByOneTag => {
-						
-						Authors.getAllPostsByOneTag(tagName)
-							.then(postsByAllAuthors => {
+		Tags.getOneTag(singleTagName)
+			.then(singleTag => {
 
-								res.status(200).json({tagsid: tag.tagsid, tagName: tag.tagname, authors: authorsByOneTag, posts: postsByAllAuthors});
+				res.status(200).json({tagsid: singleTag.tagsid, tagName: singleTag.tagname});
 
-							})
-							.catch(err => res.send({error: err, tagName: tagName, function: 'getAllPostsByOneTag'}));
-					})
-					.catch(err => res.send({error: err, tagName: tagName, function: 'getAllAuthorsByOneTag'}));
 			})
-			.catch(err => res.send({error: err, tagName: tagName, function: 'getOneTag'}));
-	}
+			.catch(err => res.send({error: err, tagName: singleTagName, function: 'getOneTag', endpoint: `/${singleTagName}/authors`}));
+	};
 });
 
 // GET:  get all posts per single tag
