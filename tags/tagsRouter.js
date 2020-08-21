@@ -407,19 +407,24 @@ router.get('/:singletagname/authors', restricted, (req, res) => {
 							let newTagsList = {tagsid: singleTag[0].tagsid, tagName: singleTag[0].tagName, authors: authorsForSingleTag};
 							let newTagsListAuthorsLength = newTagsList.authors.length;
 							let postsLength = postsForSingleTag.length;
-							let currentAuthorsID, currentPostAuthor;
+							let currentAuthorsID, currentPostAuthor, postToPush;
 							
-							for(let x = 0; x < newTagsListAuthorsLength; x++){newTagsList.authors[x].posts = []}
+							for(let x = 0; x < newTagsListAuthorsLength; x++){newTagsList.authors[x].posts = []};
 							
 							for(let x = 0; x < newTagsListAuthorsLength; x++){
-								currentAuthorsID = newTagsList.authors[x].authorsid
+								currentAuthorsID = newTagsList.authors[x].authorsid;
 								for(let y = 0; y < postsLength; y++){
-									currentPostAuthor = postsForSingleTag[y].authorsid
+									currentPostAuthor = postsForSingleTag[y].authorsid;
 									if(currentPostAuthor === currentAuthorsID){
-										newTagsList.authors[x].posts.push(postsForSingleTag[y])
-									}
-								}
-							}
+										postToPush = {
+											id: postsForSingleTag[y].id,
+											likes: postsForSingleTag[y].likes,
+											reads: postsForSingleTag[y].reads
+										};
+										newTagsList.authors[x].posts.push(postToPush);
+									};
+								};
+							};
 							
 							res.status(200).json(newTagsList);
 						})
