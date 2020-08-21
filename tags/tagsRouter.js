@@ -198,8 +198,6 @@ router.get('/posts', restricted, (req, res) => {
 });
 
 // GET:  posts AND authors per all tags
-	// /tags
-	// chain getAllTags, getAllAuthorsByAllTags, getAllPostsByAllTags
 router.get('/', restricted, (req, res) => {
 	Tags.getAllTags()
 		.then(allTags => {
@@ -369,9 +367,9 @@ router.get('/', restricted, (req, res) => {
 	// chain getOneTag, getAllAuthorsByOneTag
 router.get('/:tagname/authors', restricted, (req, res) => {
 	const tagName = req.params.tagname;
-	Tags.getOneTag(tagname)
+	Tags.getOneTag(tagName)
 		.then(tag => {
-			Tags.getAllAuthorsByOneTag(tagname)
+			Tags.getAllAuthorsByOneTag(tagName)
 				.then(authorsByOneTag => {
 
 					res.status(200).json({tag: tag, authors: authorsByOneTag});
