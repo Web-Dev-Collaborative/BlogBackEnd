@@ -367,28 +367,54 @@ router.get('/posts', restricted, cache(10), (req, res) => {
 	// chain getOneTag, getAllAuthorsByOneTag, getAllPostsByOneTag
 	// TODO
 router.get('/:tagname', restricted, (req, res) => {
-	const tagName = req.params.tagname;
-	Tags.getOneTag(tagName)
-		.then(tags => {
-			Tags.getAllAuthorsByOneTag(tagName)
-				.then(authorsByOneTag => {
+	const singleTagName = req.params.singletagname;
+	if (!singleTagName) {
+		res.status(404).json({
+			message: `The tag name ${singleTagName} does not exist.`,
+			error: err
+		});
+	} else {
+		Tags.getOneTag(singleTagName)
+			.then(singleTag => {
+				Tags.getAllAuthorsByOneTag(singleTagName)
+					.then(authorsForSingleTag => {
+						Tags.getAllPostsByOneTag(singleTagName)
+						.then(postsForSingleTag => {
 
-					Tags.getAllPostsByOneTag()
-					.then(postsByOneTag => {
-
-						res.status(200).json({tags: tags, authors: authorsByOneTag, posts: postsByOneTag});
+							let newTagsList = {tagsid: singleTag[0].tagsid, tagName: singleTag[0].tagName, authors: authorsForSingleTag, posts: postsByOneTag};
+							let newTagsListAuthorsLength = newTagsList.authors.length;
+							let postsLength = postsForSingleTag.length;
+							let currentAuthorsID, currentPostAuthor, postToPush;
+							
+							for(let x = 0; x < newTagsListAuthorsLength; x++){newTagsList.authors[x].posts = []};
+							
+							for(let x = 0; x < newTagsListAuthorsLength; x++){
+								currentAuthorsID = newTagsList.authors[x].authorsid;
+								for(let y = 0; y < postsLength; y++){
+									currentPostAuthor = postsForSingleTag[y].authorsid;
+									if(currentPostAuthor === currentAuthorsID){
+										postToPush = {
+											id: postsForSingleTag[y].id,
+											likes: postsForSingleTag[y].likes,
+											reads: postsForSingleTag[y].reads
+										};
+										newTagsList.authors[x].posts.push(postToPush);
+									};
+								};
+							};
+							
+							res.status(200).json(newTagsList);
+						})
+						.catch(err => res.send({error: err, tagName: singleTagName, function: 'getAllPostsByOneTag'}));
 
 					})
-					.catch(err => res.send(err));
-				})
-				.catch(err => res.send(err));
-		})
-		.catch(err => res.send(err));
+					.catch(err => res.send({error: err, tagName: singleTagName, function: 'getAllAuthorsByOneTag'}));
+			})
+			.catch(err => res.send({error: err, tagName: singleTagName}));
+	};
 });
 
 // GET:  get all authors per single tag
-	// /tags/<tag>/authors
-	// chain getOneTag, getAllAuthorsByOneTag
 router.get('/:singletagname/authors', restricted, (req, res) => {
 	const singleTagName = req.params.singletagname;
 	if (!singleTagName) {
@@ -407,19 +433,24 @@ router.get('/:singletagname/authors', restricted, (req, res) => {
 							let newTagsList = {tagsid: singleTag[0].tagsid, tagName: singleTag[0].tagName, authors: authorsForSingleTag};
 							let newTagsListAuthorsLength = newTagsList.authors.length;
 							let postsLength = postsForSingleTag.length;
-							let currentAuthorsID, currentPostAuthor;
+							let currentAuthorsID, currentPostAuthor, postToPush;
 							
-							for(let x = 0; x < newTagsListAuthorsLength; x++){newTagsList.authors[x].posts = []}
+							for(let x = 0; x < newTagsListAuthorsLength; x++){newTagsList.authors[x].posts = []};
 							
 							for(let x = 0; x < newTagsListAuthorsLength; x++){
-								currentAuthorsID = newTagsList.authors[x].authorsid
+								currentAuthorsID = newTagsList.authors[x].authorsid;
 								for(let y = 0; y < postsLength; y++){
-									currentPostAuthor = postsForSingleTag[y].authorsid
+									currentPostAuthor = postsForSingleTag[y].authorsid;
 									if(currentPostAuthor === currentAuthorsID){
-										newTagsList.authors[x].posts.push(postsForSingleTag[y])
-									}
-								}
-							}
+										postToPush = {
+											id: postsForSingleTag[y].id,
+											likes: postsForSingleTag[y].likes,
+											reads: postsForSingleTag[y].reads
+										};
+										newTagsList.authors[x].posts.push(postToPush);
+									};
+								};
+							};
 							
 							res.status(200).json(newTagsList);
 						})
@@ -433,9 +464,6 @@ router.get('/:singletagname/authors', restricted, (req, res) => {
 });
 
 // GET:  get all posts per single tag
-    // /tags/<tag>/posts
-	// chain getOneTag, getAllPostsByOneTag
-	// TODO
 router.get('/:tagname/posts', restricted, (req, res) => {
 	const tagName = req.params.tagname;
 	Tags.getOneTag(tagName)
@@ -443,7 +471,8 @@ router.get('/:tagname/posts', restricted, (req, res) => {
 			Tags.getAllPostsByOneTag(tagName)
 				.then(postsByOneTag => {
 
-					res.status(200).json({tags: tags, posts: postsByOneTag});
+					res.status(200).json({tagsid: tags[0].tagsid, tagname: tags[0].tagname, posts: postsByOneTag});
+					// res.status(200).json({tags: tags, posts: postsByOneTag});
 
 				})
 				.catch(err => res.send(err));
