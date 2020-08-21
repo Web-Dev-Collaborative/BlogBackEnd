@@ -230,7 +230,7 @@ function getTagsByPost(postsid){
 	ON poststags.postsid = poststags.postsid
 	GROUP BY posts.postsid;
 */
-// get tags by post
+// get tags
 function getTags(){
 	return db('tags')
 		.select(
