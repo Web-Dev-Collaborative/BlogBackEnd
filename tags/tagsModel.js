@@ -166,14 +166,12 @@ function getAllPostsByOneTag(tagName){
 		'posts.postsid AS id', 
 		'posts.likes AS likes', 
 		'posts.reads AS reads', 
-		db.raw("authors.firstname || ' ' || authors.lastname AS author"),
-		db.raw('ARRAY_AGG(tags.tagname) AS tags')
+		db.raw("authors.firstname || ' ' || authors.lastname AS author")
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-	.where('tags.tagname', tagName)
-	.groupBy('authors.authorsid', 'posts.postsid', 'posts.likes', 'posts.reads', 'authors.firstname', 'authors.lastname');
+	.where('tags.tagname', tagName);
 
 };
 

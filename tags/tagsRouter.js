@@ -404,11 +404,24 @@ router.get('/:singletagname/authors', restricted, (req, res) => {
 						Tags.getAllPostsByOneTag(singleTagName)
 						.then(postsForSingleTag => {
 
-							res.status(200).json({tagsid: singleTag[0].tagsid, 
-												  tagName: singleTag[0].tagname, 
-												  authors: authorsForSingleTag, 
-												  posts: postsForSingleTag
-												});
+							let newTagsList = {tagsid: singleTag[0].tagsid, tagName: singleTag[0].tagName, authors: authorsForSingleTag};
+							let newTagsListAuthorsLength = newTagsList.authors.length;
+							let postsLength = postsForSingleTag.length;
+							let currentAuthorsID, currentPostAuthor;
+							
+							for(let x = 0; x < newTagsListAuthorsLength; x++){newTagsList.authors[x].posts = []}
+							
+							for(let x = 0; x < newTagsListAuthorsLength; x++){
+								currentAuthorsID = newTagsList.authors[x].authorsid
+								for(let y = 0; y < postsLength; y++){
+									currentPostAuthor = postsForSingleTag[y].authorsid
+									if(currentPostAuthor === currentAuthorsID){
+										newTagsList.authors[x].posts.push(postsForSingleTag[y])
+									}
+								}
+							}
+							
+							res.status(200).json(newTagsList);
 						})
 						.catch(err => res.send({error: err, tagName: singleTagName, function: 'getAllPostsByOneTag'}));
 
