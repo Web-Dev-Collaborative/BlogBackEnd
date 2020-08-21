@@ -7,19 +7,11 @@ const { cache } = require("../../cache/cacheHelpers.js");
 
 // GET:  gets all authors records, including posts and total likes & reads counts
 router.get("/", restricted, cache(10), (req, res) => {
-	
-	let firstnameField, lastnameField, bioField, sortField, directionField;
-	if(req.query.firstname){firstnameField = req.query.firstname}
-	else{firstnameField = undefined};
-	if(req.query.lastname){lastnameField = req.query.lastname}
-	else{lastnameField = undefined};
-	if(req.query.bio){bioField = req.query.bio}
-	else{bioField = undefined};
-	if(req.query.sortBy){sortField = req.query.bio}
-	else{sortField = undefined};
-	if(req.query.direction){directionField = req.query.bio}
-	else{directionField = undefined};
-
+	const firstnameField = req.query.firstname;
+	const lastnameField = req.query.lastname;
+	const bioField = req.query.bio;
+	const sortField = req.query.sortBy;
+	const directionField = req.query.direction;
 	Authors.getAllAuthors()
 		.then((authors) => {
 			if (!authors) {
