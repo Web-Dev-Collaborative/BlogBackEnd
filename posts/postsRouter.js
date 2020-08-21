@@ -11,7 +11,7 @@ const { isTagsFieldArray, validateTag } = require('./postsHelpers.js');
 const { cache } = require('../cache/cacheHelpers.js');
 
 // posts endpoint fields:  author, authorId, postsid as id, likes, reads, tags
-  // queries:  tags, sortBy, direction
+  // queries:  tags, sortBy (author, authorId, likes, reads, id), direction (asc/desc)
 
 // GET:  gets all posts records
 router.get('/', restricted, cache(10), (req, res) => {
