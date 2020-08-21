@@ -111,16 +111,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 															for (let u = 0; u < newAuthors.length; u++){
 																newAuthors[u].tags = newAuthors[u].tags.filter((item, index)=>{return newAuthors[u].tags.indexOf(item) >= index;});
 															};
-															if(sortField === ''|| sortField !== undefined || sortField !== null){
-																res.status(200).json(newAuthors);
-															}
-															if(firstnameField === ''|| firstnameField !== undefined || firstnameField !== null){
-																res.status(200).json(newAuthors);
-															}
-															if(lastnameField === ''|| lastnameField !== undefined || lastnameField !== null){
-																res.status(200).json(newAuthors);
-															}
-															if(bioField === ''|| bioField !== undefined || bioField !== null){
+															if(!req.query.firstname && !req.query.lastname && !req.query.bio){
 																res.status(200).json(newAuthors);
 															}
 
