@@ -10,28 +10,28 @@ module.exports = {
 };
 
 function find() {
-	return db('payments').select('*');
+	return db('poststags').select('*');
 }
 
 function findBy(filter) {
-	return db('payments').where(filter);
+	return db('poststags').where(filter);
 }
 
-async function add(payment) {
-	const [pid] = await db('payments').insert(payment, 'pid');
-	return findById(pid);
+async function add(posttag) {
+	const [poststagsid] = await db('poststags').insert(posttag, 'poststagsid');
+	return findById(poststagsid);
 }
 
-function findById(pid) {
-	return db('payments').select('pid', '*').where({ pid }).first();
+function findById(poststagsid) {
+	return db('poststags').select('poststagsid', '*').where({ poststagsid }).first();
 }
 
-function update(pid, payment) {
-	return db('payments').where({ pid }).update(payment);
+function update(poststagsid, posttag) {
+	return db('poststags').where({ poststagsid }).update(posttag);
 }
 
-function remove(pid) {
-	return db('payments').where('pid', Number(pid)).del();
+function remove(poststagsid) {
+	return db('poststags').where('poststagsid', Number(poststagsid)).del();
 }
 
 /*

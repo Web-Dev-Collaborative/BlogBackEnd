@@ -10,10 +10,6 @@ const { isTagsFieldArray, validateTag } = require('./postsHelpers.js');
 
 const { cache } = require('../cache/cacheHelpers.js');
 
-// getAuthors, getPostsByAuthor from authors model
-// getTagsByAuthor, getTagsByPost from tags model
-// getPosts, getTotalReadsCount, getTotalLikesCount from posts model
-
 // posts endpoint fields:  author, authorId, postsid as id, likes, reads, tags
   // queries:  tags, sortBy, direction
 
