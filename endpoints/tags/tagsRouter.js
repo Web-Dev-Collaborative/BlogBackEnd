@@ -3,11 +3,11 @@ const router = require('express').Router();
 const Tags = require('./tagsModel.js');
 const Authors = require('../authors/authorsModel.js');
 const Posts = require('../posts/postsModel.js');
-const restricted = require('../auth/restriction.js');
+const restricted = require('../../auth/restriction.js');
 
-const { compare1 } = require('../tags/tagsHelpers.js');
+const { compare1 } = require('./tagsHelpers.js');
 
-const { cache } = require('../cache/cacheHelpers.js');
+const { cache } = require('../../cache/cacheHelpers.js');
 /*
 - tags endpoints:	
   - [ ] add tag to post

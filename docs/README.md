@@ -80,7 +80,7 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
   - [X] update, delete, add tag
 - poststags endpoints:
     - [X] get, update, delete, add a post's tags
-- [ ] add firstname & lastname query params to authors get endpoints
+- [X] add firstname & lastname query params to authors get endpoints
 - [X] add sortBy query params for firstname, lastname, authorsid to authors get endpoints
 - [ ] add overall endpoints folder & update its dependencies
 - [ ] Cypress testing

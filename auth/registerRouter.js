@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 
-const Users = require('../users/user-model.js');
-const Token = require('./auth-helpers.js');
-const { validateUser } = require('../users/user-helpers.js');
+const Users = require('../endpoints/users/userModel.js');
+const Token = require('./authHelpers.js');
+const { validateUser } = require('../endpoints/users/userHelpers.js');
 
 router.post('/', (req, res) => {
 
