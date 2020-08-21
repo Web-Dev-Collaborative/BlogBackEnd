@@ -8,8 +8,8 @@ module.exports = {
     // queries:  
 function compareFirst(a, b) {
     // ignore letter casing
-    const firstCompare = a.firstname.toUpperCase();
-    const secondCompare = b.firstname.toUpperCase();
+    const firstCompare = a.firstName.toUpperCase();
+    const secondCompare = b.firstName.toUpperCase();
     let comparison = 0;
 
     if (firstCompare > secondCompare) {comparison = 1;} 
