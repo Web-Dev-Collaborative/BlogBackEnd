@@ -10,7 +10,7 @@ const { cache } = require('../../cache/cacheHelpers.js');
   // queries:  bio, firstname, lastname, sortBy (firstname, lastname, id), direction (asc/desc)
 
 // GET:  gets all authors records, including posts and total likes & reads counts
-router.get('/', restricted, cache(10), (req, res) => {
+router.get('/', restricted, (req, res) => {
 	const firstnameField = req.query.firstname;
 	const lastnameField = req.query.lastname;
 	const bioField = req.query.bio;
@@ -204,7 +204,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 // 
 
 // GET:  gets one author record, including posts and total likes & reads counts
-router.get('/:authorsid', restricted, cache(10), (req, res) => {
+router.get('/:authorsid', restricted, (req, res) => {
 	const authorsid = req.params.authorsid;
 	if (!authorsid) {
 		res.status(404).json({ message: `The author with the specified authorsid ${authorsid} does not exist.` });
