@@ -13,7 +13,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 	// if req.query.tags is empty, return error response
 	if (!req.query.tags) {res.status(400).json({ error: 'Tags parameter is required' })};
 	const tagsField = req.query.tags;
-	// sort by id, reads, likes  (any??)
+	// sort by author, authorId, id, reads, likes
 	const sortField = req.query.sortBy;
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
@@ -30,9 +30,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 				else {newTagsField = [tagsField]};
 				let isTFArray = isTagsFieldArray(newTagsField);
 				let isValidTag = validateTag(newTagsField);
-				// validate sortField
-					// if sort criteria not valid
-						// available sorts:  author, authorId, id, likes, reads
+				
 				if (sortField !== '' && sortField !== undefined && sortField !== null) {
 					if (
 						sortField !== 'author' &&
@@ -49,18 +47,14 @@ router.get("/", restricted, cache(10), (req, res) => {
 						sortField === 'reads' ||
 						sortField === 'id'
 					) {
-						// if directionField IS NOT empty
 						if (directionField !== '' && directionField !== undefined && directionField !== null) {
-							// if directionField !== 'asc' || directionField !== 'desc' then return error response
 							if (directionField !== 'asc' && directionField !== 'desc') {
 								res.status(400).json({ error: 'direction parameter is invalid.' });
 							}
-							// else if directionField = 'asc', sort ascending by sortField
 							else if (directionField === 'asc') {
 								// sort ascending by sortField
 								posts = posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
 							}
-							// else if directionField = 'desc', sort descending by sortField
 							else if (directionField === 'desc') {
 								// sort descending by sortField
 								posts = posts.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
@@ -68,7 +62,6 @@ router.get("/", restricted, cache(10), (req, res) => {
 						}
 						// default sort ascending by sortField
 						else {
-							// sort ascending by sortField
 							posts = posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
 						};
 					};
@@ -96,7 +89,6 @@ router.get("/", restricted, cache(10), (req, res) => {
 						});
 						res.status(200).json({ posts: filteredResults });
 					} else if (isValidTag === false) {
-						// if IS NOT valid tag, return error response
 						res.status(400).json({ error: 'Tags parameter is invalid.' });
 					};
 				};
@@ -134,7 +126,7 @@ router.post("/", restricted, (req, res) => {
 		});
 });
 
-// PUT:  update single post record
+// PUT:  update single post; single row in posts table
 router.put("/:postsid", restricted, (req, res) => {
 	const postsid = req.params.postsid;
 	const updatedPost = req.body;
@@ -152,7 +144,7 @@ router.put("/:postsid", restricted, (req, res) => {
 		});
 });
 
-// DELETE:  delete single post record
+// DELETE:  delete single post; single row in posts table
 router.delete("/:postsid", restricted, (req, res) => {
 	const postsid = req.params.postsid;
 	
