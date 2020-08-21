@@ -365,17 +365,17 @@ router.get('/', restricted, (req, res) => {
 // GET:  get all authors per single tag
 	// /tags/<tag>/authors
 	// chain getOneTag, getAllAuthorsByOneTag
-router.get('/:tagname/authors', restricted, (req, res) => {
+router.get('/:tagname' + '/authors', restricted, (req, res) => {
 	const tagName = req.params.tagname;
 	Tags.getOneTag(tagName)
 		.then(tag => {
 			Tags.getAllAuthorsByOneTag(tagName)
 				.then(authorsByOneTag => {
-
-					res.status(200).json({tag: tag, authors: authorsByOneTag});
+					
+					res.status(200).json({tag: tag, authors: authorsByOneTag, tagName: tagName});
 
 				})
-				.catch(err => res.send(err));
+				.catch(err => res.send(err, {tag: tag, authors: authorsByOneTag, tagName: tagName}));
 		})
 		.catch(err => res.send(err));
 });
