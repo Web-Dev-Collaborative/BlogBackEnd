@@ -81,9 +81,7 @@ available query parameters:
 
 ## Popularity, Likes, and Reads
 
-- tags, sortBy, and direction query parameters all optional
-
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
-| `GET`          | `/mostliked                | returns list of most liked posts     |
-| `GET`          | `/mostread                 | returns list of most read posts      |
+| `GET`          | `/mostliked`               | returns list of most liked posts     |
+| `GET`          | `/mostread`                | returns list of most read posts      |
