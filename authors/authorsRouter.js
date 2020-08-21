@@ -83,19 +83,19 @@ router.get('/', restricted, (req, res) => {
 																		}
 																		else if (directionField === 'asc') {
 																			// sort ascending by sortField
-																			authors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+																			authors = authors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
 																			
 																		}
 																		// else if directionField = 'desc', sort descending by sortField
 																		else if (directionField === 'desc') {
 																			// sort descending by sortField
-																			authors.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
+																			authors = authors.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
 																		};
 																	}
 																	// default sort ascending by sortField
 																	else {
 																		// sort ascending by sortField
-																		authors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+																		authors = authors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
 																	};
 																}
 															}
