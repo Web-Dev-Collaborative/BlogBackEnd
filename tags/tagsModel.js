@@ -129,8 +129,8 @@ GROUP BY tags.tagname, authors.authorsid, authors.firstname, authors.lastname, a
 function getAllAuthorsByOneTag(tagName){
 	return db('tags')
 	.select(
-		'tags.tagname', 'tags.tagsid',
-		'authors.bio as bio',
+		'tags.tagname AS tagname', 'tags.tagsid AS tagsid',
+		'authors.bio AS bio',
 		'authors.authorsid AS id', 
 		db.raw("authors.firstname || ' ' || authors.lastname AS author")
 	)
