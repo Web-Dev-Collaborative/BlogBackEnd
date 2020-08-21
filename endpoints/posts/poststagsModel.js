@@ -19,9 +19,9 @@ function findBy(filter) {
 		.where(filter);
 };
 
-async function add(posttag) {
+async function add(poststagsentry) {
 	const [poststagsid] = await db("poststags")
-		.insert(posttag, "poststagsid");
+		.insert(poststagsentry, "poststagsid");
 	return findById(poststagsid);
 };
 
