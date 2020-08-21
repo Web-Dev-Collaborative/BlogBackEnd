@@ -91,6 +91,8 @@ GROUP BY tags.tagname, posts.postsid, posts.likes, posts.reads
 function getAllPostsByAllTags(){
 	return db('tags')
 	.select('tags.tagname AS tagname', 
+			'authors.authorsid AS id', 
+			db.raw("authors.firstname || ' ' || authors.lastname AS author"),
 		'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads'
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
