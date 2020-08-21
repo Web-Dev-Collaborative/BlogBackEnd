@@ -375,9 +375,9 @@ router.get('/:tagname/authors', restricted, (req, res) => {
 					res.status(200).json({tag: tag, authors: authorsByOneTag, tagName: tagName});
 
 				})
-				.catch(err => res.send({error: err, tag: tag, authors: authorsByOneTag, tagName: tagName}));
+				.catch(err => res.send({error: err, tagName: tagName}));
 		})
-		.catch(err => res.send({error: err, tag: tag, authors: authorsByOneTag, tagName: tagName}));
+		.catch(err => res.send({error: err, tagName: tagName}));
 });
 
 // GET:  get all posts per single tag
