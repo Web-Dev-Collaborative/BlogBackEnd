@@ -90,10 +90,14 @@ GROUP BY tags.tagname, posts.postsid, posts.likes, posts.reads
 // get all posts per all tags
 function getAllPostsByAllTags(){
 	return db('tags')
-	.select('tags.tagname AS tagname', 'posts.postsid',
-			'authors.authorsid', 
-			db.raw("authors.firstname || ' ' || authors.lastname AS author"),
-		'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads'
+	.select(
+		'tags.tagname AS tagname', 
+		'posts.postsid',
+		'authors.authorsid', 
+		db.raw("authors.firstname || ' ' || authors.lastname AS author"),
+		'posts.postsid AS id',
+		'posts.likes AS likes', 
+		'posts.reads AS reads'
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
@@ -108,7 +112,10 @@ WHERE tags.tagname = 'tech'
 // get tagsid & tagname on one tag
 function getOneTag(singleTagName){
 	return db('tags')
-		.select('tags.tagname AS tagname', 'tags.tagsid AS tagsid')
+		.select(
+			'tags.tagname AS tagname', 
+			'tags.tagsid AS tagsid'
+		)
 		.where('tags.tagname', singleTagName);
 };
 
@@ -154,12 +161,19 @@ GROUP BY tags.tagname, posts.postsid, posts.likes, posts.reads
 // get all posts on one tag
 function getAllPostsByOneTag(tagName){
 	return db('tags')
-	.select('authors.authorsid', 'posts.postsid AS id', 'posts.likes AS likes', 'posts.reads AS reads', db.raw("authors.firstname || ' ' || authors.lastname AS author")
+	.select(
+		'authors.authorsid', 
+		'posts.postsid AS id', 
+		'posts.likes AS likes', 
+		'posts.reads AS reads', 
+		db.raw("authors.firstname || ' ' || authors.lastname AS author"),
+		db.raw('ARRAY_AGG(tags.tagname) AS tags')
 	)
 	.innerJoin('poststags', 'tags.tagsid', 'poststags.tagsid')
 	.innerJoin('posts', 'poststags.postsid', 'posts.postsid')
 	.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-	.where('tags.tagname', tagName);
+	.where('tags.tagname', tagName)
+	.groupBy('authors.authorsid', 'posts.postsid', 'posts.likes', 'posts.reads', 'authors.firstname', 'authors.lastname');
 
 };
 
