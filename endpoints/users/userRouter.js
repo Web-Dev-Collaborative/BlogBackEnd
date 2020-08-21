@@ -4,6 +4,7 @@ const Users = require('./userModel.js');
 
 const restricted = require('../../auth/restriction.js');
 
+// GET:  get all users
 router.get('/', restricted, (req, res) => {
   Users.find()
     .then(users => {
@@ -12,6 +13,7 @@ router.get('/', restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
+// GET:  get a user by usersid
 router.get('/:id', restricted, (req, res) => {
   const id = req.params.id;
   if (!id) {
@@ -27,6 +29,7 @@ router.get('/:id', restricted, (req, res) => {
   }
 });
 
+// DELETE:  delete a user
 router.delete('/:id', restricted, (req, res) => {
   const id = req.params.id;
   if (!id) {
