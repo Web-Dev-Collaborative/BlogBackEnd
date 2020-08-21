@@ -40,12 +40,12 @@ module.exports = {
 */
 // get bio info for all authors
 function getAllAuthors() {
-	return db('authors').select('authors.bio AS bio', 'authors.firstname AS firstName', 'authors.authorsid AS id', 'authors.lastname AS lastName');
+	return db('authors').select('authors.bio AS bio', 'authors.firstname AS firstname', 'authors.authorsid AS id', 'authors.lastname AS lastName');
 }
 
 /*
 	SELECT 
-		authors.authorsid as id, authors.firstname as firstName, 
+		authors.authorsid as id, authors.firstname as firstname, 
 		authors.lastname as lastName, authors.bio
 	FROM authors
 	WHERE authors.authorsid = 2;
@@ -54,7 +54,7 @@ function getAllAuthors() {
 function getAuthor(authorsid) {
 	return db('authors')
 		.select(
-			'authors.bio AS bio', 'authors.firstname AS firstName', 'authors.authorsid AS id', 'authors.lastname AS lastName'
+			'authors.bio AS bio', 'authors.firstname AS firstname', 'authors.authorsid AS id', 'authors.lastname AS lastName'
 		)
 		.where('authors.authorsid', authorsid);
 }

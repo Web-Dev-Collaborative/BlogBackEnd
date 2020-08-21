@@ -65,14 +65,14 @@ router.get('/', restricted, (req, res) => {
 															// firstnameField, lastnameField, id sortBy QPs
 															if (sortField !== '' && sortField !== undefined && sortField !== null) {
 																if (
-																	sortField !== 'firstName' &&
-																	sortField !== 'lastName' &&
+																	sortField !== 'firstname' &&
+																	sortField !== 'lastname' &&
 																	sortField !== 'id'
 																) {
 																	res.status(400).json({ error: 'sortBy parameter is invalid.' });
 																} else if (
-																	sortField !== 'firstName' &&
-																	sortField !== 'lastName' &&
+																	sortField !== 'firstname' &&
+																	sortField !== 'lastname' &&
 																	sortField !== 'id'
 																) {
 																	// if directionField IS NOT empty
@@ -197,7 +197,7 @@ router.get('/:authorsid', restricted, (req, res) => {
 										filteredTags = oneAuthorsTags[0].tags.filter((item, index)=>{return oneAuthorsTags[0].tags.indexOf(item) >= index;});
 										res.status(200).json({
 															  bio: author[0].bio,
-															  firstName: author[0].firstName,
+															  firstname: author[0].firstname,
 															  id: author[0].id,
 															  lastName: author[0].lastName,
 															  posts: oneAuthorsPosts, 
