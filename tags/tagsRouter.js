@@ -174,18 +174,42 @@ router.get('/posts', restricted, (req, res) => {
 router.get('/', restricted, (req, res) => {
 	Tags.getAllTags()
 		.then(tags => {
-			Tags.getAllAuthorsByAllTags()
-				.then(authorsByAllTags => {
-					Tags.getAllPostsByAllTags()
-						.then(postsByAllTags => {
+			Tags.getAllPostsByAllTags()
+				.then(postsByAllTags => {
 
-							res.status(200).json({tags: tags, 
-												  authors: authorsByAllTags, 
-												  posts: postsByAllTags
-												});
+					let newTagsList = tags;
+					let currentTagName, currentPostsTagName;
+					let newTagsListLength = newTagsList.length;
+					let postsLength = postsByAllTags.length;
+					
+					// loop through newTagsList;
+						// add empty newTagsList[x].posts
+					for(let x = 0; x < newTagsListLength; x++){newTagsList[x].posts = [];}
+					
+					// loop through newTagsList;
+					// then loop through postsByAllTags
+					// if newTagsList[x].tagname === postsByAllTags[y].tagname
+						// add to newTagsList[x].posts
+					for(let x = 0; x < newTagsListLength; x++){
+						currentTagName = newTagsList[x].tagname;
+						for(let y = 0; y < postsLength; y++){
+							currentPostsTagName = postsByAllTags[y].tagname;
+							if(currentTagName === currentPostsTagName){
+								currentPost = 
+								{
+									"postsid": postsByAllTags[y].postsid,
+									"author": postsByAllTags[y].author,
+									"authorsid": postsByAllTags[y].authorsid,
+									"likes": postsByAllTags[y].likes,
+									"reads": postsByAllTags[y].reads
+								};
+								newTagsList[x].posts.push(currentPost);
+							}
+						}
+					
+					}
+					res.status(200).json(newTagsList);
 
-						})
-						.catch(err => res.send(err));
 				})
 				.catch(err => res.send(err));
 		})
