@@ -71,9 +71,9 @@ router.get('/', restricted, (req, res) => {
 																) {
 																	res.status(400).json({ error: 'sortBy parameter is invalid.' });
 																} else if (
-																	sortField !== 'firstname' &&
-																	sortField !== 'lastname' &&
-																	sortField !== 'id'
+																	sortField === 'firstname' &&
+																	sortField === 'lastname' &&
+																	sortField === 'id'
 																) {
 																	// if directionField IS NOT empty
 																	if (directionField !== '' && directionField !== undefined && directionField !== null) {
