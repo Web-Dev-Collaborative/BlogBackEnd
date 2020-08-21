@@ -10,7 +10,7 @@ const { cache } = require('../cache/cacheHelpers.js');
 // - add first & last name query params to authors endpoint
 
 // GET:  gets all authors records, including posts and total likes & reads counts
-router.get('/', restricted, (req, res) => {
+router.get('/', (req, res) => {
 	const firstnameField = req.query.firstname;
 	const lastnameField = req.query.lastname;
 	const sortField = req.query.sortBy;
@@ -56,44 +56,6 @@ router.get('/', restricted, (req, res) => {
 																error: err
 															});
 														} else {
-															// firstnameField, lastnameField, sortBy QPs
-															if (sortField !== '' && sortField !== undefined && sortField !== null) {
-																if (
-																	sortField !== 'firstName' &&
-																	sortField !== 'lastName' &&
-																	sortField !== 'id'
-																) {
-																	res.status(400).json({ error: 'sortBy parameter is invalid.' });
-																} else if (
-																	sortField !== 'firstName' &&
-																	sortField !== 'lastName' &&
-																	sortField !== 'id'
-																) {
-																	// if directionField IS NOT empty
-																	if (directionField !== '' && directionField !== undefined && directionField !== null) {
-																		// if directionField !== 'asc' || directionField !== 'desc' then return error response
-																		if (directionField !== 'asc' && directionField !== 'desc') {
-																			res.status(400).json({ error: 'direction parameter is invalid.' });
-																		}
-																		// else if directionField = 'asc', sort ascending by sortField
-																		else if (directionField === 'asc') {
-																			// sort ascending by sortField
-																			oneAuthorsTags.authors = oneAuthorsTags.authors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
-																		}
-																		// else if directionField = 'desc', sort descending by sortField
-																		else if (directionField === 'desc') {
-																			// sort descending by sortField
-																			oneAuthorsTags.authors = oneAuthorsTags.authors.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
-																		};
-																	}
-																	// default sort ascending by sortField
-																	else {
-																		// sort ascending by sortField
-																		oneAuthorsTags.authors = oneAuthorsTags.authors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
-																	};
-
-																}
-															}
 															// authors, posts, tagsPerAuthor, likesPerAuthor, readsPerAuthor
 															let oneAuthorsTags = {
 																"authors": authors,
@@ -149,6 +111,43 @@ router.get('/', restricted, (req, res) => {
 															// remove duplicate tags
 															for (let u = 0; u < newAuthors.length; u++){
 																newAuthors[u].tags = newAuthors[u].tags.filter((item, index)=>{return newAuthors[u].tags.indexOf(item) >= index;});
+															}
+															// firstnameField, lastnameField, sortBy QPs
+															if (sortField !== '' && sortField !== undefined && sortField !== null) {
+																if (
+																	sortField !== 'firstName' &&
+																	sortField !== 'lastName' &&
+																	sortField !== 'id'
+																) {
+																	res.status(400).json({ error: 'sortBy parameter is invalid.' });
+																} else if (
+																	sortField !== 'firstName' &&
+																	sortField !== 'lastName' &&
+																	sortField !== 'id'
+																) {
+																	// if directionField IS NOT empty
+																	if (directionField !== '' && directionField !== undefined && directionField !== null) {
+																		// if directionField !== 'asc' || directionField !== 'desc' then return error response
+																		if (directionField !== 'asc' && directionField !== 'desc') {
+																			res.status(400).json({ error: 'direction parameter is invalid.' });
+																		}
+																		else if (directionField === 'asc') {
+																			// sort ascending by sortField
+																			newAuthors = newAuthors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+																		}
+																		// else if directionField = 'desc', sort descending by sortField
+																		else if (directionField === 'desc') {
+																			// sort descending by sortField
+																			newAuthors = newAuthors.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
+																		};
+																	}
+																	// default sort ascending by sortField
+																	else {
+																		// sort ascending by sortField
+																		newAuthors = newAuthors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
+																	};
+
+																}
 															}
 															res.status(200).json(newAuthors);
 														}
