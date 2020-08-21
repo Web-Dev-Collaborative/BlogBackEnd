@@ -79,9 +79,9 @@ available query parameters:
 | `DELETE`       | `/poststags/:poststagsid`  | deletes a post-tag link              |
 | `GET`          | `/poststags`               | returns list of post-tag links       |
 
-## Popularity, Likes, and Reads
+## Popularity:  Likes and Reads
 
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
-| `GET`          | `/mostliked`               | returns list of most liked posts     |
-| `GET`          | `/mostread`                | returns list of most read posts      |
+| `GET`          | `/mostliked`               | returns list of 20 most liked posts  |
+| `GET`          | `/mostread`                | returns list of 20 most read posts   |

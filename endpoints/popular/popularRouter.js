@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const Posts = require("./popularModel.js");
+const Popular = require("./popularModel.js");
 
 const restricted = require("../../auth/restriction.js");
 
@@ -9,7 +9,7 @@ const { cache } = require("../../cache/cacheHelpers.js");
 
 // GET:  gets posts list in order of most to least liked
 router.get("/mostliked", restricted, cache(10), (req, res) => {
-	Posts.getPosts()
+	Popular.getPosts()
 		.then((posts) => {
 			if (!posts) {
 				res.status(404).json({
@@ -28,7 +28,7 @@ router.get("/mostliked", restricted, cache(10), (req, res) => {
 
 // GET:  gets posts list in order of most to least read
 router.get("/mostread", restricted, cache(10), (req, res) => {
-	Posts.getPosts()
+	Popular.getPosts()
 		.then((posts) => {
 			if (!posts) {
 				res.status(404).json({

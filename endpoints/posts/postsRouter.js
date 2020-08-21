@@ -1,8 +1,6 @@
 const router = require("express").Router();
 
 const Posts = require("./postsModel.js");
-const Authors = require("../authors/authorsModel.js");
-const Tags = require("../tags/tagsModel.js");
 
 const restricted = require("../../auth/restriction.js");
 

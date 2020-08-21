@@ -89,10 +89,9 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] deploy
 - [X] write instructions to deploy
 - [X] Postman testing & documentation
-- [ ] add error message exists to register endpoint
-- [ ] most likes endpoint
-- [ ] most reads endpoint
-- [ ] test & document most likes/reads endpoints
+- [X] most likes endpoint
+- [X] most reads endpoint
+- [X] test & document most likes/reads endpoints
 - [ ] add appropriate comments
 - [ ] update endpoints readme with all endpoints & query params
 - [ ] need Postman collection link
