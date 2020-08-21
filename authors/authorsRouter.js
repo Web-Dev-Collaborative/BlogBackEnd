@@ -10,7 +10,7 @@ const { cache } = require('../cache/cacheHelpers.js');
 // - add first & last name query params to authors endpoint
 
 // GET:  gets all authors records, including posts and total likes & reads counts
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
 	const firstnameField = req.query.firstname;
 	const lastnameField = req.query.lastname;
 	const sortField = req.query.sortBy;
