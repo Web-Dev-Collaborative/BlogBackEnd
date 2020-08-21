@@ -4,14 +4,14 @@ const Posts = require('./postsModel.js');
 const Authors = require('../authors/authorsModel.js');
 const Tags = require('../tags/tagsModel.js');
 
-const restricted = require('../auth/restriction.js');
+const restricted = require('../../auth/restriction.js');
 
 const { isTagsFieldArray, validateTag } = require('./postsHelpers.js');
 
-const { cache } = require('../cache/cacheHelpers.js');
+const { cache } = require('../../cache/cacheHelpers.js');
 
 // posts endpoint fields:  author, authorId, postsid as id, likes, reads, tags
-  // queries:  tags, sortBy (author, authorId, likes, reads, id), direction (asc/desc)
+  // queries:  tags (case insensitive), sortBy (author, authorId, likes, reads, id), direction (asc/desc)
 
 // GET:  gets all posts records
 router.get('/', restricted, cache(10), (req, res) => {

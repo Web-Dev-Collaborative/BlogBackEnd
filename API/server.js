@@ -4,13 +4,13 @@ const helmet = require('helmet');
 
 const logger = require('../middleware/logger');
 
-const usersRouter = require("../users/user-router");
-const loginRouter = require("../auth/login-router.js");
-const registerRouter = require("../auth/register-router.js");
+const usersRouter = require("../endpoints/users/userRouter");
+const loginRouter = require("../auth/loginRouter.js");
+const registerRouter = require("../auth/registerRouter.js");
 
-const authorsRouter = require('../authors/authorsRouter.js');
-const postsRouter = require('../posts/postsRouter.js');
-const tagsRouter = require('../tags/tagsRouter.js');
+const authorsRouter = require('../endpoints/authors/authorsRouter.js');
+const postsRouter = require('../endpoints/posts/postsRouter.js');
+const tagsRouter = require('../endpoints/tags/tagsRouter.js');
 const pingRouter = require('../ping/pingRouter.js');
 const server = express();
 

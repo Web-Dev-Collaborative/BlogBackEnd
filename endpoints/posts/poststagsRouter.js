@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 const Poststags = require('./poststagsModel.js');
-const restricted = require('../auth/restriction.js');
+const restricted = require('../../auth/restriction.js');
 
-const { cache } = require('../cache/cacheHelpers.js');
+const { cache } = require('../../cache/cacheHelpers.js');
 
 // GET:  gets all poststags records
 router.get('/', restricted, cache(10), (req, res) => {

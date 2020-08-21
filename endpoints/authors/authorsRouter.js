@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const Authors = require('../authors/authorsModel.js');
-const restricted = require('../auth/restriction.js');
+const Authors = require('./authorsModel.js');
+const restricted = require('../../auth/restriction.js');
 
 const { 
     compareFirst,
@@ -9,13 +9,13 @@ const {
 	compareID 
 } = require('./authorsHelpers.js');
 
-const { cache } = require('../cache/cacheHelpers.js');
+const { cache } = require('../../cache/cacheHelpers.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
-  // queries:  bio, firstname, lastname, sortBy (firstname, lastname, id), direction (asc/desc)
+  // queries:  bio/firstname/lastname (case insensitive), sortBy (firstname, lastname, id), direction (asc/desc)
 
 // GET:  gets all authors records, including posts and total likes & reads counts
-router.get('/', restricted, (req, res) => {
+router.get('/', restricted, cache(10), (req, res) => {
 	const firstnameField = req.query.firstname;
 	const lastnameField = req.query.lastname;
 	const bioField = req.query.bio;
@@ -209,7 +209,7 @@ router.get('/', restricted, (req, res) => {
 // 
 
 // GET:  gets one author record, including posts and total likes & reads counts
-router.get('/:authorsid', restricted, (req, res) => {
+router.get('/:authorsid', restricted, cache(10), (req, res) => {
 	const authorsid = req.params.authorsid;
 	if (!authorsid) {
 		res.status(404).json({ message: `The author with the specified authorsid ${authorsid} does not exist.` });
