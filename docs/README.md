@@ -92,7 +92,7 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] most likes endpoint
 - [X] most reads endpoint
 - [X] test & document most likes/reads endpoints
-- [ ] add appropriate comments
+- [X] add appropriate comments
 - [ ] update endpoints readme with all endpoints & query params
 - [ ] need Postman collection link
 - [ ] submit
@@ -185,8 +185,9 @@ To add your token to Postman, once you have the collection loaded in Postman, go
 ## Documentation
 
 - This app has been documented via Postman.
-- Postman Docs were last published on 08/20/2020.
+- Postman docs were last published on 08/21/2020.
 - Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
+- Comments including the full SQL command for its corresponding knex function is included for the larger functions in each model, just for posterity or to show that I can do/did it.
 
 [Postman Collection]()   |   [BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)
 

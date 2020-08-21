@@ -2,6 +2,8 @@ module.exports = {
     validateUser
   };
   
+  // username/password requirements
+
   function validateUser(user) {
     let errors = [];
   
