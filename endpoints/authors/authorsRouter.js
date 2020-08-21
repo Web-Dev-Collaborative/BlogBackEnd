@@ -6,9 +6,6 @@ const restricted = require('../../auth/restriction.js');
 
 const { cache } = require('../../cache/cacheHelpers.js');
 
-// authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
-  // queries:  bio, firstname, lastname, sortBy (firstname, lastname, id), direction (asc/desc)
-
 // GET:  gets all authors records, including posts and total likes & reads counts
 router.get('/', restricted, (req, res) => {
 	const firstnameField = req.query.firstname;
@@ -154,32 +151,17 @@ router.get('/', restricted, (req, res) => {
 															}
 															if(firstnameField !== '' && firstnameField !== undefined && firstnameField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	if(author.firstname.includes(firstnameField.toLowerCase()) === false){
-																		if(author.firstname.includes(firstnameField.toUpperCase()) === false){
-																			return false;
-																		}
-																	}
-																	return true;
+																	return author.firstname.includes(firstnameField);
 																});
 															}
 															if(lastnameField !== '' && lastnameField !== undefined && lastnameField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	if(author.lastname.includes(lastnameField.toLowerCase()) === false){
-																		if(author.lastname.includes(lastnameField.toUpperCase()) === false){
-																			return false;
-																		}
-																	}
-																	return true;
+																	return author.lastname.includes(lastnameField);
 																});
 															}
 															if(bioField !== '' && bioField !== undefined && bioField !== null){
 																newAuthors = newAuthors.filter(author => {
-																	if(author.bio.includes(bioField.toLowerCase()) === false){
-																		if(author.bio.includes(bioField.toUpperCase()) === false){
-																			return false;
-																		}
-																	}
-																	return true;
+																	return author.bio.includes(bioField);
 																});
 															}
 															res.status(200).json(newAuthors);
@@ -201,7 +183,6 @@ router.get('/', restricted, (req, res) => {
 		})
 		.catch(err => res.send(err));
 });
-// 
 
 // GET:  gets one author record, including posts and total likes & reads counts
 router.get('/:authorsid', restricted, (req, res) => {
