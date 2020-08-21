@@ -11,8 +11,8 @@ router.get("/", restricted, cache(10), (req, res) => {
 	const lastnameField = req.query.lastname;
 	const bioField = req.query.bio;
 	const sortField = req.query.sortBy;
-	
 	const directionField = req.query.direction;
+
 	Authors.getAllAuthors()
 		.then((authors) => {
 			if (!authors) {
@@ -75,7 +75,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																		let currentPost = oneAuthorsTags.posts[w];
 																		newAuthors[v].posts.push(currentPost);
 
-																	}
+																	};
 																	for(let x = 0; x < oneAuthorsTags.tags.length; x++){
 																		let tagsAuthorsId = oneAuthorsTags.tags[x].authorsid;
 
@@ -83,7 +83,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																			let currentTags = oneAuthorsTags.tags[x].tags;
 																			newAuthors[v].tags = currentTags;
 
-																		}
+																		};
 																		for(let y = 0; y < oneAuthorsTags.totalLikeCount.length; y++){
 																			let tlcAuthorsId = oneAuthorsTags.totalLikeCount[y].authorsid;
 
@@ -91,7 +91,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																				let tlcValue = oneAuthorsTags.totalLikeCount[y].totallikecount;
 																				newAuthors[v].totalLikeCount = tlcValue;
 
-																			}
+																			};
 																			for(let z = 0; z < oneAuthorsTags.totalReadCount.length; z++){
 																				let trcAuthorsId = oneAuthorsTags.totalReadCount[z].authorsid;
 
@@ -99,16 +99,20 @@ router.get("/", restricted, cache(10), (req, res) => {
 																					let trcValue = oneAuthorsTags.totalReadCount[z].totalreadcount;
 																					newAuthors[v].totalReadCount = trcValue;
 
-																				}
+																				};
 																			
-																			}
-																		}
-																	}
-																}
-															}
+																			};
+																		};
+																	};
+																};
+															};
+
 															// remove duplicate tags
 															for (let u = 0; u < newAuthors.length; u++){
 																newAuthors[u].tags = newAuthors[u].tags.filter((item, index)=>{return newAuthors[u].tags.indexOf(item) >= index;});
+															};
+															if(sortField === ''){
+																res.status(200).json(newAuthors);
 															}
 
 															// firstname, lastname, id sortBy QPs
@@ -163,7 +167,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	}
 																	return true;
 																});
-															}
+															};
 															if(bioField !== "" && bioField !== undefined && bioField !== null){
 																newAuthors = newAuthors.filter(author => {
 																	if(author.bio.includes(bioField.toLowerCase()) === false){
@@ -173,7 +177,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 																	}
 																	return true;
 																});
-															}
+															};
 															res.status(200).json(newAuthors);
 														}
 													})

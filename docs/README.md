@@ -94,6 +94,7 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [X] test & document most likes/reads endpoints
 - [X] add appropriate comments
 - [ ] update endpoints readme with all endpoints & query params
+- [ ] all authors endpoint not working
 - [ ] need Postman collection link
 - [ ] submit (email with secret & login info)
 
@@ -103,7 +104,6 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 - [Knex](https://github.com/knex/knex):  a query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use.
 - [Express](https://github.com/expressjs/express):  a fast, unopinionated, minimalist web framework for Node.
 - [bcrypt](https://github.com/pyca/bcrypt/):  modern(-ish) password hashing for your software and your servers.
-- [cypress](https://www.cypress.io):  Fast, easy and reliable testing for anything that runs in a browser.
 - [Postman](https://www.postman.com/):   Postman helps you be more efficient while working with APIs.  Using Postman, you can construct complex HTTP requests quickly, organize them in collections and share them with your co-workers.
 - [PostgreSQL](https://github.com/postgres/postgres):  Open Source Relational Database
 
@@ -184,7 +184,7 @@ To add your token to Postman, once you have the collection loaded in Postman, go
 
 ## Documentation
 
-- This app has been documented via Postman.
+- This app has been documented amd tested via Postman.
 - Postman docs were last published on 08/21/2020.
 - Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
 - Comments including the full SQL command for its corresponding knex function is included for the larger functions in each model, just for posterity or to show that I can do/did it.
