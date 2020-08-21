@@ -3,12 +3,6 @@ const router = require('express').Router();
 const Authors = require('./authorsModel.js');
 const restricted = require('../../auth/restriction.js');
 
-const { 
-    compareFirst,
-    compareLast,
-	compareID 
-} = require('./authorsHelpers.js');
-
 const { cache } = require('../../cache/cacheHelpers.js');
 
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount

@@ -2,6 +2,7 @@ module.exports = {
 	compare,
 	compare1
 };
+
 function compare(a, b) {
 	const idA = a.id;
 	const idB = b.id;
@@ -14,7 +15,8 @@ function compare(a, b) {
 	}
 
 	return comparison;
-}
+};
+
 function compare1(a, b) {
 	const authorsIDA = a.authorsid;
 	const authorsIDB = b.authorsid;
@@ -27,4 +29,4 @@ function compare1(a, b) {
 	}
 
 	return comparison;
-}
+};
