@@ -365,17 +365,24 @@ router.get('/', restricted, (req, res) => {
 // GET:  get all authors per single tag
 	// /tags/<tag>/authors
 	// chain getOneTag, getAllAuthorsByOneTag
-router.get('/authors/:tagname', restricted, (req, res) => {
+router.get('/:tagname/authors', restricted, (req, res) => {
 	const tagName = req.params.tagname;
-	Tags.getOneTag(tagName).then(tag => {
-			Tags.getAllAuthorsByOneTag(tagName).then(authorsByOneTag => {
-					
-					res.status(200).json({tag: tag, authors: authorsByOneTag, tagName: tagName});
+	if (!tagName) {
+		res.status(404).json({
+			message: `The tag name ${tagName} does not exist.`,
+			error: err
+		});
+	} else {
+		Tags.getOneTag(tagName).then(tag => {
+				Tags.getAllAuthorsByOneTag(tagName).then(authorsByOneTag => {
+						
+						res.status(200).json({tag: tag, authors: authorsByOneTag, tagName: tagName});
 
-				})
-				.catch(err => res.send({error: err, tagName: tagName, function: 'getAllAuthorsByOneTag'}));
-		})
-		.catch(err => res.send({error: err, tagName: tagName, function: 'getOneTag'}));
+					})
+					.catch(err => res.send({error: err, tagName: tagName, function: 'getAllAuthorsByOneTag'}));
+			})
+			.catch(err => res.send({error: err, tagName: tagName, function: 'getOneTag'}));
+	}
 });
 
 
