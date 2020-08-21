@@ -101,7 +101,7 @@ function getAllPostsByAllTags(){
 };
 
 /*
-SELECT tags.tagsid, tags.tagname
+SELECT tags.tagname
 FROM Tags
 WHERE tags.tagname = 'tech'
 */
