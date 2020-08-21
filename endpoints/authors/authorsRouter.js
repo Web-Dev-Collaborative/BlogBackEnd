@@ -114,6 +114,15 @@ router.get("/", restricted, cache(10), (req, res) => {
 															if(sortField === ''|| sortField !== undefined || sortField !== null){
 																res.status(200).json(newAuthors);
 															}
+															if(firstnameField === ''|| firstnameField !== undefined || firstnameField !== null){
+																res.status(200).json(newAuthors);
+															}
+															if(lastnameField === ''|| lastnameField !== undefined || lastnameField !== null){
+																res.status(200).json(newAuthors);
+															}
+															if(bioField === ''|| bioField !== undefined || bioField !== null){
+																res.status(200).json(newAuthors);
+															}
 
 															// firstname, lastname, id sortBy QPs
 															if (sortField !== "" && sortField !== undefined && sortField !== null) {
