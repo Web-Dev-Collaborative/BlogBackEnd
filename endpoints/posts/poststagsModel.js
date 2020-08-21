@@ -1,4 +1,4 @@
-const db = require('../../data/dbConfig');
+const db = require("../../data/dbConfig");
 
 module.exports = {
 	add,
@@ -10,62 +10,36 @@ module.exports = {
 };
 
 function find() {
-	return db('poststags').select('*');
-}
+	return db("poststags")
+		.select("*");
+};
 
 function findBy(filter) {
-	return db('poststags').where(filter);
-}
+	return db("poststags")
+		.where(filter);
+};
 
 async function add(posttag) {
-	const [poststagsid] = await db('poststags').insert(posttag, 'poststagsid');
+	const [poststagsid] = await db("poststags")
+		.insert(posttag, "poststagsid");
 	return findById(poststagsid);
-}
+};
 
 function findById(poststagsid) {
-	return db('poststags').select('poststagsid', '*').where({ poststagsid }).first();
-}
+	return db("poststags")
+		.select("poststagsid", "*")
+		.where({ poststagsid })
+		.first();
+};
 
 function update(poststagsid, posttag) {
-	return db('poststags').where({ poststagsid }).update(posttag);
-}
+	return db("poststags")
+		.where({ poststagsid })
+		.update(posttag);
+};
 
 function remove(poststagsid) {
-	return db('poststags').where('poststagsid', Number(poststagsid)).del();
-}
-
-/*
-
-
-
-*/
-
-/*
-
-
-
-*/
-
-/*
-
-
-
-*/
-
-/*
-
-
-
-*/
-
-/*
-
-
-
-*/
-
-/*
-
-
-
-*/
+	return db("poststags")
+		.where("poststagsid", Number(poststagsid))
+		.del();
+};

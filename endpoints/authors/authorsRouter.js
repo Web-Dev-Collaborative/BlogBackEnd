@@ -1,21 +1,13 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const Authors = require('./authorsModel.js');
-const restricted = require('../../auth/restriction.js');
+const Authors = require("./authorsModel.js");
+const restricted = require("../../auth/restriction.js");
 
-const { 
-    compareFirst,
-    compareLast,
-	compareID 
-} = require('./authorsHelpers.js');
+const { cache } = require("../../cache/cacheHelpers.js");
 
-const { cache } = require('../../cache/cacheHelpers.js');
-
-// authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
-  // queries:  bio/firstname/lastname (case insensitive), sortBy (firstname, lastname, id), direction (asc/desc)
 
 // GET:  gets all authors records, including posts and total likes & reads counts
-router.get('/', restricted, cache(10), (req, res) => {
+router.get("/", restricted, cache(10), (req, res) => {
 	const firstnameField = req.query.firstname;
 	const lastnameField = req.query.lastname;
 	const bioField = req.query.bio;
@@ -23,7 +15,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
 	Authors.getAllAuthors()
-		.then(authors => {
+		.then((authors) => {
 			if (!authors) {
 				res.status(404).json({
 					message: `Authors do not exist.`,
@@ -31,7 +23,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 				});
 			} else {
 				Authors.getPostsByAllAuthors()
-					.then(posts => {
+					.then((posts) => {
 						if (!posts) {
 							res.status(404).json({
 								message: `Posts do not exist.`,
@@ -39,7 +31,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 							});
 						} else {
 							Authors.getTagsByAllAuthors()
-							.then(tagsPerAuthor =>{
+							.then((tagsPerAuthor) =>{
 								if (!tagsPerAuthor) {
 									res.status(404).json({
 										message: `Tags do not exist.`,
@@ -47,7 +39,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 									});
 								} else {
 									Authors.getAllTotalLikesCount()
-										.then(likesPerAuthor =>{
+										.then((likesPerAuthor) =>{
 											if (!likesPerAuthor) {
 												res.status(404).json({
 													message: `Total likes count does not exist.`,
@@ -55,7 +47,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 												});
 											} else {
 												Authors.getAllTotalReadsCount()
-													.then(readsPerAuthor =>{
+													.then((readsPerAuthor) =>{
 														if (!readsPerAuthor) {
 															res.status(404).json({
 																message: `Total reads count does not exist.`,
@@ -121,31 +113,31 @@ router.get('/', restricted, cache(10), (req, res) => {
 															}
 
 															// firstname, lastname, id sortBy QPs
-															if (sortField !== '' && sortField !== undefined && sortField !== null) {
+															if (sortField !== "" && sortField !== undefined && sortField !== null) {
 																if (
-																	sortField !== 'firstname' &&
-																	sortField !== 'lastname' &&
-																	sortField !== 'id'
+																	sortField !== "firstname" &&
+																	sortField !== "lastname" &&
+																	sortField !== "id"
 																) {
-																	res.status(400).json({ error: 'sortBy parameter is invalid.' });
+																	res.status(400).json({ error: "sortBy parameter is invalid." });
 																} else if (
-																	sortField === 'firstname' ||
-																	sortField === 'lastname' ||
-																	sortField === 'id'
+																	sortField === "firstname" ||
+																	sortField === "lastname" ||
+																	sortField === "id"
 																) {
 																	// if directionField IS NOT empty
-																	if (directionField !== '' && directionField !== undefined && directionField !== null) {
-																		// if directionField !== 'asc' || directionField !== 'desc' then return error response
-																		if (directionField !== 'asc' && directionField !== 'desc') {
-																			res.status(400).json({ error: 'direction parameter is invalid.' });
+																	if (directionField !== "" && directionField !== undefined && directionField !== null) {
+																		// if directionField !== "asc" || directionField !== "desc" then return error response
+																		if (directionField !== "asc" && directionField !== "desc") {
+																			res.status(400).json({ error: "direction parameter is invalid." });
 																		}
-																		else if (directionField === 'asc') {
+																		else if (directionField === "asc") {
 																			// sort ascending by sortField
 																			newAuthors = newAuthors.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
 																			
 																		}
-																		// else if directionField = 'desc', sort descending by sortField
-																		else if (directionField === 'desc') {
+																		// else if directionField = "desc", sort descending by sortField
+																		else if (directionField === "desc") {
 																			// sort descending by sortField
 																			newAuthors = newAuthors.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
 																		};
@@ -157,7 +149,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 																	};
 																}
 															}
-															if(firstnameField !== '' && firstnameField !== undefined && firstnameField !== null){
+															if(firstnameField !== "" && firstnameField !== undefined && firstnameField !== null){
 																newAuthors = newAuthors.filter(author => {
 																	if(author.firstname.includes(firstnameField.toLowerCase()) === false){
 																		if(author.firstname.includes(firstnameField.toUpperCase()) === false){
@@ -167,7 +159,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 																	return true;
 																});
 															}
-															if(lastnameField !== '' && lastnameField !== undefined && lastnameField !== null){
+															if(lastnameField !== "" && lastnameField !== undefined && lastnameField !== null){
 																newAuthors = newAuthors.filter(author => {
 																	if(author.lastname.includes(lastnameField.toLowerCase()) === false){
 																		if(author.lastname.includes(lastnameField.toUpperCase()) === false){
@@ -177,7 +169,7 @@ router.get('/', restricted, cache(10), (req, res) => {
 																	return true;
 																});
 															}
-															if(bioField !== '' && bioField !== undefined && bioField !== null){
+															if(bioField !== "" && bioField !== undefined && bioField !== null){
 																newAuthors = newAuthors.filter(author => {
 																	if(author.bio.includes(bioField.toLowerCase()) === false){
 																		if(author.bio.includes(bioField.toUpperCase()) === false){
@@ -190,118 +182,120 @@ router.get('/', restricted, cache(10), (req, res) => {
 															res.status(200).json(newAuthors);
 														}
 													})
-													.catch(err => res.send(err));
+													.catch((err) => res.send(err));
 											}
 										})
-										.catch(err => res.send(err));
+										.catch((err) => res.send(err));
 
 
 								}
 							})
-							.catch(err => res.send(err));
+							.catch((err) => res.send(err));
 						}
 					})
-					.catch(err => res.send(err));
+					.catch((err) => res.send(err));
 			}
 		})
-		.catch(err => res.send(err));
+		.catch((err) => res.send(err));
 });
 // 
 
 // GET:  gets one author record, including posts and total likes & reads counts
-router.get('/:authorsid', restricted, cache(10), (req, res) => {
+router.get("/:authorsid", restricted, cache(10), (req, res) => {
 	const authorsid = req.params.authorsid;
+
 	if (!authorsid) {
 		res.status(404).json({ message: `The author with the specified authorsid ${authorsid} does not exist.` });
 	} else {
 		let filteredTags;
 		Authors.getAuthor(authorsid)
-			.then(author => {
+			.then((author) => {
 			Authors.getPostsByAuthor(authorsid)
-				.then(oneAuthorsPosts => {
+				.then((oneAuthorsPosts) => {
 					Authors.getTagsByAuthor(authorsid)
-					.then(oneAuthorsTags => {
+					.then((oneAuthorsTags) => {
 						Authors.getTotalLikesCount(authorsid)
-							.then(likes =>
+							.then((likes) =>
 								Authors.getTotalReadsCount(authorsid)
-									.then(reads =>{
+									.then((reads) =>{
 										filteredTags = oneAuthorsTags[0].tags.filter((item, index)=>{return oneAuthorsTags[0].tags.indexOf(item) >= index;});
 										res.status(200).json({
-															  bio: author[0].bio,
-															  firstname: author[0].firstname,
-															  id: author[0].id,
-															  lastName: author[0].lastName,
-															  posts: oneAuthorsPosts, 
-															  tags: filteredTags, 
-															  totalLikeCount: likes[0].totallikecount, 
-															  totalReadCount: reads[0].totalreadcount
-															})
+											bio: author[0].bio,
+											firstname: author[0].firstname,
+											id: author[0].id,
+											lastName: author[0].lastName,
+											posts: oneAuthorsPosts, 
+											tags: filteredTags, 
+											totalLikeCount: likes[0].totallikecount, 
+											totalReadCount: reads[0].totalreadcount
 										})
-								.catch(err => {
+										})
+								.catch((err) => {
 									res.status(500).json({ message: `Author total reads could not be retrieved.`, error: err });
 								})
 							)
-							.catch(err => {
+							.catch((err) => {
 								res.status(500).json({ message: `Author total likes could not be retrieved.`, error: err });
 							})
 					})
-					.catch(err => {
-						res.status(500).json({ message: `The author's tags could not be retrieved.`, error: err });
+					.catch((err) => {
+						res.status(500).json({ message: `The author"s tags could not be retrieved.`, error: err });
 					});
 
 				})
-				.catch(err => {
-					res.status(500).json({ message: `The author's posts could not be retrieved.`, error: err });
+				.catch((err) => {
+					res.status(500).json({ message: `The author"s posts could not be retrieved.`, error: err });
 				})
 			})
-			.catch(err => {
+			.catch((err) => {
 				res.status(500).json({ message: `The author information could not be retrieved.`, error: err });
 			})
 	}
 });
 
 // POST:  record author
-router.post('/', restricted, (req, res) => {
+router.post("/", restricted, (req, res) => {
 	const newAuthor = req.body;
 
 	Authors.add(newAuthor)
-		.then(author => {
+		.then((author) => {
 			res.status(201).json(author);
 		})
-		.catch(err => {
+		.catch((err) => {
 			res.status(500).json({ message: `Failed to create new author.`, error: err });
 		});
 });
 
 // PUT:  update author record
-router.put('/:authorsid', restricted, (req, res) => {
+router.put("/:authorsid", restricted, (req, res) => {
 	const authorsid = req.params.authorsid;
 	const updatedAuthor = req.body;
 
 	Authors.update(authorsid, updatedAuthor)
-		.then(author => {
+		.then((author) => {
 			if (author) {
 				res.json(author);
 			} else {
 				res.status(404).json({ message: `Could not find author with given id ${authorsid}.` });
 			}
 		})
-		.catch(err => {
+		.catch((err) => {
 			res.status(500).json({ message: `Failed to update author.`, error: err });
 		});
 });
 
 // DELETE:  delete author record
-router.delete('/:authorsid', restricted, (req, res) => {
+router.delete("/:authorsid", restricted, (req, res) => {
 	const authorsid = req.params.authorsid;
+
 	if (!authorsid) {
 		res.status(404).json({ message: `The author with the specified ID ${authorsid} does not exist.` });
 	}
 	Authors.remove(authorsid)
-		.then(author => {
+		.then((author) => {
 			res.json(author);
 		})
-		.catch(err => {
+		.catch((err) => {
 			res.status(500).json({ message: `The author could not be removed.`, error: err });
 		});
 });

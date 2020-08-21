@@ -1,6 +1,31 @@
 
 # Endpoints
 
+queries for authors:
+
+- bio (case insensitive)
+- firstname (case insensitive)
+- lastname (case insensitive)
+- sortBy (firstname, lastname, id) (case sensitive)
+- direction (asc/desc) (case sensitive)
+
+queries for posts:
+
+- tags (case insensitive)
+- sortBy (author, authorId, likes, reads, id) (case sensitive)
+- direction (asc/desc) (case sensitive)
+
+available tags:
+
+- culture
+- design
+- health
+- history
+- politics
+- science
+- startups
+- tech
+
 ## Login / Registration
 
 | Request Method | Endpoint         | Description                          |
@@ -49,7 +74,7 @@
 
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
-| `POST`         | `/poststags/`              | links a post to a tag                |
+| `POST`         | `/poststags`               | links a post to a tag                |
 | `PUT`          | `/poststags/:poststagsid`  | updates a post-tag link              |
 | `DELETE`       | `/poststags/:poststagsid`  | deletes a post-tag link              |
 | `GET`          | `/poststags`               | returns list of post-tag links       |
@@ -58,4 +83,5 @@
 
 | Request Method | Endpoint                   | Description                          |
 | :------------- | :------------------------- | :----------------------------------- |
-| `GET`          | `/popular`                 | returns list of most popular posts   |
+| `GET`          | `/mostliked                | returns list of most liked posts     |
+| `GET`          | `/mostread                 | returns list of most read posts      |

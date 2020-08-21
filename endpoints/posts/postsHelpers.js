@@ -6,7 +6,7 @@ module.exports = {
 function isTagsFieldArray(tagsField) {
 	const isArray = Array.isArray(tagsField);
 	return isArray;
-}
+};
 
 function validateTag(tagsField) {
 	const isArray = isTagsFieldArray(tagsField);
@@ -34,8 +34,8 @@ function validateTag(tagsField) {
 			) {
 				// if invalid tag, return false
 				return false;
-			}
-		}
+			};
+		};
 		return true;
 	} else if (isArray === false) {
 		tagsField[x] = tagsField[x].toLowerCase();
@@ -55,6 +55,6 @@ function validateTag(tagsField) {
 		} else {
 			// else return false
 			return true;
-		}
-	}
-}
+		};
+	};
+};
