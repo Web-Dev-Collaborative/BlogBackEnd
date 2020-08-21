@@ -13,13 +13,7 @@ const { cache } = require("../../cache/cacheHelpers.js");
 
 // GET:  gets posts list in order of most to least liked
 router.get("/mostliked", restricted, cache(10), (req, res) => {
-	// if req.query.tags is empty, return error response
-	if (!req.query.tags) {res.status(400).json({ error: 'Tags parameter is required' })};
 	const tagsField = req.query.tags;
-	// sort by id, reads, likes
-	const sortField = req.query.sortBy;
-	// direction asc or desc only, default = asc
-	const directionField = req.query.direction;
 	Posts.getPosts()
 		.then((posts) => {
 			if (!posts) {
@@ -72,13 +66,7 @@ router.get("/mostliked", restricted, cache(10), (req, res) => {
 
 // GET:  gets posts list in order of most to least read
 router.get("/mostread", restricted, cache(10), (req, res) => {
-	// if req.query.tags is empty, return error response
-	if (!req.query.tags) {res.status(400).json({ error: 'Tags parameter is required' })};
 	const tagsField = req.query.tags;
-	// sort by id, reads, likes  (any??)
-	const sortField = req.query.sortBy;
-	// direction asc or desc only, default = asc
-	const directionField = req.query.direction;
 	Posts.getPosts()
 		.then((posts) => {
 			if (!posts) {
@@ -99,44 +87,6 @@ router.get("/mostread", restricted, cache(10), (req, res) => {
 				// validate sortField
 					// if sort criteria not valid
 						// available sorts:  author, authorId, id, likes, reads
-				if (sortField !== '' && sortField !== undefined && sortField !== null) {
-					if (
-						sortField !== 'author' &&
-						sortField !== 'authorId' &&
-						sortField !== 'likes' &&
-						sortField !== 'id'
-					) {
-						res.status(400).json({ error: 'sortBy parameter is invalid.' });
-					} else if (
-						sortField === 'author' ||
-						sortField === 'authorId' ||
-						sortField === 'likes' ||
-						sortField === 'id'
-					) {
-						// if directionField IS NOT empty
-						if (directionField !== '' && directionField !== undefined && directionField !== null) {
-							// if directionField !== 'asc' || directionField !== 'desc' then return error response
-							if (directionField !== 'asc' && directionField !== 'desc') {
-								res.status(400).json({ error: 'direction parameter is invalid.' });
-							}
-							// else if directionField = 'asc', sort ascending by sortField
-							else if (directionField === 'asc') {
-								// sort ascending by sortField
-								posts = posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
-							}
-							// else if directionField = 'desc', sort descending by sortField
-							else if (directionField === 'desc') {
-								// sort descending by sortField
-								posts = posts.sort((a, b) => (a[sortField] > b[sortField] ? -1 : 1));
-							};
-						}
-						// default sort ascending by sortField
-						else {
-							// sort ascending by sortField
-							posts = posts.sort((a, b) => (a[sortField] < b[sortField] ? -1 : 1));
-						};
-					};
-				};
 
 				// if multiple tags
 				if (isTFArray === true) {
@@ -145,6 +95,10 @@ router.get("/mostread", restricted, cache(10), (req, res) => {
 						filteredResults = posts.filter(post => {
 							return newTagsField.every(tag => post.tags.includes(tag));
 						});
+						
+						// sorting posts by most to least reads
+						filteredResults = filteredResults.sort((a, b) => (a['reads'] > b['reads'] ? -1 : 1));
+						
 						res.status(200).json({ posts: filteredResults });
 					} else if (isValidTag === false) {
 						// if IS NOT valid tag, return error response
@@ -158,6 +112,10 @@ router.get("/mostread", restricted, cache(10), (req, res) => {
 						filteredResults = posts.filter(post => {
 							return post.tags.indexOf(newTagsField) >= 0;
 						});
+
+						// sorting posts by most to least reads
+						filteredResults = filteredResults.sort((a, b) => (a['reads'] > b['reads'] ? -1 : 1));
+
 						res.status(200).json({ posts: filteredResults });
 					} else if (isValidTag === false) {
 						// if IS NOT valid tag, return error response
