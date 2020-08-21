@@ -4,99 +4,14 @@
 
 This is Erica Ingram's submission for the back-end assessment from Hatchways.  The app is deployed at [this link](https://hatchways-betest.herokuapp.com/api).
 
-## Features Done
+## Documentation
 
-- [X] research/review old apps/samples
-- [X] new private github repo
-- [X] add dependencies
-- [X] get to app starting point before hitting start
-- [X] create migrations/seeds data
-- [X] Build an API that requires you to fetch data from [this API](https://hatchways.io/api/assessment/blog/posts).
-    - query parameters:  tag; string (the tag associated with the blog post)
-        - [example](https://hatchways.io/api/assessment/blog/posts?tag=tech)
-    - Our API can only filter one tag at a time.  The field “tag” is singular, not plural.
-- [X] You need the following routes in your API:
-    - [X]  GET /api/ping, response status code 200, json response {"success": true}
-    - [X] GET /api/posts, response status code 200, response as follows:
-        - query parameters:  tags, sortBy, direction
-        - The API response will be a list of all the blog posts that have at least one tag specified in the tags parameter.
-        - The sortBy parameter specifies which field should be used to sort the returned results. This is an optional parameter, with a default value of `id`.
-        - The direction parameter specifies if the results should be returned in ascending order (if the value is "asc") or descending order (if the value is "desc"). The default value of the direction parameter is `asc`.
-        - Response Body (JSON):
-            ```pseudocode
-            {
-                "posts":
-                    [
-                        {
-                            "id": 1,
-                            "author": "Rylee Paul",
-                            "authorId": 9,
-                            "likes": 960,
-                            "popularity": 0.13,
-                            "reads": 50361,
-                            "tags": [ "tech", "health" ]
-                        },
-                    ...
-                    ]
-            }
-            ```
-        - Error Responses:
-            - If `tags` parameter is not present (response status code: 400):
-                - Response body (JSON):
-                ```pseudocode
-                    {
-                        "error": "Tags parameter is required"
-                    }
-                ```
-            - If a `sortBy` or `direction` are invalid values, specify an error like below (response status code: 400):
-                - Response body (JSON):
-                ```pseudocode
-                    {
-                        "error": "sortBy parameter is invalid"
-                    }
-                ```
-- [X] For every tag specified in the tags parameter, fetch the posts with that tag using the Hatchways API (make a separate API request for every tag specified)
-- posts endpoints:
-  - [X] add tags to get single post
-  - [X] get posts by author endpoint
-  - [X] update, delete, add post
-- authors endpoints:
-  - [X] get all authors (show posts & tags)
-  - [X] get one author (show posts & tags)
-  - [X] update, delete, add author
-- [X] Combine all the results from the API requests above and remove all the repeated posts (try to be efficient when doing this)
-- [X] You will get a better score on our assessment if you can make concurrent requests to the API (making the requests in parallel)
-- [X] Making API calls to other servers can be expensive. How can you reduce the number of calls you make to a server? You can cache the results of an API call on your server. Try to implement a server side cache to our API. Two tips are 1) keep it simple, and 2) feel free to use existing libraries/frameworks.
-- tags endpoints:
-  - [X] get all tags (show posts & authors)
-    - [X] /tags/authors
-    - [X] /tags/posts
-    - [X] /tags
-  - [X] get one tag (show posts & authors)
-    - [X] /tags/<tag>/authors
-    - [X] /tags/<tag>/posts
-    - [X] /tags/<tag>
-  - [X] add tag to post
-  - [X] update, delete, add tag
-- poststags endpoints:
-    - [X] get, update, delete, add a post's tags
-- [X] add firstname & lastname query params to authors get endpoints
-- [X] add sortBy query params for firstname, lastname, authorsid to authors get endpoints
-- [X] add overall endpoints folder & update its dependencies
-- [X] make sure there are no console red/yellow errors
-- [X] make sure app organized, no repeated code, all code formatted
-- [X] fill out readme template
-- [X] deploy
-- [X] write instructions to deploy
-- [X] Postman testing & documentation
-- [X] most likes endpoint
-- [X] most reads endpoint
-- [X] test & document most likes/reads endpoints
-- [X] add appropriate comments
-- [ ] update endpoints readme with all endpoints & query params
-- [ ] all authors endpoint not working
-- [ ] need Postman collection link
-- [ ] submit (email with secret & login info)
+- This app has been documented and tested via Postman.
+- Postman docs were last published on 08/21/2020.
+- Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
+- Comments including the full SQL command for its corresponding knex function is included for the larger functions in each model, just for posterity or to show that I can do/did it.
+
+[Postman Collection](https://www.postman.com/collections/7a82d732c439d431359c)   |   [BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)
 
 ## Tech Stack
 
@@ -151,25 +66,25 @@ This is Erica Ingram's submission for the back-end assessment from Hatchways.  T
 
 In this assessment, you will write a simple backend JSON API.  If you notice something is not working (like the API, or any of the links in this document), please contact hello@hatchways.io.  You may use any type of backend API framework. Please document in a Readme how to start the application.  Your assessment will be graded based on [this rubric](https://drive.google.com/file/d/1f0jiSVTTGtAn8XbHwHcTqPEU-BT4-q6x/view).
 
-Your submission takes into consideration how long it takes you to complete it. You are welcome to submit it at any point, however completing it in less than 12 hours increases your chances of being considered for our next interview cycle.
+Your submission takes into consideration how long it takes you to complete it. You are welcome to submit it at any point, however completing it in less than 24 hours increases your chances of being considered for our next interview cycle.
 
 We have provided an API with the correct solution. This should only be used to verify
 your results. Do not call this API in your application. [Here it is in action](https://hatchways.io/api/assessment/solution/posts?tags=history,tech&sortBy=likes&direction=desc).
 
 ## Instructions to Start
 
-There is no need to run this locally, as this app has been [deployed](https://hatchways-betest.herokuapp.com/api).  The [Postman Collection]() may be found [here](), so there is no set-up required on your part whatsoever.  If you would like to run the Cypress tests on it, simply run ```yarn cypress open```.
+There is no need to run this locally, as this app has been [deployed](https://hatchways-betest.herokuapp.com/api).  The [Postman Collection](https://www.postman.com/collections/7a82d732c439d431359c) may be found [here](https://www.postman.com/collections/7a82d732c439d431359c), so there is no set-up required on your part whatsoever.  See link to documentation below.
 
 The Postman collection contains examples of all get, post, and put endpoint body submissions AND responses as well as tests, so if you open the Postman collection, you should be able to view and use all the endpoints.  They are sorted into folders.
 
-You will need to log in to hit endpoints, and a login is provided in the Postman collection.  You may also register your own username and a JWT will be provided to you via the live app.  Take the token you receive from either logging in or registering and put it in the Postman collection as the value to the variable ```token```, which should already be in the collection.  This will make it easy for you to navigate the different endpoints.
+You will need to log in to hit endpoints, and a login is provided in the Postman collection and in the email I sent about this.  You may also register your own username and a JWT will be provided to you via the live app.  Take the token you receive from either logging in or registering and put it in the Postman collection as the value to the variable ```token```, which should already be in the collection.  This will make it easy for you to navigate the different endpoints.
 
 To add your token to Postman, once you have the collection loaded in Postman, go to the gear icon in the top right next to the environment selection, select the environment you are going to use, and then paste your token in ```initial value``` and ```current value``` with the variable name ```token```.  Each endpoint in the collection is already configured to use this variable as a token, so after you've done that, you should be able to hit endpoints to your heart's content.
 
 ## Instructions to Deploy
 
 - Use Heroku to deploy app.
-- provision PostgreSQL database on Heroku.
+- Provision PostgreSQL database on Heroku.
 - enter database url as ```DATABASE_URL``` in a local .env file and in config vars on Heroku.
 - enter ```production``` as ```DB_ENV``` in a local .env file and in config vars on Heroku.
 - The secret will be emailed for you to use as ```JWT_SECRET``` in a local .env file and in config vars on Heroku.
@@ -178,18 +93,9 @@ To add your token to Postman, once you have the collection loaded in Postman, go
 
     ```knex migrate:up users.js;knex migrate:up authors.js;knex migrate:up tags.js;knex migrate:up posts.js;knex migrate:up poststags.js;knex seed:run --specific=001-authors.js;knex seed:run --specific=002-posts.js;knex seed:run --specific=003-tags.js;knex seed:run --specific=004-poststags.js;```
 
-- These might or might not be useful commands; it's just here to save you some typing:
+- These probably aren't useful commands; they're just here to save you some typing.
 
 ```knex migrate:down users.js;knex migrate:down poststags.js;knex migrate:down posts.js;knex migrate:down tags.js;knex migrate:down authors.js;```
-
-## Documentation
-
-- This app has been documented amd tested via Postman.
-- Postman docs were last published on 08/21/2020.
-- Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
-- Comments including the full SQL command for its corresponding knex function is included for the larger functions in each model, just for posterity or to show that I can do/did it.
-
-[Postman Collection]()   |   [BASE URL](https://hatchways-betest.herokuapp.com/api)   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)
 
 ## Testing
 
