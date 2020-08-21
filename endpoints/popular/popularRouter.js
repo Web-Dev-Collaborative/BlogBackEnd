@@ -1,12 +1,8 @@
 const router = require("express").Router();
 
 const Posts = require("./popularModel.js");
-const Authors = require("../authors/authorsModel.js");
-const Tags = require("../tags/tagsModel.js");
 
 const restricted = require("../../auth/restriction.js");
-
-const { isTagsFieldArray, validateTag } = require("./popularHelpers.js");
 
 const { cache } = require("../../cache/cacheHelpers.js");
 
