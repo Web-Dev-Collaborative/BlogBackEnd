@@ -25,8 +25,6 @@ server.use(cors());
 server.use("/api/login", loginRouter);
 server.use("/api/register", registerRouter);
 server.use("/api/users", usersRouter);
-
-
 // authors router
 server.use('/api/authors', authorsRouter);
 

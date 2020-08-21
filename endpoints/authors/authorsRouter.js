@@ -100,13 +100,12 @@ router.get('/', restricted, (req, res) => {
 																					let trcValue = oneAuthorsTags.totalReadCount[z].totalreadcount;
 																					// do something to totalReadCount matching author
 																					newAuthors[v].totalReadCount = trcValue;
-																				}
-																			
-																			}
-																		}
-																	}
-																}
-															}
+																				};
+																			};
+																		};
+																	};
+																};
+															};
 															// remove duplicate tags
 															for (let u = 0; u < newAuthors.length; u++){
 																newAuthors[u].tags = newAuthors[u].tags.filter((item, index)=>{return newAuthors[u].tags.indexOf(item) >= index;});
@@ -120,6 +119,7 @@ router.get('/', restricted, (req, res) => {
 																	sortField !== 'id'
 																) {
 																	res.status(400).json({ error: 'sortBy parameter is invalid.' });
+
 																} else if (
 																	sortField === 'firstname' ||
 																	sortField === 'lastname' ||
