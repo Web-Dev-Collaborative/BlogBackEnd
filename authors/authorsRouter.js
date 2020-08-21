@@ -14,17 +14,6 @@ const { cache } = require('../cache/cacheHelpers.js');
 // authors endpoint fields:  bio, firstName, authorsid (id), lastName, posts, tags, totalLikeCount, totalReadCount
   // queries:  bio, firstname, lastname, sortBy (firstname, lastname, id), direction (asc/desc)
 
-// - add bio & first & last name query params to authors endpoint
-
-// if firstnameField not '' or not null or not undefined
-	/*
-	if(firstnameField !== '' && firstnameField !== undefined && firstnameField !== null){
-		newAuthors = newAuthors.filter(author => {
-			return author.firstname.includes(firstnameField) >= 0;
-		});
-	}
-	*/
-
 // GET:  gets all authors records, including posts and total likes & reads counts
 router.get('/', restricted, (req, res) => {
 	const firstnameField = req.query.firstname;

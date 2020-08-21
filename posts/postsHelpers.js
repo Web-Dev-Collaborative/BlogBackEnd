@@ -18,7 +18,10 @@ function validateTag(tagsField) {
 	// if tagsField IS NOT array and contains invalid tags, return false
 	// else return true
 	if (isArray === true) {
+		
+
 		for (let x = 0; x < tagsField.length; x++) {
+			tagsField[x] = tagsField[x].toLowerCase();
 			if (
 				tagsField[x] !== 'culture' &&
 				tagsField[x] !== 'design' &&
@@ -35,6 +38,7 @@ function validateTag(tagsField) {
 		}
 		return true;
 	} else if (isArray === false) {
+		tagsField[x] = tagsField[x].toLowerCase();
 		// if tagsField is not array
 		if (
 			tagsField !== 'culture' &&
