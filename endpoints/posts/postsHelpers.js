@@ -8,18 +8,13 @@ function isTagsFieldArray(tagsField) {
 	return isArray;
 };
 
+// validate that tags are or are not an array, are they all one of eight available tags
+// tags are case insensitive
+	// available tags:  culture, design, health, history, politics, science, startups, tech
 function validateTag(tagsField) {
 	const isArray = isTagsFieldArray(tagsField);
-	// validate tagsField
-	// available tags:  culture, design, health, history, politics, science, startups, tech
-	// if tagsField is array or not
-	// if tagsField IS array and contains invalid tags, return false
-	// else return true
-	// if tagsField IS NOT array and contains invalid tags, return false
-	// else return true
-	if (isArray === true) {
-		
 
+	if (isArray === true) {
 		for (let x = 0; x < tagsField.length; x++) {
 			tagsField[x] = tagsField[x].toLowerCase();
 			if (
@@ -39,7 +34,7 @@ function validateTag(tagsField) {
 		return true;
 	} else if (isArray === false) {
 		tagsField[x] = tagsField[x].toLowerCase();
-		// if tagsField is not array
+
 		if (
 			tagsField !== 'culture' &&
 			tagsField !== 'design' &&
