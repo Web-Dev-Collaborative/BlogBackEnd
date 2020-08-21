@@ -400,7 +400,7 @@ router.get('/:singletagname/authors', restricted, (req, res) => {
 		Tags.getOneTag(singleTagName)
 			.then(singleTag => {
 
-				res.status(200).json({tagsid: singleTag.tagsid, tagName: singleTag.tagname});
+				res.status(200).json({tagsid: singleTag[0].tagsid, tagName: singleTag[0].tagname});
 
 			})
 			.catch(err => res.send({error: err, tagName: singleTagName, function: 'getOneTag', endpoint: `/${singleTagName}/authors`}));
