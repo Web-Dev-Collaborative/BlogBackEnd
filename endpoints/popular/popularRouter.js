@@ -10,21 +10,11 @@ const { isTagsFieldArray, validateTag } = require("./popularHelpers.js");
 
 const { cache } = require("../../cache/cacheHelpers.js");
 
-/*
-posts endpoint fields:
-	author, authorId, postsid as id, likes, reads, tags
-queries:
-	tags (case insensitive), sortBy (author, authorId, likes, reads, id), direction (asc/desc)
-available tags:
-	culture, design, health, history, politics, science, startups, tech
-*/
 
 // GET:  gets posts list in order of most to least liked
 router.get("/mostliked", restricted, cache(10), (req, res) => {
-	// if req.query.tags is empty, return error response
-	if (!req.query.tags) {res.status(400).json({ error: 'Tags parameter is required' })};
 	const tagsField = req.query.tags;
-	// sort by id, reads, likes  (any??)
+	// sort by id, reads, likes
 	const sortField = req.query.sortBy;
 	// direction asc or desc only, default = asc
 	const directionField = req.query.direction;
@@ -57,14 +47,14 @@ router.get("/mostliked", restricted, cache(10), (req, res) => {
 					if (
 						sortField !== 'author' &&
 						sortField !== 'authorId' &&
-						sortField !== 'likes' &&
+						sortField !== 'reads' &&
 						sortField !== 'id'
 					) {
 						res.status(400).json({ error: 'sortBy parameter is invalid.' });
 					} else if (
 						sortField === 'author' ||
 						sortField === 'authorId' ||
-						sortField === 'likes' ||
+						sortField === 'reads' ||
 						sortField === 'id'
 					) {
 						// if directionField IS NOT empty
@@ -125,8 +115,6 @@ router.get("/mostliked", restricted, cache(10), (req, res) => {
 
 // GET:  gets posts list in order of most to least read
 router.get("/mostread", restricted, cache(10), (req, res) => {
-	// if req.query.tags is empty, return error response
-	if (!req.query.tags) {res.status(400).json({ error: 'Tags parameter is required' })};
 	const tagsField = req.query.tags;
 	// sort by id, reads, likes  (any??)
 	const sortField = req.query.sortBy;
