@@ -140,9 +140,7 @@ router.get('/', restricted, (req, res) => {
 																		}
 																		else if (directionField === 'asc') {
 																			// sort ascending by sortField
-																			if(sortField === 'firstName'){
-																				res.status(200).json(newAuthors.sort(compareFirst));
-																			}
+																			if(sortField === 'firstName'){sortedNewAuthors = newAuthors.sort(compareFirst);}
 																			else if (sortField === 'lastName'){sortedNewAuthors = newAuthors.sort(compareLast);}
 																			else {sortedNewAuthors = newAuthors.sort(compareID);}
 																			
@@ -156,15 +154,13 @@ router.get('/', restricted, (req, res) => {
 																	// default sort ascending by sortField
 																	else {
 																		// sort ascending by sortField
-																		if(sortField === 'firstName'){
-																			res.status(200).json(newAuthors.sort(compareFirst));
-																		}
-																		else if (sortField === 'lastName'){sortedNewAuthors = newAuthors.sort(compareLast);}
-																		else {sortedNewAuthors = newAuthors.sort(compareID);}
+																		if(sortField === 'firstName'){newAuthors.sort(compareFirst);}
+																		else if (sortField === 'lastName'){newAuthors.sort(compareLast);}
+																		else {newAuthors.sort(compareID);}
 																	};
 																}
 															}
-															res.status(200).json(sortedNewAuthors);
+															res.status(200).json(newAuthors);
 														}
 													})
 													.catch(err => res.send(err));
