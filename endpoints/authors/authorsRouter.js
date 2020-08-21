@@ -111,7 +111,7 @@ router.get("/", restricted, cache(10), (req, res) => {
 															for (let u = 0; u < newAuthors.length; u++){
 																newAuthors[u].tags = newAuthors[u].tags.filter((item, index)=>{return newAuthors[u].tags.indexOf(item) >= index;});
 															};
-															if(sortField === ''){
+															if(sortField === ''|| sortField !== undefined || sortField !== null){
 																res.status(200).json(newAuthors);
 															}
 
