@@ -20,7 +20,7 @@ router.get("/:poststagsid", restricted, cache(10), (req, res) => {
 	
 	if (!poststagsid) {
 		res.status(404).json({ 
-			message: `The posttag with the specified poststagsid ${poststagsid} does not exist.` 
+			message: `The post-tag with the specified poststagsid ${poststagsid} does not exist.` 
 		});
 	} else {
 
@@ -29,7 +29,7 @@ router.get("/:poststagsid", restricted, cache(10), (req, res) => {
 				res.status(200).json(posttag);
 			})
 			.catch((err) => {
-				res.status(500).json({ message: `The posttag information could not be retrieved.`, error: err });
+				res.status(500).json({ message: `The post-tag information could not be retrieved.`, error: err });
 			});
 	};
 });
@@ -53,15 +53,15 @@ router.put("/:poststagsid", restricted, (req, res) => {
 	const updatedposttag = req.body;
 
 	Poststags.update(poststagsid, updatedposttag)
-		.then((posttag) => {
-			if (posttag) {
-				res.json(posttag);
+		.then((poststagsentry) => {
+			if (poststagsentry) {
+				res.json(poststagsentry);
 			} else {
-				res.status(404).json({ message: `Could not find posttag with given id ${poststagsid}.` });
+				res.status(404).json({ message: `Could not find poststags entry with given id ${poststagsid}.` });
 			};
 		})
 		.catch((err) => {
-			res.status(500).json({ message: `Failed to update posttag.`, error: err });
+			res.status(500).json({ message: `Failed to update poststags entry.`, error: err });
 		});
 });
 
