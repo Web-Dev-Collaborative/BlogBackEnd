@@ -43,7 +43,7 @@ server.use('/api/poststags', tagsRouter);
 server.use('/api/ping', pingRouter);
 
 // popular router (list sorted by most liked & most read)
-server.use('/api', popularRouter);
+server.use('/api/popular', popularRouter);
 
 // unsecured/unlogged-in response
 server.get('/', (req, res) => {
