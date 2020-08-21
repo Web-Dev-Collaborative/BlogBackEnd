@@ -101,14 +101,14 @@ function getAllPostsByAllTags(){
 };
 
 /*
-SELECT tags.tagsid, tags.tagname
+SELECT tags.tagname
 FROM Tags
 WHERE tags.tagname = 'tech'
 */
 // get tagsid & tagname on one tag
 function getOneTag(tagName){
 	return db('tags')
-		.select('tags.tagsid, tags.tagname')
+		.select('tags.tagname AS tagname')
 		.where('tags.tagname', tagName);
 };
 
