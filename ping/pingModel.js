@@ -1,9 +1,9 @@
-const db = require('../data/dbConfig');
+const db = require("../data/dbConfig");
 
 module.exports = {
 	find
 };
 
 function find() {
-	return db('authors').select('*');
+	return db("authors").select("*");
 }

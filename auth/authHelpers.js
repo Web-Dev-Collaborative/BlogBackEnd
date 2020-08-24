@@ -1,19 +1,19 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = {
-  getJwt
-}
+	getJwt
+};
 
 function getJwt(username) {
-  const payload = {
-    username
-  };
+	const payload = {
+		username
+	};
 
-  const secret = process.env.JWT_SECRET;
+	const secret = process.env.JWT_SECRET;
 
-  const options = {
-    expiresIn: '1d'
-  };
+	const options = {
+		expiresIn: "1d"
+	};
 
-  return jwt.sign(payload, secret, options)
+	return jwt.sign(payload, secret, options);
 }
