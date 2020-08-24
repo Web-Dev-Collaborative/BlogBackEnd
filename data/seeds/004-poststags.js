@@ -1,10 +1,10 @@
-exports.seed = function (knex) {
+exports.seed = (knex) => {
 	
-	return knex('poststags')
+	return knex("poststags")
 		.del()
-		.then(function () {
+		.then(() => {
 			
-			return knex('poststags').insert([
+			return knex("poststags").insert([
 				{
 					poststagsid: 1,
 					postsid: 15,

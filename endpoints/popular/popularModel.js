@@ -1,9 +1,8 @@
-const db = require('../../data/dbConfig');
+const db = require("../../data/dbConfig");
 
 module.exports = {
 	getPosts
 };
-
 
 /*
 	SELECT authors.firstname, authors.lastname, 
@@ -18,25 +17,25 @@ module.exports = {
 */
 // get all posts
 function getPosts() {
-	return db('posts')
+	return db("posts")
 		.select(
 			db.raw("authors.firstname || ' ' || authors.lastname as author"),
-			'posts.authorsid AS authorId',
-			'posts.postsid AS id', 
-			'posts.likes AS likes', 
-			'posts.reads AS reads',
-			db.raw('ARRAY_AGG(tags.tagname) AS tags')
+			"posts.authorsid AS authorId",
+			"posts.postsid AS id", 
+			"posts.likes AS likes", 
+			"posts.reads AS reads",
+			db.raw("ARRAY_AGG(tags.tagname) AS tags")
 		)
-		.innerJoin('authors', 'posts.authorsid', 'authors.authorsid')
-		.innerJoin('poststags', 'posts.postsid', 'poststags.postsid')
-		.innerJoin('tags', 'poststags.tagsid', 'tags.tagsid')
+		.innerJoin("authors", "posts.authorsid", "authors.authorsid")
+		.innerJoin("poststags", "posts.postsid", "poststags.postsid")
+		.innerJoin("tags", "poststags.tagsid", "tags.tagsid")
 		.groupBy(
-			'posts.postsid', 
-			'posts.authorsid', 
-			'authors.firstname', 
-			'authors.lastname',
-			'posts.likes', 
-			'posts.reads'
+			"posts.postsid", 
+			"posts.authorsid", 
+			"authors.firstname", 
+			"authors.lastname",
+			"posts.likes", 
+			"posts.reads"
 		)
 		.limit(20);
 }

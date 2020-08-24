@@ -25,7 +25,7 @@ module.exports = {
 function getAllTags(){
 	return db("tags")
 		.select("tags.tagsid", "tags.tagname");
-};
+}
 
 /*
 	SELECT tags.tagname AS tagname, authors.bio AS bio, 
@@ -42,17 +42,17 @@ function getAllTags(){
 // get all authors per all tags
 function getAllAuthorsByAllTags(){
 	return db("tags")
-	.select(
-		"authors.bio as bio",
-		"authors.authorsid AS id", 
-		db.raw("authors.firstname || ' ' || authors.lastname AS author"),
-		"tags.tagname AS tagname"
-	)
-	.innerJoin("poststags", "tags.tagsid", "poststags.tagsid")
-	.innerJoin("posts", "poststags.postsid", "posts.postsid")
-	.innerJoin("authors", "posts.authorsid", "authors.authorsid")
-	.groupBy("tags.tagname", "authors.authorsid", "authors.firstname", "authors.lastname", "authors.bio");
-};
+		.select(
+			"authors.bio as bio",
+			"authors.authorsid AS id", 
+			db.raw("authors.firstname || ' ' || authors.lastname AS author"),
+			"tags.tagname AS tagname"
+		)
+		.innerJoin("poststags", "tags.tagsid", "poststags.tagsid")
+		.innerJoin("posts", "poststags.postsid", "posts.postsid")
+		.innerJoin("authors", "posts.authorsid", "authors.authorsid")
+		.groupBy("tags.tagname", "authors.authorsid", "authors.firstname", "authors.lastname", "authors.bio");
+}
 
 /*
 	SELECT tags.tagname, posts.postsid AS id, posts.likes AS likes, posts.reads AS reads
@@ -66,19 +66,19 @@ function getAllAuthorsByAllTags(){
 // get all posts per all tags
 function getAllPostsByAllTags(){
 	return db("tags")
-	.select(
-		"tags.tagname AS tagname", 
-		"posts.postsid",
-		"authors.authorsid", 
-		db.raw("authors.firstname || ' ' || authors.lastname AS author"),
-		"posts.postsid AS id",
-		"posts.likes AS likes", 
-		"posts.reads AS reads"
-	)
-	.innerJoin("poststags", "tags.tagsid", "poststags.tagsid")
-	.innerJoin("posts", "poststags.postsid", "posts.postsid")
-	.innerJoin("authors", "authors.authorsid", "posts.authorsid");
-};
+		.select(
+			"tags.tagname AS tagname", 
+			"posts.postsid",
+			"authors.authorsid", 
+			db.raw("authors.firstname || ' ' || authors.lastname AS author"),
+			"posts.postsid AS id",
+			"posts.likes AS likes", 
+			"posts.reads AS reads"
+		)
+		.innerJoin("poststags", "tags.tagsid", "poststags.tagsid")
+		.innerJoin("posts", "poststags.postsid", "posts.postsid")
+		.innerJoin("authors", "authors.authorsid", "posts.authorsid");
+}
 
 /*
 	SELECT tags.tagsid, tags.tagname
@@ -93,7 +93,7 @@ function getOneTag(singleTagName){
 			"tags.tagsid AS tagsid"
 		)
 		.where("tags.tagname", singleTagName);
-};
+}
 
 /*
 	SELECT tags.tagname AS tagname, authors.bio AS bio, 
@@ -111,17 +111,17 @@ function getOneTag(singleTagName){
 // get all authors on one tag
 function getAllAuthorsByOneTag(tagName){
 	return db("tags")
-	.select(
-		"authors.bio AS bio",
-		"authors.authorsid", 
-		db.raw("authors.firstname || ' ' || authors.lastname AS author")
-	)
-	.distinct()
-	.innerJoin("poststags", "tags.tagsid", "poststags.tagsid")
-	.innerJoin("posts", "poststags.postsid", "posts.postsid")
-	.innerJoin("authors", "posts.authorsid", "authors.authorsid")
-	.where("tags.tagname", tagName);
-};
+		.select(
+			"authors.bio AS bio",
+			"authors.authorsid", 
+			db.raw("authors.firstname || ' ' || authors.lastname AS author")
+		)
+		.distinct()
+		.innerJoin("poststags", "tags.tagsid", "poststags.tagsid")
+		.innerJoin("posts", "poststags.postsid", "posts.postsid")
+		.innerJoin("authors", "posts.authorsid", "authors.authorsid")
+		.where("tags.tagname", tagName);
+}
 
 /*
 	SELECT tags.tagname, posts.postsid AS id, posts.likes AS likes, posts.reads AS reads
@@ -136,18 +136,18 @@ function getAllAuthorsByOneTag(tagName){
 // get all posts on one tag
 function getAllPostsByOneTag(tagName){
 	return db("tags")
-	.select(
-		"posts.postsid AS id", 
-		"posts.likes AS likes", 
-		"posts.reads AS reads", 
-		"authors.authorsid", 
-		db.raw("authors.firstname || ' ' || authors.lastname AS author")
-	)
-	.innerJoin("poststags", "tags.tagsid", "poststags.tagsid")
-	.innerJoin("posts", "poststags.postsid", "posts.postsid")
-	.innerJoin("authors", "posts.authorsid", "authors.authorsid")
-	.where("tags.tagname", tagName);
-};
+		.select(
+			"posts.postsid AS id", 
+			"posts.likes AS likes", 
+			"posts.reads AS reads", 
+			"authors.authorsid", 
+			db.raw("authors.firstname || ' ' || authors.lastname AS author")
+		)
+		.innerJoin("poststags", "tags.tagsid", "poststags.tagsid")
+		.innerJoin("posts", "poststags.postsid", "posts.postsid")
+		.innerJoin("authors", "posts.authorsid", "authors.authorsid")
+		.where("tags.tagname", tagName);
+}
 
 /*
 	SELECT DISTINCT tags.tagname 
@@ -173,7 +173,7 @@ function getTagsByAuthor(authorsid) {
 		.innerJoin("authors", "posts.authorsid", "authors.authorsid")
 		.where("authors.authorsid", authorsid)
 		.groupBy("authors.authorsid");
-};
+}
 
 /*
 	SELECT tags.tagname
@@ -195,7 +195,7 @@ function getTagsByPost(postsid){
 		.innerJoin("posts", "poststags.postsid", "posts.postsid")
 		.where("posts.postsid", postsid)
 		.groupBy("posts.postsid");
-};
+}
 
 /*
 	SELECT posts.postsid, tags.tagname
@@ -216,20 +216,20 @@ function getTags(){
 		.innerJoin("poststags", "poststags.tagsid", "tags.tagsid")
 		.innerJoin("posts", "poststags.postsid", "poststags.postsid")
 		.groupBy("posts.postsid");
-};
+}
 
 // find a tag by any field
 function findBy(filter) {
 	return db("tags")
 		.where(filter);
-};
+}
 
 // add a tag
 async function add(tag) {
 	const [tagsid] = await db("tags")
 		.insert(tag, "tagsid");
 	return findById(tagsid);
-};
+}
 
 // find a tag by tag id
 function findById(tagsid) {
@@ -237,18 +237,18 @@ function findById(tagsid) {
 		.select("tagsid", "*")
 		.where({ tagsid })
 		.first();
-};
+}
 
 // update a tag by tag id
 function update(tagsid, tag) {
 	return db("tags")
 		.where({ tagsid })
 		.update(tag);
-};
+}
 
 // delete a tag by tag id
 function remove(tagsid) {
 	return db("tags")
 		.where("tagsid", Number(tagsid))
 		.del();
-};
+}

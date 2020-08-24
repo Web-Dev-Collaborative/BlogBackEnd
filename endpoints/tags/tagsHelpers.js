@@ -15,4 +15,4 @@ function compare1(a, b) {
 	}
 
 	return comparison;
-};
+}

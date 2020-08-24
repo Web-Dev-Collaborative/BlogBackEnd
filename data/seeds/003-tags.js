@@ -1,10 +1,10 @@
-exports.seed = function (knex) {
+exports.seed = (knex) => {
 	
-	return knex('tags')
+	return knex("tags")
 		.del()
-		.then(function () {
+		.then(() => {
 			
-			return knex('tags').insert([
+			return knex("tags").insert([
 				{
 					tagsid: 1,
 					tagname: "culture"
