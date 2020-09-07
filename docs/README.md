@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/c1474fe518ccb398d184/maintainability)](https://codeclimate.com/github/evoingram/blogbackend/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1c7b5b2d9c8b7f4dbfa4/maintainability)](https://codeclimate.com/github/evoingram/blogbackend/maintainability)
 
 # Blog Back End Project
 
