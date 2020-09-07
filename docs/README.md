@@ -8,7 +8,7 @@ This was a solo project.
 
 ## Project Description
 
-This is a NodeJS, PostgreSQL & Express API for a hypothetical blog contributed to by many authors with tagging functionality.
+This is a NodeJS, PostgreSQL & Express API for a hypothetical blog contributed to by many authors with extensive query parameters and tagging functionality.
 
 ## Key Features
 
