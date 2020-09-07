@@ -6,7 +6,18 @@ This was a solo project.
 
 ## Project Description
 
-This is a potential back end for a blog contributed to by many authors with tagging functionality and a couple of endpoints sorting posts by popularity.
+This is a potential back end for a blog contributed to by many authors with tagging functionality.
+
+## Key Features
+
+- Live solo project
+- RESTful API with auth services for blog back end
+- 37 endpoints
+- Tested and documented via Postman
+- extensive query parameters
+- top 100 most liked posts
+- top 100 most read posts
+- tag posts
 
 ## Tech Stack
 
@@ -17,6 +28,10 @@ This is a potential back end for a blog contributed to by many authors with tagg
 - [Postman](https://www.postman.com/):   Postman helps you be more efficient while working with APIs.  Using Postman, you can construct complex HTTP requests quickly, organize them in collections and share them with your co-workers.
 - [PostgreSQL](https://github.com/postgres/postgres):  Open Source Relational Database
 
+## Available Scripts 
+
+### `npm server`
+### `npm start`
 
 ## Testing
 
@@ -26,6 +41,6 @@ This is a potential back end for a blog contributed to by many authors with tagg
 
 - This app has been documented and tested via Postman.
 - Postman docs were last published on 09/07/2020.
-- Postman docs contain examples of all get, post, and put endpoint body submissions AND responses..
+- Postman docs contain examples of all get, post, and put endpoint body submissions AND responses.
 
-[Postman Collection]()   |   [BASE URL]()   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)
+[Postman Collection](https://www.getpostman.com/collections/7a82d732c439d431359c)   |   [BASE URL](https://blogbackend-eli.herokuapp.com/api)   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)
