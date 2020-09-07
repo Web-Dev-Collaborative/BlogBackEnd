@@ -20,6 +20,7 @@ This is a potential back end for a blog contributed to by many authors with tagg
 - Top 100 most liked posts
 - Top 100 most read posts
 - Tag posts
+- Cached endpoints
 
 ## Tech Stack
 
