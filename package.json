@@ -1,7 +1,7 @@
 {
-  "name": "hatchwaysbetest",
+  "name": "blogbackend",
   "version": "1.0.0",
-  "description": "This is Erica Ingram's submission for the back-end assessment from Hatchways.  The app is deployed at [this link](https://hatchways-betest.herokuapp.com/api).",
+  "description": "This is a potential back end for a blog contributed to by many authors with tagging functionality.",
   "main": "index.js",
   "scripts": {
     "server": "nodemon",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evoingram/HatchwaysBETest.git"
+    "url": "git+https://github.com/evoingram/BlogBackEnd.git"
   },
   "keywords": [],
   "author": "Erica L. Ingram",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/evoingram/HatchwaysBETest/issues"
+    "url": "https://github.com/evoingram/BlogBackEnd/issues"
   },
-  "homepage": "https://github.com/evoingram/HatchwaysBETest#readme",
+  "homepage": "https://github.com/evoingram/BlogBackEnd#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
