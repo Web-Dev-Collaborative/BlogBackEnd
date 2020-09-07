@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/c1474fe518ccb398d184/maintainability)](https://codeclimate.com/github/evoingram/blogbackend/maintainability)
+
 # Blog Back End Project
 
 ## My Role
@@ -14,10 +16,10 @@ This is a potential back end for a blog contributed to by many authors with tagg
 - RESTful API with auth services for blog back end
 - 37 endpoints
 - Tested and documented via Postman
-- extensive query parameters
-- top 100 most liked posts
-- top 100 most read posts
-- tag posts
+- Extensive query parameters
+- Top 100 most liked posts
+- Top 100 most read posts
+- Tag posts
 
 ## Tech Stack
 
