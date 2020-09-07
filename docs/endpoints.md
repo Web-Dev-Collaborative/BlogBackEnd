@@ -6,6 +6,7 @@
 - Each section is labeled with its corresponding folder in Postman.
 
 [Postman Collection](https://www.getpostman.com/collections/7a82d732c439d431359c)   |   [BASE URL](https://blogbackend-eli.herokuapp.com/api)   |   [Schema](https://dbdesigner.page.link/VfzyA87X2LzAs5nA8)   |   [Documentation](https://documenter.getpostman.com/view/6401823/T1LQi78J?version=latest)   |   [Endpoints](endpoints.md)
+
 ## Auth
 
 ### Endpoints
