@@ -8,7 +8,7 @@ This was a solo project.
 
 ## Project Description
 
-This is a potential back end for a blog contributed to by many authors with tagging functionality.
+This is a NodeJS, PostgreSQL & Express API for a hypothetical blog contributed to by many authors with tagging functionality.
 
 ## Key Features
 
